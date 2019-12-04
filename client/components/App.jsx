@@ -15,6 +15,10 @@ class App extends React.Component {
 
   }
 
+  // -----------------------------------
+  // pop up info to be moved onto home page
+  // -----------------------------------
+  
   componentDidMount() {
     if (!this.props.auth.isAuthenticated) {
       setTimeout(this.popUp, 1000);
