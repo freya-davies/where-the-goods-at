@@ -5,8 +5,6 @@ import {connect} from 'react-redux'
 import Login from './Login'
 import Register from './Register'
 import Nav from './Nav'
-import Meeting from './Meeting'
-import History from './History'
 
 export function App({auth}) {
   return (
