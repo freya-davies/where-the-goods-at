@@ -7,9 +7,34 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
   <script defer src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
   <link href="styles.css" rel="stylesheet" type="text/css"/>
+  <style>
+    /* Always set the map height explicitly to define the size of the div
+     * element that contains the map. */
+    #map {
+      height: 100%;
+    }
+    /* Optional: Makes the sample page fill the window. */
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
 </head>
 <body>
-  <div id="app" class="section app-container"></div>
+  <div id="map"></div>
+  <!-- <div id="app" class="section app-container"></div> -->
+  <script>
+    var map;
+    function initMap() {
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: {lat: -34.397, lng: 150.644},
+        zoom: 8
+      });
+    }
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDlCzvqC9Bvt0MZ2JLsKtFQQdmRL9FmRO0&callback=initMap"
+    async defer></script>
   <script src="bundle.js"></script>
 </body>
 </html>
