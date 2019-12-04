@@ -19,28 +19,28 @@ Find the free food
 ### MVP
 
 As a non-registered user:
-  I want to see a google map container with login and register buttons in the nav.
-  I want to be able to filter through the items to forage and show them as pins on the google map and list them below.
-  I want to click on a pin and be shown information about the item to forage.
+  * I want to see a google map container with login and register buttons in the nav.
+  * I want to be able to filter through the items to forage and show them as pins on the google map and list them below.
+  * I want to click on a pin and be shown information about the item to forage.
 
 As a user:
-  I want to be able to register as a new user.
-  I want to be able to log in to my own account and see my profile.
-  I want to be able to add a new item.
-  I want to be able to update and delete my own item.
-  I want to be able to add an item and set it to public or private.
-  I want to be able to see a google map container which has the option of showing my private collection and my private collection plus everyone else’s entries. (filter)
-  I want to be able to search by keyword and see a google map container which shows them as pins and lists.
+  * I want to be able to register as a new user.
+  * I want to be able to log in to my own account and see my profile.
+  * I want to be able to add a new item.
+  * I want to be able to update and delete my own item.
+  * I want to be able to add an item and set it to public or private.
+  * I want to be able to see a google map container which has the option of showing my private collection and my private collection plus everyone else’s entries. (filter)
+  * I want to be able to search by keyword and see a google map container which shows them as pins and lists.
 
 ### Stretch
 
-  Pop up sign up or register form 10 seconds after landing on website
-  Add a rating and comment on other peoples items
-  Filter by seasonal availability
-  Filter by quantity (eg heaps of lemons)
-  Share with another user/friend
-  User points system
-  Email confirmation for sign up
+  * Pop up sign up or register form 10 seconds after landing on website
+  * Add a rating and comment on other peoples items
+  * Filter by seasonal availability
+  * Filter by quantity (eg heaps of lemons)
+  * Share with another user/friend
+  * User points system
+  * Email confirmation for sign up
 
 
   ---
