@@ -21,6 +21,7 @@ class Register extends React.Component {
   }
   updateDetails(e) {
     this.setState({[e.target.name]: e.target.value})
+    // console.log(e.target.value)
   }
   submit(e) {
     e.preventDefault()

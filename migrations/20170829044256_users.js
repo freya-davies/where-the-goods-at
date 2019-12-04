@@ -3,7 +3,8 @@ exports.up = function(knex) {
     table.increments('id')
     table.string('user_name')
     table.string('hash')
-    table.string('email')
+    table.string('first_name')
+    table.string('last_name')
   })
 };
 
