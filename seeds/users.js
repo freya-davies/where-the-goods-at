@@ -11,9 +11,7 @@ exports.seed = function (knex) {
           id: 1,
           user_name: 'admin',
           hash: hashSync('Krang', saltRounds),
-          first_name: 'Admin',
-          last_name: 'Istrator',
-          hourly_wage: 300,
+          email: 'admin@admin.com'
         }
       ])
     })

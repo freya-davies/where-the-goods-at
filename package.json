@@ -16,7 +16,7 @@
     "h:rollback": "heroku run npx knex migrate:rollback",
     "h:seed": "heroku run npx knex seed:run"
   },
-  "author": "EDA",
+  "author": "Sophie, Edgars, Freya, Caitlin, Nisida, Richard, Vere",
   "license": "ISC",
   "babel": {
     "presets": [
