@@ -50,10 +50,11 @@ As a user:
   | --- | --- |
   | Login | View for user to enter their login credentials |
   | Register | View for user to sign up for the App |
-  | CreateMeeting | View for user to arrange meeting attendees and information before starting the timer |
-  | Meeting | View to display current meeting time, cost and other information while the meeting is in progress |
-  | History | Display a list of past meetings the user has attended with select preview information |
-  | PastMeeting | Display a single meeting from the history list, displaying more information and a list of attendees for the past meeting |
+  | userProfile | View to display map with users personal items with the ability to add/delete/update items |
+  | createItem | View for user to add new item to their profile/map. This is a modal |
+  | map | View to display map listed items with this ability to filter (filter types: region, type, recently added, entered word) |
+  | ItemLocationList | Displays filtered items in a list below the map saying location, img and other item info. |
+  | PopUp | displays a pop up box after 10 seconds prompting the user to sign in/register if not logged in |
 
 
 ## Reducers (Client Side)
@@ -61,27 +62,27 @@ As a user:
   | name | purpose |
   | --- | --- |
   | auth | Store information regarding user logins, auth status and auth errors |
-  | currentMeeting | Track meeting progress such as current cost and current duration |
-  | meetings | store the list of meetings the user has attended in the past |
-  | users | store the list of users who can attend meetings |
+  | addItem |  |
+  | filter |  |
+  | map |  |
+  | user |  |
 
  ## Actions
 
- ### meetings
+ ### Users
 
- | type | data | purpose |
+  | Type | Data | Purpose |
  | --- | --- | --- |
- | RECEIVE_MEETINGS | meetings | retreive meetings from the db and store in redux |
- | ADD_MEETING | meeting | Add a single meeting to the history after it is created |
+ |  |  |  |
+ |  |  |  |
+ |  |  |  |
 
- ### users
+ ### Items
  | type | data | purpose |
  | --- | --- | --- |
  | RECEIVE_USERS | users | retreive the users from the server |
 
- ### currentMeeting
-  | type | data | purpose |
-| --- | --- | --- |
+
 | START_MEETING | attendees ([]), meeting_name | a meeting has started, set initial meeting state |
 | END_MEETING | null | Set meeting in progress flag to false |  
 | TICK_ONE_SECOND | null | Increase running total by 1s worth of $ |
