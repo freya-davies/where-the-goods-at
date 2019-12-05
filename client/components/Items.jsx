@@ -11,6 +11,7 @@ class AddItemForm extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
         this.handleImage = this.handleImage.bind(this)
+        this.handleClick = this.handleClick.bind(this)
     }
 
     handleChange(e) {
@@ -20,6 +21,7 @@ class AddItemForm extends React.Component {
                 [e.target.name]: e.target.value
             }
         })
+        console.log(this.state.newItem)
     }
 
     handleImage(e) {
@@ -34,6 +36,16 @@ class AddItemForm extends React.Component {
         e.preventDefault()
         addItem(this.state.newItem)
 
+    }
+
+    handleClick(e) {
+        this.setState({
+            newItem: {
+                ...this.state.newItem,
+                value: e.target.value
+            }
+        })
+        console.log(this.state)
     }
 
     render() {
@@ -68,34 +80,34 @@ class AddItemForm extends React.Component {
                     <br></br>
                     <label>
                         Public
-                        <input type='checkbox' name='public' />
+                        <input type='checkbox' name='public' onChange={this.handleChange} />
                         Private
-                        <input type='checkbox' name='private' />
+                        <input type='checkbox' name='private' onChange={this.handleChange} />
                     </label>
                     <br></br>
                     <label>
                         Category
                         <select>
-                            <option value="fruits">Fruits</option>
-                            <option value="vegetables">Vegetables</option>
-                            <option value="other">Other</option>
+                            <option value="fruits" onClick={this.handleClick}>Fruits</option>
+                            <option value="vegetables" onClick={this.handleClick}>Vegetables</option>
+                            <option value="other" onClick={this.handleClick}>Other</option>
                         </select>
                     </label>
                     <br></br>
                     <label>
                         Season
                         <select>
-                            <option value="summer">Summer</option>
-                            <option value="spring">Spring</option>
-                            <option value="autumn">Autumn</option>
-                            <option value="winter">Winter</option>
+                            <option value="summer" onClick={this.handleClick}>Summer</option>
+                            <option value="spring" onClick={this.handleClick}>Spring</option>
+                            <option value="autumn" onClick={this.handleClick}>Autumn</option>
+                            <option value="winter" onClick={this.handleClick}>Winter</option>
                         </select>
                     </label>
                     <br></br>
                     <label>
                         <div>
                             <p>Quantity</p>
-                            <input type="range" min="1" max="50" value="25" />
+                            <input type="range" min="1" max="50" />
                         </div>
                     </label>
                     <br></br>
