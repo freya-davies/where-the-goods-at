@@ -37,13 +37,13 @@ class App extends React.Component {
             <Route exact path="/register" component={Register} />
 
         <div className=''>
-          {!auth.isAuthenticated &&
+          {!this.props.auth.isAuthenticated &&
             <Route exact path="/" component={Login} />
           }
           <Route path='/add' component={Items} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
-          <div>
+          </div>
         </div>
       </Router>
     )
