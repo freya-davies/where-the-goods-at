@@ -1,6 +1,17 @@
-const router = require('express').Router()
+const express = require('express')
+const router = express.Router()
 
 const db = require('../db/items')
+
+
+router.post('/add', (req, res) => {
+    db.addItem(req.body)
+    .then(res.sendStatus(200))
+})
+
+
+
+
 
 // get public items and users items
 

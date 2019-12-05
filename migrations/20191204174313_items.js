@@ -2,6 +2,7 @@
 exports.up = function(knex) {
   return knex.schema.createTable('items', table => {
     table.increments('id')
+    table.string('name')
     table.integer('user_id')
     table.integer('category_id')
     table.string('img_url')
@@ -17,5 +18,5 @@ exports.up = function(knex) {
 };
 
 exports.down = function(knex) {
-  
+  return knex.schema.dropTable('items')
 };

@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import Login from './Login'
 import Register from './Register'
 import Nav from './Nav'
+import Items from './Items'      
 import Map from './Map'
 
 class App extends React.Component {
@@ -35,6 +36,13 @@ class App extends React.Component {
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
 
+        <div className=''>
+          {!auth.isAuthenticated &&
+            <Route exact path="/" component={Login} />
+          }
+          <Route path='/add' component={Items} />
+          <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
         </div>
       </Router>
     )
