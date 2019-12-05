@@ -43,6 +43,7 @@ class App extends React.Component {
           <Route path='/add' component={Items} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
+          <div>
         </div>
       </Router>
     )
