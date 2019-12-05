@@ -1,7 +1,7 @@
 import React from 'react'
-import {connect} from 'react-redux'
-import {registerUserRequest} from '../actions/register'
-import {loginError} from '../actions/login'
+import { connect } from 'react-redux'
+import { registerUserRequest } from '../actions/register'
+import { loginError } from '../actions/login'
 
 class Register extends React.Component {
   constructor(props) {
@@ -20,49 +20,81 @@ class Register extends React.Component {
     this.props.dispatch(loginError(''))
   }
   updateDetails(e) {
-    this.setState({[e.target.name]: e.target.value})
+    this.setState({ [e.target.name]: e.target.value })
   }
   submit(e) {
     e.preventDefault()
     e.target.reset()
-    let {user_name, password, confirm_password, first_name, last_name} = this.state
+    let { user_name, password, confirm_password, first_name, last_name } = this.state
     if (confirm_password != password) return this.props.dispatch(loginError("Passwords don't match"))
     this.props.dispatch(registerUserRequest(this.state))
   }
   render() {
-    const {auth} = this.props
+    const { auth } = this.props
     return (
-      <form className="Register form box" onSubmit={this.submit}>
-        <h1 className="title is-2">Register</h1>
-        <hr />
-        {auth.errorMessage && <span className="has-text-danger is-large">{auth.errorMessage}</span>}
-        <label className="column is-6 is-offset-one-quarter label is-large has-text-centered">Username
-          <input required className="input is-large has-text-centered is-fullwidth" placeholder="User Name" type="text" name="user_name" onChange={this.updateDetails}/>
-        </label>
-        <div className="columns">
-          <label className="column is-6 label is-large has-text-centered">First Name
-            <input required className="input is-large has-text-centered is-fullwidth" placeholder="First Name" type="text" name="first_name" onChange={this.updateDetails}/>
+      <div className="registerContainer">
+        <div className="col-6 col-md-4">
+          <form className="login-register-form" onSubmit={this.submit}>
+            <h1 className='registerTitle'>Register</h1>
+            {auth.errorMessage && <><h1><span className="badge badge-danger badge-lg">{auth.errorMessage}</span></h1><br></br></>}
+            <div className="row justify-content-start">
+              <div className='col-6 reg-text'>
+                <label htmlFor="user_name" >Username:
           </label>
-          <label className="column is-6 label is-large has-text-centered">Last Name
-            <input required className="input is-large has-text-centered is-fullwidth" placeholder="Last Name" type="text" name="last_name" onChange={this.updateDetails}/>
-          </label>
+              </div>
+              <div className='col-6 reg'>
+                <input required className="form-control" placeholder="Username" type="text" name="user_name" onChange={this.updateDetails} />
+              </div>
+            </div>
+            <div className="row justify-content-start">
+              <div className='col-6 reg-text'>
+                <label htmlFor="first_name">First Name:
+              </label>
+              </div>
+              <div className='col-6 reg'>
+                <input required className="form-control" placeholder="First Name" type="text" name="first_name" onChange={this.updateDetails} />
+              </div>
+            </div>
+            <div className="row justify-content-start">
+              <div className='col-6 reg-text'>
+                <label htmlFor="lastName">Last Name:
+              </label>
+              </div>
+              <div className='col-6 reg'>
+                <input required className="form-control" placeholder="Last Name" type="text" name="last_name" onChange={this.updateDetails} />
+              </div>
+            </div>
+            
+            <div className="row justify-content-start">
+              <div className='col-6 reg-text'>
+                <label htmlFor="password">Password
+            </label>
+              </div>
+              <div className='col-6 reg'>
+                <input required className="form-control" placeholder="Password" type="password" name="password" onChange={this.updateDetails} />
+              </div>
+            </div>
+            <div className="row justify-content-start">
+              <div className='col-6 reg-text'>
+                <label htmlFor="confirm_password">Confirm Password
+              </label>
+              </div>
+              <div className='col-6 reg'>
+                <input required className="form-control" placeholder="Confirm Password" type="password" name="confirm_password" onChange={this.updateDetails} />
+              </div>
+            </div>
+            <div className="registerButton">
+
+              <input className="btn btn-primary" value="Register" type="submit" />
+            </div>
+          </form>
         </div>
-        <br />
-        <div className="columns">
-          <label className="column is-6 label is-large has-text-centered">Password
-            <input required className="input is-large has-text-centered is-fullwidth" placeholder="Password" type="password" name="password" onChange={this.updateDetails}/>
-          </label>
-          <label className="column is-6 label is-large has-text-centered">Confirm Password
-            <input required className="input is-large has-text-centered is-fullwidth" placeholder="Confirm Password" type="password" name="confirm_password" onChange={this.updateDetails}/>
-          </label>
-        </div>
-        <input className="button is-success is-large is-fullwidth" value="Register" type="submit" />
-      </form>
+      </div >
     )
   }
 }
 
-const mapStateToProps = ({auth}) => {
+const mapStateToProps = ({ auth }) => {
   return {
     auth
   }
