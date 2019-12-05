@@ -5,6 +5,7 @@ import {connect} from 'react-redux'
 import Login from './Login'
 import Register from './Register'
 import Nav from './Nav'
+import Items from './Items'
 
 export function App({auth}) {
   return (
@@ -17,6 +18,7 @@ export function App({auth}) {
               <h1 className="title is-1">Where The Goods At</h1>
             </Link>
             <Nav />
+            
           </div>
         </div>
 
@@ -24,6 +26,7 @@ export function App({auth}) {
           {!auth.isAuthenticated &&
             <Route exact path="/" component={Login} />
           }
+          <Route path='/add' component={Items} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
         </div>
