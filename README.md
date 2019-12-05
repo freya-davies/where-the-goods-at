@@ -98,7 +98,7 @@ Response
           lat: 11.111111, 
           long: 22.2222222 }, 
           {...},
-          ... ]`
+          ... ]}`
 
 ## DB (Server Side)
   There should be three tables for MVP
