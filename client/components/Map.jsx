@@ -68,7 +68,7 @@ class Map extends React.Component {
 
                 <LoadScript
                     id="script-loader"
-                    googleMapsApiKey="AIzaSyDlCzvqC9Bvt0MZ2JLsKtFQQdmRL9FmRO0"
+                    googleMapsApiKey={}
 
                 //paste the 2 lines below into the .env file and then REMOVE THEM FROM THIS FILE. Or we will all die.
                 //JWT_SECRET="I Hate the Turtles! - Krang"
