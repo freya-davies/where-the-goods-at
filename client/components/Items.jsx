@@ -5,13 +5,20 @@ class AddItemForm extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            newItem: {}
+            newItem: {
+                name: "",
+                description: "",
+                address: "",
+                image: "",
+                public: true,
+                category: "",
+                season: "",
+            },
         }
 
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
         this.handleImage = this.handleImage.bind(this)
-        this.handleClick = this.handleClick.bind(this)
     }
 
     handleChange(e) {
@@ -36,16 +43,6 @@ class AddItemForm extends React.Component {
         e.preventDefault()
         addItem(this.state.newItem)
 
-    }
-
-    handleClick(e) {
-        this.setState({
-            newItem: {
-                ...this.state.newItem,
-                value: e.target.value
-            }
-        })
-        console.log(this.state)
     }
 
     render() {
@@ -81,26 +78,24 @@ class AddItemForm extends React.Component {
                     <label>
                         Public
                         <input type='checkbox' name='public' onChange={this.handleChange} />
-                        Private
-                        <input type='checkbox' name='private' onChange={this.handleChange} />
                     </label>
                     <br></br>
                     <label>
                         Category
-                        <select>
-                            <option value="fruits" onClick={this.handleClick}>Fruits</option>
-                            <option value="vegetables" onClick={this.handleClick}>Vegetables</option>
-                            <option value="other" onClick={this.handleClick}>Other</option>
+                        <select name='category' onChange={this.handleChange}>
+                            <option value="fruits">Fruits</option>
+                            <option value="vegetables">Vegetables</option>
+                            <option value="other">Other</option>
                         </select>
                     </label>
                     <br></br>
                     <label>
                         Season
-                        <select>
-                            <option value="summer" onClick={this.handleClick}>Summer</option>
-                            <option value="spring" onClick={this.handleClick}>Spring</option>
-                            <option value="autumn" onClick={this.handleClick}>Autumn</option>
-                            <option value="winter" onClick={this.handleClick}>Winter</option>
+                        <select name='season' onChange={this.handleChange}>
+                            <option value="summer">Summer</option>
+                            <option value="spring">Spring</option>
+                            <option value="autumn">Autumn</option>
+                            <option value="winter">Winter</option>
                         </select>
                     </label>
                     <br></br>
