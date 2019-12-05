@@ -89,13 +89,15 @@ As a user:
 
 | Method | Endpoint | 
 | --- | --- |
-| Get | /api/v1/items | ```{ locationData: [ { 
-                                name: 'test', 
-                                description: 'test', 
-                                lat: 11.111111, 
-                                long: 22.2222222 }, 
-                                {...},
-                                ... ]```
+| Get | /api/v1/items | 
+#Response
+```{ locationData: [ { 
+          name: 'test', 
+          description: 'test', 
+          lat: 11.111111, 
+          long: 22.2222222 }, 
+          {...},
+          ... ]```
 
 ## DB (Server Side)
   There should be three tables for MVP
