@@ -6,3 +6,5 @@ export function getUsers() {
   return request.get(url)
   .them(res => res.body)
 }
+
+
