@@ -100,6 +100,8 @@ Response
           {...},
           ... ]}`
 
+
+IGNORE STUFF UNDERNEATH
 ## DB (Server Side)
   There should be three tables for MVP
 
