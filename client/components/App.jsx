@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import Login from './Login'
 import Register from './Register'
 import Nav from './Nav'
+import Map from './Map'
 
 class App extends React.Component {
   constructor(props) {
@@ -27,9 +28,9 @@ class App extends React.Component {
 
   popUp = () => {
     this.setState({ showPopUp: true })
-    console.log(document.getElementById('myModal').style)
+    // console.log(document.getElementById('myModal').style)
     // document.getElementById('myModal').style.display = 'block'
-    console.log('hello')
+    // console.log('hello')
   }
 
   closeModal = () => {
@@ -46,7 +47,7 @@ class App extends React.Component {
               <div className="modal-dialog" role="document">
                 <div className="modal-content">
                   <div className="modal-header">
-                    <h5 className="modal-title" id="staticBackdropLabel">Become a forage extraordinaire!</h5>
+                    <h5 className="modal-title" id="staticBackdropLabel">Become A Forage Extraordinaire!</h5>
                     <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={this.closeModal}>
                       <span aria-hidden="true">&times;</span>
                     </button>
@@ -71,6 +72,7 @@ class App extends React.Component {
                 <h1 className="title is-1">Where The Goods At</h1>
               </Link>
               <Nav />
+              <Map />
             </div>
           </div>
 
