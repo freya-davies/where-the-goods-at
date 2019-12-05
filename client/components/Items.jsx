@@ -82,6 +82,16 @@ class AddItemForm extends React.Component {
                         </select>
                     </label>
                     <br></br>
+                    <label>
+                        Season
+                        <select>
+                            <option value="summer">Summer</option>
+                            <option value="spring">Spring</option>
+                            <option value="autumn">Autumn</option>
+                            <option value="winter">Winter</option>
+                        </select>
+                    </label>
+                    <br></br>
                     <input type="submit" value="Submit" />
                 </form>
             </div>
