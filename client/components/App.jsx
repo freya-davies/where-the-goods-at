@@ -38,11 +38,12 @@ class App extends React.Component {
 
         <div className=''>
           {!this.props.auth.isAuthenticated &&
-            <Route exact path="/" component={Login} />
-          }
           <Route path='/add' component={Items} />
-          <Route path="/login" component={Login} />
-          <Route path="/register" component={Register} />
+            // <Route exact path="/" component={Login} />
+          }
+          
+          {/* <Route path="/login" component={Login} /> */}
+          {/* <Route path="/register" component={Register} /> */}
           </div>
         </div>
       </Router>
