@@ -22,7 +22,7 @@ class App extends React.Component {
   
   componentDidMount() {
     if (!this.props.auth.isAuthenticated) {
-      setTimeout(this.popUp, 1000);
+      setTimeout(this.popUp, 10000);
     }
   }
 
