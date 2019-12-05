@@ -3,13 +3,15 @@ import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-
 class Map extends React.Component {
 
     constructor() {
         super()
         this.state = {
-            firstPin: { lat: -41.295910, lng: 174.773990 }
+            pins: [
+                { lat: -41.295910, lng: 174.773990 },
+                { lat: -41.291000, lng: 174.781520 }
+            ]
         }
     }
 
@@ -66,7 +68,7 @@ class Map extends React.Component {
 
                 <LoadScript
                     id="script-loader"
-                    googleMapsApiKey={process.env.GOOGLE_MAPS}
+                    googleMapsApiKey="AIzaSyDlCzvqC9Bvt0MZ2JLsKtFQQdmRL9FmRO0"
 
                 //paste the 2 lines below into the .env file and then REMOVE THEM FROM THIS FILE. Or we will all die.
                 //JWT_SECRET="I Hate the Turtles! - Krang"
@@ -86,9 +88,16 @@ class Map extends React.Component {
                         mapTypeId='satellite'
                         onClick={this.handleClick}
                     >
-                        <Marker
-                            position={this.state.firstPin}
-                        />
+                     {this.state.pins.map((pin) => {
+                       return (
+                            <Marker
+                                position={pin}
+                            />
+                       ) 
+                     })}
+                       
+
+
                     </GoogleMap>
 
                 </LoadScript>
@@ -98,9 +107,9 @@ class Map extends React.Component {
 }
 
 const mapStateToProps = ({ auth }) => {
-  return {
-    auth
-  }
+    return {
+        auth
+    }
 }
 
 export default connect(mapStateToProps)(Map)
