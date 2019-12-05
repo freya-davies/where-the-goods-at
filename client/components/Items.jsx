@@ -42,29 +42,52 @@ class AddItemForm extends React.Component {
                 <form onSubmit={this.handleSubmit}>
                     <h3>Add new Item</h3>
                     <label>
-                        Name
+                        Item
+                        <br></br>
                         <input type='text' name='name' onChange={this.handleChange} />
                     </label>
+                    <br></br>
                     <label>
                         Description
-                        <input type='text' name='description' onChange={this.handleChange} />
+                        <br></br>
+                        <textarea type='text' name='description' onChange={this.handleChange} />
                     </label>
+                    <br></br>
                     <label>
                         Address
+                        <br></br>
                         <input type='text' name='address' onChange={this.handleChange} />
                     </label>
+                    <br></br>
                     <label>
                         Photo
+                        <br></br>
                     <input type="file" name="image" accept="image/*" onChange={this.handleImage} />
                         <img src={this.state.newItem.img} />
-                        <input type="submit" value="Submit" />
                     </label>
+                    <br></br>
+                    <label>
+                        Public
+                        <input type='checkbox' name='public' />
+                        Private
+                        <input type='checkbox' name='private' />
+                    </label>
+                    <br></br>
+                    <label>
+
+                    </label>
+                    <input type="submit" value="Submit" />
                 </form>
             </div>
         )
     }
 }
 
-
+// checkbox for public/private - boolean 
+// dropdown for category 
+// dropdown for season 4 seasons + other
+// rating - integer 1-5
+// quantity - slider 
+// upload image
 
 export default AddItemForm

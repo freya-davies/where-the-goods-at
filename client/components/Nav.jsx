@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logoutUser} from '../actions/logout'
+import {addItem} from '../apis/items'
 
 class Nav extends React.Component {
   constructor(props) {
@@ -14,6 +15,7 @@ class Nav extends React.Component {
   toggleBurger() {
     this.setState({showBurger: !this.state.showBurger})
   }
+
   render() {
     const {auth, logout} = this.props
     const {showBurger} = this.state
@@ -23,7 +25,7 @@ class Nav extends React.Component {
           <span onClick={this.toggleBurger} className={`navbar-burger burger ${showBurger ? 'is-active': ''}`} data-target="navbarMenuHeroA">
             <Link to="/" className="navbar-item is-large">Home</Link>
             {auth.isAuthenticated
-                ? <Link to='/addItem' className="navbar-item is-large" onClick={() => addItem()}>Add Item</Link>
+                ? <Link to='/add' className="navbar-item is-large" >Add Item</Link>
                 : []
               }
             
@@ -35,7 +37,7 @@ class Nav extends React.Component {
           <div className="navbar-end">
             {auth.isAuthenticated
               ? [<Link to='/' className="navbar-item is-large" onClick={() => logout()}>Logout</Link>,
-                <Link to='add' className='navbar-item is-large'>Add Item</Link>]
+                <Link to='/add' className='navbar-item is-large'>Add Item</Link>]
               : [
                 <Link onClick={this.toggleBurger} className="navbar-item is-large" to='/login'>Login</Link>,
                 <Link onClick={this.toggleBurger} className="navbar-item" to='/register'>Register</Link>
