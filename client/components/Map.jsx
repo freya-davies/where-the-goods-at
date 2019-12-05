@@ -5,6 +5,17 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 class Map extends React.Component {
+    
+  constructor() {
+      super()
+      this.state = {
+          pins: [
+              { lat: -41.295910, lng: 174.773990 },
+              { lat: -41.291000, lng: 174.781520 }
+          ],
+          key: false
+      }
+  }
 
     constructor() {
         super()
@@ -61,9 +72,9 @@ class Map extends React.Component {
                     </LoadScript>
                 }
             </div>
-        )
-    }
-}
+ 
+    )
+  }
 
 const mapStateToProps = ({ auth }) => {
     return {

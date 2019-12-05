@@ -34,9 +34,11 @@ class App extends React.Component {
             </div>
           </div>
             <Route exact path="/" component={Map} />
+
             <Route exact path="/" component={PopUp} />
             {/* <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} /> */}
+
 
         <div className=''>
           {!this.props.auth.isAuthenticated &&
