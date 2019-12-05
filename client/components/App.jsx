@@ -19,7 +19,6 @@ class App extends React.Component {
 
   componentDidMount() {
     this.props.fetchPublicItems()
-
   }
 
   render() {
@@ -34,7 +33,10 @@ class App extends React.Component {
               <Nav />
             </div>
           </div>
-            <Route exact path="/" component={Map} />
+            {
+              this.props.items.items.length > 0 &&
+              <Route exact path="/" component={Map} />
+            }
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
 

@@ -11,28 +11,41 @@ class Map extends React.Component {
       super(props)
       console.log(props)
       this.state = {
-          pins: [
-            //   { lat: -41.295910, lng: 174.773990 },
-            //   { lat: -41.291000, lng: 174.781520 }
-          ],
-          key: false
+          pins: [],
+        //   pins: [
+        //       { lat: -41.295910, lng: 174.773990 },
+        //       { lat: -41.291000, lng: 174.781520 }
+        //   ],
+        key: false
       }
   }
 
   componentDidMount() {
+
     if (!this.props.auth.isAuthenticated) {
       setTimeout(this.popUp, 10000);
     }
-    getKey(). then(() => {
+
+    getKey().then(() => {
       this.setState({ key : true })
+    })
+
+    this.setState({
+        pins: this.props.items.items.map((item) => {
+            var location = { 
+                lat: item.lat, 
+                lng: item.long 
+            }
+            return location
+        })
     })
   }
     
   popUp = () => {
-  this.setState({ showPopUp: true })
-  // console.log(document.getElementById('myModal').style)
-  // document.getElementById('myModal').style.display = 'block'
-  // console.log('hello')
+    this.setState({ showPopUp: true })
+    // console.log(document.getElementById('myModal').style)
+    // document.getElementById('myModal').style.display = 'block'
+    // console.log('hello')
   }
 
   closeModal = () => {
@@ -73,7 +86,7 @@ class Map extends React.Component {
             </div>
         }
         
-        {this.state.key && 
+        {this.state.key && this.props.items.items &&
         <LoadScript
           id="script-loader"
           googleMapsApiKey={process.env.GOOGLE_MAPS}>
@@ -91,27 +104,28 @@ class Map extends React.Component {
             mapTypeId='satellite'
             onClick={this.handleClick}
           >
-           {/* {this.state.pins.map((pin) => {
+           {this.state.pins.map((pin) => {
              return (
                   <Marker
                       position={pin}
                   />
              ) 
-           })} */}
-           {
+           })}
+           {/* {
                 this.props.items.items.map((item) => {
                     console.log(item)
                     var location = { 
                         lat: item.lat, 
                         lng: item.long 
                     }
+                    console.log(location)
                     return (
                         <Marker
                             position={ location }
                         />
                     )
                 })
-           }
+           } */}
           </GoogleMap>
 
         </LoadScript>
