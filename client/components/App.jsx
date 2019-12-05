@@ -9,16 +9,17 @@ import Items from './Items'
 import Map from './Map'
 import PopUp from './PopUp'
 
+import { fetchPublicItems } from '../actions/items'
+
 class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
     }
-
   }
 
   componentDidMount() {
-
+    this.props.fetchPublicItems()
   }
 
   render() {
@@ -33,7 +34,10 @@ class App extends React.Component {
               <Nav />
             </div>
           </div>
-            <Route exact path="/" component={Map} />
+            {
+              this.props.items.items.length > 0 &&
+              <Route exact path="/" component={Map} />
+            }
             <Route exact path="/" component={PopUp} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
@@ -55,10 +59,11 @@ class App extends React.Component {
   }
 }
 
-const mapStateToProps = ({ auth }) => {
+const mapStateToProps = ({ auth, items }) => {
   return {
-    auth
+    auth,
+    items
   }
 }
 
-export default connect(mapStateToProps)(App)
+export default connect(mapStateToProps, { fetchPublicItems })(App)
