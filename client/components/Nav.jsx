@@ -21,12 +21,7 @@ class Nav extends React.Component {
       <div className="container">
         <div className="navbar-brand">
           <span onClick={this.toggleBurger} className={`navbar-burger burger ${showBurger ? 'is-active': ''}`} data-target="navbarMenuHeroA">
-            <Link to="/" className="navbar-item is-large">Home</Link>
-            {auth.isAuthenticated
-                ? <Link to='/addItem' className="navbar-item is-large" onClick={() => addItem()}>Add Item</Link>
-                : []
-              }
-            
+            <Link to="/" className="navbar-item is-large">Home</Link>          
             <span></span>
             <span></span>
           </span>
