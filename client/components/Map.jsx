@@ -1,8 +1,19 @@
 import React, { Component } from 'react'
-import { GoogleMap, LoadScript } from '@react-google-maps/api'
+import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api'
 
 
 class Map extends Component {
+
+    constructor() {
+        super()
+        this.state = {
+            firstPin: { lat: -41.295910, lng: 174.773990 }
+        }
+    }
+
+    componentDidMount() {
+        
+    }
 
 
     handleClick = (e) => {
@@ -16,7 +27,11 @@ class Map extends Component {
 
                 <LoadScript
                     id="script-loader"
-                    googleMapsApiKey="AIzaSyDlCzvqC9Bvt0MZ2JLsKtFQQdmRL9FmRO0"
+                    googleMapsApiKey={process.env.GOOGLE_MAPS}
+
+                    //paste the 2 lines below into the .env file and then REMOVE THEM FROM THIS FILE. Or we will all die.
+                    //JWT_SECRET="I Hate the Turtles! - Krang"
+                   // GOOGLE_MAPS=AIzaSyDlCzvqC9Bvt0MZ2JLsKtFQQdmRL9FmRO0
                 >
                     <GoogleMap
                         id='Traffic-layer-example'
@@ -32,6 +47,9 @@ class Map extends Component {
                         mapTypeId='satellite'
                         onClick={this.handleClick}
                     >
+                        <Marker
+                        position={this.state.firstPin}
+                        />
                     </GoogleMap>
 
                 </LoadScript>
