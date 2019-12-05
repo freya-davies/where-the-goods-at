@@ -90,7 +90,8 @@ As a user:
 | Method | Endpoint | 
 | --- | --- |
 | Get | /api/v1/items | 
-#Response
+
+Response
 ```{ locationData: [ { 
           name: 'test', 
           description: 'test', 
