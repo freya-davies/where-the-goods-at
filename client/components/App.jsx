@@ -8,6 +8,7 @@ import Nav from './Nav'
 import Items from './Items'      
 import Map from './Map'
 import PopUp from './PopUp'
+import ItemList from './ItemList'
 
 import { fetchPublicItems } from '../actions/items'
 
@@ -39,6 +40,7 @@ class App extends React.Component {
               <Route exact path="/" component={Map} />
             }
             <Route exact path="/" component={PopUp} />
+            <Route exact path="/" component={ItemList} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
 

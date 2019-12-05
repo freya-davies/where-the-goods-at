@@ -1,52 +1,44 @@
-import React, { Component } from 'react'
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api'
-import { getKey } from '../apis/auth'
-import { Link } from 'react-router-dom'
+import React from 'react'
 import { connect } from 'react-redux'
-import ItemList from './ItemList'
 
 
-class Map extends React.Component {
-    
+class ItemList extends React.Component {
   constructor(props) {
       super(props)
-    //   console.log(props)
       this.state = {
-          pins: [],
-        //   pins: [
-        //       { lat: -41.295910, lng: 174.773990 },
-        //       { lat: -41.291000, lng: 174.781520 }
-        //   ],
-        key: false
       }
   }
 
   componentDidMount() {
-    getKey().then(() => {
-      this.setState({ key : true })
-    })
 
-    this.setState({
-        pins: this.props.items.items.map((item) => {
-            var location = { 
-                lat: item.lat, 
-                lng: item.long 
-            }
-            return location
-        })
-    })
   }
 
    
     handleClick = (e) => {
-        // console.log(e)
     }
 
 
     render() {
+      const items = this.props.items.items
+      console.log(this.props.items.items)
         return (
             <div>
-        {this.state.key && this.props.items.items &&
+              <h2>Listed items: </h2>
+
+              {items.map((item, i) => {
+                return (
+                  <div key ={i}>
+                    <hr></hr>
+                    <img src={item.img_url} alt={item.item_name} height="80" width="80"/> 
+                    <h3>{item.item_name}</h3>
+                    <p>{item.description}</p>
+                    <hr></hr>
+                  </div>
+                )
+              })}
+
+
+        {/* {this.state.key && this.props.items.items &&
         <LoadScript
           id="script-loader"
           googleMapsApiKey={process.env.GOOGLE_MAPS}>
@@ -70,7 +62,7 @@ class Map extends React.Component {
                       position={pin}
                   />
              ) 
-           })}
+           })} */}
            {/* {
                 this.props.items.items.map((item) => {
                     console.log(item)
@@ -86,20 +78,19 @@ class Map extends React.Component {
                     )
                 })
            } */}
-          </GoogleMap>
+          {/* </GoogleMap>
 
         </LoadScript>
-        }
+        } */}
       </div>
     )
   }
 }
 
-const mapStateToProps = ({ auth, items }) => {
+const mapStateToProps = ({ items }) => {
     return {
-        auth,
         items
     }
 }
 
-export default connect(mapStateToProps)(Map)
+export default connect(mapStateToProps)(ItemList)
