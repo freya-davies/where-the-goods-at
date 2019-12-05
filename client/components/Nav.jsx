@@ -34,7 +34,8 @@ class Nav extends React.Component {
         <div id="navbarMenuHeroA" className={`navbar-menu ${showBurger ? "is-active" : ''}`}>
           <div className="navbar-end">
             {auth.isAuthenticated
-              ? <Link to='/' className="navbar-item is-large" onClick={() => logout()}>Logout</Link>
+              ? [<Link to='/' className="navbar-item is-large" onClick={() => logout()}>Logout</Link>,
+                <Link to='add' className='navbar-item is-large'>Add Item</Link>]
               : [
                 <Link onClick={this.toggleBurger} className="navbar-item is-large" to='/login'>Login</Link>,
                 <Link onClick={this.toggleBurger} className="navbar-item" to='/register'>Register</Link>
