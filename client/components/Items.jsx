@@ -5,15 +5,12 @@ class AddItemForm extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            newItem: {},
-        
+            newItem: {}
         }
 
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
         this.handleImage = this.handleImage.bind(this)
-
-
     }
 
     handleChange(e) {
@@ -22,18 +19,15 @@ class AddItemForm extends React.Component {
                 ...this.state.newItem,
                 [e.target.name]: e.target.value
             }
-
         })
-        console.log(this.state)
     }
 
     handleImage(e) {
         this.setState({
             newItem: {
                 ...this.state.newItem,
-                [e.target.name]: e.target.files[0]
+                img: URL.createObjectURL(e.target.files[0])
             }
-
         })
     }
     handleSubmit(e) {
@@ -62,8 +56,9 @@ class AddItemForm extends React.Component {
                     <label>
                         Photo
                     <input type="file" name="image" accept="image/*" onChange={this.handleImage} />
+                        <img src={this.state.newItem.img} />
+                        <input type="submit" value="Submit" />
                     </label>
-                    <input type="submit" value="Submit" />
                 </form>
             </div>
         )

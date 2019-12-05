@@ -7,6 +7,7 @@ function addItem(item, db = connection) {
         description: item.description, 
         lat: item.lat,
         long: item.long,
+        img_url: item.img
     })
 }
 
