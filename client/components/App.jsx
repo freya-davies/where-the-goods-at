@@ -8,15 +8,17 @@ import Nav from './Nav'
 import Items from './Items'      
 import Map from './Map'
 
+import { fetchPublicItems } from '../actions/items'
+
 class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
     }
-
   }
 
   componentDidMount() {
+    this.props.fetchPublicItems()
 
   }
 
@@ -50,10 +52,11 @@ class App extends React.Component {
   }
 }
 
-const mapStateToProps = ({ auth }) => {
+const mapStateToProps = ({ auth, items }) => {
   return {
-    auth
+    auth,
+    items
   }
 }
 
-export default connect(mapStateToProps)(App)
+export default connect(mapStateToProps, { fetchPublicItems })(App)

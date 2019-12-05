@@ -4,14 +4,16 @@ import { getKey } from '../apis/auth'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 
+
 class Map extends React.Component {
     
-  constructor() {
-      super()
+  constructor(props) {
+      super(props)
+      console.log(props)
       this.state = {
           pins: [
-              { lat: -41.295910, lng: 174.773990 },
-              { lat: -41.291000, lng: 174.781520 }
+            //   { lat: -41.295910, lng: 174.773990 },
+            //   { lat: -41.291000, lng: 174.781520 }
           ],
           key: false
       }
@@ -89,13 +91,27 @@ class Map extends React.Component {
             mapTypeId='satellite'
             onClick={this.handleClick}
           >
-           {this.state.pins.map((pin) => {
+           {/* {this.state.pins.map((pin) => {
              return (
                   <Marker
                       position={pin}
                   />
              ) 
-           })}
+           })} */}
+           {
+                this.props.items.items.map((item) => {
+                    console.log(item)
+                    var location = { 
+                        lat: item.lat, 
+                        lng: item.long 
+                    }
+                    return (
+                        <Marker
+                            position={ location }
+                        />
+                    )
+                })
+           }
           </GoogleMap>
 
         </LoadScript>
@@ -105,9 +121,10 @@ class Map extends React.Component {
   }
 }
 
-const mapStateToProps = ({ auth }) => {
+const mapStateToProps = ({ auth, items }) => {
     return {
-        auth
+        auth,
+        items
     }
 }
 
