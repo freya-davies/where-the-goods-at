@@ -35,3 +35,11 @@ export function login (creds) {
       throw err
     })
 }
+
+export function getKey(){
+  return request.get('/apiKey')
+    .then(res => {
+      process.env.GOOGLE_MAPS = res.text
+      return
+    })
+}

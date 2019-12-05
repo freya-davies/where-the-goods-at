@@ -50,9 +50,9 @@ As a user:
   | --- | --- |
   | Login | View for user to enter their login credentials |
   | Register | View for user to sign up for the App |
-  | userProfile | View to display map with users personal items with the ability to add/delete/update items |
-  | createItem | View for user to add new item to their profile/map. This is a modal |
-  | map | View to display map listed items with this ability to filter (filter types: region, type, recently added, entered word) |
+  | UserProfile | View to display map with users personal items with the ability to add/delete/update items |
+  | CreateItem | View for user to add new item to their profile/map. This is a modal |
+  | Map | View to display map listed items with this ability to filter (filter types: region, type, recently added, entered word) |
   | ItemLocationList | Displays filtered items in a list below the map saying location, img and other item info. |
   | PopUp | displays a pop up box after 10 seconds prompting the user to sign in/register if not logged in |
 
@@ -62,31 +62,16 @@ As a user:
   | name | purpose |
   | --- | --- |
   | auth | Store information regarding user logins, auth status and auth errors |
-  | addItem |  |
-  | filter |  |
-  | map |  |
-  | user |  |
+  | publicItems | Store all items from db with public property set to true |
+  | privateItems | Store all specific users items, after they have signed in |
 
  ## Actions
-
- ### Users
-
-  | Type | Data | Purpose |
- | --- | --- | --- |
- |  |  |  |
- |  |  |  |
- |  |  |  |
 
  ### Items
  | type | data | purpose |
  | --- | --- | --- |
- | RECEIVE_USERS | users | retreive the users from the server |
-
-
-| START_MEETING | attendees ([]), meeting_name | a meeting has started, set initial meeting state |
-| END_MEETING | null | Set meeting in progress flag to false |  
-| TICK_ONE_SECOND | null | Increase running total by 1s worth of $ |
-| RESET_MEETING | null | Revert to initial state |
+ | PUBLIC | public item data | retreive the items from the server |
+ | PRIVATE | private item data | retrieve the items from the server |
 
 
 
@@ -96,11 +81,27 @@ As a user:
 | --- | --- | --- | --- | --- |
 | Post | /api/auth/login | Yes | Log In a User | The Users JWT Token |
 | Post | /api/auth/register | Yes | Register a User | The Users JWT Token |
-| Get | /api/meetings | Yes | Get a Users Meeting Histroy | An Array of Meetings |
-| Post | /api/meetings | Yes | Save a completed meeting | The Meeting that has been saved in db read format |
-| Get | /api/meetings/:id/users | Yes | Get the attendees of a Meeting | An Array of User objects |
-| Get | /api/users | Yes | Get the users of the app | An Array of User Objects |
+| Get | /api/v1/items | No | Get all publicly available items from db | An Array of items |
+| Get | /api/v1/items/user | Yes | Get all private items for specific user from db | An Array of items |
+| Post | /api/v1/items/add | Yes | Add a new item to db | The item that has been save in db read format |
+| Patch | /api/v1/items/update | Yes | Edit an existing item in db | Item has been updated in db |
+| Del | /api/v1/items/delete | Yes | Remove an item that belongs to this user | Item has been removed from db |
 
+| Method | Endpoint | 
+| --- | --- |
+| Get | /api/v1/items | 
+
+Response
+`{ locationData: [ { 
+          name: 'test', 
+          description: 'test', 
+          lat: 11.111111, 
+          long: 22.2222222 }, 
+          {...},
+          ... ]}`
+
+
+IGNORE STUFF UNDERNEATH
 ## DB (Server Side)
   There should be three tables for MVP
 
