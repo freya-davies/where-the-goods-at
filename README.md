@@ -50,9 +50,9 @@ As a user:
   | --- | --- |
   | Login | View for user to enter their login credentials |
   | Register | View for user to sign up for the App |
-  | userProfile | View to display map with users personal items with the ability to add/delete/update items |
-  | createItem | View for user to add new item to their profile/map. This is a modal |
-  | map | View to display map listed items with this ability to filter (filter types: region, type, recently added, entered word) |
+  | UserProfile | View to display map with users personal items with the ability to add/delete/update items |
+  | CreateItem | View for user to add new item to their profile/map. This is a modal |
+  | Map | View to display map listed items with this ability to filter (filter types: region, type, recently added, entered word) |
   | ItemLocationList | Displays filtered items in a list below the map saying location, img and other item info. |
   | PopUp | displays a pop up box after 10 seconds prompting the user to sign in/register if not logged in |
 
