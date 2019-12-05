@@ -10,7 +10,7 @@
     "watch:server": "nodemon --watch server",
     "start": "node server",
     "test": "jest --noStackTrace --watchAll",
-    "postinstall": "webpack",
+    "postinstall": "webpack && knex migrate:latest",
     "h:deploy": "git push heroku master",
     "h:migrate": "heroku run npx knex migrate:latest",
     "h:rollback": "heroku run npx knex migrate:rollback",
