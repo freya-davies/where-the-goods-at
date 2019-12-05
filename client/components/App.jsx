@@ -35,8 +35,8 @@ class App extends React.Component {
           </div>
             <Route exact path="/" component={Map} />
             <Route exact path="/" component={PopUp} />
-            {/* <Route exact path="/login" component={Login} />
-            <Route exact path="/register" component={Register} /> */}
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/register" component={Register} />
 
 
         <div className=''>
