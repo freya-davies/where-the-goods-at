@@ -17,8 +17,8 @@ class Nav extends React.Component {
   render() {
     const {auth, logout} = this.props
     const {showBurger} = this.state
-    return <nav className="navbar">
-      <div className="container">
+    return (
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark customNavStyles">
         <div className="navbar-brand">
           <span onClick={this.toggleBurger} className={`navbar-burger burger ${showBurger ? 'is-active': ''}`} data-target="navbarMenuHeroA">
             <Link to="/" className="navbar-item is-large">Home</Link>          
@@ -38,9 +38,8 @@ class Nav extends React.Component {
             }
           </div>
         </div>
-      </div>
     </nav>
-  }
+    )}
 }
 
 const mapDispatchToProps = (dispatch) => {
