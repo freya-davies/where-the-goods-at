@@ -1,6 +1,8 @@
 import request from 'superagent'
 import { getKey } from './auth'
 
+const url = '/api/v1/items/'
+
 const addItemUrl = '/api/v1/items/add'
 const baseUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address='
 const endUrl = '&key='
@@ -29,5 +31,22 @@ function getCoordinates(address) {
                 console.log(error)
             })
     })
+}
+
+
+
+export function getPublicItems () {
+    
+    return request
+    .get(url)
+    .then(res => res.body)
+}
+
+
+export function getPrivateItems() {
+  return request
+  .get(url + user)
+  .then(res => res.body)
 
 }
+
