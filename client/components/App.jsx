@@ -7,6 +7,7 @@ import Register from './Register'
 import Nav from './Nav'
 import Items from './Items'      
 import Map from './Map'
+import PopUp from './PopUp'
 
 class App extends React.Component {
   constructor(props) {
@@ -33,8 +34,10 @@ class App extends React.Component {
             </div>
           </div>
             <Route exact path="/" component={Map} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/register" component={Register} />
+            <Route exact path="/" component={PopUp} />
+            {/* <Route exact path="/login" component={Login} />
+            <Route exact path="/register" component={Register} /> */}
+
 
         <div className=''>
           {!this.props.auth.isAuthenticated &&
