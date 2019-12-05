@@ -70,9 +70,7 @@ class Map extends React.Component {
                     id="script-loader"
                     googleMapsApiKey={}
 
-                //paste the 2 lines below into the .env file and then REMOVE THEM FROM THIS FILE. Or we will all die.
-                //JWT_SECRET="I Hate the Turtles! - Krang"
-                // GOOGLE_MAPS=AIzaSyDlCzvqC9Bvt0MZ2JLsKtFQQdmRL9FmRO0
+
                 >
                     <GoogleMap
                         id='Traffic-layer-example'
