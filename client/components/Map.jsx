@@ -16,7 +16,7 @@ class Map extends Component {
 
                 <LoadScript
                     id="script-loader"
-                    googleMapsApiKey="AIzaSyDlCzvqC9Bvt0MZ2JLsKtFQQdmRL9FmRO0"
+                    googleMapsApiKey={process.env.GOOGLE_MAPS}
                 >
                     <GoogleMap
                         id='Traffic-layer-example'
