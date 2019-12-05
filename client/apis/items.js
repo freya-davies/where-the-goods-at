@@ -33,8 +33,6 @@ function getCoordinates(address) {
     })
 }
 
-
-
 export function getPublicItems () {
     
     return request
