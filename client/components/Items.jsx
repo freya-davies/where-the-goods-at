@@ -62,7 +62,7 @@ class AddItemForm extends React.Component {
                     <label>
                         Photo
                         <br></br>
-                    <input type="file" name="image" accept="image/*" onChange={this.handleImage} />
+                        <input type="file" name="image" accept="image/*" onChange={this.handleImage} />
                         <img src={this.state.newItem.img} />
                     </label>
                     <br></br>
@@ -92,6 +92,20 @@ class AddItemForm extends React.Component {
                         </select>
                     </label>
                     <br></br>
+                    <label>
+                        <div>
+                            <p>Quantity</p>
+                            <input type="range" min="1" max="50" value="25" />
+                        </div>
+                    </label>
+                    <br></br>
+                    <p>Rating</p>
+                    <span className="fa fa-star checked"></span>
+                    <span className="fa fa-star checked"></span>
+                    <span className="fa fa-star checked"></span>
+                    <span className="fa fa-star"></span>
+                    <span className="fa fa-star"></span>
+                    <br></br>
                     <input type="submit" value="Submit" />
                 </form>
             </div>
@@ -102,8 +116,8 @@ class AddItemForm extends React.Component {
 // checkbox for public/private - boolean 
 // dropdown for category 
 // dropdown for season 4 seasons + other
-// rating - integer 1-5
 // quantity - slider 
+// rating - integer 1-5
 // upload image
 
 export default AddItemForm
