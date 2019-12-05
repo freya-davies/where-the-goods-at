@@ -10,6 +10,7 @@ class Register extends React.Component {
       user_name: '',
       first_name: '',
       last_name: '',
+      email: '',
       password: '',
       confirm_password: ''
     }
@@ -25,7 +26,7 @@ class Register extends React.Component {
   submit(e) {
     e.preventDefault()
     e.target.reset()
-    let { user_name, password, confirm_password, first_name, last_name } = this.state
+    let { user_name, password, confirm_password, email, first_name, last_name } = this.state
     if (confirm_password != password) return this.props.dispatch(loginError("Passwords don't match"))
     this.props.dispatch(registerUserRequest(this.state))
   }
@@ -44,6 +45,15 @@ class Register extends React.Component {
               </div>
               <div className='col-6 reg'>
                 <input required className="form-control" placeholder="Username" type="text" name="user_name" onChange={this.updateDetails} />
+              </div>
+            </div>
+            <div className="row justify-content-start">
+              <div className='col-6 reg-text'>
+                <label htmlFor="email" >Email:
+          </label>
+              </div>
+              <div className='col-6 reg'>
+                <input required className="form-control" placeholder="Email" type="email" name="email" onChange={this.updateDetails} />
               </div>
             </div>
             <div className="row justify-content-start">
