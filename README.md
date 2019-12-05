@@ -87,15 +87,15 @@ As a user:
 | Patch | /api/v1/items/update | Yes | Edit an existing item in db | Item has been updated in db |
 | Del | /api/v1/items/delete | Yes | Remove an item that belongs to this user | Item has been removed from db |
 
-| Method | Endpoint | Response format |
-| --- | --- | --- |
+| Method | Endpoint | 
+| --- | --- |
 | Get | /api/v1/items | ```{ locationData: [ { 
                                 name: 'test', 
                                 description: 'test', 
                                 lat: 11.111111, 
                                 long: 22.2222222 }, 
                                 {...},
-                                ... ]``` |
+                                ... ]```
 
 ## DB (Server Side)
   There should be three tables for MVP
