@@ -24,9 +24,7 @@ class Nav extends React.Component {
             <Link to="/" className="navbar-item is-large">Home</Link>
             {auth.isAuthenticated
                 ? <Link to='/addItem' className="navbar-item is-large" onClick={() => addItem()}>Add Item</Link>
-                : [
-                  
-                ]
+                : []
               }
             
             <span></span>

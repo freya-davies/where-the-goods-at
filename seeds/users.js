@@ -11,6 +11,7 @@ exports.seed = function (knex) {
           id: 1,
           user_name: 'SophieJoy',
           hash: hashSync('123', saltRounds),
+          email: "sophiescottmaunder@gmail.com",
           first_name: 'Sophie',
           last_name: 'Scott-Maunder'
         }
