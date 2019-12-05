@@ -13,4 +13,8 @@ server.use(express.static('public'))
 
 server.use('/api/auth', authRoutes)
 
+server.get('/apiKey', (req, res) => {
+    res.send(process.env.GOOGLE_MAPS)
+})
+
 module.exports = server
