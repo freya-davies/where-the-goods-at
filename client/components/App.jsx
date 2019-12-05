@@ -33,10 +33,10 @@ class App extends React.Component {
               <Nav />
             </div>
           </div>
+            <Route exact path="/" component={Map} />
             <Route exact path="/" component={PopUp} />
-            {/* <Route exact path="/" component={Map} /> */}
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/register" component={Register} />
+            {/* <Route exact path="/login" component={Login} />
+            <Route exact path="/register" component={Register} /> */}
 
         <div className=''>
           {!this.props.auth.isAuthenticated &&

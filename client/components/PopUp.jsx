@@ -1,4 +1,4 @@
-import React from 'react'
+import React,  { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 
@@ -7,12 +7,14 @@ class PopUp extends React.Component {
   constructor() {
     super()
     this.state = {
+      showPopUp: false
     }
   }
 
   componentDidMount() {
+    console.log("did mount?")
     if (!this.props.auth.isAuthenticated) {
-      setTimeout(this.popUp, 1000);
+      setTimeout(this.popUp, 10000);
     }
   }
 
@@ -20,7 +22,7 @@ class PopUp extends React.Component {
     this.setState({ showPopUp: true })
     // console.log(document.getElementById('myModal').style)
     // document.getElementById('myModal').style.display = 'block'
-    // console.log('hello')
+    console.log('pop!')
   }
 
   closeModal = () => {
@@ -31,7 +33,7 @@ class PopUp extends React.Component {
 
 
   handleClick = (e) => {
-    // console.log(e)
+    console.log("e is:", e)
   }
 
 
