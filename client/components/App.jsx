@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import Login from './Login'
 import Register from './Register'
 import Nav from './Nav'
+import Map from './Map'
 import Items from './Items'      
 import Filter from './Filter'
 import PopUp from './PopUp'
@@ -25,15 +26,9 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        <div className="container has-text-centered">
-          <div className="hero is-small is-primary">
-            <div className="hero-body has-text-centered">
-              <Link to='/' className="">
-                <h1 className="title is-1">Where The Goods At</h1>
-              </Link>
-              <Nav />
-            </div>
-          </div>
+        <Nav />
+        <div className='content'>
+          <div>
             {
               this.props.items.items.length > 0 &&
               <Route exact path="/" component={Filter} />
@@ -43,15 +38,10 @@ class App extends React.Component {
             <Route exact path="/register" component={Register} />
 
 
-        <div className=''>
-          {this.props.auth.isAuthenticated &&
-          <Route path='/add' component={Items} />
-
-            // <Route exact path="/" component={Login} />
-          }
-          
-          {/* <Route path="/login" component={Login} /> */}
-          {/* <Route path="/register" component={Register} /> */}
+            <div className=''>
+              {this.props.auth.isAuthenticated &&
+                <Route path='/add' component={Items} />}
+            </div>
           </div>
         </div>
       </Router>
