@@ -63,10 +63,15 @@ class Map extends React.Component {
 
     render() {
         return (
+
             <div>
                 {this.state.showPopUp &&
                 <AddModal />
                    }
+
+          <div className="container px-lg-5">
+            <div class="row mx-lg-n5">
+
                 {this.state.key && this.props.items &&
                     <LoadScript
                         id="script-loader"
@@ -93,11 +98,14 @@ class Map extends React.Component {
                         </GoogleMap>
                     </LoadScript>
                 }
-                <button onClick={this.toggleAddMode}>{this.state.addMode ? "Stop Adding Pins" : "Add Pins"}</button>
+
+                <button onClick={this.toggleAddMode}>{ this.state.addMode ? "Stop Adding Pins" : "Add Pins"}</button>
+
             </div>
         )
     }
 }
+
 
 
 export default Map
