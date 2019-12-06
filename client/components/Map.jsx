@@ -33,6 +33,18 @@ class Map extends React.Component {
             })
         })
     }
+    
+    componentWillReceiveProps(newProps){
+        this.setState({
+            pins: newProps.items.map((item) => {
+                var location = { 
+                    lat: item.lat, 
+                    lng: item.long 
+                }
+                return location
+            })
+        })
+    }
 
     toggleAddMode = (e) => {
         this.setState({
