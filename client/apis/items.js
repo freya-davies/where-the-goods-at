@@ -1,5 +1,6 @@
 import request from 'superagent'
 import { getKey } from './auth'
+import { fetchPublicItems } from '../actions/items'
 
 const url = '/api/v1/items/'
 
@@ -17,7 +18,7 @@ export function addItem(item) {
             return request
                 .post(addItemUrl)
                 .send(item)
-                .then(response => response)
+                .then(res => res.statusCode)
         })
 }
 
