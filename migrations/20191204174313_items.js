@@ -14,6 +14,7 @@ exports.up = function(knex) {
     table.string('comments')
     table.string('season')
     table.integer('quantity')
+    table.timestamp('created_at').defaultTo(knex.fn.now())
   })
 };
 
