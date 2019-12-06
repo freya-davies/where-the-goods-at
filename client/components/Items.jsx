@@ -7,7 +7,7 @@ class AddItemForm extends React.Component {
         super(props)
         this.state = {
             newItem: {
-                name: "",
+                item_name: "",
                 description: "",
                 address: "",
                 image: "",
