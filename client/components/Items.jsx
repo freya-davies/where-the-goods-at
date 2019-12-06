@@ -7,10 +7,10 @@ class AddItemForm extends React.Component {
         super(props)
         this.state = {
             newItem: {
-                name: "",
+                item_name: "",
                 description: "",
                 address: "",
-                image: "",
+                img_url: "",
                 public: false,
                 category: "",
                 season: "",
@@ -21,10 +21,10 @@ class AddItemForm extends React.Component {
 
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
-        this.handleImage = this.handleImage.bind(this)
+        // this.handleImage = this.handleImage.bind(this)
         this.handleCheckbox = this.handleCheckbox.bind(this)
         // this.onStartClick= this.onStartClick.bind(this)
-        
+
     }
 
     // onStartClick(name, nextValue, prevValue) {
@@ -33,7 +33,7 @@ class AddItemForm extends React.Component {
     //             ...this.state.newItem,
     //             rating: nextValue
     //         }})
-            
+
     // }
 
     handleChange(e) {
@@ -43,21 +43,25 @@ class AddItemForm extends React.Component {
                 [e.target.name]: e.target.value
             }
         })
-        console.log(e.target.value)
     }
 
-    handleImage(e) {
-        this.setState({
-            newItem: {
-                ...this.state.newItem,
-                img: URL.createObjectURL(e.target.files[0])
-            }
-        })
-    }
+    // handleImage(e) {
+    //     const data = new FormData() 
+    //     data.append('file', e.target.files[0])
+
+    //     this.setState({
+    //         newItem: {
+    //             ...this.state.newItem,
+    //             // img: URL.createObjectURL(e.target.files[0])
+    //             image: data
+    //         }
+    //     })
+    // }
+
     handleSubmit(e) {
         e.preventDefault()
+        console.log(this.state.newItem)
         addItem(this.state.newItem)
-
     }
 
     handleCheckbox(e) {
@@ -67,9 +71,7 @@ class AddItemForm extends React.Component {
                 public: !this.state.newItem.public
             }
         })
-        console.log(this.state.newItem.public)
     }
-
 
 
     render() {
@@ -81,7 +83,7 @@ class AddItemForm extends React.Component {
                     <label>
                         Item
                         <br></br>
-                        <input type='text' name='name' onChange={this.handleChange} />
+                        <input type='text' name='item_name' onChange={this.handleChange} />
                     </label>
                     <br></br>
                     <label>
@@ -99,8 +101,8 @@ class AddItemForm extends React.Component {
                     <label>
                         Photo
                         <br></br>
-                        <input type="file" name="image" accept="image/*" onChange={this.handleImage} />
-                        <img src={this.state.newItem.img} />
+                        <input type="text" name="img_url" onChange={this.handleChange} />
+                        {/* <img src={this.state.newItem.img} /> */}
                     </label>
                     <br></br>
                     <label>
@@ -111,8 +113,10 @@ class AddItemForm extends React.Component {
                     <label>
                         Category
                         <select name='category' onChange={this.handleChange}>
-                            <option value="fruits">Fruits</option>
+                            <option value="fruit">Fruit</option>
                             <option value="vegetables">Vegetables</option>
+                            <option value="herbs">Herbs</option>
+                            <option value="flowers">Flowers</option>
                             <option value="other">Other</option>
                         </select>
                     </label>
@@ -128,10 +132,9 @@ class AddItemForm extends React.Component {
                     </label>
                     <br></br>
                     <label>
-                        <div>
-                            <p>Quantity</p>
-                            <input name="quantity" type="range" min="1" max="50" onChange={this.handleChange}/>
-                        </div>
+                        <p>Quantity</p>
+                        <input name="quantity" type="range" min="1" max="50" onChange={this.handleChange} />{this.state.newItem.quantity}
+                        
                     </label>
                     <br></br>
                     {/* <p>Rating</p>
@@ -146,7 +149,7 @@ class AddItemForm extends React.Component {
                     <span className="fa fa-star checked"></span>
                     <span className="fa fa-star"></span>
                     <span className="fa fa-star"></span>*/}
-                    <br></br> 
+                    <br></br>
                     <input type="submit" value="Submit" />
                 </form>
             </div>
