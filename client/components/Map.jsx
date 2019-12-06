@@ -11,6 +11,10 @@ class Map extends React.Component {
       super(props)
       console.log(props)
       this.state = {
+          center : {
+            lat: -41.2743523,
+            lng: 174.735582
+          },
           pins: [],
         //   pins: [
         //       { lat: -41.295910, lng: 174.773990 },
@@ -37,8 +41,13 @@ class Map extends React.Component {
   }
 
    
-    handleClick = (e) => {
-        // console.log(e)
+  handleClick = (e) => {
+    this.setState({
+         pins: [...this.state.pins,
+         { lat: e.latLng.lat(), lng: e.latLng.lng() }],
+         center: { lat: e.latLng.lat(), lng: e.latLng.lng()}
+
+    })
     }
 
 
@@ -56,10 +65,7 @@ class Map extends React.Component {
               width: "1200px"
             }}
             zoom={12}
-            center={{
-              lat: -41.2743523,
-              lng: 174.735582
-            }}
+            center={this.state.center}
             mapTypeId='satellite'
             onClick={this.handleClick}
           >
