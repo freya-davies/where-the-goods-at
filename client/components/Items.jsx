@@ -1,5 +1,6 @@
 import React from 'react'
 import { addItem } from '../apis/items'
+// import StarRating from 'react-svg-star-rating'
 
 class AddItemForm extends React.Component {
     constructor(props) {
@@ -10,16 +11,30 @@ class AddItemForm extends React.Component {
                 description: "",
                 address: "",
                 image: "",
-                public: true,
+                public: false,
                 category: "",
                 season: "",
+                // rating: null, 
+                quantity: null,
             },
         }
 
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
         this.handleImage = this.handleImage.bind(this)
+        this.handleCheckbox = this.handleCheckbox.bind(this)
+        // this.onStartClick= this.onStartClick.bind(this)
+        
     }
+
+    // onStartClick(name, nextValue, prevValue) {
+    //     this.setState({
+    //         newItem: {
+    //             ...this.state.newItem,
+    //             rating: nextValue
+    //         }})
+            
+    // }
 
     handleChange(e) {
         this.setState({
@@ -28,7 +43,7 @@ class AddItemForm extends React.Component {
                 [e.target.name]: e.target.value
             }
         })
-        console.log(this.state.newItem)
+        console.log(e.target.value)
     }
 
     handleImage(e) {
@@ -45,7 +60,20 @@ class AddItemForm extends React.Component {
 
     }
 
+    handleCheckbox(e) {
+        this.setState({
+            newItem: {
+                ...this.state.newItem,
+                public: !this.state.newItem.public
+            }
+        })
+        console.log(this.state.newItem.public)
+    }
+
+
+
     render() {
+        // const {rating} = this.state
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
@@ -77,7 +105,7 @@ class AddItemForm extends React.Component {
                     <br></br>
                     <label>
                         Public
-                        <input type='checkbox' name='public' onChange={this.handleChange} />
+                        <input type='checkbox' name='public' onChange={this.handleCheckbox} />
                     </label>
                     <br></br>
                     <label>
@@ -102,17 +130,23 @@ class AddItemForm extends React.Component {
                     <label>
                         <div>
                             <p>Quantity</p>
-                            <input type="range" min="1" max="50" />
+                            <input name="quantity" type="range" min="1" max="50" onChange={this.handleChange}/>
                         </div>
                     </label>
                     <br></br>
-                    <p>Rating</p>
-                    <span className="fa fa-star checked"></span>
+                    {/* <p>Rating</p>
+                    <StarRating
+                        name = 'rate1'
+                        starCount={5}
+                        value={rating}
+                        onClick={this.onStartClick}
+                        /> */}
+                    {/* <span className="fa fa-star checked"></span>
                     <span className="fa fa-star checked"></span>
                     <span className="fa fa-star checked"></span>
                     <span className="fa fa-star"></span>
-                    <span className="fa fa-star"></span>
-                    <br></br>
+                    <span className="fa fa-star"></span>*/}
+                    <br></br> 
                     <input type="submit" value="Submit" />
                 </form>
             </div>
