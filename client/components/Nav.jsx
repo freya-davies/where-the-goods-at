@@ -12,9 +12,9 @@ class Nav extends React.Component {
     const {auth, logout} = this.props
     return (
        
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark customNavStyles">
-      <Link to='/' ><img className="navbar-brand " style={{ width: 80 + 'px', height: 100 + "%" }}src="" alt="" /></Link>
-      <Link to='/'><h1 className="title is-1">Forage App</h1></Link>
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark customNavStyles">
+      <Link to='/' ><img className="navbar-brand " style={{ width: 80 + 'px', height: 100 + "%" }}src="/images/forage-lettuce.png" alt="" /></Link>
+      <Link to='/'><h1 className="title is-1">Foraged &amp; Found</h1></Link>
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button>
