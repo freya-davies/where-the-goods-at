@@ -5,44 +5,43 @@ import { connect } from 'react-redux'
 import Login from './Login'
 import Register from './Register'
 import Nav from './Nav'
-import Items from './Items'      
 import Map from './Map'
+import Items from './Items'      
+import Filter from './Filter'
+import PopUp from './PopUp'
+
+import { fetchPublicItems } from '../actions/items'
 
 class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
     }
-
   }
 
   componentDidMount() {
-
+    this.props.fetchPublicItems()
   }
 
   render() {
     return (
       <Router>
-        <div className="container has-text-centered">
-          <div className="hero is-small is-primary">
-            <div className="hero-body has-text-centered">
-              <Link to='/' className="">
-                <h1 className="title is-1">Where The Goods At</h1>
-              </Link>
-              <Nav />
-            </div>
-          </div>
-            <Route exact path="/" component={Map} />
+        <Nav />
+        <div className='content'>
+          <div>
+            {
+              this.props.items.items.length > 0 &&
+              <Route exact path="/" component={Filter} />
+            }
+            <Route exact path="/" component={PopUp} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
 
-        <div className=''>
-          {!this.props.auth.isAuthenticated &&
-            <Route exact path="/" component={Login} />
-          }
-          <Route path='/add' component={Items} />
-          <Route path="/login" component={Login} />
-          <Route path="/register" component={Register} />
+
+            <div className=''>
+              {this.props.auth.isAuthenticated &&
+                <Route path='/add' component={Items} />}
+            </div>
           </div>
         </div>
       </Router>
@@ -50,10 +49,11 @@ class App extends React.Component {
   }
 }
 
-const mapStateToProps = ({ auth }) => {
+const mapStateToProps = ({ auth, items }) => {
   return {
-    auth
+    auth,
+    items
   }
 }
 
-export default connect(mapStateToProps)(App)
+export default connect(mapStateToProps, { fetchPublicItems })(App)
