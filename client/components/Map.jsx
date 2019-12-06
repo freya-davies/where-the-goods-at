@@ -3,112 +3,128 @@ import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api'
 import { getKey } from '../apis/auth'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import ItemList from './ItemList'
+
+import AddModal from './AddModal'
 
 class Map extends React.Component {
-    
-  constructor() {
-      super()
-      this.state = {
-          pins: [
-              { lat: -41.295910, lng: 174.773990 },
-              { lat: -41.291000, lng: 174.781520 }
-          ],
-          key: false
-      }
+
+  constructor(props) {
+
+    super(props)
+    console.log(props)
+    this.state = {
+      center: {
+        lat: -41.2743523,
+        lng: 174.735582
+      },
+      pins: [],
+      key: false,
+      addMode: false,
+      showPopUp: false
+
+    }
   }
 
   componentDidMount() {
-    if (!this.props.auth.isAuthenticated) {
-      setTimeout(this.popUp, 10000);
-    }
-    getKey(). then(() => {
-      this.setState({ key : true })
+    getKey().then(() => {
+      this.setState({ key: true })
+    })
+
+    this.setState({
+      pins: this.props.items.map((item) => {
+        var location = {
+          lat: item.lat,
+          lng: item.long
+        }
+        return location
+      })
     })
   }
     
-  popUp = () => {
-  this.setState({ showPopUp: true })
-  // console.log(document.getElementById('myModal').style)
-  // document.getElementById('myModal').style.display = 'block'
-  // console.log('hello')
-  }
-
-  closeModal = () => {
+  componentWillReceiveProps(newProps){
       this.setState({
-          showPopUp: false
+          pins: newProps.items.map((item) => {
+              var location = { 
+                  lat: item.lat, 
+                  lng: item.long 
+              }
+              return location
+          })
       })
   }
 
-
-  handleClick = (e) => {
-    console.log(e)
+  toggleAddMode = (e) => {
+    this.setState({
+      addMode: !this.state.addMode
+    })
   }
 
 
+  handleAddPin = (e) => {
+    if (this.state.addMode) {
+      this.setState({ showPopUp: true })
+
+    }
+  }
+
+  // this.setState({
+
+  //     pins: [
+  //         ...this.state.pins,
+  //         { lat: e.latLng.lat(), lng: e.latLng.lng() }
+  //     ],
+  //     center: { lat: e.latLng.lat(), lng: e.latLng.lng()}
+
+  // })
+
   render() {
     return (
+
       <div>
         {this.state.showPopUp &&
-            <div className="modal" style={{ display: 'block' }} id="myModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div className="modal-dialog" role="document">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <h5 className="modal-title" id="staticBackdropLabel">Become A Forage Extraordinaire!</h5>
-                            <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={this.closeModal}>
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div className="modal-body">
-                            Get access to more options and goodies!
-                    </div>
-
-                        <div className="modal-footer">
-                            <Link className="btn btn-primary" to="/login">Login</Link>
-                            <Link className="btn btn-primary" to="/register">Register</Link>
-                        </div>
-                    </div>
-                </div>
-            </div>
+          <AddModal />
         }
-        
-        {this.state.key && 
-        <LoadScript
-          id="script-loader"
-          googleMapsApiKey={process.env.GOOGLE_MAPS}>
-          <GoogleMap
-            id='Traffic-layer-example'
-            mapContainerStyle={{
-              height: "800px",
-              width: "1200px"
-            }}
-            zoom={12}
-            center={{
-              lat: -41.2743523,
-              lng: 174.735582
-            }}
-            mapTypeId='satellite'
-            onClick={this.handleClick}
-          >
-           {this.state.pins.map((pin) => {
-             return (
-                  <Marker
-                      position={pin}
-                  />
-             ) 
-           })}
-          </GoogleMap>
 
-        </LoadScript>
-        }
+        <div className="container px-lg-5">
+          <div className="row mx-lg-n5">
+
+            {this.state.key && this.props.items &&
+              <LoadScript
+                id="script-loader"
+                googleMapsApiKey={process.env.GOOGLE_MAPS}>
+                <GoogleMap
+                  id='Traffic-layer-example'
+                  mapContainerStyle={{
+                    height: "800px",
+                    width: "1200px"
+                  }}
+                  zoom={12}
+                  center={this.state.center}
+                  mapTypeId='satellite'
+                  onClick={this.handleAddPin}
+                >
+                  {this.state.pins.map((pin, index) => {
+                    return (
+                      <Marker
+                        key={index}
+                        position={pin}
+                      />
+                    )
+                  })}
+                </GoogleMap>
+              </LoadScript>
+            }
+
+            <button onClick={this.toggleAddMode}>{this.state.addMode ? "Stop Adding Pins" : "Add Pins"}</button>
+
+          </div>
+        </div>
       </div>
     )
   }
 }
 
-const mapStateToProps = ({ auth }) => {
-    return {
-        auth
-    }
-}
 
-export default connect(mapStateToProps)(Map)
+
+export default Map

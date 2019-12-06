@@ -6,7 +6,9 @@ const db = require('../db/items')
 
 router.post('/add', (req, res) => {
     db.addItem(req.body)
-    .then(res.sendStatus(200))
+    .then(response => {
+        res.sendStatus(200)
+    })
 })
 
 

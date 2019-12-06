@@ -6,46 +6,33 @@ import {logoutUser} from '../actions/logout'
 class Nav extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      showBurger: false
-    }
-    this.toggleBurger = this.toggleBurger.bind(this)
   }
-  toggleBurger() {
-    this.setState({showBurger: !this.state.showBurger})
-  }
+  
   render() {
     const {auth, logout} = this.props
-    const {showBurger} = this.state
-    return <nav className="navbar">
-      <div className="container">
-        <div className="navbar-brand">
-          <span onClick={this.toggleBurger} className={`navbar-burger burger ${showBurger ? 'is-active': ''}`} data-target="navbarMenuHeroA">
-            <Link to="/" className="navbar-item is-large">Home</Link>
+    return (
+       
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark customNavStyles">
+      <Link to='/' ><img className="navbar-brand " style={{ width: 80 + 'px', height: 100 + "%" }}src="" alt="" /></Link>
+      <Link to='/'><h1 className="title is-1">Forage App</h1></Link>
+      <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span className="navbar-toggler-icon"></span>
+      </button>
+      <div className="collapse navbar-collapse" id="navbarNav">
+        <ul className="navbar-nav ml-auto"style={{'paddingRight':50+'px'}}>
             {auth.isAuthenticated
-                ? <Link to='/addItem' className="navbar-item is-large" onClick={() => addItem()}>Add Item</Link>
-                : []
-              }
-            
-            <span></span>
-            <span></span>
-          </span>
-        </div>
-        <div id="navbarMenuHeroA" className={`navbar-menu ${showBurger ? "is-active" : ''}`}>
-          <div className="navbar-end">
-            {auth.isAuthenticated
-              ? [<Link to='/' className="navbar-item is-large" onClick={() => logout()}>Logout</Link>,
-                <Link to='add' className='navbar-item is-large'>Add Item</Link>]
+              ? [<li key="1" className="nav-item navListItems"><Link to='/' className="nav-link" onClick={() => logout()}>Logout</Link></li>,
+              <li key="2" className="nav-item navListItems"><Link to='/add' className="nav-link">Add Item</Link></li>]
+
               : [
-                <Link onClick={this.toggleBurger} className="navbar-item is-large" to='/login'>Login</Link>,
-                <Link onClick={this.toggleBurger} className="navbar-item" to='/register'>Register</Link>
+                <li key="3" className="nav-item navListItems" ><Link onClick={this.toggleBurger} className="nav-link" to='/login'>Login</Link></li>,
+                <li key="4" className="nav-item navListItems" ><Link onClick={this.toggleBurger} className= "nav-link" to='/register'>Register</Link></li>
               ]
             }
-          </div>
-        </div>
+        </ul>
       </div>
     </nav>
-  }
+    )}
 }
 
 const mapDispatchToProps = (dispatch) => {
