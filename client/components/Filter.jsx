@@ -61,4 +61,4 @@ const mapStateToProps = ({ auth, items }) => {
     }
 }
 
-export default connect(mapStateToProps)(Filter)
+export default connect(mapStateToProps)(Filter)      
