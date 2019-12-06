@@ -7,15 +7,36 @@ class Filter extends React.Component{
     constructor(props){
         super(props)
 
+        this.state = {
+            items: this.props.items.items,
+        }
+    }
+
+    handleCategory = (e) => {
+
+        this.setState({
+            items: this.props.items.items.filter(item => item.category_id === Number(e.target.value))
+        })
+
+
     }
 
     render(){
 
-        const {items} = this.props.items
         return(
-            <>
-            <Map items={items}/>
-            </>
+            <div className='d-flex'>
+            <Map items={this.state.items}/>
+
+            <div>
+                <label htmlFor="category">Category
+                    <select name="category" id="" onChange={this.handleCategory}>
+                        <option value="1">Fruit</option>
+                        <option value="4">Flowers</option>
+                        <option value="5">Other</option>
+                    </select>
+                </label>
+            </div>
+            </div>
         )
     }
 }
