@@ -6,7 +6,7 @@ import Login from './Login'
 import Register from './Register'
 import Nav from './Nav'
 import Items from './Items'      
-import Map from './Map'
+import Filter from './Filter'
 import PopUp from './PopUp'
 
 import { fetchPublicItems } from '../actions/items'
@@ -36,7 +36,7 @@ class App extends React.Component {
           </div>
             {
               this.props.items.items.length > 0 &&
-              <Route exact path="/" component={Map} />
+              <Route exact path="/" component={Filter} />
             }
             <Route exact path="/" component={PopUp} />
             <Route exact path="/login" component={Login} />
