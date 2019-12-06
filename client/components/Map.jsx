@@ -1,11 +1,16 @@
 import React, { Component } from 'react'
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api'
 import { getKey } from '../apis/auth'
+import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import ItemList from './ItemList'
+
 import AddModal from './AddModal'
 
 class Map extends React.Component {
 
   constructor(props) {
+
     super(props)
     console.log(props)
     this.state = {
