@@ -7,7 +7,20 @@
     margin: 0;
     padding: 0;
   }
+/* nav bar  */
+.customNavStyles {
+  background-color: #FFF1DA !important;
+}
 
+.is-1 {
+  padding-top: 15px;
+  font-family: 'Lakki Reddy', cursive;
+  color: #195507;
+}
+
+.nav-link {
+  color: #195507 !important;;
+}
 
   /*rating start*/
   .checked {
