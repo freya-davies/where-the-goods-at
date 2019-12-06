@@ -50,7 +50,8 @@ class ItemList extends React.Component {
                   <h3>{item.item_name}</h3>
                   <p>{item.description}</p>
                   {/* <p>{findSuburb(item.lat, item.long)}</p> */}
-                  <p>{this.getSuburbs(item)}</p>
+                  {/* FREYA - THE BELOW LINE IS WHAT YOU WANT TO UNCOMMENT */}
+                  {/* <p>{this.getSuburbs(item)}</p> */}
                   <hr></hr>
                 </div>
               )

@@ -9,6 +9,7 @@ import Items from './Items'
 import Map from './Map'
 import PopUp from './PopUp'
 import ItemList from './ItemList'
+import Landing from './Landing'
 
 import { fetchPublicItems } from '../actions/items'
 
@@ -39,6 +40,9 @@ class App extends React.Component {
               this.props.items.items.length > 0 &&
               <Route exact path="/" component={Map} />
             }
+            {/* if cookies show user has not visited this page, show {Landing} */}
+            <Route path='/landing' component={Landing} />
+
             <Route exact path="/" component={PopUp} />
             <Route exact path="/" component={ItemList} />
             <Route exact path="/login" component={Login} />
