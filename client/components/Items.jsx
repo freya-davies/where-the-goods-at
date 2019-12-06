@@ -24,7 +24,7 @@ class AddItemForm extends React.Component {
         this.handleImage = this.handleImage.bind(this)
         this.handleCheckbox = this.handleCheckbox.bind(this)
         // this.onStartClick= this.onStartClick.bind(this)
-        
+
     }
 
     // onStartClick(name, nextValue, prevValue) {
@@ -33,7 +33,7 @@ class AddItemForm extends React.Component {
     //             ...this.state.newItem,
     //             rating: nextValue
     //         }})
-            
+
     // }
 
     handleChange(e) {
@@ -69,7 +69,6 @@ class AddItemForm extends React.Component {
         })
         console.log(this.state.newItem.public)
     }
-
 
 
     render() {
@@ -111,8 +110,10 @@ class AddItemForm extends React.Component {
                     <label>
                         Category
                         <select name='category' onChange={this.handleChange}>
-                            <option value="fruits">Fruits</option>
+                            <option value="fruit">Fruit</option>
                             <option value="vegetables">Vegetables</option>
+                            <option value="herbs">Herbs</option>
+                            <option value="flowers">Flowers</option>
                             <option value="other">Other</option>
                         </select>
                     </label>
@@ -128,10 +129,9 @@ class AddItemForm extends React.Component {
                     </label>
                     <br></br>
                     <label>
-                        <div>
-                            <p>Quantity</p>
-                            <input name="quantity" type="range" min="1" max="50" onChange={this.handleChange}/>
-                        </div>
+                        <p>Quantity</p>
+                        <input name="quantity" type="range" min="1" max="50" onChange={this.handleChange} />{this.state.newItem.quantity}
+                        
                     </label>
                     <br></br>
                     {/* <p>Rating</p>
@@ -146,7 +146,7 @@ class AddItemForm extends React.Component {
                     <span className="fa fa-star checked"></span>
                     <span className="fa fa-star"></span>
                     <span className="fa fa-star"></span>*/}
-                    <br></br> 
+                    <br></br>
                     <input type="submit" value="Submit" />
                 </form>
             </div>
