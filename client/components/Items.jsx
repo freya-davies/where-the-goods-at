@@ -10,7 +10,7 @@ class AddItemForm extends React.Component {
                 item_name: "",
                 description: "",
                 address: "",
-                image: "",
+                img_url: "",
                 public: false,
                 category: "",
                 season: "",
@@ -21,7 +21,7 @@ class AddItemForm extends React.Component {
 
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
-        this.handleImage = this.handleImage.bind(this)
+        // this.handleImage = this.handleImage.bind(this)
         this.handleCheckbox = this.handleCheckbox.bind(this)
         // this.onStartClick= this.onStartClick.bind(this)
 
@@ -43,21 +43,25 @@ class AddItemForm extends React.Component {
                 [e.target.name]: e.target.value
             }
         })
-        console.log(e.target.value)
     }
 
-    handleImage(e) {
-        this.setState({
-            newItem: {
-                ...this.state.newItem,
-                img: URL.createObjectURL(e.target.files[0])
-            }
-        })
-    }
+    // handleImage(e) {
+    //     const data = new FormData() 
+    //     data.append('file', e.target.files[0])
+
+    //     this.setState({
+    //         newItem: {
+    //             ...this.state.newItem,
+    //             // img: URL.createObjectURL(e.target.files[0])
+    //             image: data
+    //         }
+    //     })
+    // }
+
     handleSubmit(e) {
         e.preventDefault()
+        console.log(this.state.newItem)
         addItem(this.state.newItem)
-
     }
 
     handleCheckbox(e) {
@@ -67,7 +71,6 @@ class AddItemForm extends React.Component {
                 public: !this.state.newItem.public
             }
         })
-        console.log(this.state.newItem.public)
     }
 
 
@@ -80,7 +83,7 @@ class AddItemForm extends React.Component {
                     <label>
                         Item
                         <br></br>
-                        <input type='text' name='name' onChange={this.handleChange} />
+                        <input type='text' name='item_name' onChange={this.handleChange} />
                     </label>
                     <br></br>
                     <label>
@@ -98,8 +101,8 @@ class AddItemForm extends React.Component {
                     <label>
                         Photo
                         <br></br>
-                        <input type="file" name="image" accept="image/*" onChange={this.handleImage} />
-                        <img src={this.state.newItem.img} />
+                        <input type="text" name="img_url" onChange={this.handleChange} />
+                        {/* <img src={this.state.newItem.img} /> */}
                     </label>
                     <br></br>
                     <label>
