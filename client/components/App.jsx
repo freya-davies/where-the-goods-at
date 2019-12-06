@@ -5,8 +5,9 @@ import { connect } from 'react-redux'
 import Login from './Login'
 import Register from './Register'
 import Nav from './Nav'
-import Items from './Items'      
 import Map from './Map'
+import Items from './Items'      
+import Filter from './Filter'
 import PopUp from './PopUp'
 import ItemList from './ItemList'
 
@@ -26,36 +27,16 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        <div className="container has-text-centered">
-          <div className="hero is-small is-primary">
-            <div className="hero-body has-text-centered">
-              <Link to='/' className="">
-                <h1 className="title is-1">Where The Goods At</h1>
-              </Link>
-              <Nav />
-            </div>
-          </div>
-            {
-              this.props.items.items.length > 0 &&
-              <Route exact path="/" component={Map} />
+        <Nav />
+            {this.props.items.items.length > 0 &&
+              <Route exact path="/" component={Filter} />
             }
             <Route exact path="/" component={PopUp} />
             <Route exact path="/" component={ItemList} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
-
-
-        <div className=''>
-          {this.props.auth.isAuthenticated &&
-          <Route path='/add' component={Items} />
-
-            // <Route exact path="/" component={Login} />
-          }
-          
-          {/* <Route path="/login" component={Login} /> */}
-          {/* <Route path="/register" component={Register} /> */}
-          </div>
-        </div>
+              {this.props.auth.isAuthenticated &&
+                <Route path='/add' component={Items} />} 
       </Router>
     )
   }

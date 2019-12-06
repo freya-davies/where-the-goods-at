@@ -9,8 +9,10 @@ const endUrl = '&key='
 
 
 export function addItem(item) {
+    console.log(item)
     getCoordinates(item.address)
         .then(res => {
+
             item.lat = res.body.results[0].geometry.location.lat
             item.long = res.body.results[0].geometry.location.lng
             delete item.address
@@ -32,8 +34,6 @@ function getCoordinates(address) {
             })
     })
 }
-
-
 
 export function getPublicItems () {
     
