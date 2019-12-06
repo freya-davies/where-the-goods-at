@@ -1,18 +1,40 @@
 import React from 'react'
 import { addItem } from '../apis/items'
+// import StarRating from 'react-svg-star-rating'
 
 class AddItemForm extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            newItem: {}
+            newItem: {
+                item_name: "",
+                description: "",
+                address: "",
+                img_url: "",
+                public: false,
+                category: "",
+                season: "",
+                // rating: null, 
+                quantity: null,
+            },
         }
 
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
-        this.handleImage = this.handleImage.bind(this)
-        this.handleClick = this.handleClick.bind(this)
+        // this.handleImage = this.handleImage.bind(this)
+        this.handleCheckbox = this.handleCheckbox.bind(this)
+        // this.onStartClick= this.onStartClick.bind(this)
+
     }
+
+    // onStartClick(name, nextValue, prevValue) {
+    //     this.setState({
+    //         newItem: {
+    //             ...this.state.newItem,
+    //             rating: nextValue
+    //         }})
+
+    // }
 
     handleChange(e) {
         this.setState({
@@ -21,34 +43,39 @@ class AddItemForm extends React.Component {
                 [e.target.name]: e.target.value
             }
         })
-        console.log(this.state.newItem)
     }
 
-    handleImage(e) {
-        this.setState({
-            newItem: {
-                ...this.state.newItem,
-                img: URL.createObjectURL(e.target.files[0])
-            }
-        })
-    }
+    // handleImage(e) {
+    //     const data = new FormData() 
+    //     data.append('file', e.target.files[0])
+
+    //     this.setState({
+    //         newItem: {
+    //             ...this.state.newItem,
+    //             // img: URL.createObjectURL(e.target.files[0])
+    //             image: data
+    //         }
+    //     })
+    // }
+
     handleSubmit(e) {
         e.preventDefault()
+        console.log(this.state.newItem)
         addItem(this.state.newItem)
-
     }
 
-    handleClick(e) {
+    handleCheckbox(e) {
         this.setState({
             newItem: {
                 ...this.state.newItem,
-                value: e.target.value
+                public: !this.state.newItem.public
             }
         })
-        console.log(this.state)
     }
 
+
     render() {
+        // const {rating} = this.state
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
@@ -56,7 +83,7 @@ class AddItemForm extends React.Component {
                     <label>
                         Item
                         <br></br>
-                        <input type='text' name='name' onChange={this.handleChange} />
+                        <input type='text' name='item_name' onChange={this.handleChange} />
                     </label>
                     <br></br>
                     <label>
@@ -74,49 +101,54 @@ class AddItemForm extends React.Component {
                     <label>
                         Photo
                         <br></br>
-                        <input type="file" name="image" accept="image/*" onChange={this.handleImage} />
-                        <img src={this.state.newItem.img} />
+                        <input type="text" name="img_url" onChange={this.handleChange} />
+                        {/* <img src={this.state.newItem.img} /> */}
                     </label>
                     <br></br>
                     <label>
                         Public
-                        <input type='checkbox' name='public' onChange={this.handleChange} />
-                        Private
-                        <input type='checkbox' name='private' onChange={this.handleChange} />
+                        <input type='checkbox' name='public' onChange={this.handleCheckbox} />
                     </label>
                     <br></br>
                     <label>
                         Category
-                        <select>
-                            <option value="fruits" onClick={this.handleClick}>Fruits</option>
-                            <option value="vegetables" onClick={this.handleClick}>Vegetables</option>
-                            <option value="other" onClick={this.handleClick}>Other</option>
+                        <select name='category' onChange={this.handleChange}>
+                            <option value="fruit">Fruit</option>
+                            <option value="vegetables">Vegetables</option>
+                            <option value="herbs">Herbs</option>
+                            <option value="flowers">Flowers</option>
+                            <option value="other">Other</option>
                         </select>
                     </label>
                     <br></br>
                     <label>
                         Season
-                        <select>
-                            <option value="summer" onClick={this.handleClick}>Summer</option>
-                            <option value="spring" onClick={this.handleClick}>Spring</option>
-                            <option value="autumn" onClick={this.handleClick}>Autumn</option>
-                            <option value="winter" onClick={this.handleClick}>Winter</option>
+                        <select name='season' onChange={this.handleChange}>
+                            <option value="summer">Summer</option>
+                            <option value="spring">Spring</option>
+                            <option value="autumn">Autumn</option>
+                            <option value="winter">Winter</option>
                         </select>
                     </label>
                     <br></br>
                     <label>
-                        <div>
-                            <p>Quantity</p>
-                            <input type="range" min="1" max="50" />
-                        </div>
+                        <p>Quantity</p>
+                        <input name="quantity" type="range" min="1" max="50" onChange={this.handleChange} />{this.state.newItem.quantity}
+                        
                     </label>
                     <br></br>
-                    <p>Rating</p>
-                    <span className="fa fa-star checked"></span>
+                    {/* <p>Rating</p>
+                    <StarRating
+                        name = 'rate1'
+                        starCount={5}
+                        value={rating}
+                        onClick={this.onStartClick}
+                        /> */}
+                    {/* <span className="fa fa-star checked"></span>
                     <span className="fa fa-star checked"></span>
                     <span className="fa fa-star checked"></span>
                     <span className="fa fa-star"></span>
-                    <span className="fa fa-star"></span>
+                    <span className="fa fa-star"></span>*/}
                     <br></br>
                     <input type="submit" value="Submit" />
                 </form>

@@ -4,12 +4,16 @@ const connection = require('./connection')
 function addItem(item, db = connection) {
     return db('items')
     .insert({
-        item_name: item.name, 
+        item_name: item.item_name, 
         description: item.description, 
         lat: item.lat,
         long: item.long,
-        img_url: item.img,
-        public: true,
+        img_url: item.img_url,
+        season: item.season,
+        quantity: item.quantity,
+        rating: item.rating,
+        category_id: 1,
+        public: 1
     })
 }
 

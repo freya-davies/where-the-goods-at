@@ -9,6 +9,7 @@ import Map from './Map'
 import Items from './Items'      
 import Filter from './Filter'
 import PopUp from './PopUp'
+import ItemList from './ItemList'
 
 import { fetchPublicItems } from '../actions/items'
 
@@ -27,23 +28,15 @@ class App extends React.Component {
     return (
       <Router>
         <Nav />
-        <div className='content'>
-          <div>
-            {
-              this.props.items.items.length > 0 &&
+            {this.props.items.items.length > 0 &&
               <Route exact path="/" component={Filter} />
             }
             <Route exact path="/" component={PopUp} />
+            <Route exact path="/" component={ItemList} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
-
-
-            <div className=''>
               {this.props.auth.isAuthenticated &&
-                <Route path='/add' component={Items} />}
-            </div>
-          </div>
-        </div>
+                <Route path='/add' component={Items} />} 
       </Router>
     )
   }
