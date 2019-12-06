@@ -5,7 +5,6 @@ exports.seed = function(knex) {
     .then(function () {
       // Inserts seed entries
       return knex('items').insert([
-
         {id: 1, item_name: 'Coriander', user_id: 1, category_id: 1, img_url: 'http://source.unsplash.com/500x500/?funny-horse', public: false, description: 'Some funny animals', lat: -41.296889, long: 174.7719502, rating: 5, comments: 'Some nice stuff going on in here', season: 'all year long', quantity: '1000000'},
         {id: 2, item_name: 'Lemons', user_id: 1, category_id: 1, img_url: 'http://source.unsplash.com/500x500/?funny-horse', public: true, description: 'Some funny animals', lat: -41.296990, long: 174.7719502, rating: 5, comments: 'Some nice stuff going on in here', season: 'all year long', quantity: '1000000'},
         {id: 3, item_name: 'Apples', user_id: 1, category_id: 1, img_url: 'http://source.unsplash.com/500x500/?funny-horse', public: true, description: 'Some funny animals', lat: -41.296773, long: 174.7719502, rating: 5, comments: 'Some nice stuff going on in here', season: 'all year long', quantity: '1000000'},
@@ -24,4 +23,3 @@ exports.seed = function(knex) {
     });
 };
 
--41.337884, 174.770409
