@@ -6,7 +6,7 @@ class Map extends React.Component {
     
     constructor(props) {
         super(props)
-        console.log(props)
+        // console.log(props)
         this.state = {
             center : {
                 lat: -41.2743523,
