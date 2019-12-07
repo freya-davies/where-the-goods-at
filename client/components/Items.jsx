@@ -146,9 +146,9 @@ class AddItemForm extends React.Component {
                 <select name='category' onChange={this.handleChange}>
                   <option value={0}></option>
                   {this.state.categoryData &&
-                    this.state.categoryData.map(category => {
+                    this.state.categoryData.map((category,i) => {
                       return (
-                        <option value={category.id}>
+                        <option key={i} value={category.id}>
                           {category.category_name}
                         </option>
                       )
@@ -161,9 +161,9 @@ class AddItemForm extends React.Component {
                 <select name='season' onChange={this.handleChange}>
                   <option value={0}></option>
                   {this.state.seasonData &&
-                    this.state.seasonData.map(season => {
+                    this.state.seasonData.map((season,i) => {
                       return (
-                        <option value={season.id}>{season.season_name}</option>
+                        <option key={i} value={season.id}>{season.season_name}</option>
                       )
                     })}
                 </select>

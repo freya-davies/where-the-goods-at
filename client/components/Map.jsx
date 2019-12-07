@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api'
+import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/api'
 import { getKey } from '../apis/auth'
-import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import ItemList from './ItemList'
-
 import AddModal from './AddModal'
 
-class Map extends React.Component {
+import { showAddItemModal } from '../actions/modals'
+
+class Map extends Component {
 
   constructor(props) {
 
@@ -21,9 +21,12 @@ class Map extends React.Component {
       pins: [],
       key: false,
       addMode: false,
-      showPopUp: false
-
+      showModal: false,
+      infoWindowShowing: false
     }
+
+    this.handleMarker = this.handleMarker.bind(this)
+
   }
 
   componentDidMount() {
@@ -32,7 +35,18 @@ class Map extends React.Component {
     })
 
     this.setState({
-      pins: this.props.items.map((item) => {
+      pins: this.props.items.map((item, index) => {
+        return {
+          index,
+          showing: false
+        }
+      })
+    })
+  }
+
+  componentWillReceiveProps(newProps) {
+    this.setState({
+      pins: newProps.items.map((item) => {
         var location = {
           lat: item.lat,
           lng: item.long
@@ -40,18 +54,6 @@ class Map extends React.Component {
         return location
       })
     })
-  }
-    
-  componentWillReceiveProps(newProps){
-      this.setState({
-          pins: newProps.items.map((item) => {
-              var location = { 
-                  lat: item.lat, 
-                  lng: item.long 
-              }
-              return location
-          })
-      })
   }
 
   toggleAddMode = (e) => {
@@ -63,10 +65,27 @@ class Map extends React.Component {
 
   handleAddPin = (e) => {
     if (this.state.addMode) {
-      this.setState({ showPopUp: true })
-
+      let newPin = { lat: e.latLng.lat(), lng: e.latLng.lng() }
+      this.props.showAddItemModal(newPin)
     }
   }
+
+  handleMarker(index) {
+    this.setState({
+      pins: [...this.state.pins,
+              this.state.pins[index].showing = !this.state.pins[index].showing
+            ]
+    })
+  }
+
+  // clearShowingPins = () => {
+  //   return this.state.pins.map((pin) => {
+  //       if (pin.showing == true) {
+  //         pin.showing = false
+  //       }
+  //       return pin
+  //     }) 
+  // }
 
   // this.setState({
 
@@ -88,7 +107,6 @@ class Map extends React.Component {
 
         <div className="container px-lg-5">
           <div className="row mx-lg-n5">
-
             {this.state.key && this.props.items &&
               <LoadScript
                 id="script-loader"
@@ -104,20 +122,27 @@ class Map extends React.Component {
                   mapTypeId='satellite'
                   onClick={this.handleAddPin}
                 >
-                  {this.state.pins.map((pin, index) => {
+                  {this.props.items.map((item, index) => {
                     return (
                       <Marker
+                        onClick={() => this.handleMarker(index)}
                         key={index}
-                        position={pin}
-                      />
+                        position={{ lat: item.lat, lng: item.long }}
+                      >
+                        {this.state.pins[index].showing && (
+                          <InfoWindow onCloseClick={() => this.handleMarker(index)} position={{ lat: item.lat, lng: item.long }}>
+                            <div className="">
+                              myinfowindow
+                              </div>
+                          </InfoWindow>
+                        )}
+                      </Marker>
                     )
                   })}
                 </GoogleMap>
               </LoadScript>
             }
-
-            <button onClick={this.toggleAddMode}>{this.state.addMode ? "Stop Adding Pins" : "Add Pins"}</button>
-
+            <button onClick={this.toggleAddMode}>{this.state.addMode ? "Stop Adding Items" : "Add Items"}</button>
           </div>
         </div>
       </div>
@@ -125,6 +150,8 @@ class Map extends React.Component {
   }
 }
 
+const mapStateToProps = () => {
+  return {}
+}
 
-
-export default Map
+export default connect(mapStateToProps, { showAddItemModal })(Map)
