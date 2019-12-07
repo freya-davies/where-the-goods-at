@@ -58,3 +58,14 @@ export function getPrivateItems() {
 
 }
 
+export function getCategories(){
+    return request
+        .get(url + 'categories')
+        .then(res => res.body)
+}
+
+export function getSeasons(){
+    return request
+        .get(url + 'seasons')
+        .then(res => res.body)
+}
