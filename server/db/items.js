@@ -30,9 +30,19 @@ function getAllItems(userId, db = connection) {
     return db('items').select().where('public', true).orWhere('user_id', userId)
 }
 
+function getCategories(db = connection){
+    return db('categories').select()
+}
+
+function getSeasons(db = connection){
+    return db('season').select()
+}
+
 module.exports = {
-    addItem, 
-    getPublicItems,
-    getPrivateItems,
-    getAllItems
+  addItem,
+  getPublicItems,
+  getPrivateItems,
+  getAllItems,
+  getCategories,
+  getSeasons,
 }

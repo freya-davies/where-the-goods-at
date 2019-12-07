@@ -1,5 +1,5 @@
 import React from 'react'
-import { addItem } from '../apis/items'
+import { addItem, getCategories, getSeasons } from '../apis/items'
 // import StarRating from 'react-svg-star-rating'
 
 class AddItemForm extends React.Component {
@@ -25,6 +25,17 @@ class AddItemForm extends React.Component {
         this.handleCheckbox = this.handleCheckbox.bind(this)
         // this.onStartClick= this.onStartClick.bind(this)
 
+    }
+
+    componentDidMount(){
+        getCategories()
+            .then(categoryData => {
+                this.setState({categoryData})
+            })
+        getSeasons()
+            .then(seasonData => {
+                this.setState({seasonData})
+            })
     }
 
     // onStartClick(name, nextValue, prevValue) {
@@ -77,82 +88,115 @@ class AddItemForm extends React.Component {
     render() {
         // const {rating} = this.state
         return (
-            <div>
-                <form onSubmit={this.handleSubmit}>
-                    <h3>Add new Item</h3>
-                    <label>
-                        Item
-                        <br></br>
-                        <input type='text' name='item_name' onChange={this.handleChange} />
-                    </label>
-                    <br></br>
-                    <label>
-                        Description
-                        <br></br>
-                        <textarea type='text' name='description' onChange={this.handleChange} />
-                    </label>
-                    <br></br>
-                    <label>
-                        Address
-                        <br></br>
-                        <input type='text' name='address' onChange={this.handleChange} />
-                    </label>
-                    <br></br>
-                    <label>
-                        Photo
-                        <br></br>
-                        <input type="text" name="img_url" onChange={this.handleChange} />
-                        {/* <img src={this.state.newItem.img} /> */}
-                    </label>
-                    <br></br>
-                    <label>
-                        Public
-                        <input type='checkbox' name='public' onChange={this.handleCheckbox} />
-                    </label>
-                    <br></br>
-                    <label>
-                        Category
-                        <select name='category' onChange={this.handleChange}>
-                            <option value="fruit">Fruit</option>
-                            <option value="vegetables">Vegetables</option>
-                            <option value="herbs">Herbs</option>
-                            <option value="flowers">Flowers</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </label>
-                    <br></br>
-                    <label>
-                        Season
-                        <select name='season' onChange={this.handleChange}>
-                            <option value="summer">Summer</option>
-                            <option value="spring">Spring</option>
-                            <option value="autumn">Autumn</option>
-                            <option value="winter">Winter</option>
-                        </select>
-                    </label>
-                    <br></br>
-                    <label>
-                        <p>Quantity</p>
-                        <input name="quantity" type="range" min="1" max="50" onChange={this.handleChange} />{this.state.newItem.quantity}
-                        
-                    </label>
-                    <br></br>
-                    {/* <p>Rating</p>
+          <div>
+            <form onSubmit={this.handleSubmit}>
+              <h3>Add new Item</h3>
+              <label>
+                Item
+                <br></br>
+                <input
+                  type='text'
+                  name='item_name'
+                  onChange={this.handleChange}
+                />
+              </label>
+              <br></br>
+              <label>
+                Description
+                <br></br>
+                <textarea
+                  type='text'
+                  name='description'
+                  onChange={this.handleChange}
+                />
+              </label>
+              <br></br>
+              <label>
+                Address
+                <br></br>
+                <input
+                  type='text'
+                  name='address'
+                  onChange={this.handleChange}
+                />
+              </label>
+              <br></br>
+              <label>
+                Photo
+                <br></br>
+                <input
+                  type='text'
+                  name='img_url'
+                  onChange={this.handleChange}
+                />
+                {/* <img src={this.state.newItem.img} /> */}
+              </label>
+              <br></br>
+              <label>
+                Public
+                <input
+                  type='checkbox'
+                  name='public'
+                  onChange={this.handleCheckbox}
+                />
+              </label>
+              <br></br>
+              <label>
+                Category
+                <select name='category' onChange={this.handleChange}>
+                  <option value={0}></option>
+                  {this.state.categoryData &&
+                    this.state.categoryData.map(category => {
+                      return (
+                        <option value={category.id}>
+                          {category.category_name}
+                        </option>
+                      )
+                    })}
+                </select>
+              </label>
+              <br></br>
+              <label>
+                Season
+                <select name='season' onChange={this.handleChange}>
+                  <option value={0}></option>
+                  {this.state.seasonData &&
+                    this.state.seasonData.map(season => {
+                      return (
+                        <option value={season.id}>{season.season_name}</option>
+                      )
+                    })}
+                </select>
+              </label>
+              <br></br>
+              <label>
+                <p>Quantity</p>
+                <input
+                  name='quantity'
+                  type='range'
+                  min='1'
+                  max='50'
+                  onChange={this.handleChange}
+                />
+                {this.state.newItem.quantity}
+              </label>
+              <br></br>
+              {/* <p>Rating</p>
                     <StarRating
                         name = 'rate1'
                         starCount={5}
                         value={rating}
                         onClick={this.onStartClick}
                         /> */}
-                    {/* <span className="fa fa-star checked"></span>
+              {/* <span className="fa fa-star checked"></span>
                     <span className="fa fa-star checked"></span>
                     <span className="fa fa-star checked"></span>
                     <span className="fa fa-star"></span>
                     <span className="fa fa-star"></span>*/}
-                    <br></br>
-                    <input type="submit" value="Submit" />
-                </form>
-            </div>
+              <br></br>
+              <input type='submit' value='Submit' />
+            </form>
+          </div>
         )
     }
 }
