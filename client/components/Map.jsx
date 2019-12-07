@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
 import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/api'
 import { getKey } from '../apis/auth'
-import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import ItemList from './ItemList'
 import AddModal from './AddModal'
 
 import { showAddItemModal } from '../actions/modals'
 
-class Map extends React.Component {
+class Map extends Component {
 
   constructor(props) {
 
@@ -72,12 +71,21 @@ class Map extends React.Component {
   }
 
   handleMarker(index) {
-    console.log(index)
     this.setState({
-      pins: [...this.state.pins, this.state.pins[index].showing = !this.state.pins[index].showing]
+      pins: [...this.state.pins,
+              this.state.pins[index].showing = !this.state.pins[index].showing
+            ]
     })
-    // this.setState({infoWindowShowing: !this.state.infoWindowShowing}) 
   }
+
+  // clearShowingPins = () => {
+  //   return this.state.pins.map((pin) => {
+  //       if (pin.showing == true) {
+  //         pin.showing = false
+  //       }
+  //       return pin
+  //     }) 
+  // }
 
   // this.setState({
 
@@ -91,58 +99,48 @@ class Map extends React.Component {
 
   render() {
     return (
-      <>
-        {/* {this.state.showModal ?
-          <AddModal showing={true} /> : <AddModal showing={false}/>
-        } */}
-        <div>
-
-          <div className="container px-lg-5">
-            <div className="row mx-lg-n5">
-
-              {this.state.key && this.props.items &&
-                <LoadScript
-                  id="script-loader"
-                  googleMapsApiKey={process.env.GOOGLE_MAPS}>
-                  <GoogleMap
-                    id='Traffic-layer-example'
-                    mapContainerStyle={{
-                      height: "800px",
-                      width: "1200px"
-                    }}
-                    zoom={12}
-                    center={this.state.center}
-                    mapTypeId='satellite'
-                    onClick={this.handleAddPin}
-                  >
-                    {this.props.items.map((item, index) => {
-                      return (
-                        <Marker
-                          onClick={() => this.handleMarker(index)}
-                          key={index}
-                          position={{ lat: item.lat, lng: item.long }}
-                        >
-                          {this.state.pins[index].showing && (
-                            <InfoWindow onCloseClick={() =>  this.handleMarker(index)} position={{ lat: item.lat, lng: item.long }}>
-                              <div className="">
-                                myinfowindow
+      <div>
+        <div className="container px-lg-5">
+          <div className="row mx-lg-n5">
+            {this.state.key && this.props.items &&
+              <LoadScript
+                id="script-loader"
+                googleMapsApiKey={process.env.GOOGLE_MAPS}>
+                <GoogleMap
+                  id='Traffic-layer-example'
+                  mapContainerStyle={{
+                    height: "800px",
+                    width: "1200px"
+                  }}
+                  zoom={12}
+                  center={this.state.center}
+                  mapTypeId='satellite'
+                  onClick={this.handleAddPin}
+                >
+                  {this.props.items.map((item, index) => {
+                    return (
+                      <Marker
+                        onClick={() => this.handleMarker(index)}
+                        key={index}
+                        position={{ lat: item.lat, lng: item.long }}
+                      >
+                        {this.state.pins[index].showing && (
+                          <InfoWindow onCloseClick={() => this.handleMarker(index)} position={{ lat: item.lat, lng: item.long }}>
+                            <div className="">
+                              myinfowindow
                               </div>
-                            </InfoWindow>
-                          )}
-                        </Marker>
-                      )
-
-                    })}
-                  </GoogleMap>
-                </LoadScript>
-              }
-
-              <button onClick={this.toggleAddMode}>{this.state.addMode ? "Stop Adding Items" : "Add Items"}</button>
-
-            </div>
+                          </InfoWindow>
+                        )}
+                      </Marker>
+                    )
+                  })}
+                </GoogleMap>
+              </LoadScript>
+            }
+            <button onClick={this.toggleAddMode}>{this.state.addMode ? "Stop Adding Items" : "Add Items"}</button>
           </div>
         </div>
-      </>
+      </div>
     )
   }
 }
