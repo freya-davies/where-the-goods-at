@@ -9,7 +9,6 @@ import Map from './Map'
 import Items from './Items'      
 import Filter from './Filter'
 import PopUp from './PopUp'
-import ItemList from './ItemList'
 import Landing from './Landing'
 
 import { fetchPublicItems } from '../actions/items'
@@ -36,7 +35,6 @@ class App extends React.Component {
             <Route path='/landing' component={Landing} />
 
             <Route exact path="/" component={PopUp} />
-            <Route exact path="/" component={ItemList} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
               {this.props.auth.isAuthenticated &&

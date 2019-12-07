@@ -6,6 +6,8 @@
     height: 100%;
     margin: 0;
     padding: 0;
+    background-color: #0c2504;
+    color: #9e9d9d;
   }
 /* nav bar  */
 .customNavStyles {
@@ -25,4 +27,14 @@
   /*rating start*/
   .checked {
     color: orange;
+  }
+
+  /* list Item */
+  .bg-main {
+  background-color: #FFF1DA;
+  color: #195507;
+  }
+
+  .bg-dark-main {
+    background-color: rgb(223, 215, 203);
   }
