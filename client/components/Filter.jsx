@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Map from './Map'
+import { isProperty } from '@babel/types'
 
 
 class Filter extends React.Component {
@@ -19,45 +20,40 @@ class Filter extends React.Component {
         })
     }
 
-    sortNumberNewest = (a, b) => {
-        return a - b;
-    }
-
-    sortNumberNewest = (a, b) => {
-        return a - b;
-    }
-
-    shuffleArray = (array) => {
-        for (var i = array.length - 1; i > 0; i--) {
-            var j = Math.floor(Math.random() * (i + 1));
-            var temp = array[i];
-            array[i] = array[j];
-            array[j] = temp;
-        }
-    }
-
+// ------------------------
+// FREYA - want this to return either first 5 or last 5 entries
+// ------------------------
     handleRecent = (e) => {
-        // want this to:
-        // sort throught the arrays timestamp (created_at) and return the whole array in order of latest. 
+        if (e.target.value == 'new') {
+            const longness = this.props.items.items.length
 
-        if(e = 'new') {
-           return this.setState({
-                items: this.props.items.items.sort(item => console.log("NEW" + e.target.value))
+            this.setState({
+                items: this.props.items.items.map(item => {
+                    if (item.id > (longness - 5)) {
+                        console.log(item)
+                        return item
+                    }
+                })
+
             })
         } else
-        if (e = 'old') {
-            return console.log('hello!')
-            //   return  this.setState({
-                //         items: this.props.items.items.sort(item => console.log("OLD" + e.target.value))
-            } else 
-            if (e = 'random') {
+        if (e.target.value == 'old') {
+            const longness = this.props.items.items.length
 
-            // shuffleArray(this.state.)
-            console.log(this.props.items.items.sort(item => console.log("RAN" + item)))
+            this.setState({
+                    items: this.props.items.items.map(item => {
+                    if (item.id < 5 ) {
+                        console.log(item)
+                        return item
+                    } else {
+                        return
+                    }
+                })
+            })
+            console.log(this.state.items)
         } else {
             return console.log('Something is broken')
         }
-            // sortNumber(item)
     }
 
 
@@ -82,14 +78,27 @@ class Filter extends React.Component {
                         </label>
                     </div>
                     <div>
-                        <label htmlFor="category">Recently Added
+                        <label htmlFor="category">Recently Added - BROKEN BUTTON
                     <select name="category" id="" onChange={this.handleRecent}>
                                 <option value="new">Newest</option>
                                 <option value="old">Oldest </option>
-                                <option value="random">Randomly</option>
                             </select>
                         </label>
                     </div>
+                    {/* <div>
+                        <label htmlFor="category">Suburb - BROKEN BUTTON
+                    <select name="category" id="" onChange={this.handleRecent}> */}
+                        {/* what I want this to do is:
+                        - map through suburb names, 
+                        - only show the name if it isn't already showing
+                        - bring back all items in props that include that name */}
+                                {/* {this.props.items.items.map((item, i) => {
+                                  return  <option key={i} value={item.item_name}>{item.item_name}</option>
+                                    })
+                                }
+                            </select>
+                        </label>
+                    </div> */}
                 </div >
 
             </div >
