@@ -11,17 +11,24 @@ const endUrl = '&key='
 
 export function addItem(item) {
     console.log(item)
-    getCoordinates(item.address)
-        .then(res => {
-
-            item.lat = res.body.results[0].geometry.location.lat
-            item.long = res.body.results[0].geometry.location.lng
-            delete item.address
-            return request
-                .post(addItemUrl)
-                .send(item)
-                .then(res => res.statusCode)
-        })
+    if (item.lat && item.long) {
+        return request
+        .post(addItemUrl)
+        .send(item)
+        .then(res => res.statusCode)
+    } else {
+        getCoordinates(item.address)
+            .then(res => {
+    
+                item.lat = res.body.results[0].geometry.location.lat
+                item.long = res.body.results[0].geometry.location.lng
+                delete item.address
+                return request
+                    .post(addItemUrl)
+                    .send(item)
+                    .then(res => res.statusCode)
+            })
+    }
 }
 
 function getCoordinates(address) {
