@@ -9,7 +9,11 @@ import Map from './Map'
 import Items from './Items'      
 import Filter from './Filter'
 import PopUp from './PopUp'
-import Landing from './Landing'
+import ItemList from './ItemList'
+import LandingPage from './LandingPage'
+import ModalConductor from './ModalConductor'
+
+
 
 import { fetchPublicItems } from '../actions/items'
 
@@ -26,13 +30,14 @@ class App extends React.Component {
 
   render() {
     return (
+      <>
+      { this.props.modals.currentModal && <ModalConductor modal={this.props.modals} /> }
       <Router>
         <Nav />
             {this.props.items.items.length > 0 &&
               <Route exact path="/" component={Filter} />
             }
-            {/* if cookies show user has not visited this page, show {Landing} */}
-            <Route path='/landing' component={Landing} />
+            <Route exact path="/" component={LandingPage} />
 
             <Route exact path="/" component={PopUp} />
             <Route exact path="/login" component={Login} />
@@ -40,14 +45,16 @@ class App extends React.Component {
               {this.props.auth.isAuthenticated &&
                 <Route path='/add' component={Items} />} 
       </Router>
+      </>
     )
   }
 }
 
-const mapStateToProps = ({ auth, items }) => {
+const mapStateToProps = ({ auth, items, modals }) => {
   return {
     auth,
-    items
+    items,
+    modals
   }
 }
 
