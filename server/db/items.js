@@ -9,11 +9,11 @@ function addItem(item, db = connection) {
         lat: item.lat,
         long: item.long,
         img_url: item.img_url,
-        season: item.season,
+        season_id: item.season,
         quantity: item.quantity,
         rating: item.rating,
-        category_id: 1,
-        public: 1
+        category_id: item.category,
+        public: item.public
     })
 }
 
@@ -30,9 +30,19 @@ function getAllItems(userId, db = connection) {
     return db('items').select().where('public', true).orWhere('user_id', userId)
 }
 
+function getCategories(db = connection){
+    return db('categories').select()
+}
+
+function getSeasons(db = connection){
+    return db('season').select()
+}
+
 module.exports = {
-    addItem, 
-    getPublicItems,
-    getPrivateItems,
-    getAllItems
+  addItem,
+  getPublicItems,
+  getPrivateItems,
+  getAllItems,
+  getCategories,
+  getSeasons,
 }

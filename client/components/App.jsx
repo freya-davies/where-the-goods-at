@@ -10,6 +10,10 @@ import Items from './Items'
 import Filter from './Filter'
 import PopUp from './PopUp'
 import ItemList from './ItemList'
+import LandingPage from './LandingPage'
+import ModalConductor from './ModalConductor'
+
+
 
 import { fetchPublicItems } from '../actions/items'
 
@@ -26,26 +30,31 @@ class App extends React.Component {
 
   render() {
     return (
+      <>
+      { this.props.modals.currentModal && <ModalConductor modal={this.props.modals} /> }
       <Router>
         <Nav />
             {this.props.items.items.length > 0 &&
               <Route exact path="/" component={Filter} />
             }
+            <Route exact path="/" component={LandingPage} />
+
             <Route exact path="/" component={PopUp} />
-            <Route exact path="/" component={ItemList} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
               {this.props.auth.isAuthenticated &&
                 <Route path='/add' component={Items} />} 
       </Router>
+      </>
     )
   }
 }
 
-const mapStateToProps = ({ auth, items }) => {
+const mapStateToProps = ({ auth, items, modals }) => {
   return {
     auth,
-    items
+    items,
+    modals
   }
 }
 
