@@ -81,7 +81,7 @@ class Map extends React.Component {
   render() {
     return (
 
-      <div>
+      <div className="fixMap">
         {this.state.showPopUp &&
           <AddModal />
         }
