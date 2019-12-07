@@ -10,6 +10,7 @@ import Items from './Items'
 import Filter from './Filter'
 import PopUp from './PopUp'
 import ItemList from './ItemList'
+import LandingPage from './LandingPage'
 
 import { fetchPublicItems } from '../actions/items'
 
@@ -31,6 +32,7 @@ class App extends React.Component {
             {this.props.items.items.length > 0 &&
               <Route exact path="/" component={Filter} />
             }
+            <Route exact path="/" component={LandingPage} />
             <Route exact path="/" component={PopUp} />
             <Route exact path="/" component={ItemList} />
             <Route exact path="/login" component={Login} />
