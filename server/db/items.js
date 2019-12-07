@@ -9,11 +9,11 @@ function addItem(item, db = connection) {
         lat: item.lat,
         long: item.long,
         img_url: item.img_url,
-        season: item.season,
+        season_id: item.season,
         quantity: item.quantity,
         rating: item.rating,
-        category_id: 1,
-        public: 1
+        category_id: item.category,
+        public: item.public
     })
 }
 

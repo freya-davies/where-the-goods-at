@@ -95,6 +95,7 @@ class AddItemForm extends React.Component {
                 Item
                 <br></br>
                 <input
+                  required
                   type='text'
                   name='item_name'
                   onChange={this.handleChange}
@@ -105,6 +106,7 @@ class AddItemForm extends React.Component {
                 Description
                 <br></br>
                 <textarea
+                  required
                   type='text'
                   name='description'
                   onChange={this.handleChange}
@@ -115,6 +117,7 @@ class AddItemForm extends React.Component {
                 Address
                 <br></br>
                 <input
+                  required
                   type='text'
                   name='address'
                   onChange={this.handleChange}
@@ -125,6 +128,7 @@ class AddItemForm extends React.Component {
                 Photo
                 <br></br>
                 <input
+                  required
                   type='text'
                   name='img_url'
                   onChange={this.handleChange}
@@ -143,8 +147,8 @@ class AddItemForm extends React.Component {
               <br></br>
               <label>
                 Category
-                <select name='category' onChange={this.handleChange}>
-                  <option value={0}></option>
+                <select required name='category' onChange={this.handleChange}>
+                  <option value=''></option>
                   {this.state.categoryData &&
                     this.state.categoryData.map((category,i) => {
                       return (
@@ -158,8 +162,8 @@ class AddItemForm extends React.Component {
               <br></br>
               <label>
                 Season
-                <select name='season' onChange={this.handleChange}>
-                  <option value={0}></option>
+                <select required name='season' onChange={this.handleChange}>
+                  <option value=''></option>
                   {this.state.seasonData &&
                     this.state.seasonData.map((season,i) => {
                       return (
