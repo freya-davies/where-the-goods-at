@@ -70,7 +70,7 @@ class Filter extends React.Component {
                     <div className="jumbotron jumbotron-fluid bg-main rounded">
                         <div className="container">
                             <h3 className="display-4">Sort</h3>
-                            <p className="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+                            <p className="lead"></p>
                             <div>
                                 <label htmlFor="category">Category
                     <select name="category" id="" onChange={this.handleCategory}>

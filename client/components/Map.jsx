@@ -99,7 +99,12 @@ class Map extends Component {
 
   render() {
     return (
-      <div>
+
+      <div className="fixMap">
+        {this.state.showPopUp &&
+          <AddModal />
+        }
+
         <div className="container px-lg-5">
           <div className="row mx-lg-n5">
             {this.state.key && this.props.items &&
