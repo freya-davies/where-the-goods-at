@@ -26,19 +26,29 @@ class Filter extends React.Component {
         return (
             <div className='d-flex'>
                 <div className='col-8'>
-            <Map items={this.state.items}/>
-            </div>
+                    <Map items={this.state.items} />
+                </div>
 
-            <div className='col-md-auto'>
+                <div className='col-md-auto'>
 
-                <label htmlFor="category">Category
+                    <label htmlFor="category">Category
                     <select name="category" id="" onChange={this.handleCategory}>
-                    <option value="1">Fruit</option>
-                    <option value="4">Flowers</option>
-                    <option value="5">Other</option>
-                </select>
-            </label>
-            </div >
+                            <option value="1">Fruit</option>
+                            <option value="4">Flowers</option>
+                            <option value="5">Other</option>
+                        </select>
+                    </label>
+                </div >
+    
+                <div className='col-md-auto'>
+                    <label htmlFor="category">Recent
+                    <select name="category" id="" onChange={this.handleCategory}>
+                            <option value="1">Fruit</option>
+                            <option value="4">Flowers</option>
+                            <option value="5">Other</option>
+                        </select>
+                    </label>
+                </div >
             </div >
         )
     }
@@ -51,4 +61,4 @@ const mapStateToProps = ({ auth, items }) => {
     }
 }
 
-export default connect(mapStateToProps)(Filter)
+export default connect(mapStateToProps)(Filter)      

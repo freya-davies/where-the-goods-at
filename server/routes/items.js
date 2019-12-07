@@ -55,6 +55,15 @@ router.get('/user', (req, res) => {
     })
 })
 
+router.get('/categories', (req, res) => {
+    db.getCategories()
+        .then(data => res.json(data))
+})
+
+router.get('/seasons', (req, res) => {
+    db.getSeasons()
+        .then(data => res.json(data))
+})
 
 
 module.exports = router

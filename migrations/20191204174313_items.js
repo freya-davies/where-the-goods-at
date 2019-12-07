@@ -12,8 +12,9 @@ exports.up = function(knex) {
     table.float('lat')
     table.integer('rating')
     table.string('comments')
-    table.string('season')
+    table.integer('season_id')
     table.integer('quantity')
+    table.bigint('created_at')
   })
 };
 
