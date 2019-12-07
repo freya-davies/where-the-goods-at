@@ -39,30 +39,37 @@ class ItemList extends React.Component {
 
     return (
       <div>
-        <h2>Listed items: </h2>
-        {this.props.items.items ?
-          <>
-            {items.map((item, i) => {
-              return (
-                <div key={i}>
-                  <hr></hr>
-                  <img src={item.img_url} alt={item.item_name} height="80" width="80" />
-                  <h3>{item.item_name}</h3>
-                  <p>{item.description}</p>
-                  {/* <p>{findSuburb(item.lat, item.long)}</p> */}
-                  {/* FREYA - THE BELOW LINE IS WHAT YOU WANT TO UNCOMMENT */}
-                  {/* <p>{this.getSuburbs(item)}</p> */}
-                  <hr></hr>
-                </div>
-              )
-            }
-            )}
-            
+        <div className="container">
+          <h2>Listed items: </h2>
+          {this.props.items.items ?
+            <>
+              <div className="row">
+                {items.map((item, i) => {
+                  return (
+                    <div key={i} className="col-sm-4 container bg-dark-main">
+                      <div className="rounded">
+                        <hr></hr>
+                      <img className="rounded" src={item.img_url} alt={item.item_name} height="80" width="80" />
+                      <h3>{item.item_name}</h3>
+                      <p>{item.description}</p>
+                      {/* <p>{findSuburb(item.lat, item.long)}</p> */}
+                      {/* FREYA - THE BELOW LINE IS WHAT YOU WANT TO UNCOMMENT */}
+                      {/* <p>{this.getSuburbs(item)}</p> */}
+                      <hr></hr>
+                      </div>
+                    </div>
+
+                  )
+                }
+                )}
+              </div>
             </>
-          :
-          <p>Fetching Data</p>
+            :
+            <p>Fetching Data</p>
           }
-        
+        </div>
+
+
       </div>
 
     )

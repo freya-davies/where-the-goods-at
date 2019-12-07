@@ -14,6 +14,7 @@ import LandingPage from './LandingPage'
 import ModalConductor from './ModalConductor'
 
 
+
 import { fetchPublicItems } from '../actions/items'
 
 class App extends React.Component {
@@ -39,7 +40,6 @@ class App extends React.Component {
             <Route exact path="/" component={LandingPage} />
 
             <Route exact path="/" component={PopUp} />
-            <Route exact path="/" component={ItemList} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
               {this.props.auth.isAuthenticated &&
