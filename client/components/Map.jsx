@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import ItemList from './ItemList'
 import AddModal from './AddModal'
 import { showAddItemModal, updateItemModal } from '../actions/modals'
+import { getCategories, getSeasons } from '../apis/items'
 
 
 class Map extends Component {
@@ -34,6 +35,14 @@ class Map extends Component {
     getKey().then(() => {
       this.setState({ key: true })
     })
+    getCategories()
+      .then(categoryData => {
+        this.setState({ categoryData })
+      })
+    getSeasons()
+      .then(seasonData => {
+        this.setState({ seasonData })
+      })
   }
 
   componentWillReceiveProps(newProps) {
@@ -54,7 +63,6 @@ class Map extends Component {
     })
   }
 
-
   handleAddPin = (e) => {
     if (this.state.addMode) {
       let newPin = { lat: e.latLng.lat(), lng: e.latLng.lng() }
@@ -66,8 +74,6 @@ class Map extends Component {
     this.setState({
       activePin: this.props.items[index]
     })
-
-    console.log(this.props.items[index])
   }
 
   closeWindow() {
@@ -87,6 +93,7 @@ class Map extends Component {
   // })
 
   render() {
+    console.log(this.state)
     return (
 
       <div className="">
@@ -109,8 +116,7 @@ class Map extends Component {
                   zoom={12}
                   center={this.state.center}
                   mapTypeId='satellite'
-                  onClick={this.handleAddPin}
-                >
+                  onClick={this.handleAddPin}>
                   {this.props.items.map((item, index) => {
                     return (
                       <Marker
@@ -122,20 +128,13 @@ class Map extends Component {
                         {this.props.items[index] == this.state.activePin && (
                           <InfoWindow onCloseClick={() => this.closeWindow()} position={{ lat: item.lat, lng: item.long }}>
                             <div className="">
-                              {this.props.items[index].item_name}
-                              <br></br>
-                              {this.props.items[index].description}
-                              <br></br>
-                              {this.props.items[index].img_url}
-                              <br></br>
-                              {this.props.items[index].category_id}
-                              <br></br>
-                              {this.props.items[index].public}
-                              <br></br>
-                              {this.props.items[index].quantity}
-                              <br></br>
-                              {this.props.items[index].season}
-                              <br></br>
+                              <h4>{this.props.items[index].item_name}</h4>
+                              {/* <input type='text' name={this.props.items[index].item_name} />  */}
+                              <h6>Description: {this.props.items[index].description}</h6>
+                              <img src={this.props.items[index].img_url} />
+                              <h6>Category: {this.state.categoryData[this.props.items[index].category_id - 1].category_name}</h6>
+                              <h6>Quantity: {this.props.items[index].quantity}</h6>
+                              <h6>Season: {this.state.seasonData[this.props.items[index].season_id - 1].season_name}</h6>
                             </div>
                           </InfoWindow>
                         )}
