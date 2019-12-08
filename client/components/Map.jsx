@@ -4,8 +4,8 @@ import { getKey } from '../apis/auth'
 import { connect } from 'react-redux'
 import ItemList from './ItemList'
 import AddModal from './AddModal'
+import { showAddItemModal, updateItemModal } from '../actions/modals'
 
-import { showAddItemModal } from '../actions/modals'
 
 class Map extends Component {
 
@@ -26,6 +26,8 @@ class Map extends Component {
     }
 
     this.handleMarker = this.handleMarker.bind(this)
+    this.handleClick = this.handleClick.bind(this)
+
 
   }
 
@@ -73,9 +75,15 @@ class Map extends Component {
   handleMarker(index) {
     this.setState({
       pins: [...this.state.pins,
-              this.state.pins[index].showing = !this.state.pins[index].showing
-            ]
+      this.state.pins[index].showing = !this.state.pins[index].showing
+      ]
     })
+
+    console.log(this.props.items[index])
+  }
+
+  handleClick(index) {
+    this.props.updateItemModal(this.props.items[index])
   }
 
   // clearShowingPins = () => {
@@ -132,8 +140,22 @@ class Map extends Component {
                         {this.state.pins[index].showing && (
                           <InfoWindow onCloseClick={() => this.handleMarker(index)} position={{ lat: item.lat, lng: item.long }}>
                             <div className="">
-                              myinfowindow
-                              </div>
+                              {this.props.items[index].item_name}
+                              <br></br>
+                              {this.props.items[index].description}
+                              <br></br>
+                              {this.props.items[index].img_url}
+                              <br></br>
+                              {this.props.items[index].category_id}
+                              <br></br>
+                              {this.props.items[index].public}
+                              <br></br>
+                              {this.props.items[index].quantity}
+                              <br></br>
+                              {this.props.items[index].season}
+                              <br></br>
+                              <button onClick={() => this.handleClick(index)}>Click Me!</button>
+                            </div>
                           </InfoWindow>
                         )}
                       </Marker>
@@ -154,4 +176,4 @@ const mapStateToProps = () => {
   return {}
 }
 
-export default connect(mapStateToProps, { showAddItemModal })(Map)
+export default connect(mapStateToProps, { showAddItemModal, updateItemModal })(Map)
