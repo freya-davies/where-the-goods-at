@@ -22,25 +22,17 @@ class Map extends Component {
       key: false,
       addMode: false,
       showModal: false,
-      infoWindowShowing: false
+      infoWindowShowing: false,
+      activePin: null
     }
 
-    this.handleMarker = this.handleMarker.bind(this)
-
+    this.openWindow = this.openWindow.bind(this)
+    this.closeWindow = this.closeWindow.bind(this)
   }
 
   componentDidMount() {
     getKey().then(() => {
       this.setState({ key: true })
-    })
-
-    this.setState({
-      pins: this.props.items.map((item, index) => {
-        return {
-          index,
-          showing: false
-        }
-      })
     })
   }
 
@@ -70,22 +62,18 @@ class Map extends Component {
     }
   }
 
-  handleMarker(index) {
+  openWindow(index) {
     this.setState({
-      pins: [...this.state.pins,
-              this.state.pins[index].showing = !this.state.pins[index].showing
-            ]
+      activePin: this.props.items[index]
     })
+
   }
 
-  // clearShowingPins = () => {
-  //   return this.state.pins.map((pin) => {
-  //       if (pin.showing == true) {
-  //         pin.showing = false
-  //       }
-  //       return pin
-  //     }) 
-  // }
+  closeWindow() {
+    this.setState({
+      activePin: null
+    })
+  }
 
   // this.setState({
 
@@ -120,12 +108,12 @@ class Map extends Component {
                   {this.props.items.map((item, index) => {
                     return (
                       <Marker
-                        onClick={() => this.handleMarker(index)}
+                        onClick={() => this.openWindow(index)}
                         key={index}
                         position={{ lat: item.lat, lng: item.long }}
                       >
-                        {this.state.pins[index].showing && (
-                          <InfoWindow onCloseClick={() => this.handleMarker(index)} position={{ lat: item.lat, lng: item.long }}>
+                        {this.props.items[index] == this.state.activePin && (
+                          <InfoWindow onCloseClick={() => this.closeWindow()} position={{ lat: item.lat, lng: item.long }}>
                             <div className="">
                               myinfowindow
                               </div>
