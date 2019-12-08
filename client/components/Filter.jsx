@@ -94,7 +94,7 @@ class Filter extends React.Component {
 
             <div>
               <label htmlFor='category'>
-                Recently Added - BROKEN BUTTON
+                Recently Added
                 <select name='category' id='' onChange={this.handleRecent}>
                   <option value='new'>Newest</option>
                   <option value='old'>Oldest </option>
