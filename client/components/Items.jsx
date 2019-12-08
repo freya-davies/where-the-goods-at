@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { addItem, getCategories, getSeasons } from '../apis/items'
 // import StarRating from 'react-svg-star-rating'
 
@@ -6,17 +7,18 @@ class AddItemForm extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            newItem: {
-                item_name: "",
-                description: "",
-                address: "",
-                img_url: "",
-                public: false,
-                category: "",
-                season: "",
-                // rating: null, 
-                quantity: null,
-            },
+          newItem: {
+            item_name: '',
+            user: this.props.auth.auth.user.user_name,
+            description: '',
+            address: '',
+            img_url: '',
+            public: false,
+            category: '',
+            season: '',
+            // rating: null,
+            quantity: null
+          }
         }
 
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -71,7 +73,6 @@ class AddItemForm extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault()
-        console.log(this.state.newItem)
         addItem(this.state.newItem)
     }
 
@@ -86,8 +87,7 @@ class AddItemForm extends React.Component {
 
 
     render() {
-        // const {rating} = this.state
-        return (
+      return (
           <div>
             <form onSubmit={this.handleSubmit}>
               <h3>Add new Item</h3>
@@ -212,4 +212,10 @@ class AddItemForm extends React.Component {
 // rating - integer 1-5
 // upload image
 
-export default AddItemForm
+const mapStateToProps = auth => {
+  return {
+    auth
+  }
+}
+
+export default connect(mapStateToProps)(AddItemForm)

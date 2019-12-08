@@ -51,9 +51,9 @@ export function getPublicItems () {
 }
 
 
-export function getPrivateItems() {
+export function getPrivateItems(user) {
   return request
-  .get(url + user)
+  .get(url + `user/${user}`)
   .then(res => res.body)
 
 }
