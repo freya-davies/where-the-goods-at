@@ -15,12 +15,21 @@ class AddModal extends React.Component {
         lat: this.props.location.lat,
         long: this.props.location.lng,
         img_url: '',
-        public: false,
+        public: true,
         category: '',
         season: '',
-        quantity: null
+        quantity: null,
+        image: null
       }
     }
+<<<<<<< HEAD
+=======
+
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+    this.handleImageUpload = this.handleImageUpload.bind(this)
+    this.handleCheckbox = this.handleCheckbox.bind(this)
+>>>>>>> 79ab3da879d2fa4269f825202d70c8653444d8f3
   }
 
   componentDidMount() {
@@ -41,7 +50,28 @@ class AddModal extends React.Component {
     })
   }
 
+<<<<<<< HEAD
   handleSubmit = (e) => {
+=======
+  handleImageUpload(e) {
+    const data = new FormData()
+    let file = e.target.files[0]
+    data.append('file', file)
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+        this.setState({
+            newItem: {
+                ...this.state.newItem,
+                image: reader.result
+            }
+        })
+    }
+}
+
+  handleSubmit(e) {
+    console.log(this.state.newItem)
+>>>>>>> 79ab3da879d2fa4269f825202d70c8653444d8f3
     e.preventDefault()
     addItem(this.state.newItem)
     fetchPublicItems()
@@ -105,18 +135,7 @@ class AddModal extends React.Component {
                   </label>
                   <br></br>
                   <label>
-                    Photo
-                    <br></br>
-                    <input
-                      required
-                      type='text'
-                      name='img_url'
-                      onChange={this.handleChange}
-                    />
-                  </label>
-                  <br></br>
-                  <label>
-                    Public
+                    Private
                     <input
                       type='checkbox'
                       name='public'
@@ -167,8 +186,17 @@ class AddModal extends React.Component {
                     {this.state.newItem.quantity}
                   </label>
                   <br></br>
-                  <br></br>
+                  <label>
+                    <p>Image</p>
+                    <input
+                      type="file"
+                      name="image"
+                      accept="image/*"
+                      onChange={this.handleImageUpload}
+                    />
+                  </label>
                   <input type='submit' value='Submit' />
+                  <br></br>
                 </form>
               </div>
             </div>
@@ -181,7 +209,6 @@ class AddModal extends React.Component {
               >
                 Close
               </button>
-              {/* <button type="button" className="btn btn-primary">Add to Map</button> */}
             </div>
           </div>
         </div>
@@ -191,9 +218,9 @@ class AddModal extends React.Component {
 }
 
 const mapStateToProps = (auth) => {
-    return {
-      auth
-    }
+  return {
+    auth
+  }
 }
 
 export default connect(mapStateToProps, { hideModal })(AddModal)
