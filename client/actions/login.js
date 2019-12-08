@@ -10,6 +10,7 @@ export function requestLogin () {
 }
 
 export function receiveLogin (user) {
+  localStorage.setItem('UrbanForagerRemembersMe', 'true')
   return {
     type: 'LOGIN_SUCCESS',
     isFetching: false,
