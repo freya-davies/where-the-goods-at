@@ -114,20 +114,6 @@ class UpdateItem extends React.Component {
                         </form>
                   
                     </div>
-                    <div className='modal-footer'>
-                    <button
-                        type='button'
-                        className='btn btn-secondary'
-                        data-dismiss='modal'
-                        // onClick={this.closeModal}
-                    >
-                        Close
-                    </button>
-                    {/* <button type="button" className="btn btn-primary">Add to Map</button> */}
-                    </div>
-                </div>
-                </div>
-            </div>
         )
     }
 }

@@ -4,7 +4,7 @@ import { getKey } from '../apis/auth'
 import { connect } from 'react-redux'
 import ItemList from './ItemList'
 import AddModal from './AddModal'
-import { showAddItemModal, updateItemModal } from '../actions/modals'
+import { showAddItemModal } from '../actions/modals'
 import { getCategories, getSeasons } from '../apis/items'
 
 
@@ -157,4 +157,4 @@ const mapStateToProps = () => {
   return {}
 }
 
-export default connect(mapStateToProps, { showAddItemModal, updateItemModal })(Map)
+export default connect(mapStateToProps, { showAddItemModal })(Map)

@@ -10,18 +10,14 @@ router.post('/add', (req, res) => {
         .then(userId => {
             req.body.user = userId.id
             db.addItem(req.body)
-                .then(response => {
-                res.sendStatus(200)
+                .then(res => {
+                res.redirect('/')
             })
         })
 
 
     
 })
-
-
-
-
 
 // get public items and users items
 
@@ -37,7 +33,16 @@ router.get('/all', (req, res) => {
     })
 })
 
+//get single item
 
+router.get('items/:id', (res,req) => {
+    console.log(req.params.id)
+    let {id} = req.params
+    db.getItem(id)
+    .then(item => {
+        res.json(item)
+    })
+})
 
 // get public items
 

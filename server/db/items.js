@@ -41,6 +41,10 @@ function getSeasons(db = connection){
     return db('season').select()
 }
 
+function getItem(itemId, db=connection) {
+    return db('item').select().where('itemId', itemId)
+}
+
 module.exports = {
   addItem,
   getPublicItems,
@@ -48,4 +52,5 @@ module.exports = {
   getAllItems,
   getCategories,
   getSeasons,
+  getItem
 }

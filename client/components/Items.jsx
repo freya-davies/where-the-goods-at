@@ -47,7 +47,7 @@ class AddItemForm extends React.Component {
     })
   }
 
-  handleImageUpload(e) {
+  handleImageUpload(e) {season
     const data = new FormData()
     let file = e.target.files[0]
     data.append('file', file)

@@ -68,3 +68,9 @@ export function getSeasons(){
         .get(url + 'seasons')
         .then(res => res.body)
 }
+
+export function getItem(){
+    return request
+    .get(url + `items/${id}`)
+    .then(res => res.body)
+}
