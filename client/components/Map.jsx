@@ -4,8 +4,8 @@ import { getKey } from '../apis/auth'
 import { connect } from 'react-redux'
 import ItemList from './ItemList'
 import AddModal from './AddModal'
+import { showAddItemModal, updateItemModal } from '../actions/modals'
 
-import { showAddItemModal } from '../actions/modals'
 
 class Map extends Component {
 
@@ -66,6 +66,8 @@ class Map extends Component {
     this.setState({
       activePin: this.props.items[index]
     })
+
+    console.log(this.props.items[index])
   }
 
   closeWindow() {
@@ -119,8 +121,21 @@ class Map extends Component {
                         {this.props.items[index] == this.state.activePin && (
                           <InfoWindow onCloseClick={() => this.closeWindow()} position={{ lat: item.lat, lng: item.long }}>
                             <div className="">
-                              myinfowindow
-                              </div>
+                              {this.props.items[index].item_name}
+                              <br></br>
+                              {this.props.items[index].description}
+                              <br></br>
+                              {this.props.items[index].img_url}
+                              <br></br>
+                              {this.props.items[index].category_id}
+                              <br></br>
+                              {this.props.items[index].public}
+                              <br></br>
+                              {this.props.items[index].quantity}
+                              <br></br>
+                              {this.props.items[index].season}
+                              <br></br>
+                            </div>
                           </InfoWindow>
                         )}
                       </Marker>
@@ -141,4 +156,4 @@ const mapStateToProps = () => {
   return {}
 }
 
-export default connect(mapStateToProps, { showAddItemModal })(Map)
+export default connect(mapStateToProps, { showAddItemModal, updateItemModal })(Map)

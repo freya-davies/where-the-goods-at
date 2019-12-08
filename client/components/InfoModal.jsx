@@ -1,6 +1,6 @@
 import React from "react"
 
-class AddModal extends React.Component {
+class InfoModal extends React.Component {
 
     constructor(props) {
         super(props)
