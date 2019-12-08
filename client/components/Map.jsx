@@ -131,10 +131,11 @@ class Map extends Component {
                               <h4>{this.props.items[index].item_name}</h4>
                               {/* <input type='text' name={this.props.items[index].item_name} />  */}
                               <h6>Description: {this.props.items[index].description}</h6>
-                              <img src={this.props.items[index].img_url} />
                               <h6>Category: {this.state.categoryData[this.props.items[index].category_id - 1].category_name}</h6>
                               <h6>Quantity: {this.props.items[index].quantity}</h6>
                               <h6>Season: {this.state.seasonData[this.props.items[index].season_id - 1].season_name}</h6>
+                              {this.props.items[index].image &&
+                              <img src={this.props.items[index].image}/>}
                             </div>
                           </InfoWindow>
                         )}

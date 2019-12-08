@@ -10,7 +10,6 @@ const endUrl = '&key='
 
 
 export function addItem(item) {
-    console.log(item)
     if (item.lat && item.long) {
         return request
         .post(addItemUrl)
