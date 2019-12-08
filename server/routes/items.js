@@ -2,13 +2,21 @@ const express = require('express')
 const router = express.Router()
 
 const db = require('../db/items')
+const dbUser = require('../db/users')
 
 
 router.post('/add', (req, res) => {
-    db.addItem(req.body)
-    .then(response => {
-        res.sendStatus(200)
-    })
+    dbUser.getUserByUsername(req.body.user)
+        .then(userId => {
+            req.body.user = userId.id
+            db.addItem(req.body)
+                .then(response => {
+                res.sendStatus(200)
+            })
+        })
+
+
+    
 })
 
 
@@ -22,7 +30,6 @@ router.get('/all', (req, res) => {
     
       //check console to see structure of object
 
-      console.log(req.body)
       let userId = req.body.id || 1
     db.getAllItems(userId)
     .then(items => {
@@ -43,15 +50,13 @@ router.get('/', (req, res) => {
 
 // get users private items
 
-router.get('/user', (req, res) => {
-
-    //check console to see structure of object
-
-    console.log(req.body)
-    let userId = req.body.id || 1
-    db.getPrivateItems(userId)
-    .then(items => {
-        res.json(items)
+router.get('/user/:name', (req, res) => {
+    dbUser.getUserByUsername(req.params.name)
+        .then(userId => {
+            db.getPrivateItems(userId.id)
+            .then(items => {
+                res.json(items)
+            })
     })
 })
 

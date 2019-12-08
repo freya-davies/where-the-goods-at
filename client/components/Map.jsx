@@ -4,8 +4,9 @@ import { getKey } from '../apis/auth'
 import { connect } from 'react-redux'
 import ItemList from './ItemList'
 import AddModal from './AddModal'
+import { showAddItemModal, updateItemModal } from '../actions/modals'
+import { getCategories, getSeasons } from '../apis/items'
 
-import { showAddItemModal } from '../actions/modals'
 
 class Map extends Component {
 
@@ -22,26 +23,26 @@ class Map extends Component {
       key: false,
       addMode: false,
       showModal: false,
-      infoWindowShowing: false
+      infoWindowShowing: false,
+      activePin: null
     }
 
-    this.handleMarker = this.handleMarker.bind(this)
-
+    this.openWindow = this.openWindow.bind(this)
+    this.closeWindow = this.closeWindow.bind(this)
   }
 
   componentDidMount() {
     getKey().then(() => {
       this.setState({ key: true })
     })
-
-    this.setState({
-      pins: this.props.items.map((item, index) => {
-        return {
-          index,
-          showing: false
-        }
+    getCategories()
+      .then(categoryData => {
+        this.setState({ categoryData })
       })
-    })
+    getSeasons()
+      .then(seasonData => {
+        this.setState({ seasonData })
+      })
   }
 
   componentWillReceiveProps(newProps) {
@@ -62,7 +63,6 @@ class Map extends Component {
     })
   }
 
-
   handleAddPin = (e) => {
     if (this.state.addMode) {
       let newPin = { lat: e.latLng.lat(), lng: e.latLng.lng() }
@@ -70,22 +70,17 @@ class Map extends Component {
     }
   }
 
-  handleMarker(index) {
+  openWindow(index) {
     this.setState({
-      pins: [...this.state.pins,
-              this.state.pins[index].showing = !this.state.pins[index].showing
-            ]
+      activePin: this.props.items[index]
     })
   }
 
-  // clearShowingPins = () => {
-  //   return this.state.pins.map((pin) => {
-  //       if (pin.showing == true) {
-  //         pin.showing = false
-  //       }
-  //       return pin
-  //     }) 
-  // }
+  closeWindow() {
+    this.setState({
+      activePin: null
+    })
+  }
 
   // this.setState({
 
@@ -98,8 +93,14 @@ class Map extends Component {
   // })
 
   render() {
+    console.log(this.state)
     return (
-      <div>
+
+      <div className="">
+        {this.state.showPopUp &&
+          <AddModal />
+        }
+
         <div className="container px-lg-5">
           <div className="row mx-lg-n5">
             {this.state.key && this.props.items &&
@@ -115,20 +116,27 @@ class Map extends Component {
                   zoom={12}
                   center={this.state.center}
                   mapTypeId='satellite'
-                  onClick={this.handleAddPin}
-                >
+                  onClick={this.handleAddPin}>
                   {this.props.items.map((item, index) => {
                     return (
                       <Marker
-                        onClick={() => this.handleMarker(index)}
+                        onClick={() => this.openWindow(index)}
                         key={index}
                         position={{ lat: item.lat, lng: item.long }}
+                        //icon={'path to icon'}
                       >
-                        {this.state.pins[index].showing && (
-                          <InfoWindow onCloseClick={() => this.handleMarker(index)} position={{ lat: item.lat, lng: item.long }}>
+                        {this.props.items[index] == this.state.activePin && (
+                          <InfoWindow onCloseClick={() => this.closeWindow()} position={{ lat: item.lat, lng: item.long }}>
                             <div className="">
-                              myinfowindow
-                              </div>
+                              <h4>{this.props.items[index].item_name}</h4>
+                              {/* <input type='text' name={this.props.items[index].item_name} />  */}
+                              <h6>Description: {this.props.items[index].description}</h6>
+                              <h6>Category: {this.state.categoryData[this.props.items[index].category_id - 1].category_name}</h6>
+                              <h6>Quantity: {this.props.items[index].quantity}</h6>
+                              <h6>Season: {this.state.seasonData[this.props.items[index].season_id - 1].season_name}</h6>
+                              {this.props.items[index].image &&
+                              <img src={this.props.items[index].image}/>}
+                            </div>
                           </InfoWindow>
                         )}
                       </Marker>
@@ -149,4 +157,4 @@ const mapStateToProps = () => {
   return {}
 }
 
-export default connect(mapStateToProps, { showAddItemModal })(Map)
+export default connect(mapStateToProps, { showAddItemModal, updateItemModal })(Map)

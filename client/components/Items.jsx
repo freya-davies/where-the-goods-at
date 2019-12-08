@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { addItem, getCategories, getSeasons } from '../apis/items'
 // import StarRating from 'react-svg-star-rating'
 
@@ -6,22 +7,24 @@ class AddItemForm extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            newItem: {
-                item_name: "",
-                description: "",
-                address: "",
-                img_url: "",
-                public: false,
-                category: "",
-                season: "",
-                // rating: null, 
-                quantity: null,
-            },
+          newItem: {
+            item_name: '',
+            user: this.props.auth.auth.user.user_name,
+            description: '',
+            address: '',
+            img_url: '',
+            public: false,
+            category: '',
+            season: '',
+            // rating: null,
+            quantity: null,
+            image: null
+          }
         }
 
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
-        // this.handleImage = this.handleImage.bind(this)
+        this.handleImageUpload = this.handleImageUpload.bind(this)
         this.handleCheckbox = this.handleCheckbox.bind(this)
         // this.onStartClick= this.onStartClick.bind(this)
 
@@ -56,22 +59,26 @@ class AddItemForm extends React.Component {
         })
     }
 
-    // handleImage(e) {
-    //     const data = new FormData() 
-    //     data.append('file', e.target.files[0])
-
-    //     this.setState({
-    //         newItem: {
-    //             ...this.state.newItem,
-    //             // img: URL.createObjectURL(e.target.files[0])
-    //             image: data
-    //         }
-    //     })
-    // }
+    handleImageUpload(e) {
+        const data = new FormData() 
+        let file = e.target.files[0]
+        data.append('file', file)
+        console.log(file)
+        let reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = () => {
+          console.log(reader.result)
+          this.setState({
+            newItem: {
+                ...this.state.newItem,
+                image: reader.result
+            }
+          })
+        }
+    }
 
     handleSubmit(e) {
         e.preventDefault()
-        console.log(this.state.newItem)
         addItem(this.state.newItem)
     }
 
@@ -84,10 +91,8 @@ class AddItemForm extends React.Component {
         })
     }
 
-
     render() {
-        // const {rating} = this.state
-        return (
+      return (
           <div>
             <form onSubmit={this.handleSubmit}>
               <h3>Add new Item</h3>
@@ -198,6 +203,16 @@ class AddItemForm extends React.Component {
                     <span className="fa fa-star"></span>
                     <span className="fa fa-star"></span>*/}
               <br></br>
+              <label>
+                <p>Image</p>
+                <input
+                  type="file"
+                  name="image"
+                  accept="image/*"
+                  onChange={this.handleImageUpload}
+                />
+                {/* <input ref={(ref) => { this.uploadInput = ref; }} type="file" /> */}
+              </label>
               <input type='submit' value='Submit' />
             </form>
           </div>
@@ -212,4 +227,10 @@ class AddItemForm extends React.Component {
 // rating - integer 1-5
 // upload image
 
-export default AddItemForm
+const mapStateToProps = auth => {
+  return {
+    auth
+  }
+}
+
+export default connect(mapStateToProps)(AddItemForm)

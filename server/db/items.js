@@ -13,7 +13,10 @@ function addItem(item, db = connection) {
         quantity: item.quantity,
         rating: item.rating,
         category_id: item.category,
-        public: item.public
+        public: item.public,
+        user_id: item.user,
+        created_at: Date.now(),
+        image: item.image
     })
 }
 

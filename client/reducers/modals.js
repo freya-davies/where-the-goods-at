@@ -1,5 +1,6 @@
 const initialState = {
     currentModal: '',
+    item: null,
     itemLocation: null
 }
 
@@ -13,6 +14,11 @@ export default function modals(state = initialState, action) {
         case 'HIDE_MODAL':
             return {
                 currentModal: null
+            }
+        case 'UPDATE_ITEM_MODAL':
+            return {
+                currentModal: action.type,
+                item: action.item
             }
         default:
             return state
