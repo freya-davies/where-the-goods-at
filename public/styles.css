@@ -8,7 +8,6 @@
     padding: 0;
     background-color: #0c2504;
     color: #9e9d9d;
-    margin-top: 3% !important;
   }
 
   a:link {
@@ -21,10 +20,14 @@
       text-decoration: none;
   }
 
-
+.scrollable {
+  overflow-y:scroll; 
+  height: 60vh;
+}
 /* nav bar  */
 .customNavStyles {
   background-color: #FFF1DA !important;
+  margin-bottom: 1rem;
 }
 
 .is-1 {
