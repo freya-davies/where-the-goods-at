@@ -22,51 +22,56 @@ class Filter extends React.Component {
     })
   }
 
-  // ------------------------
-  // FREYA - want this to return either first 5 or last 5 entries
-  // ------------------------
   handleRecent = e => {
     if (e.target.value == 'new') {
       const longness = this.props.items.items.length
 
       this.setState({
-        items: this.props.items.items.map(item => {
-          if (item.id > longness - 5) {
-            console.log(item)
-            return item
-          }
-        })
+        items: this.props.items.items.slice(-10)
       })
     } else if (e.target.value == 'old') {
       const longness = this.props.items.items.length
 
       this.setState({
-        items: this.props.items.items.map(item => {
-          if (item.id < 5) {
-            console.log(item)
+        items: this.props.items.items.filter(item => {
+          if (item.id < 10) {
+            console.log('id less than 5: ', item)
             return item
           } else {
             return
           }
         })
       })
-      console.log(this.state.items)
+      console.log(this.state.items.slice(5))
     } else {
       return console.log('Something is broken')
     }
   }
 
   handleItemDisplay = e => {
-      this.setState({public: !this.state.public})
+    this.setState({ public: !this.state.public })
   }
 
   whichItems = () => {
-    if(this.state.public) return this.state.items
+    if (this.state.public) return this.state.items
     else return this.props.privateItems.privateItems
-         
+
   }
 
   render() {
+    // Make listed items alphabetical
+    this.props.items.items.sort((a, b) => {
+      return a.item_name > b.item_name ? 1 : -1
+    })
+
+    // Make listed items show suburb
+    // this.props.items.items.sort((a, b) => {
+    //   return a.suburb > b.suburb ? 1 : -1
+    // })
+
+
+
+
     return (
       <div className='d-flex px-2'>
         <div className='col-8'>
@@ -111,21 +116,6 @@ class Filter extends React.Component {
                 Private
               </label>
             </div>
-
-            {/* <div>
-                        <label htmlFor="category">Suburb - BROKEN BUTTON
-                    <select name="category" id="" onChange={this.handleRecent}> */}
-            {/* what I want this to do is:
-                        - map through suburb names, 
-                        - only show the name if it isn't already showing
-                        - bring back all items in props that include that name */}
-            {/* {this.props.items.items.map((item, i) => {
-                                  return  <option key={i} value={item.item_name}>{item.item_name}</option>
-                                    })
-                                }
-                            </select>
-                        </label>
-                    </div> */}
           </div>
 
           <div className='rounded bg-main'>
