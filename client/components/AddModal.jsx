@@ -47,7 +47,6 @@ class AddModal extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    console.log(this.state.newItem)
     addItem(this.state.newItem)
     fetchPublicItems()
   }
@@ -66,7 +65,6 @@ class AddModal extends React.Component {
   }
 
   render() {
-    console.log(this.props.location)
 
     return (
       <div
@@ -112,18 +110,7 @@ class AddModal extends React.Component {
                   </label>
                   <br></br>
                   <label>
-                    Photo
-                    <br></br>
-                    <input
-                      required
-                      type='text'
-                      name='img_url'
-                      onChange={this.handleChange}
-                    />
-                  </label>
-                  <br></br>
-                  <label>
-                    Public
+                    Private
                     <input
                       type='checkbox'
                       name='public'
@@ -174,8 +161,17 @@ class AddModal extends React.Component {
                     {this.state.newItem.quantity}
                   </label>
                   <br></br>
-                  <br></br>
+                  <label>
+                    <p>Image</p>
+                    <input
+                      type="file"
+                      name="image"
+                      accept="image/*"
+                      onChange={this.handleImageUpload}
+                    />
+                  </label>
                   <input type='submit' value='Submit' />
+                  <br></br>
                 </form>
               </div>
             </div>
@@ -188,7 +184,6 @@ class AddModal extends React.Component {
               >
                 Close
               </button>
-              {/* <button type="button" className="btn btn-primary">Add to Map</button> */}
             </div>
           </div>
         </div>
@@ -198,9 +193,9 @@ class AddModal extends React.Component {
 }
 
 const mapStateToProps = (auth) => {
-    return {
-      auth
-    }
+  return {
+    auth
+  }
 }
 
 export default connect(mapStateToProps, { hideModal })(AddModal)

@@ -17,3 +17,9 @@ export function updateItemModal(item) {
         item
     }
 }
+
+export function showAddItemByAddressModal() {
+    return {
+        type: 'ADD_ITEM_BY_ADDRESS_MODAL',
+    }
+}
