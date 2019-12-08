@@ -1,4 +1,4 @@
-import {getPublicItems} from '../apis/items'
+import { getPublicItems, getPrivateItems } from '../apis/items'
 
 export function fetchPublicItems () {
     return (dispatch) => {
@@ -13,4 +13,19 @@ export function fetchPublicItems () {
             })
         })
       }
+}
+
+export function fetchPrivateItems (user) {
+    return (dispatch) => {
+        dispatch({
+            type: 'FETCH_PRIVATE_ITEMS'
+        })
+        getPrivateItems(user)
+            .then(items => {
+                dispatch({
+                    type: 'RECEIVE_PRIVATE_ITEMS',
+                    items
+                })
+            })
+    }
 }

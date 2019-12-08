@@ -22,27 +22,17 @@ class Map extends Component {
       key: false,
       addMode: false,
       showModal: false,
-      infoWindowShowing: false
+      infoWindowShowing: false,
+      activePin: null
     }
 
-    this.handleMarker = this.handleMarker.bind(this)
-    this.handleClick = this.handleClick.bind(this)
-
-
+    this.openWindow = this.openWindow.bind(this)
+    this.closeWindow = this.closeWindow.bind(this)
   }
 
   componentDidMount() {
     getKey().then(() => {
       this.setState({ key: true })
-    })
-
-    this.setState({
-      pins: this.props.items.map((item, index) => {
-        return {
-          index,
-          showing: false
-        }
-      })
     })
   }
 
@@ -72,28 +62,19 @@ class Map extends Component {
     }
   }
 
-  handleMarker(index) {
+  openWindow(index) {
     this.setState({
-      pins: [...this.state.pins,
-      this.state.pins[index].showing = !this.state.pins[index].showing
-      ]
+      activePin: this.props.items[index]
     })
 
     console.log(this.props.items[index])
   }
 
-  handleClick(index) {
-    this.props.updateItemModal(this.props.items[index])
+  closeWindow() {
+    this.setState({
+      activePin: null
+    })
   }
-
-  // clearShowingPins = () => {
-  //   return this.state.pins.map((pin) => {
-  //       if (pin.showing == true) {
-  //         pin.showing = false
-  //       }
-  //       return pin
-  //     }) 
-  // }
 
   // this.setState({
 
@@ -108,7 +89,7 @@ class Map extends Component {
   render() {
     return (
 
-      <div className="fixMap">
+      <div className="">
         {this.state.showPopUp &&
           <AddModal />
         }
@@ -133,12 +114,12 @@ class Map extends Component {
                   {this.props.items.map((item, index) => {
                     return (
                       <Marker
-                        onClick={() => this.handleMarker(index)}
+                        onClick={() => this.openWindow(index)}
                         key={index}
                         position={{ lat: item.lat, lng: item.long }}
                       >
-                        {this.state.pins[index].showing && (
-                          <InfoWindow onCloseClick={() => this.handleMarker(index)} position={{ lat: item.lat, lng: item.long }}>
+                        {this.props.items[index] == this.state.activePin && (
+                          <InfoWindow onCloseClick={() => this.closeWindow()} position={{ lat: item.lat, lng: item.long }}>
                             <div className="">
                               {this.props.items[index].item_name}
                               <br></br>
@@ -154,7 +135,6 @@ class Map extends Component {
                               <br></br>
                               {this.props.items[index].season}
                               <br></br>
-                              <button onClick={() => this.handleClick(index)}>Click Me!</button>
                             </div>
                           </InfoWindow>
                         )}
