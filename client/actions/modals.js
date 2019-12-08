@@ -10,10 +10,3 @@ export function hideModal() {
         type: 'HIDE_MODAL'
     }
 }
-
-export function updateItemModal(item) {
-    return {
-        type: 'UPDATE_ITEM_MODAL',
-        item
-    }
-}

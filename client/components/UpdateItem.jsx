@@ -1,46 +1,29 @@
 import React from "react"
 import { connect } from 'react-redux'
 
-class ViewModal extends React.Component {
+class UpdateItem extends React.Component {
     constructor(props) {
         super(props) 
         this.state = {
-            // item: {
-            //     item_name: '',
-            //     comments: '',
-            //     description: '',
-            //     lat: this.props.location.lat,
-            //     long: this.props.location.lng,
-            //     img_url: '',
-            //     public: false,
-            //     category: '',
-            //     season: '',
-            //     quantity: null
-            //   }
+            item: {
+                item_name: '',
+                comments: '',
+                description: '',
+                lat: this.props.location.lat,
+                long: this.props.location.lng,
+                img_url: '',
+                public: false,
+                category: '',
+                season: '',
+                quantity: null
+              }
         }
     }
 
     render() {
         return (
-            <div
-                className='modal'
-                id='exampleModalCenter'
-                style={{ display: 'block' }}
-                tabIndex='-1'
-                role='dialog'
-                aria-labelledby='exampleModalCenterTitle'
-                aria-hidden='true'
-            >
-                <div className='modal-dialog modal-dialog-centered' role='document'>
-                <div className='modal-content'>
-                    <div className='modal-header'>
-                    <h5 className='modal-title' id='exampleModalLongTitle'>
-                        Modal title
-                    </h5>
-                    </div>
-                    <div className='modal-body'>
                     <div>
-                        {/* <form onSubmit={this.handleSubmit}>
+                        <form onSubmit={this.handleSubmit}>
                         <label>
                             Item
                             <br></br>
@@ -128,8 +111,8 @@ class ViewModal extends React.Component {
                         <br></br>
                         <br></br>
                         <input type='submit' value='Submit' />
-                        </form> */}
-                    </div>
+                        </form>
+                  
                     </div>
                     <div className='modal-footer'>
                     <button
@@ -153,4 +136,4 @@ const mapStateToProps = () => {
     return {}
 }
 
-export default connect(mapStateToProps)(ViewModal)
+export default connect(mapStateToProps)(UpdateItem)

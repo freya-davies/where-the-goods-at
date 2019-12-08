@@ -15,11 +15,6 @@ export default function modals(state = initialState, action) {
             return {
                 currentModal: null
             }
-        case 'UPDATE_ITEM_MODAL':
-            return {
-                currentModal: action.type,
-                item: action.item
-            }
         default:
             return state
     }
