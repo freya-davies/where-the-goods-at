@@ -13,6 +13,9 @@ router.post('/add', (req, res) => {
                 .then(response => {
                 res.sendStatus(200)
             })
+        }).catch(error => {
+            console.log('Error:',error)
+            res.sendStatus(500)
         })
 
 
