@@ -100,7 +100,7 @@ class Map extends Component {
   render() {
     return (
 
-      <div className="fixMap">
+      <div className="">
         {this.state.showPopUp &&
           <AddModal />
         }
