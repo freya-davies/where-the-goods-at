@@ -13,7 +13,6 @@ class Map extends Component {
   constructor(props) {
 
     super(props)
-    console.log(props)
     this.state = {
       center: {
         lat: -41.2743523,
@@ -45,6 +44,7 @@ class Map extends Component {
       })
   }
 
+  //try remaking these into DidUpdate as this method is considered unsafe and will be renamed in 17.x v of react
   componentWillReceiveProps(newProps) {
     this.setState({
       pins: newProps.items.map((item) => {
@@ -93,7 +93,6 @@ class Map extends Component {
   // })
 
   render() {
-    console.log(this.state)
     return (
 
       <div className="">

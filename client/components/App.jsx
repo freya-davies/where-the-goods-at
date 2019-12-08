@@ -47,7 +47,9 @@ class App extends React.Component {
             {this.props.items.items.length > 0 &&
               <Route exact path="/" component={Filter} />
             }
+            {!(localStorage.getItem('UrbanForagerRemembersMe')) &&
             <Route exact path="/" component={LandingPage} />
+            }
 
             <Route exact path="/" component={PopUp} />
             <Route exact path="/login" component={Login} />
