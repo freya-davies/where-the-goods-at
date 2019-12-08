@@ -1,7 +1,7 @@
 
 const initialState = {
   items: [],
-  isFetching: false
+  isFetching: false,
 }
 
 export default function items (state = initialState, action) {
@@ -16,7 +16,7 @@ export default function items (state = initialState, action) {
         items: action.items,
         isFetching: false
       }
-    default:
+    default: 
       return state
   }
 }

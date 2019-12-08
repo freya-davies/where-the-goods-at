@@ -15,7 +15,7 @@ import ModalConductor from './ModalConductor'
 
 
 
-import { fetchPublicItems } from '../actions/items'
+import { fetchPublicItems, fetchPrivateItems } from '../actions/items'
 
 class App extends React.Component {
   constructor(props) {
@@ -26,6 +26,16 @@ class App extends React.Component {
 
   componentDidMount() {
     this.props.fetchPublicItems()
+  }
+
+  componentDidUpdate(prevProps){
+    if(this.props.auth.isAuthenticated){
+      if(this.props.privateItems === prevProps.privateItems){
+        this.props.fetchPrivateItems(this.props.auth.user.user_name)
+      }
+    }else if(!this.props.auth.isAuthenticated){
+      //when logging out remove privateItems state from redux state
+    }
   }
 
   render() {
@@ -50,12 +60,13 @@ class App extends React.Component {
   }
 }
 
-const mapStateToProps = ({ auth, items, modals }) => {
+const mapStateToProps = ({ auth, items, modals, privateItems }) => {
   return {
     auth,
     items,
-    modals
+    modals,
+    privateItems
   }
 }
 
-export default connect(mapStateToProps, { fetchPublicItems })(App)
+export default connect(mapStateToProps, { fetchPublicItems, fetchPrivateItems })(App)
