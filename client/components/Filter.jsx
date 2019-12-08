@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Map from './Map'
 import ItemList from './ItemList'
-import { isProperty } from '@babel/types'
 
 class Filter extends React.Component {
   constructor(props) {
@@ -15,11 +14,31 @@ class Filter extends React.Component {
   }
 
   handleCategory = e => {
-    this.setState({
-      items: this.props.items.items.filter(
-        item => item.category_id === Number(e.target.value)
-      )
-    })
+    if (this.state.public) {
+      if (e.target.value == 0) {
+        this.setState({
+          items: this.props.items.items
+        })
+      } else {
+        this.setState({
+          items: this.props.items.items.filter(
+            item => item.category_id === Number(e.target.value)
+          )
+        })
+      }
+    } else {
+      if (e.target.value == 0) {
+        this.setState({
+          items: this.props.privateItems.privateItems
+        })
+      } else {
+        this.setState({
+          items: this.props.privateItems.privateItems.filter(
+            item => item.category_id === Number(e.target.value)
+          )
+        })
+      }
+    }
   }
 
   // ------------------------
@@ -57,20 +76,23 @@ class Filter extends React.Component {
   }
 
   handleItemDisplay = e => {
-      this.setState({public: !this.state.public})
-  }
-
-  whichItems = () => {
-    if(this.state.public) return this.state.items
-    else return this.props.privateItems.privateItems
-         
+    this.setState({ 
+      public: !this.state.public 
+    }, () => {
+      document.getElementById('category-select').value = 0
+      if (this.state.public) {
+        this.setState({ items: this.props.items.items })
+      } else {
+        this.setState({ items: this.props.privateItems.privateItems })
+      }
+    })
   }
 
   render() {
     return (
       <div className='d-flex px-2'>
         <div className='col-8'>
-          <Map items={this.whichItems()} />
+          <Map items={this.state.items} />
         </div>
 
         <div >
@@ -79,8 +101,11 @@ class Filter extends React.Component {
             <div>
               <label htmlFor='category'>
                 Category
-                <select name='category' id='' onChange={this.handleCategory}>
+                <select name='category' id='category-select' onChange={this.handleCategory}>
+                  <option value='0'>All</option>
                   <option value='1'>Fruit</option>
+                  <option value='2'>Vegetables</option>
+                  <option value='3'>Herbs</option>
                   <option value='4'>Flowers</option>
                   <option value='5'>Other</option>
                 </select>
@@ -129,7 +154,7 @@ class Filter extends React.Component {
           </div>
 
           <div className='rounded bg-main'>
-            <ItemList items={this.whichItems()} />
+            <ItemList items={this.state.items} />
           </div>
         </div>
       </div>
