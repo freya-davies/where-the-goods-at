@@ -41,7 +41,7 @@ class PopUp extends React.Component {
     return (
       <React.Fragment>
         {this.state.showPopUp &&
-          <div className="modal" style={{ display: 'block' }} id="myModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div className="modal" style={{ display: 'block' }} id="myModal" data-backdrop="static" tabIndex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div className="modal-dialog" role="document">
               <div className="modal-content">
                 <div className="modal-header">
