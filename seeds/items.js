@@ -4,7 +4,7 @@ exports.seed = function(knex) {
   return knex('items').del()
     .then(function () {
       // Inserts seed entries
-      return knex('items').insert([
+      let seeds = [
         {id: 1, item_name: 'Coriander', user_id: 1, category_id: 1, img_url: 'http://source.unsplash.com/500x500/?funny-horse', public: false, description: 'Some funny animals', lat: -41.296889, long: 174.7719502, rating: 5, comments: 'Some nice stuff going on in here', season_id: 5, quantity: '1000000', created_at: Date.now(), image: null},
         {id: 2, item_name: 'Lemons', user_id: 1, category_id: 1, img_url: 'http://source.unsplash.com/500x500/?funny-horse', public: true, description: 'Some funny animals', lat: -41.296990, long: 174.7719502, rating: 5, comments: 'Some nice stuff going on in here', season_id: 5, quantity: '1000000', created_at: Date.now(), image: null},
         {id: 3, item_name: 'Apples', user_id: 1, category_id: 1, img_url: 'http://source.unsplash.com/500x500/?funny-horse', public: true, description: 'Some funny animals', lat: -41.296773, long: 174.7719502, rating: 5, comments: 'Some nice stuff going on in here', season_id: 5, quantity: '1000000', created_at: Date.now(), image: null},
@@ -27,7 +27,11 @@ exports.seed = function(knex) {
         {id: 19, item_name: 'Pear tree', user_id: 1, category_id: 1, img_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpOflbvZ-RcqtFQ-iFAgVyuhAylCk99iTIjhfB3OTD49W5MqBR&s', public: true, description: 'Over hanging tree', lat: -41.301326, long: 174.798003, rating: 5, comments: '5', season_id: 5, quantity: '10', created_at: Date.now(), image: null},
         {id: 20, item_name: 'Plum', user_id: 1, category_id: 1, img_url: 'https://www.waimeanurseries.co.nz/assets/our-products/fruit-trees/plums/hawera/_resampled/FillWyI3MjAiLCI0NTAiXQ/Plum-Hawera-3.JPG', public: true, description: 'Plum tree', lat: -41.291903, long: 174.791105, rating: 5, comments: '5', season_id: 5, quantity: '10', created_at: Date.now(), image: null},
         {id: 22, item_name: 'Little veggie garden', user_id: 1, category_id: 1, img_url: 'https://worcesterallotment.files.wordpress.com/2010/05/globeartichoke2.jpg', public: true, description: 'Fruit trees along with a veggie patch', lat: -41.291903, long: 174.791105, rating: 5, comments: '5', season_id: 5, quantity: '10', created_at: Date.now(), image: 'https://i.pinimg.com/originals/10/52/c3/1052c3ef9116a412bfa1c4700df4fa30.jpg'},
-      ]);
+      ]
+
+      seeds = seeds.map(s => knex('items').insert(s))
+
+      return Promise.all(seeds)
     });
 };
 
