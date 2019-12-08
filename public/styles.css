@@ -73,11 +73,14 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
 }
 
 .hidden {
   display: none;
+}
+
+.center-animation {
+  justify-content: center;
 }
 
 
@@ -116,6 +119,16 @@ h1.ml8 {
   top: -0.2em;
 }
 
+.sub-title {
+  position: relative;
+  z-index: 2;
+  font-size: 2rem;
+  display: inline-block;
+  line-height: 0.7em;
+  right: -0.12em;
+  top: -0.2em;
+}
+
 .ml8 .bang {
   font-size: 1.4em;
   top: auto;
@@ -132,15 +145,15 @@ h1.ml8 {
 }
 
 .ml8 .circle-white {
-  width: 3em;
-  height: 3em;
+  width: 30rem;
+  height: 30rem;
   border: 2px dashed white;
   border-radius: 2em;
 }
 
 .ml8 .circle-dark {
-  width: 2.2em;
-  height: 2.2em;
+  width: 28rem;
+  height: 28rem;
   background-color: #4f7b86;
   border-radius: 3em;
   z-index: 1;
@@ -150,11 +163,15 @@ h1.ml8 {
   border-radius: 2.4em;
   background-color: transparent;
   border: 2px dashed #4f7b86;
-  width: 2.3em;
-  height: 2.3em;
+  width: 30rem;
+  height: 30rem;
 }
 
 .close-landing {
   color: white;
   opacity: 80%;
+}
+
+.center-button {
+  align-self: center;
 }
