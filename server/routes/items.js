@@ -9,7 +9,6 @@ router.post('/add', (req, res) => {
     dbUser.getUserByUsername(req.body.user)
         .then(userId => {
             req.body.user = userId.id
-            console.log(req.body)
             db.addItem(req.body)
                 .then(response => {
                 res.sendStatus(200)
@@ -31,7 +30,6 @@ router.get('/all', (req, res) => {
     
       //check console to see structure of object
 
-      console.log(req.body)
       let userId = req.body.id || 1
     db.getAllItems(userId)
     .then(items => {

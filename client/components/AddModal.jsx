@@ -11,6 +11,7 @@ class AddModal extends React.Component {
       newItem: {
         item_name: '',
         description: '',
+        user: this.props.auth.auth.user.user_name,
         lat: this.props.location.lat,
         long: this.props.location.lng,
         img_url: '',
@@ -196,8 +197,10 @@ class AddModal extends React.Component {
   }
 }
 
-const mapStateToProps = () => {
-    return {}
+const mapStateToProps = (auth) => {
+    return {
+      auth
+    }
 }
 
 export default connect(mapStateToProps, { hideModal })(AddModal)
