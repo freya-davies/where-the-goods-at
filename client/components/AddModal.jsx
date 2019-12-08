@@ -15,15 +15,17 @@ class AddModal extends React.Component {
         lat: this.props.location.lat,
         long: this.props.location.lng,
         img_url: '',
-        public: false,
+        public: true,
         category: '',
         season: '',
-        quantity: null
+        quantity: null,
+        image: null
       }
     }
 
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    this.handleImageUpload = this.handleImageUpload.bind(this)
     this.handleCheckbox = this.handleCheckbox.bind(this)
   }
 
@@ -45,7 +47,24 @@ class AddModal extends React.Component {
     })
   }
 
+  handleImageUpload(e) {
+    const data = new FormData()
+    let file = e.target.files[0]
+    data.append('file', file)
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+        this.setState({
+            newItem: {
+                ...this.state.newItem,
+                image: reader.result
+            }
+        })
+    }
+}
+
   handleSubmit(e) {
+    console.log(this.state.newItem)
     e.preventDefault()
     addItem(this.state.newItem)
     fetchPublicItems()
