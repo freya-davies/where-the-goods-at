@@ -68,69 +68,68 @@ class Filter extends React.Component {
 
   render() {
     return (
-      <div className='d-flex'>
+      <div className='d-flex px-2'>
         <div className='col-8'>
           <Map items={this.whichItems()} />
         </div>
 
-        <div>
-          <div className='jumbotron jumbotron-fluid bg-main rounded'>
-            <div className='container'>
-              <h3 className='display-4'>Sort</h3>
-              <p className='lead'></p>
-              <div>
-                <label htmlFor='category'>
-                  Category
-                  <select name='category' id='' onChange={this.handleCategory}>
-                    <option value='1'>Fruit</option>
-                    <option value='4'>Flowers</option>
-                    <option value='5'>Other</option>
-                  </select>
-                </label>
-              </div>
+        <div >
+          <div className='container rounded bg-main mb-3'>
+            <h3 className='display-4'>Sort</h3>
+            <div>
+              <label htmlFor='category'>
+                Category
+                <select name='category' id='' onChange={this.handleCategory}>
+                  <option value='1'>Fruit</option>
+                  <option value='4'>Flowers</option>
+                  <option value='5'>Other</option>
+                </select>
+              </label>
+            </div>
 
-              <div>
-                <label htmlFor='category'>
-                  Recently Added - BROKEN BUTTON
-                  <select name='category' id='' onChange={this.handleRecent}>
-                    <option value='new'>Newest</option>
-                    <option value='old'>Oldest </option>
-                  </select>
-                </label>
-              </div>
+            <div>
+              <label htmlFor='category'>
+                Recently Added - BROKEN BUTTON
+                <select name='category' id='' onChange={this.handleRecent}>
+                  <option value='new'>Newest</option>
+                  <option value='old'>Oldest </option>
+                </select>
+              </label>
+            </div>
 
-              <div class='custom-control custom-switch'>
-                <input
-                  type='checkbox'
-                  class='custom-control-input'
-                  id='customSwitch1'
-                  onChange={this.handleItemDisplay}
-                  value={this.state.public}
-                />
-                <label class='custom-control-label' for='customSwitch1'>
-                  Public / Private items
-                </label>
-              </div>
+            {/* fix me the toggle */}
+            <div class='custom-control custom-switch'>
+              Public
+              <input
+                type='checkbox'
+                class='custom-control-input'
+                id='customSwitch1'
+                onChange={this.handleItemDisplay}
+                value={this.state.public}
+              />
+              <label class='custom-control-label' for='customSwitch1'>
+                Private
+              </label>
+            </div>
 
-              {/* <div>
+            {/* <div>
                         <label htmlFor="category">Suburb - BROKEN BUTTON
                     <select name="category" id="" onChange={this.handleRecent}> */}
-              {/* what I want this to do is:
+            {/* what I want this to do is:
                         - map through suburb names, 
                         - only show the name if it isn't already showing
                         - bring back all items in props that include that name */}
-              {/* {this.props.items.items.map((item, i) => {
+            {/* {this.props.items.items.map((item, i) => {
                                   return  <option key={i} value={item.item_name}>{item.item_name}</option>
                                     })
                                 }
                             </select>
                         </label>
                     </div> */}
-            </div>
           </div>
 
           <div className='rounded bg-main'>
-            <ItemList items={this.state.items} />
+            <ItemList items={this.whichItems()} />
           </div>
         </div>
       </div>

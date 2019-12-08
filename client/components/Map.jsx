@@ -122,7 +122,9 @@ class Map extends Component {
                       <Marker
                         onClick={() => this.openWindow(index)}
                         key={index}
-                        position={{ lat: item.lat, lng: item.long }}>
+                        position={{ lat: item.lat, lng: item.long }}
+                        //icon={'path to icon'}
+                      >
                         {this.props.items[index] == this.state.activePin && (
                           <InfoWindow onCloseClick={() => this.closeWindow()} position={{ lat: item.lat, lng: item.long }}>
                             <div className="">
