@@ -12,9 +12,12 @@ router.post('/add', (req, res) => {
             db.addItem(req.body)
                 .then(response => {
                 res.sendStatus(200)
+            }).catch(error => {
+                console.log('Error1:',error)
+                res.sendStatus(500)
             })
         }).catch(error => {
-            console.log('Error:',error)
+            console.log('Error2:',error)
             res.sendStatus(500)
         })
 
