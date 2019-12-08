@@ -10,6 +10,7 @@ exports.up = function(knex) {
     table.string('description')
     table.float('long')
     table.float('lat')
+    table.string('suburb')
     table.integer('rating')
     table.string('comments')
     table.integer('season_id')

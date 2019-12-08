@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import Map from './Map'
 import ItemList from './ItemList'
 import { isProperty } from '@babel/types'
+import {findSuburb} from '../apis/itemList'
 
 class Filter extends React.Component {
   constructor(props) {
@@ -26,6 +27,10 @@ class Filter extends React.Component {
     if (e.target.value == 'new') {
       const longness = this.props.items.items.length
 
+      // this.props.items.items.sort((a, b) => {
+      //   return a.id > b.id ? -1 : 1
+      // })
+
       this.setState({
         items: this.props.items.items.slice(-10)
       })
@@ -35,14 +40,14 @@ class Filter extends React.Component {
       this.setState({
         items: this.props.items.items.filter(item => {
           if (item.id < 10) {
-            console.log('id less than 5: ', item)
+            // console.log('id less than 5: ', item)
             return item
           } else {
             return
           }
         })
       })
-      console.log(this.state.items.slice(5))
+      // console.log(this.state.items.slice(5))
     } else {
       return console.log('Something is broken')
     }
@@ -68,9 +73,6 @@ class Filter extends React.Component {
     // this.props.items.items.sort((a, b) => {
     //   return a.suburb > b.suburb ? 1 : -1
     // })
-
-
-
 
     return (
       <div className='d-flex px-2'>
@@ -116,6 +118,10 @@ class Filter extends React.Component {
                 Private
               </label>
             </div>
+          </div>
+          
+          <div>
+            <button onClick={() => findSuburb(this.props.items.items[2].lat, this.props.items.items[2].long)}>kjhfgijodfn</button>
           </div>
 
           <div className='rounded bg-main'>
