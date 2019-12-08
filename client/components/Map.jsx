@@ -135,6 +135,8 @@ class Map extends Component {
                               <br></br>
                               {this.props.items[index].season}
                               <br></br>
+                              {this.props.items[index].image &&
+                              <img src={this.props.items[index].image}/>}
                             </div>
                           </InfoWindow>
                         )}

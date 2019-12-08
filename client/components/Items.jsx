@@ -17,13 +17,14 @@ class AddItemForm extends React.Component {
             category: '',
             season: '',
             // rating: null,
-            quantity: null
+            quantity: null,
+            image: null
           }
         }
 
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
-        // this.handleImage = this.handleImage.bind(this)
+        this.handleImageUpload = this.handleImageUpload.bind(this)
         this.handleCheckbox = this.handleCheckbox.bind(this)
         // this.onStartClick= this.onStartClick.bind(this)
 
@@ -58,18 +59,23 @@ class AddItemForm extends React.Component {
         })
     }
 
-    // handleImage(e) {
-    //     const data = new FormData() 
-    //     data.append('file', e.target.files[0])
-
-    //     this.setState({
-    //         newItem: {
-    //             ...this.state.newItem,
-    //             // img: URL.createObjectURL(e.target.files[0])
-    //             image: data
-    //         }
-    //     })
-    // }
+    handleImageUpload(e) {
+        const data = new FormData() 
+        let file = e.target.files[0]
+        data.append('file', file)
+        console.log(file)
+        let reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = () => {
+          console.log(reader.result)
+          this.setState({
+            newItem: {
+                ...this.state.newItem,
+                image: reader.result
+            }
+          })
+        }
+    }
 
     handleSubmit(e) {
         e.preventDefault()
@@ -84,7 +90,6 @@ class AddItemForm extends React.Component {
             }
         })
     }
-
 
     render() {
       return (
@@ -198,6 +203,16 @@ class AddItemForm extends React.Component {
                     <span className="fa fa-star"></span>
                     <span className="fa fa-star"></span>*/}
               <br></br>
+              <label>
+                <p>Image</p>
+                <input
+                  type="file"
+                  name="image"
+                  accept="image/*"
+                  onChange={this.handleImageUpload}
+                />
+                {/* <input ref={(ref) => { this.uploadInput = ref; }} type="file" /> */}
+              </label>
               <input type='submit' value='Submit' />
             </form>
           </div>

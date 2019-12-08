@@ -15,6 +15,7 @@ exports.up = function(knex) {
     table.integer('season_id')
     table.integer('quantity')
     table.bigint('created_at')
+    table.binary('image')
   })
 };
 
