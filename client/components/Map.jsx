@@ -66,7 +66,6 @@ class Map extends Component {
     this.setState({
       activePin: this.props.items[index]
     })
-
   }
 
   closeWindow() {
