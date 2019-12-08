@@ -74,8 +74,6 @@ class Map extends Component {
     this.setState({
       activePin: this.props.items[index]
     })
-
-    console.log(this.props.items[index])
   }
 
   closeWindow() {
@@ -118,8 +116,7 @@ class Map extends Component {
                   zoom={12}
                   center={this.state.center}
                   mapTypeId='satellite'
-                  onClick={this.handleAddPin}
-                >
+                  onClick={this.handleAddPin}>
                   {this.props.items.map((item, index) => {
                     return (
                       <Marker
