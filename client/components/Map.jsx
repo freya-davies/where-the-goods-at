@@ -4,7 +4,8 @@ import { getKey } from '../apis/auth'
 import { connect } from 'react-redux'
 import ItemList from './ItemList'
 import AddModal from './AddModal'
-import { showAddItemModal, updateItemModal } from '../actions/modals'
+import AddItemByAddress from './AddItemByAddress'
+import { showAddItemModal, updateItemModal} from '../actions/modals'
 import { getCategories, getSeasons } from '../apis/items'
 
 
@@ -22,6 +23,7 @@ class Map extends Component {
       pins: [],
       key: false,
       addMode: false,
+      addForm: false,
       showModal: false,
       infoWindowShowing: false,
       activePin: null
@@ -54,6 +56,11 @@ class Map extends Component {
         }
         return location
       })
+    })
+  }
+  toggleAddForm = (e) => {
+    this.setState({
+      addForm: !this.state.addForm
     })
   }
 
@@ -93,13 +100,16 @@ class Map extends Component {
   // })
 
   render() {
-    console.log(this.state)
+    // console.log(this.state)
     return (
 
       <div className="">
         {this.state.showPopUp &&
-          <AddModal />
-        }
+          <AddModal />  
+        } 
+        {this.state.addForm && 
+          <AddItemByAddress toggleAddForm={this.toggleAddForm}/>
+        }       
 
         <div className="container px-lg-5">
           <div className="row mx-lg-n5">
@@ -146,6 +156,7 @@ class Map extends Component {
               </LoadScript>
             }
             <button onClick={this.toggleAddMode}>{this.state.addMode ? "Stop Adding Items" : "Add Items"}</button>
+            <button onClick={this.toggleAddForm}>Add</button>
           </div>
         </div>
       </div>
