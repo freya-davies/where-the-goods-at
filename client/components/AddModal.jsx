@@ -21,10 +21,6 @@ class AddModal extends React.Component {
         quantity: null
       }
     }
-
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleChange = this.handleChange.bind(this)
-    this.handleCheckbox = this.handleCheckbox.bind(this)
   }
 
   componentDidMount() {
@@ -36,7 +32,7 @@ class AddModal extends React.Component {
     })
   }
 
-  handleChange(e) {
+  handleChange = (e) => {
     this.setState({
       newItem: {
         ...this.state.newItem,
@@ -45,14 +41,13 @@ class AddModal extends React.Component {
     })
   }
 
-  handleSubmit(e) {
+  handleSubmit = (e) => {
     e.preventDefault()
-    console.log(this.state.newItem)
     addItem(this.state.newItem)
     fetchPublicItems()
   }
 
-  handleCheckbox(e) {
+  handleCheckbox = (e) => {
     this.setState({
       newItem: {
         ...this.state.newItem,
@@ -66,8 +61,6 @@ class AddModal extends React.Component {
   }
 
   render() {
-    console.log(this.props.location)
-
     return (
       <div
         className='modal'

@@ -19,7 +19,8 @@ class AddItemForm extends React.Component {
             // rating: null,
             quantity: null,
             image: null
-          }
+          },
+          formAdded: false
         }
 
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -63,7 +64,6 @@ class AddItemForm extends React.Component {
         const data = new FormData() 
         let file = e.target.files[0]
         data.append('file', file)
-        console.log(file)
         let reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onloadend = () => {
@@ -80,6 +80,9 @@ class AddItemForm extends React.Component {
     handleSubmit(e) {
         e.preventDefault()
         addItem(this.state.newItem)
+          .then(res => {
+            if(res == 200) this.setState({formAdded: true})
+          })
     }
 
     handleCheckbox(e) {
@@ -93,7 +96,10 @@ class AddItemForm extends React.Component {
 
     render() {
       return (
-          <div>
+          <div>{
+            this.state.formAdded ? 
+            <p className='display-4'>SUCCESS</p>
+            :
             <form onSubmit={this.handleSubmit}>
               <h3>Add new Item</h3>
               <label>
@@ -215,6 +221,7 @@ class AddItemForm extends React.Component {
               </label>
               <input type='submit' value='Submit' />
             </form>
+          }
           </div>
         )
     }
