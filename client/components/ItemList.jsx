@@ -29,7 +29,8 @@ class ItemList extends React.Component {
   // findSuburb(this.props.items.items.lat, this.props.items.items.long)
 
   render() {
-    // console.log(this)
+    console.log(this)
+
     const items = this.props.items
     // console.log(this.props.items.items)
 
