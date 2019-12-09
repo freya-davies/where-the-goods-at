@@ -1,6 +1,6 @@
 import React from "react"
 import { connect } from 'react-redux'
-import { getItem, getCategories, getSeasons } from '../apis/items'
+import { getItem, getCategories, getSeasons, updateItem } from '../apis/items'
 
 class UpdateItem extends React.Component {
 
@@ -8,7 +8,6 @@ class UpdateItem extends React.Component {
         super(props)
         this.state = {
             item: null,
-            defaultSeason: ""
         }
     }
 
@@ -32,6 +31,21 @@ class UpdateItem extends React.Component {
             })
     }
 
+    handleImageUpload = (e) => {
+        const data = new FormData()
+        let file = e.target.files[0]
+        data.append('file', file)
+        let reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = () => {
+            this.setState({
+                item: {
+                    ...this.state.item,
+                    image: reader.result
+                }
+            })
+        }
+    }
 
     showItem = () => {
         let displayItem = this.props.items.items.filter(item => {
@@ -44,43 +58,86 @@ class UpdateItem extends React.Component {
         })
     }
 
+
     getSeasonName() {
-        var season = this.state.seasonData.find(season => {
+        let season = this.state.seasonData.find(season => {
             return season.id == this.state.item.season_id
         })
         return season.season_name
     }
 
-    render() {
+    getCategoryName() {
+        let category = this.state.categoryData.find(category => {
+            return category.id == this.state.item.category_id
+        })
+        return category.category_name
+    }
 
+    handleClick = () => {
+        this.setState({
+            item: {
+                ...this.state.item,
+                public: !this.state.item.public
+            }
+        })
+    }
+
+    handleSubmit = (e) => {
+        e.preventDefault()
+        updateItem(this.state.item)
+    }
+    handleChange = (e) => {
+        this.setState({
+            item: {
+                ...this.state.item,
+                [e.target.name]: e.target.value
+            }
+        })
+    }
+
+    render() {
+        console.log(this.state.item)
         return (
             <div>
                 {this.state.item != null &&
                     <div className="updateItemForm">
-                        <img src={this.state.item.img_url} />
+                        {/* <img src={this.state.item.img_url} />  */}
+
                         <form onSubmit={this.handleSubmit}>
-                            <label for="item_name">Item Name: </label>
-                            <input name="item_name" value={this.state.item.item_name} />
+                            <label for="image">Image</label>
+                            <input
+                                type="file"
+                                name="image"
+                                accept="image/*"
+                                onChange={this.handleImageUpload}
+                            />
                             <br></br>
-                            <label for="decription">Description: </label>
-                            <input name="description" value={this.state.item.description} />
+                            <label for="item_name">Item Name: </label>
+                            <input name="item_name" value={this.state.item.item_name} onChange={this.handleChange} />
+                            <br></br>
+
+                            <label for="description">Description: </label>
+                            <textarea name="description" value={this.state.item.description} onChange={this.handleChange} />
                             <br></br>
 
                             <label for="public">Public: </label>
-                            <input type="checkbox" name="public" value={this.state.item.public} />
+                            <input type="checkbox" name="public" checked={this.state.item.public} onClick={this.handleClick} />
                             <br></br>
+
+
                             <label for="category">Category: </label>
-                            <select name='category'>
-                                <option value={this.state.item.category}></option>
-                                {this.state.categoryData &&
-                                    this.state.categoryData.map((category, i) => {
-                                        return (
-                                            <option key={i} value={category.id}>
-                                                {category.category_name}
-                                            </option>
-                                        )
-                                    })}
-                            </select>
+                            {this.state.categoryData &&
+                                <select required name='category' >
+                                    <option value={this.state.item.category_id}>{
+                                        this.getCategoryName()
+                                    }</option>
+                                    {this.state.categoryData &&
+                                        this.state.categoryData.map((category, i) => {
+                                            return (
+                                                <option key={i} value={category.id}>{category.category_name}</option>
+                                            )
+                                        })}
+                                </select>}
                             <br></br>
                             <label for="season">Season: </label>
                             {this.state.seasonData &&
@@ -94,9 +151,11 @@ class UpdateItem extends React.Component {
                                                 <option key={i} value={season.id}>{season.season_name}</option>
                                             )
                                         })}
-                                </select>
-                            }
+                                </select>}
+                            <br></br>
+                            <button type='submit' value='Submit'>Update Item</button>
                         </form>
+
                     </div>
                 }
             </div>

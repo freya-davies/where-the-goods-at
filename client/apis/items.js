@@ -77,8 +77,9 @@ export function getItem(id){
 }
 
 export function updateItem(item) {
+    console.log(item)
     return request
-    .patch(`update/${item.id}`)
+    .patch(`${url}update/${item.id}`)
     .send(item)
     .then(res => res.body)
 }
