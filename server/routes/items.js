@@ -19,28 +19,16 @@ router.post('/add', (req, res) => {
     
 })
 
-
-
-
-
 // get public items and users items
-
-
 router.get('/all', (req, res) => {
-    
-      //check console to see structure of object
-
-      let userId = req.body.id || 1
+    let userId = req.body.id
     db.getAllItems(userId)
     .then(items => {
         res.json(items)
     })
 })
 
-
-
 // get public items
-
 router.get('/', (req, res) => {
     db.getPublicItems()
     .then(items => {
@@ -49,7 +37,6 @@ router.get('/', (req, res) => {
 })
 
 // get users private items
-
 router.get('/user/:name', (req, res) => {
     dbUser.getUserByUsername(req.params.name)
         .then(userId => {
@@ -60,11 +47,13 @@ router.get('/user/:name', (req, res) => {
     })
 })
 
+//get all categoies
 router.get('/categories', (req, res) => {
     db.getCategories()
         .then(data => res.json(data))
 })
 
+//get all seasons
 router.get('/seasons', (req, res) => {
     db.getSeasons()
         .then(data => res.json(data))
