@@ -2,8 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Map from './Map'
 import ItemList from './ItemList'
-import { isProperty } from '@babel/types'
-import { findSuburb } from '../apis/itemList'
 
 class Filter extends React.Component {
   constructor(props) {
