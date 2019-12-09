@@ -10,9 +10,7 @@ router.post('/add', (req, res) => {
         .then(userId => {
             req.body.user = userId.id
             db.addItem(req.body)
-                .then(response => {
-                res.sendStatus(200)
-            })
+                .then(res.sendStatus(200))
         })
 
 

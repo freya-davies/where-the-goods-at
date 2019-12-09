@@ -59,10 +59,12 @@ class AddModal extends React.Component {
   }
 
   handleSubmit = (e) => {
-    // console.log(this.state.newItem)
     e.preventDefault()
     addItem(this.state.newItem)
-    fetchPublicItems()
+      .then(() => {
+        this.props.fetchPublicItems()
+        this.props.hideModal()
+      })
   }
 
   handleCheckbox = (e) => {
@@ -224,8 +226,9 @@ class AddModal extends React.Component {
     
 const mapStateToProps = (auth) => {
   return {
-          auth
-        }
-        }
-        
-export default connect(mapStateToProps, {hideModal})(AddModal)
+    auth
+  }
+}
+
+export default connect(mapStateToProps, { hideModal, fetchPublicItems })(AddModal)
+
