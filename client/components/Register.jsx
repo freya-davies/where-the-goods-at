@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { registerUserRequest } from '../actions/register'
+import { checkDatabase } from '../apis/register'
 import { loginError } from '../actions/login'
 
 class Register extends React.Component {
@@ -17,19 +18,30 @@ class Register extends React.Component {
     this.updateDetails = this.updateDetails.bind(this)
     this.submit = this.submit.bind(this)
   }
+
   componentDidMount() {
     this.props.dispatch(loginError(''))
   }
+
   updateDetails(e) {
     this.setState({ [e.target.name]: e.target.value })
   }
+
   submit(e) {
     e.preventDefault()
     e.target.reset()
     let { user_name, password, confirm_password, email, first_name, last_name } = this.state
-    if (password.length <= 7) return this.props.dispatch(loginError("Password must contain at least 8 characters"))
-    if (confirm_password != password) return this.props.dispatch(loginError("Passwords don't match"))
-    this.props.dispatch(registerUserRequest(this.state))
+
+    checkDatabase(email)
+      .then((emailExists) => {
+        if (emailExists) return this.props.dispatch(loginError("Email already exists"))
+        console.log('line 1', result)
+        if (password.length <= 7) return this.props.dispatch(loginError("Password must contain at least 8 characters"))
+        // console.log('line 2')
+        if (confirm_password != password) return this.props.dispatch(loginError("Passwords don't match"))
+        // console.log('line 3')
+        this.props.dispatch(registerUserRequest(this.state))
+      })
   }
 
 
@@ -77,7 +89,7 @@ class Register extends React.Component {
                 <input required className="form-control" placeholder="Last Name" type="text" name="last_name" onChange={this.updateDetails} />
               </div>
             </div>
-            
+
             <div className="row justify-content-start">
               <div className='col-6 reg-text'>
                 <label htmlFor="password">Password
