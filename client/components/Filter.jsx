@@ -103,6 +103,18 @@ class Filter extends React.Component {
         this.setState({ items: this.props.privateItems.privateItems })
       }
     })
+
+    this.handleToggleHighlight()
+  }
+
+  handleToggleHighlight = () => {
+    if(this.state.public){
+      document.getElementById('public').classList.remove('highlightViewMode')
+      document.getElementById('private').classList.add('highlightViewMode')
+    }else if(!this.state.public){
+      document.getElementById('public').classList.add('highlightViewMode')
+      document.getElementById('private').classList.remove('highlightViewMode')
+    }
   }
 
 
@@ -129,11 +141,11 @@ class Filter extends React.Component {
   render() {
     return (
       <div className='row px-2'>
-        <div className='col-sm-12 col-md-8'>
+        <div className='col-sm-12 col-md-12 col-lg-8'>
           <Map items={this.state.items} />
         </div>
 
-        <div className='col-sm-12 col-md-4'>
+        <div className='col-sm-12 col-md-12 col-lg-4'>
           <div className='container rounded bg-main mb-3'>
             <h3 className='display-4'>Sort</h3>
             <div>
@@ -178,7 +190,6 @@ class Filter extends React.Component {
 
             {/* fix me the toggle */}
             <div className='custom-control custom-switch'>
-              Public
               <input
                 type='checkbox'
                 className='custom-control-input'
@@ -187,7 +198,10 @@ class Filter extends React.Component {
                 value={this.state.public}
               />
               <label className='custom-control-label' htmlFor='customSwitch1'>
-                Private
+                <div className='d-flex'>
+                  <div id='public' className='px-1 highlightViewMode'>Public</div>
+                  <div id='private' className='px-1'>Private</div>
+                </div>
               </label>
             </div>
           </div>
