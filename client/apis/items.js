@@ -34,17 +34,6 @@ export function addItem(item) {
             }
         }
 
-        // return getCoordinates(item.address)
-        // .then(res => {
-        //     item.lat = res.body.results[0].geometry.location.lat
-        //     item.long = res.body.results[0].geometry.location.lng
-        //     delete item.address
-        //         return request
-        //         .post(addItemUrl)
-        //         .send(item)
-        //         .then(res => res.statusCode)
-        //     })
-
 
 function getCoordinates(address) {
 
