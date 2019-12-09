@@ -67,8 +67,10 @@
     "react-router-dom": "^5.1.2",
     "react-star-rating-component": "^1.4.1",
     "react-svg-star-rating": "^1.0.3",
+    "react-test-renderer": "^16.12.0",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
+    "save": "^2.4.0",
     "superagent": "^5.1.1",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10"
