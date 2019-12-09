@@ -74,7 +74,7 @@ exports.seed = function (knex) {
           season_id: 2,
           quantity: 2,
           image:
-            ''
+            'https://www.daltons.co.nz/sites/default/files/styles/side_image_xs/public/olive_branches_is17173598m_crop.jpg?itok=uvfjnIcJ'
         },
         {
           id: 25,
