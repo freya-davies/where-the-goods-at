@@ -136,15 +136,15 @@ class Map extends Component {
                       >
                         {this.props.items[index] == this.state.activePin && (
                           <InfoWindow onCloseClick={() => this.closeWindow()} position={{ lat: item.lat, lng: item.long }}>
-                            <div className="">
+                            <div className="info-window">
                               <h4>{this.props.items[index].item_name}</h4>
                               {/* <input type='text' name={this.props.items[index].item_name} />  */}
-                              <h6>Description: {this.props.items[index].description}</h6>
-                              <h6>Category: {this.state.categoryData[this.props.items[index].category_id - 1].category_name}</h6>
-                              <h6>Quantity: {this.props.items[index].quantity}</h6>
-                              <h6>Season: {this.state.seasonData[this.props.items[index].season_id - 1].season_name}</h6>
+                              <h6>Description:</h6><p> <em>"{this.props.items[index].description}"</em></p>
+                              <h6>Category:</h6><p> {this.state.categoryData[this.props.items[index].category_id - 1].category_name}</p> 
+                              <h6>Quantity:</h6><p>{this.props.items[index].quantity}</p>
+                              <h6>Season:</h6><p> {this.state.seasonData[this.props.items[index].season_id - 1].season_name}</p> 
                               {this.props.items[index].image &&
-                                <img src={this.props.items[index].image} />}
+                                <img src={this.props.items[index].image} style={{maxWidth: '20rem'}}/>}
                             </div>
                           </InfoWindow>
                         )}

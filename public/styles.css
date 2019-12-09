@@ -180,3 +180,14 @@ h1.ml8 {
 .center-button {
   align-self: center;
 }
+
+/* pop up info from pin */
+/* .gm-style-iw-c {
+  min-width: 21rem;
+  max-width: 22rem;
+} */
+
+.info-window {
+  min-width: 21rem;
+  max-width: 22rem;
+}
