@@ -21,9 +21,6 @@ class ItemList extends React.Component {
 //   handleClick = e => { }
 
   render() {
-//     const items = this.props.items
-//     console.log(items)
-  console.log('hi - itemlist', this.props)
     return (
       <div className='scrollable'>
         <h2>Listed items: </h2>

@@ -59,7 +59,7 @@ class AddModal extends React.Component {
   }
 
   handleSubmit = (e) => {
-    console.log(this.state.newItem)
+    // console.log(this.state.newItem)
     e.preventDefault()
     addItem(this.state.newItem)
     fetchPublicItems()
