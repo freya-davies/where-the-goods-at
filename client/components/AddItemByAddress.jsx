@@ -67,8 +67,13 @@ class AddItemByAddress extends React.Component {
         e.preventDefault()
         addItem(this.state.newItem)
             .then(res => {
-                if(res == 200) this.props.toggleAddForm()
-                this.props.fetchPublicItems()
+                if(res == 200) {
+                    this.props.toggleAddForm()
+                    if(this.state.newItem.public) this.props.fetchPublicItems()
+                    else {
+                        console.log(this.props.auth.auth.user.user_name)
+                        this.props.fetchPrivateItems(this.props.auth.auth.user.user_name)}
+                }
             })
     }
 
@@ -231,4 +236,4 @@ const mapStateToProps = (auth) => {
     }
 }
 
-export default connect(mapStateToProps, { hideModal, fetchPublicItems })(AddItemByAddress)
+export default connect(mapStateToProps, { hideModal, fetchPublicItems, fetchPrivateItems })(AddItemByAddress)

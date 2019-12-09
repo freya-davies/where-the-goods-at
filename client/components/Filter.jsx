@@ -17,6 +17,7 @@ class Filter extends React.Component {
     if(this.props.items !== prevProps.items){
       this.setState({items: this.props.items.items})
     }
+    if(!this.state.public && (prevProps.items !== this.props.privateItems)) this.setState({items: this.props.privateItems.privateItems})
   }
 
   handleCategory = e => {
