@@ -22,11 +22,10 @@ class Nav extends React.Component {
           <ul className="navbar-nav ml-auto" style={{ 'paddingRight': 50 + 'px' }}>
             {auth.isAuthenticated
               ? [<li key="1" className="nav-item nav-username">Welcome {this.props.auth.user.user_name}!</li>,
-              <li key="2" className="nav-item navListItems"><Link to='/' className="nav-link" onClick={() => logout()}>Logout</Link></li>,
-              <li key="3" className="nav-item navListItems"><Link to='/add' className="nav-link">Add Item</Link></li>]
+              <li key="2" className="nav-item navListItems"><Link to='/' className="nav-link" onClick={() => logout()}>Logout</Link></li>]
               : [
-                <li key="4" className="nav-item navListItems" ><Link onClick={this.toggleBurger} className="nav-link" to='/login'>Login</Link></li>,
-                <li key="5" className="nav-item navListItems" ><Link onClick={this.toggleBurger} className="nav-link" to='/register'>Register</Link></li>
+                <li key="3" className="nav-item navListItems" ><Link onClick={this.toggleBurger} className="nav-link" to='/login'>Login</Link></li>,
+                <li key="4" className="nav-item navListItems" ><Link onClick={this.toggleBurger} className="nav-link" to='/register'>Register</Link></li>
               ]
             }
           </ul>
