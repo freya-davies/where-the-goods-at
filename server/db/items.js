@@ -41,7 +41,7 @@ function getSeasons(db = connection){
 }
 
 function getItem(itemId, db=connection) {
-    return db('item').select().where('itemId', itemId)
+    return db('items').where('id', itemId).first()
 }
 
 function updateItem(id, item, db =  connection) {

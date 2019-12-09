@@ -1,4 +1,4 @@
-import { getPublicItems, getPrivateItems } from '../apis/items'
+import { getPublicItems, getPrivateItems, updateItem } from '../apis/items'
 
 export function fetchPublicItems () {
     return (dispatch) => {
@@ -27,5 +27,17 @@ export function fetchPrivateItems (user) {
                     items
                 })
             })
+    }
+}
+
+export function updateSingleItem(id, item) {
+    return (dispatch) => {
+        updateItem(id, item)
+        .then(i => {
+            dispatch({
+                type: 'UPDATE_ITEM',
+                id
+            })
+        })
     }
 }

@@ -1,50 +1,104 @@
 import React from "react"
 import { connect } from 'react-redux'
-import { getItem } from '../apis/items'
+import { getItem, getCategories, getSeasons } from '../apis/items'
 
 class UpdateItem extends React.Component {
+
     constructor(props) {
         super(props)
         this.state = {
-           items : this.props.items.items
+            item: null,
+            defaultSeason: ""
         }
     }
 
     componentDidMount() {
-        console.log(this.props.items)
-        // console.log(getItem)
+        getItem(this.props.match.params.id)
+            .then(data => {
+                this.setState({
+                    item: data
+                }, () => console.log(this.state.item))
+            })
+
+        getCategories()
+            .then(categoryData => {
+                this.setState({ categoryData })
+            })
+
+
+        getSeasons()
+            .then(seasonData => {
+                this.setState({ seasonData })
+            })
     }
 
-    handleClick = () => {
-    let displayItem = this.props.items.items.filter(item => {
+
+    showItem = () => {
+        let displayItem = this.props.items.items.filter(item => {
             if (item.id == this.props.match.params.id) {
                 return item
-            }       
-         })
-         console.log(displayItem)
-
+            }
+        })
         this.setState({
             items: displayItem
         })
     }
 
+    getSeasonName() {
+        var season = this.state.seasonData.find(season => {
+            return season.id == this.state.item.season_id
+        })
+        return season.season_name
+    }
+
     render() {
-        // console.log(this.props.items)
-        // console.log(this.props.match.params.id)
+
         return (
             <div>
-                <button onClick={this.handleClick}>Display Item</button>{
-                    this.state.items.length &&
-                    <>
-                    <p>{this.state.items[0].item_name}</p>
-                    <img src={this.state.items[0].img_url}/>
-                    <p>Description: {this.state.items[0].description}</p>
-                    <p>Public: {this.state.items[0].public}</p>
-                    <p>Category: {this.state.items[0].category}</p>
-                    <p>Quantity: {this.state.items[0].quantity}</p>
-                    <p>Season: {this.state.items[0].season}</p>
-                    </>
-                 }
+                {this.state.item != null &&
+                    <div className="updateItemForm">
+                        <img src={this.state.item.img_url} />
+                        <form onSubmit={this.handleSubmit}>
+                            <label for="item_name">Item Name: </label>
+                            <input name="item_name" value={this.state.item.item_name} />
+                            <br></br>
+                            <label for="decription">Description: </label>
+                            <input name="description" value={this.state.item.description} />
+                            <br></br>
+
+                            <label for="public">Public: </label>
+                            <input type="checkbox" name="public" value={this.state.item.public} />
+                            <br></br>
+                            <label for="category">Category: </label>
+                            <select name='category'>
+                                <option value={this.state.item.category}></option>
+                                {this.state.categoryData &&
+                                    this.state.categoryData.map((category, i) => {
+                                        return (
+                                            <option key={i} value={category.id}>
+                                                {category.category_name}
+                                            </option>
+                                        )
+                                    })}
+                            </select>
+                            <br></br>
+                            <label for="season">Season: </label>
+                            {this.state.seasonData &&
+                                <select required name='season' >
+                                    <option value={this.state.item.season_id}>{
+                                        this.getSeasonName()
+                                    }</option>
+                                    {this.state.seasonData &&
+                                        this.state.seasonData.map((season, i) => {
+                                            return (
+                                                <option key={i} value={season.id}>{season.season_name}</option>
+                                            )
+                                        })}
+                                </select>
+                            }
+                        </form>
+                    </div>
+                }
             </div>
         )
     }

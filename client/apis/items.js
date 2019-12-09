@@ -72,6 +72,13 @@ export function getSeasons(){
 export function getItem(id){
 
     return request
-    .get(url + `items/${id}`)
+    .get(url + `item/${id}`)
+    .then(res => res.body)
+}
+
+export function updateItem(item) {
+    return request
+    .patch(`update/${item.id}`)
+    .send(item)
     .then(res => res.body)
 }

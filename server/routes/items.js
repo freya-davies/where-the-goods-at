@@ -32,7 +32,7 @@ router.get('/all', (req, res) => {
 
 // get single item
 
-router.get('/update/:id', (req, res) => {
+router.get('/item/:id', (req, res) => {
     let {id} = req.params
     db.getItem(id)
     .then(item => {

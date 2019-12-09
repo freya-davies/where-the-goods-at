@@ -56,6 +56,7 @@ class App extends React.Component {
             <>
               <Route path='/add' component={Items} />
               <Route path="/update/:id" component={UpdateItem} />
+              {/* <Route path="/update/:id" render={(props) => <UpdateItem items={this.props.items.items} />} /> */}
             </>}
         </Router>
       </>
