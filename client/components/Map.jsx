@@ -4,6 +4,7 @@ import { getKey } from '../apis/auth'
 import { connect } from 'react-redux'
 import ItemList from './ItemList'
 import AddModal from './AddModal'
+import AddItemByAddress from './AddItemByAddress'
 import { showAddItemModal, updateItemModal } from '../actions/modals'
 import { getCategories, getSeasons } from '../apis/items'
 
@@ -21,6 +22,7 @@ class Map extends Component {
       pins: [],
       key: false,
       addMode: false,
+      addForm: false,
       showModal: false,
       infoWindowShowing: false,
       activePin: null
@@ -54,6 +56,11 @@ class Map extends Component {
         }
         return location
       })
+    })
+  }
+  toggleAddForm = (e) => {
+    this.setState({
+      addForm: !this.state.addForm
     })
   }
 
@@ -93,11 +100,15 @@ class Map extends Component {
   // })
 
   render() {
+
     return (
 
       <div className="">
         {this.state.showPopUp &&
           <AddModal />
+        }
+        {this.state.addForm &&
+          <AddItemByAddress toggleAddForm={this.toggleAddForm} />
         }
 
         <div className="container px-lg-5">
@@ -134,7 +145,7 @@ class Map extends Component {
                               <h6>Quantity: {this.props.items[index].quantity}</h6>
                               <h6>Season: {this.state.seasonData[this.props.items[index].season_id - 1].season_name}</h6>
                               {this.props.items[index].image &&
-                              <img src={this.props.items[index].image}/>}
+                                <img src={this.props.items[index].image} />}
                             </div>
                           </InfoWindow>
                         )}
@@ -144,7 +155,14 @@ class Map extends Component {
                 </GoogleMap>
               </LoadScript>
             }
-            <button onClick={this.toggleAddMode}>{this.state.addMode ? "Stop Adding Items" : "Add Items"}</button>
+            <div className="row">
+              <div className="col">
+                <button onClick={this.toggleAddMode}>{this.state.addMode ? "Stop Adding Items" : "Add Items"}</button>
+              </div>
+              <div className="col">
+                <button onClick={this.toggleAddForm}>Add</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
