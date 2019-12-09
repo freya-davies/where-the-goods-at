@@ -8,6 +8,7 @@ function addItem(item, db = connection) {
             description: item.description,
             lat: item.lat,
             long: item.long,
+            img_url: item.img_url,
             season_id: item.season,
             quantity: item.quantity,
             rating: item.rating,

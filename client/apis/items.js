@@ -11,29 +11,39 @@ const endUrl = '&key='
 
 export function addItem(item) {
     if (item.lat && item.long) {
-        findSuburb(item.lat, item.long)
-            .then(suburb => {
-                item.suburb = suburb
                 return request
                     .post(addItemUrl)
                     .send(item)
                     .then(res => res.statusCode)
-            })
     } else {
-       return getCoordinates(item.address)
+        return getCoordinates(item.address)
             .then(res => {
                 item.lat = res.body.results[0].geometry.location.lat
                 item.long = res.body.results[0].geometry.location.lng
                 delete item.address
+               return findSuburb(item.lat, item.long)
+                .then(suburb => {
+                    item.suburb = suburb
                     return request
                     .post(addItemUrl)
                     .send(item)
                     .then(res => res.statusCode)
                 })
+            })
+
             }
         }
 
-    
+        // return getCoordinates(item.address)
+        // .then(res => {
+        //     item.lat = res.body.results[0].geometry.location.lat
+        //     item.long = res.body.results[0].geometry.location.lng
+        //     delete item.address
+        //         return request
+        //         .post(addItemUrl)
+        //         .send(item)
+        //         .then(res => res.statusCode)
+        //     })
 
 
 function getCoordinates(address) {

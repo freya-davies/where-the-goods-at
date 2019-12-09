@@ -65,11 +65,9 @@ class AddItemByAddress extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault()
-        Promise.all(
-        addItem(this.state.newItem))
+        addItem(this.state.newItem)
             .then(res => {
                 if(res == 200) {
-                    console.log('here')
                     if(this.state.newItem.public) this.props.fetchPublicItems()
                     else {
                         this.props.fetchPrivateItems(this.props.auth.auth.user.user_name)}
