@@ -18,7 +18,7 @@ class Filter extends React.Component {
 
   componentDidMount() {
     // Make listed items alphabetical
-    console.log(this.state.items)
+    // console.log(this.state.items)
     this.sortItems()
   }
 
@@ -112,7 +112,7 @@ class Filter extends React.Component {
 
   sortItems() {
     let {items, order} = this.state
-    // let items = this.state.items
+    // is the same as: let items = this.state.items
 
     if (order == 'default') {
         items.sort((a, b) => {
@@ -131,18 +131,6 @@ class Filter extends React.Component {
   }
 
   render() {
-
-
-    // Make listed items show suburb
-    // this.props.items.items.sort((a, b) => {
-    //   return a.suburb > b.suburb ? 1 : -1
-    // })
-    console.log(this.state.items)
-    // let itemsArray = this.sortItems(this.state.items, this.state.order)
-    // console.log(itemsArray)
-
-
-
     return (
       <div className='row px-2'>
         <div className='col-sm-12 col-md-8'>
