@@ -1,125 +1,63 @@
 import React from "react"
 import { connect } from 'react-redux'
+import { getItem } from '../apis/items'
 
 class UpdateItem extends React.Component {
     constructor(props) {
-        super(props) 
+        super(props)
         this.state = {
-            item: {
-                item_name: '',
-                comments: '',
-                description: '',
-                lat: this.props.location.lat,
-                long: this.props.location.lng,
-                img_url: '',
-                public: false,
-                category: '',
-                season: '',
-                quantity: null
-              }
+           items : this.props.items.items
         }
     }
 
+    componentDidMount() {
+        console.log(this.props)
+        console.log(this.props.items)
+        // console.log(getItem)
+        
+    }
+
+    handleClick = () => {
+    let displayItem = this.props.items.items.filter(item => {
+            if (item.id == this.props.match.params.id) {
+                return item
+            }       
+         })
+         console.log(displayItem)
+
+        this.setState({
+            items: displayItem
+        })
+    }
+
     render() {
+        // console.log(this.props.items)
+        // console.log(this.props.match.params.id)
         return (
-                    <div>
-                        <form onSubmit={this.handleSubmit}>
-                        <label>
-                            Item
-                            <br></br>
-                            <input
-                            required
-                            type='text'
-                            name='item_name'
-                            onChange={this.handleChange}
-                            />
-                        </label>
-                        <br></br>
-                        <label>
-                            Description
-                            <br></br>
-                            <textarea
-                            required
-                            type='text'
-                            name='description'
-                            onChange={this.handleChange}
-                            />
-                        </label>
-                        <br></br>
-                        <label>
-                            Photo
-                            <br></br>
-                            <input
-                            required
-                            type='text'
-                            name='img_url'
-                            onChange={this.handleChange}
-                            />
-                        </label>
-                        <br></br>
-                        <label>
-                            Public
-                            <input
-                            type='checkbox'
-                            name='public'
-                            onChange={this.handleCheckbox}
-                            />
-                        </label>
-                        <br></br>
-                        <label>
-                            Category
-                            <select name='category' onChange={this.handleChange}>
-                            <option value={0}></option>
-                            {this.state.categoryData &&
-                                this.state.categoryData.map((category, i) => {
-                                return (
-                                    <option key={i} value={category.id}>
-                                    {category.category_name}
-                                    </option>
-                                )
-                                })}
-                            </select>
-                        </label>
-                        <br></br>
-                        <label>
-                            Season
-                            <select name='season' onChange={this.handleChange}>
-                            <option value={0}></option>
-                            {this.state.seasonData &&
-                                this.state.seasonData.map((season, i) => {
-                                return (
-                                    <option key={i} value={season.id}>
-                                    {season.season_name}
-                                    </option>
-                                )
-                                })}
-                            </select>
-                        </label>
-                        <br></br>
-                        <label>
-                            <p>Quantity</p>
-                            <input
-                            required
-                            name='quantity'
-                            type='range'
-                            min='1'
-                            max='50'
-                            onChange={this.handleChange}
-                            />
-                            {this.state.newItem.quantity}
-                        </label>
-                        <br></br>
-                        <br></br>
-                        <input type='submit' value='Submit' />
-                        </form>
-                  
-                    </div>
+            <div>
+                <button onClick={this.handleClick}>Display Item</button>{
+                    this.state.items.length < 1 ?
+                    <p>Click me!</p>
+                    :
+                    <>
+                    <p>{this.state.items[0].item_name}</p>
+                    <img src={this.state.items[0].img_url}/>
+                    <p>Description: {this.state.items[0].description}</p>
+                    <p>Public: {this.state.items[0].public}</p>
+                    <p>Category: {this.state.items[0].category}</p>
+                    <p>Quantity: {this.state.items[0].quantity}</p>
+                    <p>Season: {this.state.items[0].season}</p>
+                    </>
+                }
+            </div>
         )
     }
 }
 
-const mapStateToProps = () => {
-    return {}
+const mapStateToProps = ({ items }) => {
+    return {
+        items
+    }
 }
 
 export default connect(mapStateToProps)(UpdateItem)

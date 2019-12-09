@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { HashRouter as Router, Route, Link } from 'react-router-dom'
 import { findSuburb } from '../apis/itemList'
 
 class ItemList extends React.Component {
@@ -49,6 +50,9 @@ class ItemList extends React.Component {
                       <img className="rounded" src={item.img_url} alt={item.item_name} height="80" width="80" />
                       <h3>{item.item_name}</h3>
                       <p>{item.description}</p>
+                      <Link to={`/update/${item.id}`}>
+                      <button>Update</button>
+                      </Link>
                       {/* <p>{findSuburb(item.lat, item.long)}</p> */}
                       {/* FREYA - THE BELOW LINE IS WHAT YOU WANT TO UNCOMMENT */}
                       {/* <p>{this.getSuburbs(item)}</p> */}

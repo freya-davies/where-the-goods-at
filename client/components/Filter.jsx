@@ -98,16 +98,16 @@ class Filter extends React.Component {
             </div>
 
             {/* fix me the toggle */}
-            <div class='custom-control custom-switch'>
+            <div className='custom-control custom-switch'>
               Public
               <input
                 type='checkbox'
-                class='custom-control-input'
+                className='custom-control-input'
                 id='customSwitch1'
                 onChange={this.handleItemDisplay}
                 value={this.state.public}
               />
-              <label class='custom-control-label' for='customSwitch1'>
+              <label className='custom-control-label' for='customSwitch1'>
                 Private
               </label>
             </div>
