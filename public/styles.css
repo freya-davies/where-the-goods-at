@@ -37,6 +37,12 @@
   color: #195507 !important;;
 }
 
+.nav-username {
+  align-self: center;
+  font-size: large;
+  margin-right: 1.5rem;
+}
+
   /*rating start*/
   .checked {
     color: orange;

@@ -8,6 +8,8 @@ import AddItemByAddress from './AddItemByAddress'
 import { showAddItemModal, updateItemModal } from '../actions/modals'
 import { getCategories, getSeasons } from '../apis/items'
 
+const googleMapStyles = require('../../public/GoogleMapStyles.json')
+
 
 class Map extends Component {
 
@@ -120,8 +122,11 @@ class Map extends Component {
                   id='Traffic-layer-example'
                   mapContainerStyle={{
                     height: "800px",
-                    width: "1200px"
+                    width: "1200px",
                   }}
+                  options={{
+                    styles: googleMapStyles
+                    }}
                   zoom={12}
                   center={this.state.center}
                   mapTypeId='satellite'
@@ -178,5 +183,7 @@ const mapStateToProps = (auth) => {
     auth
   }
 }
+
+
 
 export default connect(mapStateToProps, { showAddItemModal, updateItemModal })(Map)
