@@ -8,5 +8,5 @@ function doesEmailExist (givenEmail, db = connection) {
 
 
 module.exports = {
-  compareEmails
+  doesEmailExist
 }
