@@ -15,7 +15,6 @@ function addItem(item, db = connection) {
             category_id: item.category,
             public: item.public,
             user_id: item.user,
-            created_at: Date.now(),
             image: item.image
         })
 }
