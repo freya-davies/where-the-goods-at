@@ -107,7 +107,7 @@ class Filter extends React.Component {
                 onChange={this.handleItemDisplay}
                 value={this.state.public}
               />
-              <label className='custom-control-label' for='customSwitch1'>
+              <label className='custom-control-label' htmlFor='customSwitch1'>
                 Private
               </label>
             </div>
