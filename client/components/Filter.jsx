@@ -22,7 +22,7 @@ class Filter extends React.Component {
     this.sortItems()
   }
 
-  
+
   componentDidUpdate(prevProps){
     if(this.props.items !== prevProps.items){
       this.setState({items: this.props.items.items})
@@ -119,11 +119,11 @@ class Filter extends React.Component {
       }) 
     } else if (order == 'new') {
         items.sort((a, b) => {
-          return a.id > b.id ? 1 : -1
+          return a.id > b.id ? -1 : 1
         })
     } else if (order == 'old') {
         items.sort((a, b) => {
-          return a.id < b.id ? 1 : -1
+          return a.id < b.id ? -1 : 1
         })
     }
     this.setState({items: items})
