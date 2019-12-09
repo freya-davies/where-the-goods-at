@@ -9,4 +9,4 @@ const db = connection
 db('items').select().then(items => console.log(items))
 
 // write the following into terminal to get seed data from site: 
-//  node getseeddata.js into terminal
+//  node getseeddata.js
