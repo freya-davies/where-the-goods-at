@@ -2,7 +2,11 @@
     height: 100%;
   }
 
-  .addItemContainer {
+.highlightViewMode {
+  font-weight: 900;
+}
+
+.addItemContainer {
   position: absolute;
     top: 100px;
     left: 10px;
