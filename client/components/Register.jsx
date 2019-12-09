@@ -27,9 +27,12 @@ class Register extends React.Component {
     e.preventDefault()
     e.target.reset()
     let { user_name, password, confirm_password, email, first_name, last_name } = this.state
+    if (password.length <= 7) return this.props.dispatch(loginError("Password must contain at least 8 characters"))
     if (confirm_password != password) return this.props.dispatch(loginError("Passwords don't match"))
     this.props.dispatch(registerUserRequest(this.state))
   }
+
+
   render() {
     const { auth } = this.props
     return (
