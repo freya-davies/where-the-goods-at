@@ -49,14 +49,14 @@ class AddModal extends React.Component {
     let reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = () => {
-        this.setState({
-            newItem: {
-                ...this.state.newItem,
-                image: reader.result
-            }
-        })
+      this.setState({
+        newItem: {
+          ...this.state.newItem,
+          image: reader.result
+        }
+      })
     }
-}
+  }
 
   handleSubmit = (e) => {
     e.preventDefault()
@@ -95,47 +95,52 @@ class AddModal extends React.Component {
           <div className='modal-content'>
             <div className='modal-header'>
               <h5 className='modal-title' id='exampleModalLongTitle'>
-                Modal title
+                Add Item by Dropping Pin
               </h5>
             </div>
             <div className='modal-body'>
-              <div>
-                <form onSubmit={this.handleSubmit}>
-                  <h3>Add new Item</h3>
-                  <label>
-                    Item
-                    <br></br>
+              <form onSubmit={this.handleSubmit}>
+                <div className="form-row">
+                  <div className="form-group col-md-6">
+                    <label>
+                      Item</label>
                     <input
                       required
                       type='text'
                       name='item_name'
+                      className="form-control"
+                      placeholder="eg; Parsley"
                       onChange={this.handleChange}
                     />
-                  </label>
-                  <br></br>
-                  <label>
-                    Description
-                    <br></br>
-                    <textarea
-                      required
-                      type='text'
-                      name='description'
-                      onChange={this.handleChange}
-                    />
-                  </label>
-                  <br></br>
-                  <label>
-                    Private
+                  </div>
+                  <div className="form-check">
                     <input
                       type='checkbox'
                       name='public'
+                      className="form-check-input"
                       onChange={this.handleCheckbox}
                     />
-                  </label>
-                  <br></br>
+                    <label className="form-check-label" htmlFor="exampleCheck1">Private</label>
+                    <small id="subtext" className="form-text text-muted">Keep your foraging spot a secret!</small>
+                  </div>
+                </div>
+                <div className="form-row">
                   <label>
-                    Category
-                    <select name='category' onChange={this.handleChange}>
+                    Description
+                    </label>
+                  <textarea
+                    required
+                    type='text'
+                    name='description'
+                    className="form-control"
+                    rows='3'
+                    onChange={this.handleChange}
+                  />
+                </div>
+                <div className="form-row">
+                  <div className="form-group col-md-4">
+                    <label>Category</label>
+                    <select name='category' onChange={this.handleChange} className="form-control">
                       <option value={0}></option>
                       {this.state.categoryData &&
                         this.state.categoryData.map((category, i) => {
@@ -146,11 +151,12 @@ class AddModal extends React.Component {
                           )
                         })}
                     </select>
-                  </label>
-                  <br></br>
-                  <label>
-                    Season
-                    <select name='season' onChange={this.handleChange}>
+                  </div>
+                  <div className="form-group col-md-4">
+                    <label>
+                      Season
+                                        </label>
+                    <select name='season' onChange={this.handleChange} className="form-control">
                       <option value={0}></option>
                       {this.state.seasonData &&
                         this.state.seasonData.map((season, i) => {
@@ -161,52 +167,63 @@ class AddModal extends React.Component {
                           )
                         })}
                     </select>
-                  </label>
-                  <br></br>
-                  <label>
-                    <p>Quantity</p>
-                    <input
-                      required
-                      name='quantity'
-                      type='range'
-                      min='1'
-                      max='50'
-                      onChange={this.handleChange}
-                    />
-                    {this.state.newItem.quantity}
-                  </label>
-                  <br></br>
+                  </div>
+                </div>
+                <div className="form-row">
+                  <label htmlFor="customRange1">Quantity</label>
+                  <input
+                    required
+                    name='quantity'
+                    type='range'
+                    className="custom-range"
+                    min='1'
+                    max='50'
+                    defaultValue='1'
+                    onChange={this.handleChange}
+                  />
+                  {this.state.newItem.quantity}
+                </div>
+                <div className="form-row">
+
                   <label>
                     <p>Image</p>
+                  </label>
+                  <div className="custom-file">
                     <input
                       type="file"
                       name="image"
                       accept="image/*"
                       onChange={this.handleImageUpload}
                     />
-                  </label>
-                  <input type='submit' value='Submit' />
-                  <br></br>
-                </form>
-              </div>
+                  </div>
+                </div>
+                <div className='modal-footer'>
+                  <div className="col-auto my-1">
+                    <button
+                      type='submit'
+                      className='btn btn-secondary'> Submit
+                                    </button>
+                  </div>
+                  <div className="col-auto my-1">
+                    <button
+                      type='button'
+                      className='btn btn-secondary'
+                      data-dismiss='modal'
+                      onClick={this.closeModal}>
+                      Close</button>
+                  </div>
+                  </div>
+              </form>
             </div>
-            <div className='modal-footer'>
-              <button
-                type='button'
-                className='btn btn-secondary'
-                data-dismiss='modal'
-                onClick={this.closeModal}
-              >
-                Close
-              </button>
             </div>
+
           </div>
         </div>
-      </div>
-    )
-  }
-}
 
+        )
+      }
+    }
+    
 const mapStateToProps = (auth) => {
   return {
     auth
@@ -214,3 +231,4 @@ const mapStateToProps = (auth) => {
 }
 
 export default connect(mapStateToProps, { hideModal, fetchPublicItems })(AddModal)
+
