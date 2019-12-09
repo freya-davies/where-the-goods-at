@@ -58,6 +58,7 @@ class Filter extends React.Component {
     }
   }
 
+
   handleSeason = e => {
     if (this.state.public) {
       if (e.target.value == 0) {
@@ -67,7 +68,7 @@ class Filter extends React.Component {
       } else {
         this.setState({
           items: this.props.items.items.filter(
-            item => item.season_id === Number(e.target.value)
+            item => item.season_id === Number(e.target.value) 
           )
         })
       }
