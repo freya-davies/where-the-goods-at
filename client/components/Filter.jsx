@@ -62,9 +62,10 @@ class Filter extends React.Component {
           items: this.props.items.items
         })
       } else {
+        console.log(this.props.items.items)
         this.setState({
           items: this.props.items.items.filter(
-            item => item.season_id === Number(e.target.value) 
+            item => item.season_id === Number(e.target.value) || item.season_id === 5
           )
         })
       }
@@ -77,7 +78,7 @@ class Filter extends React.Component {
       } else {
         this.setState({
           items: this.props.privateItems.privateItems.filter(
-            item => item.season_id === Number(e.target.value)
+            item => item.season_id === Number(e.target.value) || item.season_id === 5
           )
         })
       }
