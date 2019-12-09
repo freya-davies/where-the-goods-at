@@ -30,14 +30,24 @@ router.get('/all', (req, res) => {
     })
 })
 
-//get single item
+// get single item
 
-router.get('/update/:id', (res,req) => {
-    console.log(req.params.id)
+router.get('/update/:id', (req, res) => {
     let {id} = req.params
     db.getItem(id)
     .then(item => {
         res.json(item)
+    })
+})
+
+// update single item
+
+router.patch('/update/:id', (req, res) => {
+    let item = req.body
+    console.log(item)
+    
+    db.updateItem(req.params.id, item).then(items => {
+        res.json(items)
     })
 })
 

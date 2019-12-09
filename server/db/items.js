@@ -20,7 +20,6 @@ function addItem(item, db = connection) {
     })
 }
 
-
 function getPublicItems(db = connection) {
     return db('items').select().where('public', true)
 }
@@ -45,6 +44,12 @@ function getItem(itemId, db=connection) {
     return db('item').select().where('itemId', itemId)
 }
 
+function updateItem(id, item, db =  connection) {
+    return db('items')
+    .where('id', id)
+    .update(item)
+}  
+
 module.exports = {
   addItem,
   getPublicItems,
@@ -52,5 +57,6 @@ module.exports = {
   getAllItems,
   getCategories,
   getSeasons,
-  getItem
+  getItem,
+  updateItem,
 }

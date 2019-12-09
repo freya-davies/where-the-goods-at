@@ -11,10 +11,8 @@ class UpdateItem extends React.Component {
     }
 
     componentDidMount() {
-        console.log(this.props)
         console.log(this.props.items)
         // console.log(getItem)
-        
     }
 
     handleClick = () => {
@@ -36,9 +34,7 @@ class UpdateItem extends React.Component {
         return (
             <div>
                 <button onClick={this.handleClick}>Display Item</button>{
-                    this.state.items.length < 1 ?
-                    <p>Click me!</p>
-                    :
+                    this.state.items.length &&
                     <>
                     <p>{this.state.items[0].item_name}</p>
                     <img src={this.state.items[0].img_url}/>
@@ -48,7 +44,7 @@ class UpdateItem extends React.Component {
                     <p>Quantity: {this.state.items[0].quantity}</p>
                     <p>Season: {this.state.items[0].season}</p>
                     </>
-                }
+                 }
             </div>
         )
     }
