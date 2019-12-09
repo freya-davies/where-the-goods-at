@@ -20,10 +20,7 @@
       text-decoration: none;
   }
 
-.scrollable {
-  overflow-y:scroll; 
-  height: 60vh;
-}
+
 /* nav bar  */
 .customNavStyles {
   background-color: #FFF1DA !important;
@@ -56,6 +53,14 @@
   }
 
 
+  .card-img-top {
+  width: 80%;
+  }
+
+  .scrollable {
+    overflow-y:scroll; 
+    height: 80vh;
+  }
 
 /* landing page  */
 
