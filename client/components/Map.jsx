@@ -100,7 +100,6 @@ class Map extends Component {
   // })
 
   render() {
-
     return (
 
       <div className="">
@@ -154,9 +153,14 @@ class Map extends Component {
                   })}
                 </GoogleMap>
               </LoadScript>
+            }{this.props.auth.auth.isAuthenticated ?
+              <>
+              <button onClick={this.toggleAddMode}>{this.state.addMode ? "Stop Adding Items" : "Add Items"}</button>
+              <button onClick={this.toggleAddForm}>Add</button>
+              </>
+              :
+              <></>
             }
-            <button onClick={this.toggleAddMode}>{this.state.addMode ? "Stop Adding Items" : "Add Items"}</button>
-            <button onClick={this.toggleAddForm}>Add</button>
           </div>
         </div>
       </div>
@@ -164,8 +168,10 @@ class Map extends Component {
   }
 }
 
-const mapStateToProps = () => {
-  return {}
+const mapStateToProps = (auth) => {
+  return {
+    auth
+  }
 }
 
 export default connect(mapStateToProps, { showAddItemModal, updateItemModal })(Map)

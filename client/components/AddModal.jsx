@@ -22,14 +22,6 @@ class AddModal extends React.Component {
         image: null
       }
     }
-<<<<<<< HEAD
-=======
-
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleChange = this.handleChange.bind(this)
-    this.handleImageUpload = this.handleImageUpload.bind(this)
-    this.handleCheckbox = this.handleCheckbox.bind(this)
->>>>>>> 79ab3da879d2fa4269f825202d70c8653444d8f3
   }
 
   componentDidMount() {
@@ -50,10 +42,7 @@ class AddModal extends React.Component {
     })
   }
 
-<<<<<<< HEAD
-  handleSubmit = (e) => {
-=======
-  handleImageUpload(e) {
+  handleImageUpload = (e) => {
     const data = new FormData()
     let file = e.target.files[0]
     data.append('file', file)
@@ -69,9 +58,8 @@ class AddModal extends React.Component {
     }
 }
 
-  handleSubmit(e) {
+  handleSubmit = (e) => {
     console.log(this.state.newItem)
->>>>>>> 79ab3da879d2fa4269f825202d70c8653444d8f3
     e.preventDefault()
     addItem(this.state.newItem)
     fetchPublicItems()

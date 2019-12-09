@@ -13,6 +13,12 @@ class Filter extends React.Component {
     }
   }
 
+  componentDidUpdate(prevProps){
+    if(this.props.items !== prevProps.items){
+      this.setState({items: this.props.items.items})
+    }
+  }
+
   handleCategory = e => {
     if (this.state.public) {
       if (e.target.value == 0) {
@@ -90,12 +96,12 @@ class Filter extends React.Component {
 
   render() {
     return (
-      <div className='d-flex px-2'>
-        <div className='col-8'>
+      <div className='row px-2'>
+        <div className='col-sm-12 col-md-8'>
           <Map items={this.state.items} />
         </div>
 
-        <div >
+        <div className='col-sm-12 col-md-4'>
           <div className='container rounded bg-main mb-3'>
             <h3 className='display-4'>Sort</h3>
             <div>

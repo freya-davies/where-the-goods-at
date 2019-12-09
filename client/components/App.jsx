@@ -72,3 +72,4 @@ const mapStateToProps = ({ auth, items, modals, privateItems }) => {
 }
 
 export default connect(mapStateToProps, { fetchPublicItems, fetchPrivateItems })(App)
+//could be mapping dispatch to props
