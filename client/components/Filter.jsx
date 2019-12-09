@@ -19,6 +19,7 @@ class Filter extends React.Component {
   componentDidMount() {
     // Make listed items alphabetical
     console.log(this.state.items)
+    this.sortItems()
   }
 
   handleCategory = e => {
@@ -80,10 +81,11 @@ class Filter extends React.Component {
   }
 
 
+  // set state and then run sortItems function once state has been set
   handleRecent = e => {
     this.setState({
       order: e.target.value
-    })
+    },this.sortItems)
   }
 
   handleItemDisplay = e => {
@@ -100,24 +102,24 @@ class Filter extends React.Component {
   }
 
 
-  sortItems(items, order) {
+  sortItems() {
+    let {items, order} = this.state
+    // let items = this.state.items
+
     if (order == 'default') {
-      return items.sort((a, b) => {
-        return a.item_name > b.item_name ? 1 : -1
-      })
-      console.log(items)
+        items.sort((a, b) => {
+          return a.item_name > b.item_name ? 1 : -1
+      }) 
     } else if (order == 'new') {
-      return items.sort((a, b) => {
-        return a.id > b.id ? -1 : 1
-      })
-      console.log(items)
+        items.sort((a, b) => {
+          return a.id > b.id ? 1 : -1
+        })
     } else if (order == 'old') {
-      return items.sort((a, b) => {
-        return a.id > b.id ? 1 : -1
-      })
-      console.log(items)
+        items.sort((a, b) => {
+          return a.id < b.id ? 1 : -1
+        })
     }
-    // return items
+    this.setState({items: items})
   }
 
   render() {
@@ -127,8 +129,11 @@ class Filter extends React.Component {
     // this.props.items.items.sort((a, b) => {
     //   return a.suburb > b.suburb ? 1 : -1
     // })
-    console.log(this.state.order)
-    let itemsArray = this.sortItems(this.state.items, this.state.order)
+    console.log(this.state.items)
+    // let itemsArray = this.sortItems(this.state.items, this.state.order)
+    // console.log(itemsArray)
+
+
 
     return (
       <div className='d-flex px-2'>
@@ -197,7 +202,7 @@ class Filter extends React.Component {
           </div>
 
           <div className='rounded bg-main'>
-            <ItemList items={itemsArray} />
+            <ItemList items={this.state.items} />
           </div>
         </div>
       </div>
