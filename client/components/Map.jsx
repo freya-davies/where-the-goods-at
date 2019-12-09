@@ -104,7 +104,7 @@ class Map extends Component {
   render() {
     return (
 
-      <div className="">
+      <div className="mapWrap">
         {this.state.showPopUp &&
           <AddModal />
         }
@@ -161,12 +161,12 @@ class Map extends Component {
             }
    
         {this.props.auth.auth.isAuthenticated &&
-            <div className="row">
-              <div className="col">
-                <button onClick={this.toggleAddMode}>{this.state.addMode ? "Stop Adding Items" : "Add Items"}</button>
+            <div className="addItemContainer">
+              <div className="addPinButton">
+                <button onClick={this.toggleAddMode}>{this.state.addMode ? "Stop Adding Items" : "Add Item by Pin"}</button>
               </div>
-              <div className="col">
-                <button onClick={this.toggleAddForm}>Add</button>
+              <div className="addPinButton">
+                <button onClick={this.toggleAddForm}>Add Item by Address</button>
               </div>
             </div>
                 }

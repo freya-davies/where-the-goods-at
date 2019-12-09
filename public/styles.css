@@ -1,6 +1,22 @@
 #map {
     height: 100%;
   }
+
+  .addItemContainer {
+  position: absolute;
+    top: 100px;
+    left: 10px;
+    background-color: #f4f4f4;
+    display: block;
+    padding: 10px;
+}
+
+.addPinButton {
+  margin-bottom: 10px;
+}
+.mapWrap {
+  position: relative;
+}
   /* Optional: Makes the sample page fill the window. */
   html, body {
     height: 100%;
@@ -65,7 +81,7 @@
 
   .scrollable {
     overflow-y:scroll; 
-    height: 80vh;
+    height: 74vh;
   }
 
 /* landing page  */
