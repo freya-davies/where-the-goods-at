@@ -8,7 +8,7 @@ class ItemList extends React.Component {
     this.state = {}
   }
 
-  componentDidMount() {}
+  componentDidMount() { }
 
   componentWillReceiveProps(newProps) {
     this.setState({
@@ -16,12 +16,10 @@ class ItemList extends React.Component {
     })
   }
 
-  handleClick = e => {}
+  handleClick = e => { }
 
   getSuburbs = item => {
-    // console.log(this.props.items.items)
     return findSuburb(item.lat, item.long).then(data => {
-      console.log(data)
       return data
     })
     // console.log(findSuburb(item.lat, item.long))
@@ -37,59 +35,26 @@ class ItemList extends React.Component {
     // --------------------------
 
     return (
-        <div className='scrollable'>
-          <h2>Listed items: </h2>
-               <div className="row">
-                 {items.map((item, i) => {
-                  return (
-                    <div key={i} className="col-sm-4 container bg-dark-main">
-                      <div className="rounded">
-                        <hr></hr>
-                      <img className="rounded" src={item.img_url} alt={item.item_name} height="80" width="80" />
-                      <h3>{item.item_name}</h3>
-                      <p>{item.description}</p>
-                      {/* <p>{findSuburb(item.lat, item.long)}</p> */}
-                      {/* FREYA - THE BELOW LINE IS WHAT YOU WANT TO UNCOMMENT */}
-                      {/* <p>{this.getSuburbs(item)}</p> */}
-                      <hr></hr>
-                      </div>
-                    </div>
-
-                  )
-                }
-                )}
+      <div className='scrollable'>
+        <h2>Listed items: </h2>
+        <div className="row">
+          <div className="col-centered">
+          {items.map((item, i) => {
+            return (
+              <div className="card" style={{ alignItems: 'center'}} >
+                <img className="card-img-top" src={item.image} alt={item.item_name} style={{ 'MaxWidth': 2 + 'rem'}}/>
+                <div className="card-body">
+                  <h5 className="card-title">{item.item_name}</h5>
+                  <p className="card-text">{item.description}</p>
+                </div>
               </div>
-          
+            )
+          }
+          )}
+        </div>
         </div>
 
-      // <div>
-      //   <div className="container">
-      //     <h2>Listed items: </h2>
-      //       <>
-      //         <div className="row">
-      //           {items.map((item, i) => {
-      //             return (
-      //               <div key={i} className="col-sm-4 container bg-dark-main">
-      //                 <div className="rounded">
-      //                   <hr></hr>
-      //                 <img className="rounded" src={item.img_url} alt={item.item_name} height="80" width="80" />
-      //                 <h3>{item.item_name}</h3>
-      //                 <p>{item.description}</p>
-      //                 {/* <p>{findSuburb(item.lat, item.long)}</p> */}
-      //                 {/* FREYA - THE BELOW LINE IS WHAT YOU WANT TO UNCOMMENT */}
-      //                 {/* <p>{this.getSuburbs(item)}</p> */}
-      //                 <hr></hr>
-      //                 </div>
-      //               </div>
-
-      //             )
-      //           }
-      //           )}
-      //         </div>
-      //       </>
-      //   </div>
-
-      // </div>
+      </div>
     )
   }
 }
