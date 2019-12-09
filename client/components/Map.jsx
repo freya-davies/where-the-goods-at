@@ -100,7 +100,6 @@ class Map extends Component {
   // })
 
   render() {
-
     return (
 
       <div className="">
@@ -155,6 +154,8 @@ class Map extends Component {
                 </GoogleMap>
               </LoadScript>
             }
+   
+        {this.props.auth.auth.isAuthenticated &&
             <div className="row">
               <div className="col">
                 <button onClick={this.toggleAddMode}>{this.state.addMode ? "Stop Adding Items" : "Add Items"}</button>
@@ -163,6 +164,8 @@ class Map extends Component {
                 <button onClick={this.toggleAddForm}>Add</button>
               </div>
             </div>
+                }
+
           </div>
         </div>
       </div>
@@ -170,8 +173,10 @@ class Map extends Component {
   }
 }
 
-const mapStateToProps = () => {
-  return {}
+const mapStateToProps = (auth) => {
+  return {
+    auth
+  }
 }
 
 export default connect(mapStateToProps, { showAddItemModal, updateItemModal })(Map)

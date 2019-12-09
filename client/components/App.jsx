@@ -17,7 +17,7 @@ import ModalConductor from './ModalConductor'
 
 import { fetchPublicItems, fetchPrivateItems } from '../actions/items'
 
-class App extends React.Component {
+export class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -39,6 +39,7 @@ class App extends React.Component {
   }
 
   render() {
+    //console.log(this.props)
     return (
       <>
       { this.props.modals.currentModal && <ModalConductor modal={this.props.modals} /> }
@@ -72,3 +73,4 @@ const mapStateToProps = ({ auth, items, modals, privateItems }) => {
 }
 
 export default connect(mapStateToProps, { fetchPublicItems, fetchPrivateItems })(App)
+//could be mapping dispatch to props

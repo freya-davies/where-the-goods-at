@@ -1,7 +1,7 @@
 import React from "react"
 import { connect } from 'react-redux'
 import { addItem, getCategories, getSeasons } from '../apis/items'
-import { fetchPublicItems } from '../actions/items'
+import { fetchPublicItems, fetchPrivateItems } from '../actions/items'
 import { hideModal } from "../actions/modals"
 
 class AddItemByAddress extends React.Component {
@@ -66,7 +66,10 @@ class AddItemByAddress extends React.Component {
     handleSubmit(e) {
         e.preventDefault()
         addItem(this.state.newItem)
-        fetchPublicItems()
+            .then(res => {
+                if(res == 200) this.props.toggleAddForm()
+                this.props.fetchPublicItems()
+            })
     }
 
     handleCheckbox(e) {
@@ -228,4 +231,4 @@ const mapStateToProps = (auth) => {
     }
 }
 
-export default connect(mapStateToProps, { hideModal })(AddItemByAddress)
+export default connect(mapStateToProps, { hideModal, fetchPublicItems })(AddItemByAddress)

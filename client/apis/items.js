@@ -21,7 +21,7 @@ export function addItem(item) {
                     .then(res => res.statusCode)
             })
     } else {
-        getCoordinates(item.address)
+       return getCoordinates(item.address)
             .then(res => {
                 item.lat = res.body.results[0].geometry.location.lat
                 item.long = res.body.results[0].geometry.location.lng
