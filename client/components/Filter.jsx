@@ -18,7 +18,6 @@ class Filter extends React.Component {
 
   componentDidMount() {
     // Make listed items alphabetical
-    console.log(this.state.items)
     this.sortItems()
   }
 
@@ -27,7 +26,6 @@ class Filter extends React.Component {
     if(this.props.items !== prevProps.items){
       this.setState({items: this.props.items.items})
     }
-    if(!this.state.public && (prevProps.items !== this.props.privateItems)) this.setState({items: this.props.privateItems.privateItems})
   }
 
   handleCategory = e => {
@@ -137,7 +135,6 @@ class Filter extends React.Component {
     // this.props.items.items.sort((a, b) => {
     //   return a.suburb > b.suburb ? 1 : -1
     // })
-    console.log(this.state.items)
     // let itemsArray = this.sortItems(this.state.items, this.state.order)
     // console.log(itemsArray)
 

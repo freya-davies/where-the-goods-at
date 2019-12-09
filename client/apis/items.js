@@ -1,6 +1,5 @@
 import request from 'superagent'
 import { getKey } from './auth'
-import { fetchPublicItems } from '../actions/items'
 import { findSuburb } from '../apis/itemList'
 
 const url = '/api/v1/items/'
@@ -26,19 +25,16 @@ export function addItem(item) {
                 item.lat = res.body.results[0].geometry.location.lat
                 item.long = res.body.results[0].geometry.location.lng
                 delete item.address
-                findSuburb(item.lat, item.long)
-                .then(suburb => {
-                    item.suburb = suburb
-                    console.log('ITEM IS: ', item)
                     return request
                     .post(addItemUrl)
                     .send(item)
                     .then(res => res.statusCode)
                 })
-            })
+            }
+        }
 
-    }
-}
+    
+
 
 function getCoordinates(address) {
 
