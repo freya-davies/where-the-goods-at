@@ -10,6 +10,7 @@ const endUrl = '&key='
 
 export function findSuburb(lat, long) {
 // wanna map through all items and then do the following
+// console.log(lat, long)
   return getSuburb(lat, long)
     .then(item => {
       // item.suburb =  

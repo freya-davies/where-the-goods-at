@@ -2,6 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Map from './Map'
 import ItemList from './ItemList'
+import { isProperty } from '@babel/types'
+import { findSuburb } from '../apis/itemList'
 
 class Filter extends React.Component {
   constructor(props) {
@@ -9,9 +11,17 @@ class Filter extends React.Component {
 
     this.state = {
       items: this.props.items.items,
-      public: true
+      public: true,
+      order: 'default'
     }
   }
+
+  componentDidMount() {
+    // Make listed items alphabetical
+    console.log(this.state.items)
+    this.sortItems()
+  }
+
 
   componentDidUpdate(prevProps){
     if(this.props.items !== prevProps.items){
@@ -38,6 +48,7 @@ class Filter extends React.Component {
         this.setState({
           items: this.props.privateItems.privateItems
         })
+        
       } else {
         this.setState({
           items: this.props.privateItems.privateItems.filter(
@@ -48,43 +59,46 @@ class Filter extends React.Component {
     }
   }
 
-  // ------------------------
-  // FREYA - want this to return either first 5 or last 5 entries
-  // ------------------------
-  handleRecent = e => {
-    if (e.target.value == 'new') {
-      const longness = this.props.items.items.length
-
-      this.setState({
-        items: this.props.items.items.map(item => {
-          if (item.id > longness - 5) {
-            console.log(item)
-            return item
-          }
+  handleSeason = e => {
+    if (this.state.public) {
+      if (e.target.value == 0) {
+        this.setState({
+          items: this.props.items.items
         })
-      })
-    } else if (e.target.value == 'old') {
-      const longness = this.props.items.items.length
-
-      this.setState({
-        items: this.props.items.items.map(item => {
-          if (item.id < 5) {
-            console.log(item)
-            return item
-          } else {
-            return
-          }
+      } else {
+        this.setState({
+          items: this.props.items.items.filter(
+            item => item.season_id === Number(e.target.value)
+          )
         })
-      })
-      console.log(this.state.items)
+      }
     } else {
-      return console.log('Something is broken')
+      if (e.target.value == 0) {
+        this.setState({
+          items: this.props.privateItems.privateItems
+        })
+        
+      } else {
+        this.setState({
+          items: this.props.privateItems.privateItems.filter(
+            item => item.season_id === Number(e.target.value)
+          )
+        })
+      }
     }
   }
 
+
+  // set state and then run sortItems function once state has been set
+  handleRecent = e => {
+    this.setState({
+      order: e.target.value
+    },this.sortItems)
+  }
+
   handleItemDisplay = e => {
-    this.setState({ 
-      public: !this.state.public 
+    this.setState({
+      public: !this.state.public
     }, () => {
       document.getElementById('category-select').value = 0
       if (this.state.public) {
@@ -95,7 +109,40 @@ class Filter extends React.Component {
     })
   }
 
+
+  sortItems() {
+    let {items, order} = this.state
+    // let items = this.state.items
+
+    if (order == 'default') {
+        items.sort((a, b) => {
+          return a.item_name > b.item_name ? 1 : -1
+      }) 
+    } else if (order == 'new') {
+        items.sort((a, b) => {
+          return a.id > b.id ? -1 : 1
+        })
+    } else if (order == 'old') {
+        items.sort((a, b) => {
+          return a.id < b.id ? -1 : 1
+        })
+    }
+    this.setState({items: items})
+  }
+
   render() {
+
+
+    // Make listed items show suburb
+    // this.props.items.items.sort((a, b) => {
+    //   return a.suburb > b.suburb ? 1 : -1
+    // })
+    console.log(this.state.items)
+    // let itemsArray = this.sortItems(this.state.items, this.state.order)
+    // console.log(itemsArray)
+
+
+
     return (
       <div className='row px-2'>
         <div className='col-sm-12 col-md-8'>
@@ -119,10 +166,26 @@ class Filter extends React.Component {
               </label>
             </div>
 
+            {/* Seasons dropdown */}
             <div>
               <label htmlFor='category'>
-                Recently Added - BROKEN BUTTON
+                Season
+                <select name='category' id='category-select' onChange={this.handleSeason}>
+                  <option value='0'>All</option>
+                  <option value='1'>Summer</option>
+                  <option value='2'>Autumn</option>
+                  <option value='3'>Winter</option>
+                  <option value='4'>Spring</option>
+                </select>
+              </label>
+            </div>
+
+            {/* Recently dropdown */}
+            <div>
+              <label htmlFor='category'>
+                Recently Added
                 <select name='category' id='' onChange={this.handleRecent}>
+                  <option value='default'>A-Z</option>
                   <option value='new'>Newest</option>
                   <option value='old'>Oldest </option>
                 </select>
@@ -143,21 +206,6 @@ class Filter extends React.Component {
                 Private
               </label>
             </div>
-
-            {/* <div>
-                        <label htmlFor="category">Suburb - BROKEN BUTTON
-                    <select name="category" id="" onChange={this.handleRecent}> */}
-            {/* what I want this to do is:
-                        - map through suburb names, 
-                        - only show the name if it isn't already showing
-                        - bring back all items in props that include that name */}
-            {/* {this.props.items.items.map((item, i) => {
-                                  return  <option key={i} value={item.item_name}>{item.item_name}</option>
-                                    })
-                                }
-                            </select>
-                        </label>
-                    </div> */}
           </div>
 
           <div className='rounded bg-main'>
