@@ -1,6 +1,6 @@
 import React from 'react'
 
-class LandingPage extends React.Component {
+export class LandingPage extends React.Component {
     constructor() {
         super()
         this.state = {

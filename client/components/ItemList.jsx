@@ -1,25 +1,46 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import { HashRouter as Router, Route, Link } from 'react-router-dom'
-import { findSuburb } from '../apis/itemList'
+import { deleteItem } from '../apis/items'
+import { setCurrentItem } from '../actions/items'
+
 
 class ItemList extends React.Component {
-//   constructor(props) {
-//     super(props)
-//     this.state = {}
-//   }
+  constructor(props) {
+    super(props)
+    this.state = {
+      item: null
+    }
+  }
 
-//   componentDidMount() { }
+  // --------------------
+  //  connecting redux make this break for some reason, please leave comments
+  // --------------------
+  //   constructor(props) {
+  //     super(props)
+  //     this.state = {}
+  //   }
 
-//   componentDidUpdate(newProps) {
-//     console.log(newProps)
-//     this.setState({
-//       items: newProps.items
-//     })
-//     return true
-//   }
+  //   componentDidMount() { }
 
-//   handleClick = e => { }
+  //   componentDidUpdate(newProps) {
+  //     console.log(newProps)
+  //     this.setState({
+  //       items: newProps.items
+  //     })
+  //     return true
+  //   }
+
+  handleDelete = (id) => {
+    alert("Are you sure you would like to delete this item?")
+    deleteItem(id)
+      .then(() => {
+        this.refreshPage()
+      })
+  }
+
+  refreshPage = () => {
+    window.location.reload()
+  }
 
   render() {
     return (
@@ -28,24 +49,36 @@ class ItemList extends React.Component {
         <h3 className="list-heading">Listed Items</h3>
         <div className="row">
           <div className="col-centered">
-          {this.props.items.map((item, i) => {
-            return (
-              <div key={i} className="card" style={{ alignItems: 'center'}} >
-                <img className="card-img-top" src={item.image} alt={item.item_name} style={{ 'MaxWidth': 2 + 'rem'}}/>
-                <div className="card-body">
-                  <h5 className="card-title">{item.item_name}</h5>
-                  <h6><em>{item.suburb}</em></h6>
-                  <p className="card-text">{item.description}</p>
-                  <Link to={`/update/${item.id}`}>
+            {this.props.items.map((item, i) => {
+              return (
+                <div key={i} className="card" style={{ alignItems: 'center' }} >
+                  <div onClick={() => this.props.dispatch(setCurrentItem(item))}>
+                    <img className="card-img-top" src={item.image} alt={item.item_name} style={{ 'MaxWidth': 2 + 'rem' }} />
+                    <div className="card-body">
+                      <h5 className="card-title">{item.item_name}</h5>
+                      <h6><em>{item.suburb}</em></h6>
+                      <p className="card-text">{item.description}</p>
+                    
+                  
+                    {this.props.auth &&
+                    <>
+                    <Link to={`/update/${item.id}`}>
                       <button>Update</button>
-                      </Link>
+                    </Link>
+                    <button onClick={() => this.handleDelete(item.id)}>Delete</button>
+                    </>
+                    }
+                    </div>
+                  </div>
+
                 </div>
-              </div>
-            )
-          }
-          )}
+              )
+            }
+            )}
+          </div>
+
         </div>
-        </div>
+
         </div>
       </div>
     )
@@ -53,5 +86,4 @@ class ItemList extends React.Component {
 }
 
 
-// export default connect()(ItemList)
 export default ItemList

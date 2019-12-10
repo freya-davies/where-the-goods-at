@@ -38,12 +38,11 @@ export class App extends React.Component {
   }
 
   render() {
-    //console.log(this.props)
     return (
       <>
       { this.props.modals.currentModal && <ModalConductor modal={this.props.modals} /> }
       <Router>
-        <Nav />
+        <Nav className='FilterMap' />
             {this.props.items.items.length > 0 &&
               <Route exact path="/" component={Filter} />
             }

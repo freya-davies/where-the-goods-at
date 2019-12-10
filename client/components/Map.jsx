@@ -10,7 +10,7 @@ import { getCategories, getSeasons } from '../apis/items'
 const googleMapStyles = require('../../public/GoogleMapStyles.json')
 
 
-class Map extends Component {
+export class Map extends Component {
 
   constructor(props) {
 
@@ -20,6 +20,7 @@ class Map extends Component {
         lat: -41.2743523,
         lng: 174.735582
       },
+      zoom : 12,
       pins: [],
       key: false,
       addMode: false,
@@ -58,6 +59,16 @@ class Map extends Component {
         return location
       })
     })
+
+    if(this.props.currentItem != newProps.currentItem) {
+      this.setState({
+        center: {
+          lat: newProps.currentItem.lat,
+          lng: newProps.currentItem.long
+        },
+        zoom: 18
+      })
+    }
   }
   toggleAddForm = (e) => {
     this.setState({
@@ -91,7 +102,6 @@ class Map extends Component {
   }
 
   handleIcons = category => {
-    console.log(category)
     return '/images/Avocado.svg'
     //need to read from file and do a string.includes on each
   }
@@ -112,6 +122,7 @@ class Map extends Component {
             {this.state.key && this.props.items &&
               <LoadScript
                 id="script-loader"
+                libraries={["places"]}
                 googleMapsApiKey={process.env.GOOGLE_MAPS}>
                 <GoogleMap
                   id='Traffic-layer-example'
@@ -122,8 +133,8 @@ class Map extends Component {
                   }}
                   options={{
                     styles: googleMapStyles
-                  }}
-                  zoom={12}
+                    }}
+                  zoom={this.state.zoom}
                   center={this.state.center}
                   mapTypeId='satellite'
                   onClick={this.handleAddPin}>
@@ -177,9 +188,10 @@ class Map extends Component {
   }
 }
 
-const mapStateToProps = (auth) => {
+const mapStateToProps = (state) => {
   return {
-    auth
+    auth: state, 
+    currentItem : state.currentItem,
   }
 }
 
