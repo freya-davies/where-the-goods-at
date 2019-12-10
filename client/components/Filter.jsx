@@ -69,7 +69,7 @@ export class Filter extends React.Component {
           )
 
         })
-      })
+      }
       console.log(this.state.items)
     } else {
       if (e.target.value == 0) {
@@ -142,7 +142,7 @@ export class Filter extends React.Component {
   }
 
   render() {
-    let isAuthenticated = this.props.auth.isAuthenticated
+    const isAuthenticated = this.props.auth.isAuthenticated
 
     return (
       <div className='row px-2'>
@@ -237,7 +237,8 @@ export class Filter extends React.Component {
       </div >
     )
   }
-}
+  }
+
 
 const mapStateToProps = ({ auth, items, privateItems }) => {
   return {

@@ -220,7 +220,7 @@ class AddItemByAddress extends React.Component {
                                     )}
                                     </PlacesAutocomplete>   
                                 </div>
-                                    {this.state.showAddressWarning && <p>Please enter a valid address</p>}
+                                    {this.state.showAddressWarning && <p style={{color: 'red'}}>Please enter a valid address</p>}
 
                                 <div className="form-row">
                                     <label>
