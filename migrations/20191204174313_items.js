@@ -5,7 +5,6 @@ exports.up = function(knex) {
     table.string('item_name')
     table.integer('user_id')
     table.integer('category_id')
-    table.string('img_url')
     table.boolean('public')
     table.string('description')
     table.float('long')
@@ -15,7 +14,6 @@ exports.up = function(knex) {
     table.string('comments')
     table.integer('season_id')
     table.integer('quantity')
-    table.bigint('created_at')
     table.binary('image')
   })
 };

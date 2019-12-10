@@ -8,18 +8,15 @@ function addItem(item, db = connection) {
             description: item.description,
             lat: item.lat,
             long: item.long,
-            img_url: item.img_url,
             season_id: item.season,
             quantity: item.quantity,
             rating: item.rating,
             category_id: item.category,
             public: item.public,
             user_id: item.user,
-            created_at: Date.now(),
             image: item.image
         })
 }
-
 
 function getPublicItems(db = connection) {
     return db('items').select().where('public', true)
@@ -59,11 +56,42 @@ function getSeasons(db = connection) {
     return db('season').select()
 }
 
+function getItem(itemId, db=connection) {
+    return db('items').where('id', itemId).first()
+}
+
+function updateItem(id, item, db =  connection) {
+    return db('items')
+    .where('id', id)
+    .update({
+        item_name: item.item_name,
+            description: item.description,
+            lat: item.lat,
+            long: item.long,
+            season_id: item.season,
+            quantity: item.quantity,
+            rating: item.rating,
+            category_id: item.category,
+            public: item.public,
+            user_id: item.user,
+            image: item.image
+    })
+}  
+
+function deleteItem(id, db=connection) {
+    return db('items')
+    .where('id', id)
+    .delete()
+}
+
 module.exports = {
-    addItem,
-    getPublicItems,
-    getPrivateItems,
-    getAllItems,
-    getCategories,
-    getSeasons,
+  addItem,
+  getPublicItems,
+  getPrivateItems,
+  getAllItems,
+  getCategories,
+  getSeasons,
+  getItem,
+  updateItem,
+  deleteItem
 }

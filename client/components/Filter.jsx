@@ -13,9 +13,16 @@ export class Filter extends React.Component {
     }
   }
 
-  componentDidUpdate(prevProps){
-    if(this.props.items !== prevProps.items){
-      this.setState({items: this.props.items.items})
+
+  componentDidMount() {
+    this.sortItems()
+  }
+
+
+  componentDidUpdate(prevProps) {
+    if (this.props.items !== prevProps.items) {
+      this.setState({ items: this.props.items.items })
+
     }
   }
 
@@ -47,39 +54,47 @@ export class Filter extends React.Component {
     }
   }
 
-  // ------------------------
-  // FREYA - want this to return either first 5 or last 5 entries
-  // ------------------------
-  handleRecent = e => {
-    if (e.target.value == 'new') {
-      const longness = this.props.items.items.length
 
-      this.setState({
-        items: this.props.items.items.map(item => {
-          if (item.id > longness - 5) {
-            console.log(item)
-            return item
-          }
+
+  handleSeason = e => {
+    if (this.state.public) {
+      if (e.target.value == 0) {
+        this.setState({
+          items: this.props.items.items
         })
-      })
-    } else if (e.target.value == 'old') {
-      const longness = this.props.items.items.length
+      } else {
+        this.setState({
+          items: this.props.items.items.filter(
+            item => item.season_id === Number(e.target.value) || item.season_id === 5
+          )
 
-      this.setState({
-        items: this.props.items.items.map(item => {
-          if (item.id < 5) {
-            console.log(item)
-            return item
-          } else {
-            return
-          }
         })
       })
       console.log(this.state.items)
     } else {
-      return console.log('Something is broken')
+      if (e.target.value == 0) {
+        this.setState({
+          items: this.props.privateItems.privateItems
+        })
+
+      } else {
+        this.setState({
+          items: this.props.privateItems.privateItems.filter(
+            item => item.season_id === Number(e.target.value) || item.season_id === 5
+          )
+        })
+      }
     }
   }
+
+
+  // set state and then run sortItems function once state has been set
+  handleRecent = e => {
+    this.setState({
+      order: e.target.value
+    }, this.sortItems)
+  }
+
 
   handleItemDisplay = e => {
     this.setState({ 
@@ -92,78 +107,135 @@ export class Filter extends React.Component {
         this.setState({ items: this.props.privateItems.privateItems })
       }
     })
+
+    this.handleToggleHighlight()
+  }
+
+  handleToggleHighlight = () => {
+    if (this.state.public) {
+      document.getElementById('public').classList.remove('highlightViewMode')
+      document.getElementById('private').classList.add('highlightViewMode')
+    } else if (!this.state.public) {
+      document.getElementById('public').classList.add('highlightViewMode')
+      document.getElementById('private').classList.remove('highlightViewMode')
+    }
+  }
+
+  sortItems() {
+    let { items, order } = this.state
+    // is the same as: let items = this.state.items
+
+    if (order == 'default') {
+      items.sort((a, b) => {
+        return a.item_name > b.item_name ? 1 : -1
+      })
+    } else if (order == 'new') {
+      items.sort((a, b) => {
+        return a.id > b.id ? -1 : 1
+      })
+    } else if (order == 'old') {
+      items.sort((a, b) => {
+        return a.id < b.id ? -1 : 1
+      })
+    }
+    this.setState({ items: items })
   }
 
   render() {
+    let isAuthenticated = this.props.auth.isAuthenticated
+
     return (
       <div className='row px-2'>
-        <div className='col-sm-12 col-md-8'>
-          <Map id='MappyMap' items={this.state.items} />
+        <div className='col-sm-12 col-md-12 col-lg-8 mt-3'>
+          <Map items={this.state.items} />
         </div>
 
-        <div className='col-sm-12 col-md-4'>
-          <div id='sort'className='container rounded bg-main mb-3'>
-            <h3 className='display-4'>Sort</h3>
-            <div>
-              <label htmlFor='category'>
-                Category
-                <select name='category' id='category-select' onChange={this.handleCategory}>
-                  <option value='0'>All</option>
-                  <option value='1'>Fruit</option>
-                  <option value='2'>Vegetables</option>
-                  <option value='3'>Herbs</option>
-                  <option value='4'>Flowers</option>
-                  <option value='5'>Other</option>
-                </select>
-              </label>
-            </div>
+        <div className='col-sm-12 col-md-12 col-lg-4 mt-3'>
+          <div className='container rounded bg-main mb-3'>
+            <h3 className="sort-heading">Sort</h3>
 
-            <div>
-              <label htmlFor='category'>
-                Recently Added - BROKEN BUTTON
-                <select name='category' id='' onChange={this.handleRecent}>
-                  <option value='new'>Newest</option>
-                  <option value='old'>Oldest </option>
-                </select>
-              </label>
-            </div>
+            {/* Category dropdown */}
+            <article className="card-group-item">
+              <header className="card-header filter-options">
+                <h6 className="title">Category </h6>
+              </header>
+              <div className="filter-content">
+                <div className="list-group list-group-flush">
+                  <select name='category' id='category-select' onChange={this.handleCategory}>
+                    <option value='0' className="dropdown-item">All</option>
+                    <option value='1' className="dropdown-item">Fruit</option>
+                    <option value='2' className="dropdown-item">Vegetables</option>
+                    <option value='3' className="dropdown-item">Herbs</option>
+                    <option value='4' className="dropdown-item">Flowers</option>
+                    <option value='5' className="dropdown-item">Other</option> */}
+                  </select>
+                </div>
+              </div>
+            </article>
 
-            {/* fix me the toggle */}
-            <div className='custom-control custom-switch'>
-              Public
+            {/* Seasons dropdown */}
+            <article className="card-group-item">
+              <header className="card-header filter-options">
+                <h6 className="title">Season </h6>
+              </header>
+              <div className="filter-content">
+                <div className="list-group list-group-flush">
+                  <select name='category' id='category-select' onChange={this.handleSeason}>
+                    <option value='0'>All</option>
+                    <option value='1'>Summer</option>
+                    <option value='2'>Autumn</option>
+                    <option value='3'>Winter</option>
+                    <option value='4'>Spring</option>
+                  </select>
+                </div>
+              </div>
+            </article>
+
+            {/* Recently dropdown */}
+            <article className="card-group-item">
+              <header className="card-header filter-options">
+                <h6 className="title">Recently Added </h6>
+              </header>
+              <div className="filter-content">
+                <div className="list-group list-group-flush">
+                  <select name='category' id='' onChange={this.handleRecent}>
+                    <option value='default'>A-Z</option>
+                    <option value='new'>Newest</option>
+                    <option value='old'>Oldest </option>
+                  </select>
+                </div>
+              </div>
+            </article>
+
+            {isAuthenticated &&
+              <>
+                <header className="card-header filter-options view-header">
+                  <h6 className="title">View </h6>
+                </header>
+                <div className='custom-control custom-switch'>
+                  Public
               <input
-                type='checkbox'
-                className='custom-control-input'
-                id='customSwitch1'
-                onChange={this.handleItemDisplay}
-                value={this.state.public}
-              />
-              <label className='custom-control-label' htmlFor='customSwitch1'>
-                Private
-              </label>
-            </div>
-
-            {/* <div>
-                        <label htmlFor="category">Suburb - BROKEN BUTTON
-                    <select name="category" id="" onChange={this.handleRecent}> */}
-            {/* what I want this to do is:
-                        - map through suburb names, 
-                        - only show the name if it isn't already showing
-                        - bring back all items in props that include that name */}
-            {/* {this.props.items.items.map((item, i) => {
-                                  return  <option key={i} value={item.item_name}>{item.item_name}</option>
-                                    })
-                                }
-                            </select>
-                        </label>
-                    </div> */}
+                    type='checkbox'
+                    className='custom-control-input'
+                    id='customSwitch1'
+                    onChange={this.handleItemDisplay}
+                    value={this.state.public} />
+                  <label className='custom-control-label' htmlFor='customSwitch1'>
+                    <div className='d-flex'>
+                      <div id='public' className='px-1 highlightViewMode'>Public</div>
+                      <div id='private' className='px-1'>Private</div>
+                    </div>
+                  </label>
+                </div>
+              </>
+            }
           </div>
 
-          <div id='listedItems'className='rounded bg-main'>
-            <ItemList items={this.state.items} />
+          <div className='container rounded bg-main mb-3'>
+            <ItemList items={this.state.items} dispatch={this.props.dispatch} auth={this.props.auth.isAuthenticated} />
           </div>
         </div>
-      </div>
+      </div >
     )
   }
 }
