@@ -20,6 +20,10 @@ export default function modals(state = initialState, action) {
                 currentModal: action.type,
                 item: action.item
             }
+            case 'ADD_ITEM_BY_ADDRESS_MODAL':
+                return {
+                    currentModal: action.type
+                }
         default:
             return state
     }

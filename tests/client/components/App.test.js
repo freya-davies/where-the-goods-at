@@ -3,41 +3,41 @@ import { shallow } from 'enzyme'
 
 import {App} from '../../../client/components/App'
 
-test('Title renders on App', () => {
-  // Arrange
-  const expected = 'Where the goods at'
+// test('Back button renders without errors', () => {
+//   const component = shallow(<Instructions/>);
+//   // console.log(component.debug());
+//   const button = component.find('.home-btns__btn')
+//   expect(button.length).toBe(1)
+  
+// })
 
-  // Act
-  const wrapper = shallow(<App auth={{isAuthenticated: false}}/>)
-  const actual = wrapper.find('h1').text()
-
-  // Debug output
-  // console.log(wrapper.debug())
-
-  // Assert
+test('Map renders on page', () => {
+  const expected = 1
+  const wrapper = shallow(<App items ={{items: []}} modals={{currentModal: true}} auth={{isAuthenticated: false}} fetchPublicItems={()=> {}} />) 
+  //console.log(wrapper.debug());
+  const actual = wrapper.find('.FilterMap').length
   expect(actual).toEqual(expected)
 })
 
-// test('App has some routes when not logged in', () => {
-//   // Arrange
-//   const expected = 5
 
-//   // Act
-//   const wrapper = shallow(<App auth={{isAuthenticated: false}}/>)
-//   const actual = wrapper.find('Route').length
+ test('App has 4 routes when not logged in', () => {
+   // Arrange
+   const expected = 4
 
-//   // Assert
-//   expect(actual).toEqual(expected)
-// })
+   // Act
+   const wrapper = shallow(<App items ={{items: []}}modals={{currentModal: true}} auth={{isAuthenticated: false}} fetchPublicItems={()=> {}} />)
+   //console.log(wrapper.debug())
+   const actual = wrapper.find('Route').length
 
-// test('App has one less route when logged in', () => {
-//   // Arrange
-//   const expected = 4
+   // Assert
+   expect(actual).toEqual(expected)
+ })
 
-//   // Act
-//   const wrapper = shallow(<App auth={{isAuthenticated: true}}/>)
-//   const actual = wrapper.find('Route').length
-
-//   // Assert
-//   expect(actual).toEqual(expected)
-// })
+ test('App has 5 routes when logged in', () => {
+   
+   const expected = 5
+   const wrapper = shallow(<App items ={{items: []}}modals={{currentModal: true}} auth={{isAuthenticated: true}} fetchPublicItems={()=> {}} /> )
+  //0 console.log(wrapper.debug())
+   const actual = wrapper.find('Route').length
+    expect(actual).toEqual(expected)
+ })

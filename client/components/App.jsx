@@ -5,19 +5,18 @@ import { connect } from 'react-redux'
 import Login from './Login'
 import Register from './Register'
 import Nav from './Nav'
-import Map from './Map'
 import Items from './Items'      
 import Filter from './Filter'
 import PopUp from './PopUp'
-import ItemList from './ItemList'
 import LandingPage from './LandingPage'
 import ModalConductor from './ModalConductor'
 
 
 
 import { fetchPublicItems, fetchPrivateItems } from '../actions/items'
+import UpdateItem from './UpdateItem'
 
-class App extends React.Component {
+export class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -28,12 +27,12 @@ class App extends React.Component {
     this.props.fetchPublicItems()
   }
 
-  componentDidUpdate(prevProps){
-    if(this.props.auth.isAuthenticated){
-      if(this.props.privateItems === prevProps.privateItems){
+  componentDidUpdate(prevProps) {
+    if (this.props.auth.isAuthenticated) {
+      if (this.props.privateItems === prevProps.privateItems) {
         this.props.fetchPrivateItems(this.props.auth.user.user_name)
       }
-    }else if(!this.props.auth.isAuthenticated){
+    } else if (!this.props.auth.isAuthenticated) {
       //when logging out remove privateItems state from redux state
     }
   }
@@ -43,17 +42,22 @@ class App extends React.Component {
       <>
       { this.props.modals.currentModal && <ModalConductor modal={this.props.modals} /> }
       <Router>
-        <Nav />
+        <Nav className='FilterMap' />
             {this.props.items.items.length > 0 &&
               <Route exact path="/" component={Filter} />
             }
+            {!(localStorage.getItem('UrbanForagerRemembersMe')) &&
             <Route exact path="/" component={LandingPage} />
+            }
 
             <Route exact path="/" component={PopUp} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
-              {this.props.auth.isAuthenticated &&
-                <Route path='/add' component={Items} />} 
+            {this.props.auth.isAuthenticated &&
+            <>
+              <Route path='/add' component={Items} />
+              <Route path="/update/:id" component={UpdateItem} />
+            </>}
       </Router>
       </>
     )
@@ -70,3 +74,4 @@ const mapStateToProps = ({ auth, items, modals, privateItems }) => {
 }
 
 export default connect(mapStateToProps, { fetchPublicItems, fetchPrivateItems })(App)
+//could be mapping dispatch to props

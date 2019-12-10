@@ -1,102 +1,89 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { findSuburb } from '../apis/itemList'
+import { HashRouter as Router, Route, Link } from 'react-router-dom'
+import { deleteItem } from '../apis/items'
+import { setCurrentItem } from '../actions/items'
+
 
 class ItemList extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      item: null
+    }
   }
 
-  componentDidMount() {}
+  // --------------------
+  //  connecting redux make this break for some reason, please leave comments
+  // --------------------
+  //   constructor(props) {
+  //     super(props)
+  //     this.state = {}
+  //   }
 
-  componentWillReceiveProps(newProps) {
-    this.setState({
-      items: newProps
-    })
+  //   componentDidMount() { }
+
+  //   componentDidUpdate(newProps) {
+  //     console.log(newProps)
+  //     this.setState({
+  //       items: newProps.items
+  //     })
+  //     return true
+  //   }
+
+  handleDelete = (id) => {
+    alert("Are you sure you would like to delete this item?")
+    deleteItem(id)
+      .then(() => {
+        this.refreshPage()
+      })
   }
 
-  handleClick = e => {}
-
-  getSuburbs = item => {
-    // console.log(this.props.items.items)
-    return findSuburb(item.lat, item.long).then(data => {
-      console.log(data)
-      return data
-    })
-    // console.log(findSuburb(item.lat, item.long))
+  refreshPage = () => {
+    window.location.reload()
   }
-  // findSuburb(this.props.items.items.lat, this.props.items.items.long)
 
   render() {
-    console.log(this)
-    const items = this.props.items
-    // console.log(this.props.items.items)
-
-    // --------------------------
-    // WANT TO ADD IN LOCATION/SUBURB, need to change lat and long into street adderess
-    // --------------------------
-
     return (
-        <div className='scrollable'>
-          <h2>Listed items: </h2>
-               <div className="row">
-                 {items.map((item, i) => {
-                  return (
-                    <div key={i} className="col-sm-4 container bg-dark-main">
-                      <div className="rounded">
-                        <hr></hr>
-                      <img className="rounded" src={item.img_url} alt={item.item_name} height="80" width="80" />
-                      <h3>{item.item_name}</h3>
-                      <p>{item.description}</p>
-                      {/* <p>{findSuburb(item.lat, item.long)}</p> */}
-                      {/* FREYA - THE BELOW LINE IS WHAT YOU WANT TO UNCOMMENT */}
-                      {/* <p>{this.getSuburbs(item)}</p> */}
-                      <hr></hr>
-                      </div>
-                    </div>
+      <div className='scrollable'>
+        <div className='container rounded bg-main mb-3'>
+        <h3 className="list-heading">Listed Items</h3>
+        <div className="row">
+          <div className="col-centered">
 
-                  )
-                }
-                )}
-              </div>
-          
+            {this.props.items.map((item, i) => {
+              return (
+                <div key={i} className="card" style={{ alignItems: 'center' }} >
+                  <div onClick={() => this.props.dispatch(setCurrentItem(item))}>
+                    <img className="card-img-top" src={item.image} alt={item.item_name} style={{ 'MaxWidth': 2 + 'rem' }} />
+                    <div className="card-body">
+                      <h5 className="card-title">{item.item_name}</h5>
+                      <h6><em>{item.suburb}</em></h6>
+                      <p className="card-text">{item.description}</p>
+                    
+                  
+                    {this.props.auth &&
+                    <>
+                    <Link to={`/update/${item.id}`}>
+                      <button>Update</button>
+                    </Link>
+                    <button onClick={() => this.handleDelete(item.id)}>Delete</button>
+                    </>
+                    }
+                    </div>
+                  </div>
+                </div>
+              )
+            }
+            )}
+          </div>
+
         </div>
 
-      // <div>
-      //   <div className="container">
-      //     <h2>Listed items: </h2>
-      //       <>
-      //         <div className="row">
-      //           {items.map((item, i) => {
-      //             return (
-      //               <div key={i} className="col-sm-4 container bg-dark-main">
-      //                 <div className="rounded">
-      //                   <hr></hr>
-      //                 <img className="rounded" src={item.img_url} alt={item.item_name} height="80" width="80" />
-      //                 <h3>{item.item_name}</h3>
-      //                 <p>{item.description}</p>
-      //                 {/* <p>{findSuburb(item.lat, item.long)}</p> */}
-      //                 {/* FREYA - THE BELOW LINE IS WHAT YOU WANT TO UNCOMMENT */}
-      //                 {/* <p>{this.getSuburbs(item)}</p> */}
-      //                 <hr></hr>
-      //                 </div>
-      //               </div>
-
-      //             )
-      //           }
-      //           )}
-      //         </div>
-      //       </>
-      //   </div>
-
-      // </div>
+        </div>
+      </div>
     )
   }
 }
 
-const mapStateToProps = () => {
-  return {}
-}
 
-export default connect(mapStateToProps)(ItemList)
+export default ItemList

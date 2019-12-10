@@ -1,6 +1,6 @@
 import request from 'superagent'
 import { getKey } from './auth'
-import { fetchPublicItems } from '../actions/items'
+import { findSuburb } from '../apis/itemList'
 
 const url = '/api/v1/items/'
 
@@ -11,24 +11,29 @@ const endUrl = '&key='
 
 export function addItem(item) {
     if (item.lat && item.long) {
-        return request
-        .post(addItemUrl)
-        .send(item)
-        .then(res => res.statusCode)
-    } else {
-        getCoordinates(item.address)
-            .then(res => {
-    
-                item.lat = res.body.results[0].geometry.location.lat
-                item.long = res.body.results[0].geometry.location.lng
-                delete item.address
                 return request
                     .post(addItemUrl)
                     .send(item)
                     .then(res => res.statusCode)
+    } else {
+        return getCoordinates(item.address)
+            .then(res => {
+                item.lat = res.body.results[0].geometry.location.lat
+                item.long = res.body.results[0].geometry.location.lng
+                delete item.address
+               return findSuburb(item.lat, item.long)
+                .then(suburb => {
+                    item.suburb = suburb
+                    return request
+                    .post(addItemUrl)
+                    .send(item)
+                    .then(res => res.statusCode)
+                })
             })
-    }
-}
+
+            }
+        }
+
 
 function getCoordinates(address) {
 
@@ -42,29 +47,48 @@ function getCoordinates(address) {
     })
 }
 
-export function getPublicItems () {
-    
-    return request
-    .get(url)
-    .then(res => res.body)
-}
+export function getPublicItems() {
 
+    return request
+        .get(url)
+        .then(res => res.body)
+}
 
 export function getPrivateItems(user) {
-  return request
-  .get(url + `user/${user}`)
-  .then(res => res.body)
+    return request
+        .get(url + `user/${user}`)
+        .then(res => res.body)
 
 }
 
-export function getCategories(){
+export function getCategories() {
     return request
         .get(url + 'categories')
         .then(res => res.body)
 }
 
-export function getSeasons(){
+export function getSeasons() {
     return request
         .get(url + 'seasons')
         .then(res => res.body)
+}
+
+export function getItem(id){
+    return request
+    .get(url + `item/${id}`)
+    .then(res => res.body)
+}
+
+export function updateItem(item) {
+    return request
+    .patch(`${url}update/${item.id}`)
+    .send(item)
+    .then(res => res.body)
+}
+
+export function deleteItem(id) {
+    console.log(id)
+    return request
+    .delete(`${url}delete/${id}`)
+    .then(res => {return res.body})
 }

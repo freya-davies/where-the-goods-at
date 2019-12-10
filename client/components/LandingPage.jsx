@@ -1,6 +1,6 @@
 import React from 'react'
 
-class LandingPage extends React.Component {
+export class LandingPage extends React.Component {
     constructor() {
         super()
         this.state = {
@@ -27,7 +27,13 @@ class LandingPage extends React.Component {
             .add({
                 targets: '.ml8 .letters-left',
                 scale: [0, 1],
-                duration: 1200,
+                duration: 1500,
+                offset: '-=550'
+            })
+            .add({
+                targets: '.ml8 .sub-title',
+                scale: [0, 1],
+                duration: 1500,
                 offset: '-=550'
             })
             .add({
@@ -59,20 +65,29 @@ class LandingPage extends React.Component {
                 {this.state.showLandingPage &&
                     <div className="modal" style={{ display: 'block' }} data-backdrop="static" tabIndex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div className="full-screen flex-container-center">
+                            <div className='row center-animation'>
+                                <div className='col-8' onClick={this.closeLandingPage}>
                             <h1 className="ml8">
                                 <span className="letters-container">
-                                    <span className="letters letters-left">Forage &amp; Found</span>
+                                    <span className="letters letters-left">Foraged &amp; Found</span>
+                                    <br></br>
+                                    <span className='sub-title'>
+                                        Click to Enter!
+                                    </span>
                                 </span>
                                 <span className="circle circle-white"></span>
                                 <span className="circle circle-dark"></span>
                                 <span className="circle circle-container"><span className="circle circle-dark-dashed"></span></span>
                             </h1>
-                            <br></br>
+                            </div>
+                            </div>
+                            <div className='row center-button'>
                         
                         <div className="landing-button">
-                            <button type="button" className="close close-landing" data-dismiss="modal" aria-label="Close" onClick={this.closeLandingPage}>
+                            <button type="button" className="close close-landing" data-dismiss="modal" aria-label="Close" onClick={this.closeLandingPage}> Click to enter!
                                 <div aria-hidden="true">&times;</div>
                             </button>
+                            </div>
                         </div>
                     </div>
                     </div>
