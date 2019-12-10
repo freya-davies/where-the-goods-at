@@ -116,6 +116,7 @@ class Map extends Component {
             {this.state.key && this.props.items &&
               <LoadScript
                 id="script-loader"
+                libraries={["places"]}
                 googleMapsApiKey={process.env.GOOGLE_MAPS}>
                 <GoogleMap
                   id='Traffic-layer-example'

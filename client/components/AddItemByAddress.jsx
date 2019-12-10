@@ -1,5 +1,10 @@
 import React from "react"
 import { connect } from 'react-redux'
+import PlacesAutocomplete, {
+    geocodeByAddress,
+    getLatLng,
+  } from 'react-places-autocomplete';
+
 import { addItem, getCategories, getSeasons } from '../apis/items'
 import { fetchPublicItems, fetchPrivateItems } from '../actions/items'
 import { hideModal } from "../actions/modals"
@@ -27,6 +32,7 @@ class AddItemByAddress extends React.Component {
         this.handleChange = this.handleChange.bind(this)
         this.handleImageUpload = this.handleImageUpload.bind(this)
         this.handleCheckbox = this.handleCheckbox.bind(this)
+        this.handleAddressSuggestion = this.handleAddressSuggestion.bind(this)
     }
 
     componentDidMount() {
@@ -89,6 +95,32 @@ class AddItemByAddress extends React.Component {
         this.props.hideModal()
     }
 
+    handleAddress = e => {
+        this.setState({
+            newItem: {
+                ...this.state.newItem,
+                address: e
+            }
+        })
+    }
+
+    handleAddressSuggestion(suggestion) {
+        this.setState({
+            newItem: {
+                ...this.state.newItem,
+                address: suggestion
+            }
+        })
+    }
+    
+    // validateAddress() {
+    //     //call in handleSubmit
+    //     geocodeByAddress(this.state.newItem.address)
+    //         .then(results => getLatLng(results[0]))
+    //         .then(latLng => console.log('Success', latLng))
+    //         .catch(error => console.error('Error', error));
+    // }
+
     render() {
         return (
             <div
@@ -136,16 +168,62 @@ class AddItemByAddress extends React.Component {
                                     </div>
                                 </div>
                                 <div className="form-row">
-                                    <label>
-                                        Address
-                                            <input
-                                            required
-                                            type='text'
-                                            name='address'
-                                            className="form-control"
-                                            onChange={this.handleChange}
-                                        />
-                                    </label>
+                                    <PlacesAutocomplete
+                                        value={this.state.newItem.address}
+                                        name='address'
+                                        onChange={this.handleAddress}
+                                        onSelect={this.handleSelect}
+                                        searchOptions={{
+                                            location: new google.maps.LatLng(-41.2743523, 174.735582),
+                                            radius: 1000,
+                                            types: ['address']
+                                        }}
+                                    >
+                                        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+                                        <label>
+                                            Address
+                                                {/* <input
+                                                required
+                                                type='text'
+                                                name='address'
+                                                className="form-control"
+                                                onChange={this.handleChange}
+                                                /> */}
+                                                <input
+                                                required
+                                                type='text'
+                                                name='address'
+                                                {...getInputProps({
+                                                    placeholder: 'Search Places ...',
+                                                    className: 'form-control location-search-input',
+                                                })}
+                                                />
+                                                <div className="autocomplete-dropdown-container">
+                                                {loading && <div>Loading...</div>}
+                                                {suggestions.map(suggestion => {
+                                                    const className = suggestion.active
+                                                    ? 'suggestion-item--active'
+                                                    : 'suggestion-item';
+                                                    // inline style for demonstration purpose
+                                                    const style = suggestion.active
+                                                    ? { backgroundColor: '#fafafa', cursor: 'pointer' }
+                                                    : { backgroundColor: '#ffffff', cursor: 'pointer' };
+                                                    return (
+                                                    <div
+                                                        {...getSuggestionItemProps(suggestion, {
+                                                        className,
+                                                        style,
+                                                        })}
+                                                        onClick={() => this.handleAddressSuggestion(suggestion.description)}
+                                                    >
+                                                        <span>{suggestion.description}</span>
+                                                    </div>
+                                                    );
+                                                })}
+                                                </div>
+                                        </label>
+                                    )}
+                                    </PlacesAutocomplete>   
                                 </div>
                                 <div className="form-row">
                                     <label>
