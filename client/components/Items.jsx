@@ -26,7 +26,6 @@ class AddItemForm extends React.Component {
     this.handleImageUpload = this.handleImageUpload.bind(this)
     this.handleCheckbox = this.handleCheckbox.bind(this)
 
-
   }
 
   componentDidMount() {
