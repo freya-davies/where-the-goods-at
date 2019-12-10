@@ -207,7 +207,6 @@ export class Filter extends React.Component {
               </div>
             </article>
 
-
             {isAuthenticated &&
               <>
                 <header className="card-header filter-options view-header">
