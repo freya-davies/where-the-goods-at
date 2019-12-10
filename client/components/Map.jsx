@@ -122,6 +122,7 @@ class Map extends Component {
                   mapContainerStyle={{
                     height: "800px",
                     width: "1200px",
+                    borderRadius: ".25rem"
                   }}
                   options={{
                     styles: googleMapStyles
@@ -162,10 +163,10 @@ class Map extends Component {
         {this.props.auth.auth.isAuthenticated &&
             <div className="addItemContainer">
               <div className="addPinButton">
-                <button onClick={this.toggleAddMode}>{this.state.addMode ? "Stop Adding Items" : "Add Item by Pin"}</button>
+                <button type="button" class="btn btn-light " onClick={this.toggleAddMode}>{this.state.addMode ? "Stop Adding Items" : "Add Item by Pin"}</button>
               </div>
               <div className="addPinButton">
-                <button onClick={this.toggleAddForm}>Add Item by Address</button>
+                <button type="button" class="btn btn-light" onClick={this.toggleAddForm}>Add Item by Address</button>
               </div>
             </div>
                 }
