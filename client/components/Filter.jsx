@@ -26,6 +26,7 @@ export class Filter extends React.Component {
     }
   }
 
+
   handleCategory = e => {
     if (this.state.public) {
       if (e.target.value == 0) {
@@ -53,7 +54,6 @@ export class Filter extends React.Component {
       }
     }
   }
-
 
 
   handleSeason = e => {
@@ -88,7 +88,6 @@ export class Filter extends React.Component {
   }
 
 
-  // set state and then run sortItems function once state has been set
   handleRecent = e => {
     this.setState({
       order: e.target.value
@@ -97,8 +96,8 @@ export class Filter extends React.Component {
 
 
   handleItemDisplay = e => {
-    this.setState({ 
-      public: !this.state.public 
+    this.setState({
+      public: !this.state.public
     }, () => {
       document.getElementById('category-select').value = 0
       if (this.state.public) {
@@ -107,9 +106,9 @@ export class Filter extends React.Component {
         this.setState({ items: this.props.privateItems.privateItems })
       }
     })
-
     this.handleToggleHighlight()
   }
+
 
   handleToggleHighlight = () => {
     if (this.state.public) {
@@ -120,6 +119,7 @@ export class Filter extends React.Component {
       document.getElementById('private').classList.remove('highlightViewMode')
     }
   }
+
 
   sortItems() {
     let { items, order } = this.state
@@ -140,6 +140,7 @@ export class Filter extends React.Component {
     }
     this.setState({ items: items })
   }
+
 
   render() {
     const isAuthenticated = this.props.auth.isAuthenticated
@@ -167,7 +168,7 @@ export class Filter extends React.Component {
                     <option value='2' className="dropdown-item">Vegetables</option>
                     <option value='3' className="dropdown-item">Herbs</option>
                     <option value='4' className="dropdown-item">Flowers</option>
-                    <option value='5' className="dropdown-item">Other</option> */}
+                    <option value='5' className="dropdown-item">Other</option>
                   </select>
                 </div>
               </div>
@@ -213,7 +214,7 @@ export class Filter extends React.Component {
                   <h6 className="title">View </h6>
                 </header>
                 <div className='custom-control custom-switch'>
-              <input
+                  <input
                     type='checkbox'
                     className='custom-control-input'
                     id='customSwitch1'
@@ -237,7 +238,7 @@ export class Filter extends React.Component {
       </div >
     )
   }
-  }
+}
 
 
 const mapStateToProps = ({ auth, items, privateItems }) => {
