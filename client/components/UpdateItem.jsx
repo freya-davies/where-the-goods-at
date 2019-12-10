@@ -18,7 +18,7 @@ class UpdateItem extends React.Component {
             .then(data => {
                 this.setState({
                     item: data
-                }, () => console.log(this.state.item))
+                })
             })
 
         getCategories()
@@ -84,13 +84,13 @@ class UpdateItem extends React.Component {
     }
 
     handleSubmit = (e) => {
-        console.log("stuff")
+        console.log(this.state.item)
         e.preventDefault()
         updateItem(this.state.item)
-            .then((thing) => {console.log(thing)
-            this.setState({
-                redirect: true
-            })})
+            .then(
+                this.setState({
+                    redirect: true
+                }))
     }
 
     handleChange = (e) => {
@@ -109,6 +109,13 @@ class UpdateItem extends React.Component {
                     <div className="updateItemForm">
                         {this.state.redirect && <Redirect to='/' />}
                         <form onSubmit={this.handleSubmit}>
+                            <br></br>
+                            <label for="item_name">Item Name: </label>
+                            <input name="item_name" value={this.state.item.item_name} onChange={this.handleChange} />
+                            <br></br>
+                            <label for="description">Description: </label>
+                            <textarea name="description" value={this.state.item.description} onChange={this.handleChange} />
+                            <br></br>
                             <label for="image">Image</label>
                             <input
                                 type="file"
@@ -117,14 +124,6 @@ class UpdateItem extends React.Component {
                                 onChange={this.handleImageUpload}
                             />
                             <br></br>
-                            <label for="item_name">Item Name: </label>
-                            <input name="item_name" value={this.state.item.item_name} onChange={this.handleChange} />
-                            <br></br>
-
-                            <label for="description">Description: </label>
-                            <textarea name="description" value={this.state.item.description} onChange={this.handleChange} />
-                            <br></br>
-
                             <label for="public">Public: </label>
                             <input type="checkbox" name="public" checked={this.state.item.public} onClick={this.handleClick} />
                             <br></br>
