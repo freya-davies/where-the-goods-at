@@ -81,4 +81,10 @@ router.get('/seasons', (req, res) => {
 })
 
 
+router.delete('/delete/:id', (req,res) => {
+    db.deleteItem(req.params.id)
+    .then(res.sendStatus(200))
+})
+
+
 module.exports = router

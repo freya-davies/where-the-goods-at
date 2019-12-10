@@ -66,6 +66,12 @@ function updateItem(id, item, db =  connection) {
     .update(item)
 }  
 
+function deleteItem(id, db=connection) {
+    return db('items')
+    .where('id', id)
+    .delete()
+}
+
 module.exports = {
   addItem,
   getPublicItems,
@@ -75,4 +81,5 @@ module.exports = {
   getSeasons,
   getItem,
   updateItem,
+  deleteItem
 }

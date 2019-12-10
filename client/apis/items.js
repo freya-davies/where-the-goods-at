@@ -85,3 +85,10 @@ export function updateItem(item) {
     .send(item)
     .then(res => res.body)
 }
+
+export function deleteItem(id) {
+    console.log(id)
+    return request
+    .delete(`${url}delete/${id}`)
+    .then(res => {return res.body})
+}
