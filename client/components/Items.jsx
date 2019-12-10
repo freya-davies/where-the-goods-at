@@ -172,7 +172,6 @@ class AddItemForm extends React.Component {
               accept="image/*"
               onChange={this.handleImageUpload}
             />
-            {/* <input ref={(ref) => { this.uploadInput = ref; }} type="file" /> */}
           </label>
           <input type='submit' value='Submit' />
         </form>

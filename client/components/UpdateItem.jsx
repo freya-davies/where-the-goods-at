@@ -1,5 +1,6 @@
 import React from "react"
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import { getItem, getCategories, getSeasons, updateItem } from '../apis/items'
 
 class UpdateItem extends React.Component {
@@ -8,6 +9,7 @@ class UpdateItem extends React.Component {
         super(props)
         this.state = {
             item: null,
+            redirect: false,
         }
     }
 
@@ -58,7 +60,6 @@ class UpdateItem extends React.Component {
         })
     }
 
-
     getSeasonName() {
         let season = this.state.seasonData.find(season => {
             return season.id == this.state.item.season_id
@@ -83,9 +84,15 @@ class UpdateItem extends React.Component {
     }
 
     handleSubmit = (e) => {
+        console.log("stuff")
         e.preventDefault()
         updateItem(this.state.item)
+            .then((thing) => {console.log(thing)
+            this.setState({
+                redirect: true
+            })})
     }
+
     handleChange = (e) => {
         this.setState({
             item: {
@@ -96,13 +103,11 @@ class UpdateItem extends React.Component {
     }
 
     render() {
-        console.log(this.state.item)
         return (
             <div>
                 {this.state.item != null &&
                     <div className="updateItemForm">
-                        {/* <img src={this.state.item.img_url} />  */}
-
+                        {this.state.redirect && <Redirect to='/' />}
                         <form onSubmit={this.handleSubmit}>
                             <label for="image">Image</label>
                             <input
@@ -123,7 +128,6 @@ class UpdateItem extends React.Component {
                             <label for="public">Public: </label>
                             <input type="checkbox" name="public" checked={this.state.item.public} onClick={this.handleClick} />
                             <br></br>
-
 
                             <label for="category">Category: </label>
                             {this.state.categoryData &&
@@ -155,7 +159,6 @@ class UpdateItem extends React.Component {
                             <br></br>
                             <button type='submit' value='Submit'>Update Item</button>
                         </form>
-
                     </div>
                 }
             </div>

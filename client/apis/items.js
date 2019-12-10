@@ -43,18 +43,15 @@ function getCoordinates(address) {
 }
 
 export function getPublicItems () {
-    
     return request
     .get(url)
     .then(res => res.body)
 }
 
-
 export function getPrivateItems(user) {
   return request
   .get(url + `user/${user}`)
   .then(res => res.body)
-
 }
 
 export function getCategories(){
@@ -70,14 +67,12 @@ export function getSeasons(){
 }
 
 export function getItem(id){
-
     return request
     .get(url + `item/${id}`)
     .then(res => res.body)
 }
 
 export function updateItem(item) {
-    console.log(item)
     return request
     .patch(`${url}update/${item.id}`)
     .send(item)
