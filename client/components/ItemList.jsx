@@ -37,7 +37,7 @@ class ItemList extends React.Component {
                   <h6><em>{item.suburb}</em></h6>
                   <p className="card-text">{item.description}</p>
                   <Link to={`/update/${item.id}`}>
-                      <button>Update</button>
+                  <button type="button" className="btn btn-light list-button"> Update</button>
                       </Link>
                 </div>
               </div>

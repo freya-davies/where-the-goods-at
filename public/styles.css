@@ -100,8 +100,13 @@
     background-color: rgb(223, 215, 203);
   }
 
+  .list-button {
+    background-color: #F3BD06;
+  }
+
 
   .card-img-top {
+  margin-top: 1rem;
   width: 60%;
   }
 
