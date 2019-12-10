@@ -18,7 +18,6 @@ function addItem(item, db = connection) {
         })
 }
 
-
 function getPublicItems(db = connection) {
     return db('items').select().where('public', true)
         .then(items => {
@@ -57,11 +56,23 @@ function getSeasons(db = connection) {
     return db('season').select()
 }
 
+function getItem(itemId, db=connection) {
+    return db('items').where('id', itemId).first()
+}
+
+function updateItem(id, item, db =  connection) {
+    return db('items')
+    .where('id', id)
+    .update(item)
+}  
+
 module.exports = {
-    addItem,
-    getPublicItems,
-    getPrivateItems,
-    getAllItems,
-    getCategories,
-    getSeasons,
+  addItem,
+  getPublicItems,
+  getPrivateItems,
+  getAllItems,
+  getCategories,
+  getSeasons,
+  getItem,
+  updateItem,
 }

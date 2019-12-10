@@ -54,7 +54,6 @@ export function getPublicItems() {
         .then(res => res.body)
 }
 
-
 export function getPrivateItems(user) {
     return request
         .get(url + `user/${user}`)
@@ -72,4 +71,17 @@ export function getSeasons() {
     return request
         .get(url + 'seasons')
         .then(res => res.body)
+}
+
+export function getItem(id){
+    return request
+    .get(url + `item/${id}`)
+    .then(res => res.body)
+}
+
+export function updateItem(item) {
+    return request
+    .patch(`${url}update/${item.id}`)
+    .send(item)
+    .then(res => res.body)
 }
