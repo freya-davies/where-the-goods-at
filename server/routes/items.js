@@ -16,11 +16,7 @@ router.post('/add', (req, res) => {
 
 // get public items and users items
 
-
 router.get('/all', (req, res) => {
-
-    //check console to see structure of object
-
     let userId = req.body.id || 1
     db.getAllItems(userId)
         .then(items => {
@@ -29,7 +25,6 @@ router.get('/all', (req, res) => {
 })
 
 // get single item
-
 router.get('/item/:id', (req, res) => {
     let { id } = req.params
     db.getItem(id)
@@ -39,11 +34,8 @@ router.get('/item/:id', (req, res) => {
 })
 
 // update single item
-
 router.patch('/update/:id', (req, res) => {
     let item = req.body
-    console.log(item)
-
     db.updateItem(req.params.id, item).then(items => {
         res.json(items)
     })
@@ -80,10 +72,10 @@ router.get('/seasons', (req, res) => {
         .then(data => res.json(data))
 })
 
-
-router.delete('/delete/:id', (req,res) => {
+//delete single item
+router.delete('/delete/:id', (req, res) => {
     db.deleteItem(req.params.id)
-    .then(res.sendStatus(200))
+        .then(res.sendStatus(200))
 })
 
 

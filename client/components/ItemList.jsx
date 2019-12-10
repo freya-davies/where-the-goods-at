@@ -34,7 +34,6 @@ class ItemList extends React.Component {
   }
 
   render() {
-    console.log(this.props)
     return (
       <div className='scrollable'>
         <h2>Listed items: </h2>
@@ -48,14 +47,14 @@ class ItemList extends React.Component {
                     <h5 className="card-title">{item.item_name}</h5>
                     <h6><em>{item.suburb}</em></h6>
                     <p className="card-text">{item.description}</p>
-                  
+
                     {this.props.auth &&
-                    <>
-                    <Link to={`/update/${item.id}`}>
-                      <button>Update</button>
-                    </Link>
-                    <button onClick={() => this.handleDelete(item.id)}>Delete</button>
-                    </>
+                      <>
+                        <Link to={`/update/${item.id}`}>
+                          <button>Update</button>
+                        </Link>
+                        <button onClick={() => this.handleDelete(item.id)}>Delete</button>
+                      </>
                     }
                   </div>
                 </div>
