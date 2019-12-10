@@ -31,12 +31,11 @@ class InfoModal extends React.Component {
                 [e.target.name]: e.target.value
             }
         })
-        
+
     }
 
     handleSubmit(e) {
         e.preventDefault()
-        console.log(this.state.newItem)
         addItem(this.state.newItem)
         fetchPublicItems()
     }
@@ -56,9 +55,6 @@ class InfoModal extends React.Component {
 
 
     render() {
-
-        console.log(this.props.location)
-
         return (
             <div className="modal" id="exampleModalCenter" style={{ display: "block" }} tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div className="modal-dialog modal-dialog-centered" role="document">
@@ -67,8 +63,8 @@ class InfoModal extends React.Component {
                             <h5 className="modal-title" id="exampleModalLongTitle">Modal title</h5>
                         </div>
                         <div className="modal-body">
-                            
-                            
+
+
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={this.closeModal}>Close</button>

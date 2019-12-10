@@ -12,16 +12,39 @@ router.post('/add', (req, res) => {
             db.addItem(req.body)
                 .then(res.sendStatus(200))
         })
-
-
-    
 })
 
 // get public items and users items
+
+
 router.get('/all', (req, res) => {
-    let userId = req.body.id
+
+    //check console to see structure of object
+
+    let userId = req.body.id || 1
     db.getAllItems(userId)
-    .then(items => {
+        .then(items => {
+            res.json(items)
+        })
+})
+
+// get single item
+
+router.get('/item/:id', (req, res) => {
+    let { id } = req.params
+    db.getItem(id)
+        .then(item => {
+            res.json(item)
+        })
+})
+
+// update single item
+
+router.patch('/update/:id', (req, res) => {
+    let item = req.body
+    console.log(item)
+
+    db.updateItem(req.params.id, item).then(items => {
         res.json(items)
     })
 })
@@ -29,9 +52,9 @@ router.get('/all', (req, res) => {
 // get public items
 router.get('/', (req, res) => {
     db.getPublicItems()
-    .then(items => {
-        res.json(items)
-    })
+        .then(items => {
+            res.json(items)
+        })
 })
 
 // get users private items
@@ -39,10 +62,10 @@ router.get('/user/:name', (req, res) => {
     dbUser.getUserByUsername(req.params.name)
         .then(userId => {
             db.getPrivateItems(userId.id)
-            .then(items => {
-                res.json(items)
-            })
-    })
+                .then(items => {
+                    res.json(items)
+                })
+        })
 })
 
 //get all categoies

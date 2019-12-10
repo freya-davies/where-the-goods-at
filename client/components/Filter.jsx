@@ -19,9 +19,9 @@ class Filter extends React.Component {
   }
 
 
-  componentDidUpdate(prevProps){
-    if(this.props.items !== prevProps.items){
-      this.setState({items: this.props.items.items})
+  componentDidUpdate(prevProps) {
+    if (this.props.items !== prevProps.items) {
+      this.setState({ items: this.props.items.items })
     }
   }
 
@@ -43,7 +43,7 @@ class Filter extends React.Component {
         this.setState({
           items: this.props.privateItems.privateItems
         })
-        
+
       } else {
         this.setState({
           items: this.props.privateItems.privateItems.filter(
@@ -73,7 +73,7 @@ class Filter extends React.Component {
         this.setState({
           items: this.props.privateItems.privateItems
         })
-        
+
       } else {
         this.setState({
           items: this.props.privateItems.privateItems.filter(
@@ -89,7 +89,7 @@ class Filter extends React.Component {
   handleRecent = e => {
     this.setState({
       order: e.target.value
-    },this.sortItems)
+    }, this.sortItems)
   }
 
   handleItemDisplay = e => {
@@ -108,10 +108,10 @@ class Filter extends React.Component {
   }
 
   handleToggleHighlight = () => {
-    if(this.state.public){
+    if (this.state.public) {
       document.getElementById('public').classList.remove('highlightViewMode')
       document.getElementById('private').classList.add('highlightViewMode')
-    }else if(!this.state.public){
+    } else if (!this.state.public) {
       document.getElementById('public').classList.add('highlightViewMode')
       document.getElementById('private').classList.remove('highlightViewMode')
     }
@@ -119,84 +119,100 @@ class Filter extends React.Component {
 
 
   sortItems() {
-    let {items, order} = this.state
+    let { items, order } = this.state
     // is the same as: let items = this.state.items
 
     if (order == 'default') {
-        items.sort((a, b) => {
-          return a.item_name > b.item_name ? 1 : -1
-      }) 
+      items.sort((a, b) => {
+        return a.item_name > b.item_name ? 1 : -1
+      })
     } else if (order == 'new') {
-        items.sort((a, b) => {
-          return a.id > b.id ? -1 : 1
-        })
+      items.sort((a, b) => {
+        return a.id > b.id ? -1 : 1
+      })
     } else if (order == 'old') {
-        items.sort((a, b) => {
-          return a.id < b.id ? -1 : 1
-        })
+      items.sort((a, b) => {
+        return a.id < b.id ? -1 : 1
+      })
     }
-    this.setState({items: items})
+    this.setState({ items: items })
   }
 
   render() {
     return (
       <div className='row px-2'>
-        <div className='col-sm-12 col-md-12 col-lg-8'>
+        <div className='col-sm-12 col-md-12 col-lg-8 mt-3'>
           <Map items={this.state.items} />
         </div>
 
-        <div className='col-sm-12 col-md-12 col-lg-4'>
+        <div className='col-sm-12 col-md-12 col-lg-4 mt-3'>
           <div className='container rounded bg-main mb-3'>
-            <h3 className='display-4'>Sort</h3>
-            <div>
-              <label htmlFor='category'>
-                Category
-                <select name='category' id='category-select' onChange={this.handleCategory}>
-                  <option value='0'>All</option>
-                  <option value='1'>Fruit</option>
-                  <option value='2'>Vegetables</option>
-                  <option value='3'>Herbs</option>
-                  <option value='4'>Flowers</option>
-                  <option value='5'>Other</option>
-                </select>
-              </label>
-            </div>
+            <h3 className="sort-heading">Sort</h3>
+
+            {/* Category dropdown */}
+            <article className="card-group-item">
+              <header className="card-header filter-options">
+                <h6 className="title">Category </h6>
+              </header>
+              <div className="filter-content">
+                <div className="list-group list-group-flush">
+                  <select name='category' id='category-select' onChange={this.handleCategory}>
+                    <option value='0' className="dropdown-item">All</option>
+                    <option value='1' className="dropdown-item">Fruit</option>
+                    <option value='2' className="dropdown-item">Vegetables</option>
+                    <option value='3' className="dropdown-item">Herbs</option>
+                    <option value='4' className="dropdown-item">Flowers</option>
+                    <option value='5' className="dropdown-item">Other</option> */}
+                  </select>
+                </div>
+              </div>
+            </article>
 
             {/* Seasons dropdown */}
-            <div>
-              <label htmlFor='category'>
-                Season
-                <select name='category' id='category-select' onChange={this.handleSeason}>
-                  <option value='0'>All</option>
-                  <option value='1'>Summer</option>
-                  <option value='2'>Autumn</option>
-                  <option value='3'>Winter</option>
-                  <option value='4'>Spring</option>
-                </select>
-              </label>
-            </div>
+            <article className="card-group-item">
+              <header className="card-header filter-options">
+                <h6 className="title">Season </h6>
+              </header>
+              <div className="filter-content">
+                <div className="list-group list-group-flush">
+                  <select name='category' id='category-select' onChange={this.handleSeason}>
+                    <option value='0'>All</option>
+                    <option value='1'>Summer</option>
+                    <option value='2'>Autumn</option>
+                    <option value='3'>Winter</option>
+                    <option value='4'>Spring</option>
+                  </select>
+                </div>
+              </div>
+            </article>
 
             {/* Recently dropdown */}
-            <div>
-              <label htmlFor='category'>
-                Recently Added
-                <select name='category' id='' onChange={this.handleRecent}>
-                  <option value='default'>A-Z</option>
-                  <option value='new'>Newest</option>
-                  <option value='old'>Oldest </option>
-                </select>
-              </label>
-            </div>
+            <article className="card-group-item">
+              <header className="card-header filter-options">
+                <h6 className="title">Recently Added </h6>
+              </header>
+              <div className="filter-content">
+                <div className="list-group list-group-flush">
+                  <select name='category' id='' onChange={this.handleRecent}>
+                    <option value='default'>A-Z</option>
+                    <option value='new'>Newest</option>
+                    <option value='old'>Oldest </option>
+                  </select>
+                </div>
+              </div>
+            </article>
 
-            {/* fix me the toggle */}
+            <header className="card-header filter-options view-header">
+              <h6 className="title">View </h6>
+            </header>
             <div className='custom-control custom-switch'>
+              Public
               <input
                 type='checkbox'
                 className='custom-control-input'
                 id='customSwitch1'
                 onChange={this.handleItemDisplay}
-                value={this.state.public}
-              />
+                value={this.state.public} />
               <label className='custom-control-label' htmlFor='customSwitch1'>
                 <div className='d-flex'>
                   <div id='public' className='px-1 highlightViewMode'>Public</div>
@@ -206,11 +222,11 @@ class Filter extends React.Component {
             </div>
           </div>
 
-          <div className='rounded bg-main'>
-            <ItemList items={this.state.items} />
+          <div className='container rounded bg-main mb-3'>
+            <ItemList items={this.state.items} dispatch={this.props.dispatch} />
           </div>
         </div>
-      </div>
+      </div >
     )
   }
 }
