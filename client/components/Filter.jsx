@@ -139,6 +139,8 @@ class Filter extends React.Component {
   }
 
   render() {
+    let isAuthenticated = this.props.auth.auth
+
     return (
       <div className='row px-2'>
         <div className='col-sm-12 col-md-12 col-lg-8 mt-3'>
@@ -202,24 +204,28 @@ class Filter extends React.Component {
               </div>
             </article>
 
-            <header className="card-header filter-options view-header">
-              <h6 className="title">View </h6>
-            </header>
-            <div className='custom-control custom-switch'>
-              Public
+            {isAuthenticated &&
+              <>
+                <header className="card-header filter-options view-header">
+                  <h6 className="title">View </h6>
+                </header>
+                <div className='custom-control custom-switch'>
+                  Public
               <input
-                type='checkbox'
-                className='custom-control-input'
-                id='customSwitch1'
-                onChange={this.handleItemDisplay}
-                value={this.state.public} />
-              <label className='custom-control-label' htmlFor='customSwitch1'>
-                <div className='d-flex'>
-                  <div id='public' className='px-1 highlightViewMode'>Public</div>
-                  <div id='private' className='px-1'>Private</div>
+                    type='checkbox'
+                    className='custom-control-input'
+                    id='customSwitch1'
+                    onChange={this.handleItemDisplay}
+                    value={this.state.public} />
+                  <label className='custom-control-label' htmlFor='customSwitch1'>
+                    <div className='d-flex'>
+                      <div id='public' className='px-1 highlightViewMode'>Public</div>
+                      <div id='private' className='px-1'>Private</div>
+                    </div>
+                  </label>
                 </div>
-              </label>
-            </div>
+              </>
+            }
           </div>
 
           <div className='container rounded bg-main mb-3'>
