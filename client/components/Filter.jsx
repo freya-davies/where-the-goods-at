@@ -3,16 +3,16 @@ import { connect } from 'react-redux'
 import Map from './Map'
 import ItemList from './ItemList'
 
-class Filter extends React.Component {
+export class Filter extends React.Component {
   constructor(props) {
     super(props)
 
     this.state = {
       items: this.props.items.items,
-      public: true,
-      order: 'default'
+      public: true
     }
   }
+
 
   componentDidMount() {
     this.sortItems()
@@ -22,6 +22,7 @@ class Filter extends React.Component {
   componentDidUpdate(prevProps) {
     if (this.props.items !== prevProps.items) {
       this.setState({ items: this.props.items.items })
+
     }
   }
 
@@ -43,7 +44,6 @@ class Filter extends React.Component {
         this.setState({
           items: this.props.privateItems.privateItems
         })
-
       } else {
         this.setState({
           items: this.props.privateItems.privateItems.filter(
@@ -53,6 +53,7 @@ class Filter extends React.Component {
       }
     }
   }
+
 
 
   handleSeason = e => {
@@ -66,8 +67,10 @@ class Filter extends React.Component {
           items: this.props.items.items.filter(
             item => item.season_id === Number(e.target.value) || item.season_id === 5
           )
+
         })
       }
+      console.log(this.state.items)
     } else {
       if (e.target.value == 0) {
         this.setState({
@@ -92,9 +95,10 @@ class Filter extends React.Component {
     }, this.sortItems)
   }
 
+
   handleItemDisplay = e => {
-    this.setState({
-      public: !this.state.public
+    this.setState({ 
+      public: !this.state.public 
     }, () => {
       document.getElementById('category-select').value = 0
       if (this.state.public) {
@@ -117,7 +121,6 @@ class Filter extends React.Component {
     }
   }
 
-
   sortItems() {
     let { items, order } = this.state
     // is the same as: let items = this.state.items
@@ -139,7 +142,7 @@ class Filter extends React.Component {
   }
 
   render() {
-    let isAuthenticated = this.props.auth.isAuthenticated
+    const isAuthenticated = this.props.auth.isAuthenticated
 
     return (
       <div className='row px-2'>
@@ -148,7 +151,7 @@ class Filter extends React.Component {
         </div>
 
         <div className='col-sm-12 col-md-12 col-lg-4 mt-3'>
-          <div className='container rounded bg-main mb-3'>
+          <div className='container rounded bg-main mb-3 sort-cont'>
             <h3 className="sort-heading">Sort</h3>
 
             {/* Category dropdown */}
@@ -210,7 +213,6 @@ class Filter extends React.Component {
                   <h6 className="title">View </h6>
                 </header>
                 <div className='custom-control custom-switch'>
-                  Public
               <input
                     type='checkbox'
                     className='custom-control-input'
@@ -228,15 +230,15 @@ class Filter extends React.Component {
             }
           </div>
 
-          <div className='container rounded bg-main mb-3'>
+          <div className='container rounded bg-main mb-3 item-cont'>
             <ItemList items={this.state.items} dispatch={this.props.dispatch} auth={this.props.auth.isAuthenticated} />
-
           </div>
         </div>
       </div >
     )
   }
-}
+  }
+
 
 const mapStateToProps = ({ auth, items, privateItems }) => {
   return {

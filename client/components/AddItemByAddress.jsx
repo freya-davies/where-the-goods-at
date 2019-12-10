@@ -1,9 +1,6 @@
 import React from "react"
 import { connect } from 'react-redux'
-import PlacesAutocomplete, {
-    geocodeByAddress,
-    getLatLng,
-  } from 'react-places-autocomplete';
+import PlacesAutocomplete, { geocodeByAddress } from 'react-places-autocomplete';
 
 import { addItem, getCategories, getSeasons } from '../apis/items'
 import { fetchPublicItems, fetchPrivateItems } from '../actions/items'
@@ -18,13 +15,12 @@ class AddItemByAddress extends React.Component {
                 user: this.props.auth.auth.user.user_name,
                 description: '',
                 address: '',
-                // img_url: '',
                 public: true,
                 category: '',
                 season: '',
-                // rating: null,
                 quantity: null,
-                image: null
+                image: null,
+                showAddressWarning: false
             }
         }
 
@@ -71,16 +67,27 @@ class AddItemByAddress extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault()
-        addItem(this.state.newItem)
-            .then(res => {
-                if (res == 200) {
-                    if (this.state.newItem.public) this.props.fetchPublicItems()
-                    else {
-                        this.props.fetchPrivateItems(this.props.auth.auth.user.user_name)
-                    }
-                }
-                this.props.toggleAddForm()
+        geocodeByAddress(this.state.newItem.address)
+        .then(() => {
+            this.setState({
+                showAddressWarning: false
             })
+            addItem(this.state.newItem)
+                .then(res => {
+                    if (res == 200) {
+                        if (this.state.newItem.public) this.props.fetchPublicItems()
+                        else {
+                            this.props.fetchPrivateItems(this.props.auth.auth.user.user_name)
+                        }
+                    }
+                    this.props.toggleAddForm()
+                })
+        })
+        .catch(() => {
+            this.setState({
+                showAddressWarning: true
+            })
+        })
     }
 
     handleCheckbox(e) {
@@ -113,14 +120,6 @@ class AddItemByAddress extends React.Component {
             }
         })
     }
-    
-    // validateAddress() {
-    //     //call in handleSubmit
-    //     geocodeByAddress(this.state.newItem.address)
-    //         .then(results => getLatLng(results[0]))
-    //         .then(latLng => console.log('Success', latLng))
-    //         .catch(error => console.error('Error', error));
-    // }
 
     render() {
         return (
@@ -185,13 +184,6 @@ class AddItemByAddress extends React.Component {
                                         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
                                         <label>
                                             Address
-                                                {/* <input
-                                                required
-                                                type='text'
-                                                name='address'
-                                                className="form-control"
-                                                onChange={this.handleChange}
-                                                /> */}
                                                 <input
                                                 required
                                                 type='text'
@@ -228,6 +220,7 @@ class AddItemByAddress extends React.Component {
                                     )}
                                     </PlacesAutocomplete>   
                                 </div>
+                                    {this.state.showAddressWarning && <p style={{color: 'red'}}>Please enter a valid address</p>}
 
                                 <div className="form-row">
                                     <label>

@@ -37,8 +37,8 @@
     height: 100%;
     margin: 0;
     padding: 0;
-    background-color: #0c2504;
-    color: #9e9d9d;
+    background-color: #FAFAFB;
+    color: #28395F;
   }
 
   a:link {
@@ -54,18 +54,18 @@
 
 /* nav bar  */
 .customNavStyles {
-  background-color: #FFF1DA !important;
+  background-color: #D25E5D !important;
   max-height: 5rem;
 }
 
 .is-1 {
   padding-top: 15px;
   font-family: 'Lakki Reddy', cursive;
-  color: #195507;
+  color: #FAFAFB;
 }
 
 .nav-link {
-  color: #195507 !important;;
+  color: #FAFAFB !important;;
 }
 
 .nav-username {
@@ -81,27 +81,41 @@
 
   /* list Item */
 
+  .item-cont {
+    background-color: #F3BD06;
+    color: #28395F;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;
+}
+
+  
+
   .list-heading {
     padding-top: .5rem;
   }
 
-  .bg-main {
-  background-color: #FFF1DA;
-  color: #195507;
-  } 
+
 
   .bg-main-reverse {
-    background-color: #0c2504;
-  color: #FFF1DA;
+    background-color: #F3BD06 ;
+  color: #28395F !important;
   }
 
   .bg-dark-main {
     background-color: rgb(223, 215, 203);
   }
 
+  .list-button {
+    background-color: #F3BD06;
+  }
+
 
   .card-img-top {
+  margin-top: 1rem;
   width: 60%;
+  }
+
+  .list-card {
+    text-align: center;
   }
 
   .scrollable {
@@ -238,6 +252,13 @@ h1.ml8 {
 }
 
 /* filter panel */
+.sort-cont {
+  background-color: #B0DDD9;
+    color: #28395F;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;
+}
+
+
 .sort-heading {
   padding-top: .5rem;
 }

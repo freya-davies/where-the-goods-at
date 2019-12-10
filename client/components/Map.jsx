@@ -10,7 +10,7 @@ import { getCategories, getSeasons } from '../apis/items'
 const googleMapStyles = require('../../public/GoogleMapStyles.json')
 
 
-class Map extends Component {
+export class Map extends Component {
 
   constructor(props) {
 
@@ -129,7 +129,8 @@ class Map extends Component {
                   mapContainerStyle={{
                     height: "800px",
                     width: "1200px",
-                    borderRadius: ".25rem"
+                    borderRadius: ".25rem",
+                    boxShadow: "rgba(0, 0, 0, 0.5) 0px 3px 4px -1px"
                   }}
                   options={{
                     styles: googleMapStyles
@@ -166,31 +167,21 @@ class Map extends Component {
                     )
                   })}
 
+
                   {this.props.auth.auth.isAuthenticated &&
-                    <div className="addItemContainer">
-                      <div className="addPinButton">
-                        <button onClick={this.toggleAddMode}>{this.state.addMode ? "Stop Adding Items" : "Add Item by Pin"}</button>
-                      </div>
-                      <div className="addPinButton">
-                        <button onClick={this.toggleAddForm}>Add Item by Address</button>
-                      </div>
-                    </div>
-                  }
+                              <div className="addItemContainer">
+                                <div className="addPinButton">
+                                  <button type="button" className="btn btn-light" onClick={this.toggleAddMode}>{this.state.addMode ? "Stop Adding Items" : "Add Item by Pin"}</button>
+                                </div>
+                                <div className="addPinButton">
+                                  <button type="button" className="btn btn-light" onClick={this.toggleAddForm}>Add Item by Address</button>
+                                </div>
+                              </div>
+                                  }
 
                 </GoogleMap>
               </LoadScript>
             }
-   
-        {this.props.auth.auth.isAuthenticated &&
-            <div className="addItemContainer">
-              <div className="addPinButton">
-                <button type="button" class="btn btn-light " onClick={this.toggleAddMode}>{this.state.addMode ? "Stop Adding Items" : "Add Item by Pin"}</button>
-              </div>
-              <div className="addPinButton">
-                <button type="button" class="btn btn-light" onClick={this.toggleAddForm}>Add Item by Address</button>
-              </div>
-            </div>
-                }
 
           </div>
         </div>

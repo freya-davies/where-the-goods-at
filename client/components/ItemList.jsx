@@ -49,9 +49,10 @@ class ItemList extends React.Component {
         <h3 className="list-heading">Listed Items</h3>
         <div className="row">
           <div className="col-centered">
+
             {this.props.items.map((item, i) => {
               return (
-                <div key={i} className="card" style={{ alignItems: 'center' }} >
+                <div key={i} className="card list-card" style={{ alignItems: 'center' }} >
                   <div onClick={() => this.props.dispatch(setCurrentItem(item))}>
                     <img className="card-img-top" src={item.image} alt={item.item_name} style={{ 'MaxWidth': 2 + 'rem' }} />
                     <div className="card-body">
@@ -70,7 +71,6 @@ class ItemList extends React.Component {
                     }
                     </div>
                   </div>
-
                 </div>
               )
             }
