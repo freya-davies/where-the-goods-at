@@ -73,6 +73,11 @@
   .bg-main {
   background-color: #FFF1DA;
   color: #195507;
+  } 
+
+  .bg-main-reverse {
+    background-color: #0c2504;
+  color: #FFF1DA;
   }
 
   .bg-dark-main {
@@ -81,7 +86,7 @@
 
 
   .card-img-top {
-  width: 80%;
+  width: 60%;
   }
 
   .scrollable {
@@ -234,4 +239,48 @@ background-color: transparent;
 
 .custom-switch {
   padding: 1rem 0 1rem 2.5rem;
+
+/* login page */
+.img-fluid {
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+  width: 30%;
+}
+
+.loginTitle {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.loginContainer {
+  text-align: -webkit-center;
+}
+
+.form-inline {
+  text-align: center;
+  display: inherit;
+}
+
+.loginButton {
+  margin-top: 2rem;
+}
+
+/* register page */
+.registerContainer {
+  text-align: -webkit-center;
+}
+
+.registerButton {
+    margin-top: 2rem;
+}
+
+.registerTitle {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+}
+.justify-content-start {
+    margin-top: 0.5rem;
+
 }
