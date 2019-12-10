@@ -49,6 +49,7 @@ class ItemList extends React.Component {
         <h3 className="list-heading">Listed Items</h3>
         <div className="row">
           <div className="col-centered">
+
             {this.props.items.map((item, i) => {
               return (
                 <div key={i} className="card" style={{ alignItems: 'center' }} >
@@ -70,7 +71,6 @@ class ItemList extends React.Component {
                     }
                     </div>
                   </div>
-
                 </div>
               )
             }

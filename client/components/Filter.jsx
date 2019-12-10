@@ -213,7 +213,6 @@ export class Filter extends React.Component {
                   <h6 className="title">View </h6>
                 </header>
                 <div className='custom-control custom-switch'>
-                  Public
               <input
                     type='checkbox'
                     className='custom-control-input'
