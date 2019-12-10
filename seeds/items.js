@@ -193,8 +193,22 @@ exports.seed = function (knex) {
           season_id: 1,
           quantity: 3,
           image: 'https://i.pinimg.com/600x315/58/96/2e/58962ed7f25def4add14b87c42cd8b6e.jpg'
-        }
-
+        },
+        { id: 38,
+          item_name: 'Ginkgo',
+          user_id: 1,
+          category_id: 3,
+          public: 1,
+          description:
+           'Ginkgo tree here. Makes great tea. Avoid the seeds, they are poisonous. Harvest late summer.',
+          long: 174.7261058608957,
+          lat: -41.285144054997915,
+          suburb: null,
+          rating: null,
+          comments: null,
+          season_id: 1,
+          quantity: 2,
+          image: 'https://images-na.ssl-images-amazon.com/images/I/71ZZ3gLGibL._SX466_.jpg' }
       ]);
     });
 };
