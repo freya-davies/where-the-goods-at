@@ -63,7 +63,19 @@ function getItem(itemId, db=connection) {
 function updateItem(id, item, db =  connection) {
     return db('items')
     .where('id', id)
-    .update(item)
+    .update({
+        item_name: item.item_name,
+            description: item.description,
+            lat: item.lat,
+            long: item.long,
+            season_id: item.season,
+            quantity: item.quantity,
+            rating: item.rating,
+            category_id: item.category,
+            public: item.public,
+            user_id: item.user,
+            image: item.image
+    })
 }  
 
 function deleteItem(id, db=connection) {

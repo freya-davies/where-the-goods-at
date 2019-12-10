@@ -35,7 +35,7 @@ class Register extends React.Component {
     checkDatabase(email)
       .then((emailExists) => {
         if (emailExists) return this.props.dispatch(loginError("Email already exists"))
-        console.log('line 1', result)
+        console.log('line 1', emailExists)
         if (password.length <= 7) return this.props.dispatch(loginError("Password must contain at least 8 characters"))
         // console.log('line 2')
         if (confirm_password != password) return this.props.dispatch(loginError("Passwords don't match"))
@@ -49,43 +49,56 @@ class Register extends React.Component {
     const { auth } = this.props
     return (
       <div className="registerContainer">
-        <div className="col-6 col-md-4">
+        <div className="col-6 col-md-4 register-div">
           <img className="img-fluid" src="/images/forage-lettuce.png" alt="Forage &amp; Find" />
+
           <form className="login-register-form" onSubmit={this.submit}>
             <h1 className='registerTitle'>Register</h1>
             {auth.errorMessage && <><h1><span className="badge badge-danger badge-lg">{auth.errorMessage}</span></h1><br></br></>}
+
             <div className="row justify-content-start">
               <div className='col-6 reg-text'>
-                <label htmlFor="user_name" >Username:
-          </label>
+                <label htmlFor="user_name" 
+                  >Username:
+              </label>
               </div>
+
               <div className='col-6 reg'>
                 <input required className="form-control" placeholder="Username" type="text" name="user_name" onChange={this.updateDetails} />
               </div>
             </div>
+
             <div className="row justify-content-start">
               <div className='col-6 reg-text'>
-                <label htmlFor="email" >Email:
-          </label>
+                <label htmlFor="email" 
+                  >Email:
+              </label>
               </div>
+
               <div className='col-6 reg'>
                 <input required className="form-control" placeholder="Email" type="email" name="email" onChange={this.updateDetails} />
               </div>
             </div>
+
             <div className="row justify-content-start">
               <div className='col-6 reg-text'>
-                <label htmlFor="first_name">First Name:
-              </label>
+                <label htmlFor="first_name">
+                  First Name:
+                </label>
               </div>
+
               <div className='col-6 reg'>
                 <input required className="form-control" placeholder="First Name" type="text" name="first_name" onChange={this.updateDetails} />
               </div>
             </div>
+
             <div className="row justify-content-start">
               <div className='col-6 reg-text'>
-                <label htmlFor="lastName">Last Name:
-              </label>
+                <label htmlFor="lastName">
+                  Last Name:
+                </label>
               </div>
+
               <div className='col-6 reg'>
                 <input required className="form-control" placeholder="Last Name" type="text" name="last_name" onChange={this.updateDetails} />
               </div>
@@ -93,24 +106,29 @@ class Register extends React.Component {
 
             <div className="row justify-content-start">
               <div className='col-6 reg-text'>
-                <label htmlFor="password">Password
-            </label>
+                <label htmlFor="password">
+                  Password
+                </label>
               </div>
+
               <div className='col-6 reg'>
                 <input required className="form-control" placeholder="Password" type="password" name="password" onChange={this.updateDetails} />
               </div>
             </div>
+
             <div className="row justify-content-start">
               <div className='col-6 reg-text'>
-                <label htmlFor="confirm_password">Confirm Password
-              </label>
+                <label htmlFor="confirm_password">
+                  Confirm Password
+                </label>
               </div>
+
               <div className='col-6 reg'>
                 <input required className="form-control" placeholder="Confirm Password" type="password" name="confirm_password" onChange={this.updateDetails} />
               </div>
             </div>
-            <div className="registerButton">
 
+            <div className="registerButton">
               <input className="btn bg-main" value="Register" type="submit" />
             </div>
           </form>
