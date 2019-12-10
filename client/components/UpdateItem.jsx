@@ -86,6 +86,7 @@ class UpdateItem extends React.Component {
     }
 
     handleSubmit = (e) => {
+        (this.state.item)
         e.preventDefault()
         updateItem(this.state.item)
             .then(() => {
@@ -112,13 +113,13 @@ class UpdateItem extends React.Component {
                         {this.state.redirect && <Redirect to='/' />}
                         <form onSubmit={this.handleSubmit}>
                             <br></br>
-                            <label for="item_name">Item Name: </label>
+                            <label htmlFor="item_name">Item Name: </label>
                             <input name="item_name" value={this.state.item.item_name} onChange={this.handleChange} />
                             <br></br>
-                            <label for="description">Description: </label>
+                            <label htmlFor="description">Description: </label>
                             <textarea name="description" value={this.state.item.description} onChange={this.handleChange} />
                             <br></br>
-                            <label for="image">Image</label>
+                            <label htmlFor="image">Image</label>
                             <input
                                 type="file"
                                 name="image"
@@ -126,13 +127,13 @@ class UpdateItem extends React.Component {
                                 onChange={this.handleImageUpload}
                             />
                             <br></br>
-                            <label for="public">Public: </label>
+                            <label htmlFor="public">Public: </label>
                             <input type="checkbox" name="public" checked={this.state.item.public} onClick={this.handleClick} />
                             <br></br>
 
-                            <label for="category">Category: </label>
+                            <label htmlFor="category">Category: </label>
                             {this.state.categoryData &&
-                                <select required name='category' >
+                                <select required onChange={this.handleChange} name='category' >
                                     <option value={this.state.item.category_id}>{
                                         this.getCategoryName()
                                     }</option>
@@ -144,9 +145,9 @@ class UpdateItem extends React.Component {
                                         })}
                                 </select>}
                             <br></br>
-                            <label for="season">Season: </label>
+                            <label htmlFor="season">Season: </label>
                             {this.state.seasonData &&
-                                <select required name='season' >
+                                <select required onChange={this.handleChange} name='season' >
                                     <option value={this.state.item.season_id}>{
                                         this.getSeasonName()
                                     }</option>
