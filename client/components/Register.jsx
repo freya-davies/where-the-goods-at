@@ -49,7 +49,7 @@ class Register extends React.Component {
     const { auth } = this.props
     return (
       <div className="registerContainer">
-        <div className="col-6 col-md-4">
+        <div className="col-6 col-md-4 register-div">
           <img className="img-fluid" src="/images/forage-lettuce.png" alt="Forage &amp; Find" />
 
           <form className="login-register-form" onSubmit={this.submit}>
