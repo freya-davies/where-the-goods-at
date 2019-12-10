@@ -19,8 +19,9 @@ export class Filter extends React.Component {
   }
 
 
+
   componentDidUpdate(prevProps) {
-    if (this.props.items !== prevProps.items) {
+    if (this.props.items !== prevProps.items && this.state.public) {
       this.setState({ items: this.props.items.items })
 
     }
@@ -70,7 +71,6 @@ export class Filter extends React.Component {
 
         })
       }
-      console.log(this.state.items)
     } else {
       if (e.target.value == 0) {
         this.setState({
