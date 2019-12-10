@@ -42,7 +42,6 @@ router.get('/item/:id', (req, res) => {
 
 router.patch('/update/:id', (req, res) => {
     let item = req.body
-    console.log(item)
 
     db.updateItem(req.params.id, item).then(items => {
         res.json(items)

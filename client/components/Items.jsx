@@ -57,7 +57,6 @@ class AddItemForm extends React.Component {
         let reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onloadend = () => {
-          // console.log(reader.result)
           this.setState({
             newItem: {
                 ...this.state.newItem,
