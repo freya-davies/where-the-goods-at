@@ -11,13 +11,7 @@ test('Heading renders on page', () => {
   expect(actual).toEqual(expected)
 })
 
-test('Sort container renders on page', () => {
-  const expected = 1
-  const wrapper = shallow(<Nav items ={{items: []}} modals={{currentModal: true}} auth={{isAuthenticated: true}} fetchPublicItems={()=> {}} />) 
-  //console.log(wrapper.debug());
-  const actual = wrapper.find('#navi').length
-  expect(actual).toEqual(expected)
-})
+
 
 
 

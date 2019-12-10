@@ -102,7 +102,7 @@ export class Filter extends React.Component {
         </div>
 
         <div className='col-sm-12 col-md-4'>
-          <div className='container rounded bg-main mb-3'>
+          <div id='sort'className='container rounded bg-main mb-3'>
             <h3 className='display-4'>Sort</h3>
             <div>
               <label htmlFor='category'>
@@ -159,7 +159,7 @@ export class Filter extends React.Component {
                     </div> */}
           </div>
 
-          <div className='rounded bg-main'>
+          <div id='listedItems'className='rounded bg-main'>
             <ItemList items={this.state.items} />
           </div>
         </div>
