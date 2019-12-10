@@ -133,13 +133,8 @@ class Map extends Component {
                   }}
                   options={{
                     styles: googleMapStyles
-<<<<<<< HEAD
                     }}
                   zoom={this.state.zoom}
-=======
-                  }}
-                  zoom={12}
->>>>>>> 28d8c991155ea7cd551bed1ad66c38040bf92b73
                   center={this.state.center}
                   mapTypeId='satellite'
                   onClick={this.handleAddPin}>
@@ -150,12 +145,8 @@ class Map extends Component {
                         key={index}
                         position={{ lat: item.lat, lng: item.long }}
                         //icon={this.handleIcons(item.category_id)}
-<<<<<<< HEAD
-                        icon={'/images/Avocado3.svg'}
-=======
                         icon={`/images/icon${item.category_id}.svg`}
 
->>>>>>> 28d8c991155ea7cd551bed1ad66c38040bf92b73
                       >
                         {this.props.items[index] == this.state.activePin && (
                           <InfoWindow onCloseClick={() => this.closeWindow()} position={{ lat: item.lat, lng: item.long }}>
