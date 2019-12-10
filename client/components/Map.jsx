@@ -121,7 +121,7 @@ class Map extends Component {
                   }}
                   options={{
                     styles: googleMapStyles
-                    }}
+                  }}
                   zoom={12}
                   center={this.state.center}
                   mapTypeId='satellite'
@@ -133,7 +133,7 @@ class Map extends Component {
                         key={index}
                         position={{ lat: item.lat, lng: item.long }}
                         //icon={this.handleIcons(item.category_id)}
-                        icon={'/images/Avocado3.svg'}
+                        icon={`/images/icon${item.category_id}.svg`}
 
                       >
                         {this.props.items[index] == this.state.activePin && (
@@ -142,31 +142,34 @@ class Map extends Component {
                               <h4>{this.props.items[index].item_name}</h4>
                               {/* <input type='text' name={this.props.items[index].item_name} />  */}
                               <h6>Description:</h6><p> <em>"{this.props.items[index].description}"</em></p>
-                              <h6>Category:</h6><p> {this.state.categoryData[this.props.items[index].category_id - 1].category_name}</p> 
+                              <h6>Category:</h6><p> {this.state.categoryData[this.props.items[index].category_id - 1].category_name}</p>
                               <h6>Quantity:</h6><p>{this.props.items[index].quantity}</p>
-                              <h6>Season:</h6><p> {this.state.seasonData[this.props.items[index].season_id - 1].season_name}</p> 
+                              <h6>Season:</h6><p> {this.state.seasonData[this.props.items[index].season_id - 1].season_name}</p>
                               {this.props.items[index].image &&
-                                <img src={this.props.items[index].image} style={{maxWidth: '20rem'}}/>}
+                                <img src={this.props.items[index].image} style={{ maxWidth: '20rem' }} />}
                             </div>
                           </InfoWindow>
                         )}
                       </Marker>
                     )
                   })}
+
+                  {this.props.auth.auth.isAuthenticated &&
+                    <div className="addItemContainer">
+                      <div className="addPinButton">
+                        <button onClick={this.toggleAddMode}>{this.state.addMode ? "Stop Adding Items" : "Add Item by Pin"}</button>
+                      </div>
+                      <div className="addPinButton">
+                        <button onClick={this.toggleAddForm}>Add Item by Address</button>
+                      </div>
+                    </div>
+                  }
+
                 </GoogleMap>
               </LoadScript>
             }
-   
-        {this.props.auth.auth.isAuthenticated &&
-            <div className="addItemContainer">
-              <div className="addPinButton">
-                <button onClick={this.toggleAddMode}>{this.state.addMode ? "Stop Adding Items" : "Add Item by Pin"}</button>
-              </div>
-              <div className="addPinButton">
-                <button onClick={this.toggleAddForm}>Add Item by Address</button>
-              </div>
-            </div>
-                }
+
+
 
           </div>
         </div>

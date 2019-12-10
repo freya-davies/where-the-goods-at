@@ -141,26 +141,26 @@ class Filter extends React.Component {
   render() {
     return (
       <div className='row px-2'>
-        <div className='col-sm-12 col-md-12 col-lg-8'>
+        <div className='col-sm-12 col-md-12 col-lg-8 mt-3'>
           <Map items={this.state.items} />
         </div>
 
-        <div className='col-sm-12 col-md-12 col-lg-4'>
+        <div className='col-sm-12 col-md-12 col-lg-4 mt-3'>
           <div className='container rounded bg-main mb-3'>
             <h3 className="sort-heading">Sort</h3>
-            <article class="card-group-item">
-              <header class="card-header filter-options">
-                <h6 class="title">Category </h6>
+            <article className="card-group-item">
+              <header className="card-header filter-options">
+                <h6 className="title">Category </h6>
               </header>
-              <div class="filter-content">
-                <div class="list-group list-group-flush">
+              <div className="filter-content">
+                <div className="list-group list-group-flush">
                   <select name='category' id='category-select' onChange={this.handleCategory}>
-                    <option value='0' class="dropdown-item">All</option>
-                    <option value='1' class="dropdown-item">Fruit</option>
-                    <option value='2' class="dropdown-item">Vegetables</option>
-                    <option value='3' class="dropdown-item">Herbs</option>
-                    <option value='4' class="dropdown-item">Flowers</option>
-                    <option value='5' class="dropdown-item">Other</option> */}
+                    <option value='0' className="dropdown-item">All</option>
+                    <option value='1' className="dropdown-item">Fruit</option>
+                    <option value='2' className="dropdown-item">Vegetables</option>
+                    <option value='3' className="dropdown-item">Herbs</option>
+                    <option value='4' className="dropdown-item">Flowers</option>
+                    <option value='5' className="dropdown-item">Other</option> */}
                   </select>
                 </div>
 
@@ -168,12 +168,12 @@ class Filter extends React.Component {
             </article>
 
             {/* Seasons dropdown */}
-            <article class="card-group-item">
-              <header class="card-header filter-options">
-                <h6 class="title">Season </h6>
+            <article className="card-group-item">
+              <header className="card-header filter-options">
+                <h6 className="title">Season </h6>
               </header>
-              <div class="filter-content">
-                <div class="list-group list-group-flush">
+              <div className="filter-content">
+                <div className="list-group list-group-flush">
                   <select name='category' id='category-select' onChange={this.handleSeason}>
                     <option value='0'>All</option>
                     <option value='1'>Summer</option>
@@ -221,7 +221,7 @@ class Filter extends React.Component {
             </div>
           </div>
 
-          <div className='rounded bg-main'>
+          <div className='container rounded bg-main mb-3'>
             <ItemList items={this.state.items} />
           </div>
         </div>
