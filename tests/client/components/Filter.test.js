@@ -6,7 +6,7 @@ import {Filter} from '../../../client/components/Filter'
 
 test('Sort container renders on page', () => {
   const expected = 1
-  const wrapper = shallow(<Filter items ={{items: []}} modals={{currentModal: true}}  fetchPublicItems={()=> {}} />) 
+  const wrapper = shallow(<Filter items ={{items: []}} modals={{currentModal: true}} auth={{isAuthenticated: true}}  fetchPublicItems={()=> {}} />) 
   //console.log(wrapper.debug());
   const actual = wrapper.find('#sort').length
   expect(actual).toEqual(expected)

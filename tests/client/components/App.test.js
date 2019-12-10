@@ -1,7 +1,9 @@
 import React from 'react'
 import { shallow } from 'enzyme'
+import PlacesAutocomplete from 'react-places-autocomplete'; 
 
 import {App} from '../../../client/components/App'
+import { Autocomplete } from '@react-google-maps/api'
 
 // test('Back button renders without errors', () => {
 //   const component = shallow(<Instructions/>);
@@ -35,7 +37,7 @@ test('Map renders on page', () => {
 
  test('App has 5 routes when logged in', () => {
    
-   const expected = 5
+   const expected = 6
    const wrapper = shallow(<App items ={{items: []}}modals={{currentModal: true}} auth={{isAuthenticated: true}} fetchPublicItems={()=> {}} /> )
   //0 console.log(wrapper.debug())
    const actual = wrapper.find('Route').length

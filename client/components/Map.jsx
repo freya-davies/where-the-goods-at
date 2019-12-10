@@ -3,9 +3,10 @@ import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/ap
 import { getKey } from '../apis/auth'
 import { connect } from 'react-redux'
 import AddModal from './AddModal'
-import AddItemByAddress from './AddItemByAddress'
+import AddItemByAddress from './AddItemByAddress.jsx'
 import { showAddItemModal, updateItemModal } from '../actions/modals'
 import { getCategories, getSeasons } from '../apis/items'
+import PlacesAutocomplete from 'react-places-autocomplete'
 
 const googleMapStyles = require('../../public/GoogleMapStyles.json')
 
