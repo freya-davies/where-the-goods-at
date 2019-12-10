@@ -207,13 +207,13 @@ export class Filter extends React.Component {
               </div>
             </article>
 
+
             {isAuthenticated &&
               <>
                 <header className="card-header filter-options view-header">
                   <h6 className="title">View </h6>
                 </header>
                 <div className='custom-control custom-switch'>
-                  Public
               <input
                     type='checkbox'
                     className='custom-control-input'
