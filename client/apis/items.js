@@ -1,6 +1,5 @@
 import request from 'superagent'
 import { getKey } from './auth'
-import { fetchPublicItems } from '../actions/items'
 import { findSuburb } from '../apis/itemList'
 
 const url = '/api/v1/items/'
@@ -12,24 +11,19 @@ const endUrl = '&key='
 
 export function addItem(item) {
     if (item.lat && item.long) {
-        findSuburb(item.lat, item.long)
-            .then(suburb => {
-                item.suburb = suburb
                 return request
                     .post(addItemUrl)
                     .send(item)
                     .then(res => res.statusCode)
-            })
     } else {
-       return getCoordinates(item.address)
+        return getCoordinates(item.address)
             .then(res => {
                 item.lat = res.body.results[0].geometry.location.lat
                 item.long = res.body.results[0].geometry.location.lng
                 delete item.address
-                findSuburb(item.lat, item.long)
+               return findSuburb(item.lat, item.long)
                 .then(suburb => {
                     item.suburb = suburb
-                    console.log('ITEM IS: ', item)
                     return request
                     .post(addItemUrl)
                     .send(item)
@@ -37,8 +31,9 @@ export function addItem(item) {
                 })
             })
 
-    }
-}
+            }
+        }
+
 
 function getCoordinates(address) {
 
@@ -59,7 +54,6 @@ export function getPublicItems() {
         .then(res => res.body)
 }
 
-
 export function getPrivateItems(user) {
     return request
         .get(url + `user/${user}`)
@@ -77,4 +71,24 @@ export function getSeasons() {
     return request
         .get(url + 'seasons')
         .then(res => res.body)
+}
+
+export function getItem(id){
+    return request
+    .get(url + `item/${id}`)
+    .then(res => res.body)
+}
+
+export function updateItem(item) {
+    return request
+    .patch(`${url}update/${item.id}`)
+    .send(item)
+    .then(res => res.body)
+}
+
+export function deleteItem(id) {
+    console.log(id)
+    return request
+    .delete(`${url}delete/${id}`)
+    .then(res => {return res.body})
 }

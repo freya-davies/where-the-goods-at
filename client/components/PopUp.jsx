@@ -36,16 +36,20 @@ class PopUp extends React.Component {
               <div className="modal-content">
                 <div className="modal-header">
                   <h5 className="modal-title" id="staticBackdropLabel">Become A Forage Extraordinaire!</h5>
+                  
                   <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={this.closeModal}>
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
+
                 <div className="modal-body">
                   Get access to more options and goodies!
-                            </div>
+                </div>
+
                 <div className="modal-footer">
-                  <Link className="btn btn-primary" to="/login">Login</Link>
-                  <Link className="btn btn-primary" to="/register">Register</Link>
+                  <Link className="btn bg-main-reverse" to="/login">Login</Link>
+                  
+                  <Link className="btn bg-main-reverse" to="/register">Register</Link>
                 </div>
               </div>
             </div>

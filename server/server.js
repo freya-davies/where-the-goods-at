@@ -5,6 +5,7 @@ require('dotenv').config()
 const authRoutes = require('./routes/auth')
 
 const itemsRoutes = require('./routes/items')
+const checkEmail = require('./routes/register')
 
 
 const server = express()
@@ -18,6 +19,7 @@ server.use(express.static('public'))
 server.use('/api/auth', authRoutes)
 
 server.use('/api/v1/items', itemsRoutes)
+server.use('/api/checkEmail', checkEmail)
 
 
 
