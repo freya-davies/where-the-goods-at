@@ -41,6 +41,7 @@
 .customNavStyles {
   background-color: #FFF1DA !important;
   margin-bottom: 1rem;
+  max-height: 5rem;
 }
 
 .is-1 {
