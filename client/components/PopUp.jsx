@@ -40,11 +40,14 @@ class PopUp extends React.Component {
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
+
                 <div className="modal-body">
                   Get access to more options and goodies!
-                            </div>
+                </div>
+
                 <div className="modal-footer">
                   <Link className="btn bg-main-reverse" to="/login">Login</Link>
+                  
                   <Link className="btn bg-main-reverse" to="/register">Register</Link>
                 </div>
               </div>
