@@ -45,6 +45,7 @@
 .customNavStyles {
   background-color: #FFF1DA !important;
   margin-bottom: 1rem;
+  max-height: 5rem;
 }
 
 .is-1 {
@@ -72,6 +73,11 @@
   .bg-main {
   background-color: #FFF1DA;
   color: #195507;
+  } 
+
+  .bg-main-reverse {
+    background-color: #0c2504;
+  color: #FFF1DA;
   }
 
   .bg-dark-main {
@@ -80,7 +86,7 @@
 
 
   .card-img-top {
-  width: 80%;
+  width: 60%;
   }
 
   .scrollable {
@@ -216,4 +222,82 @@ h1.ml8 {
 .info-window {
   min-width: 21rem;
   max-width: 22rem;
+}
+
+/* filter panel */
+.sort-heading {
+  padding-top: .5rem;
+}
+
+.filter-options{
+margin-top: .3rem;
+padding-top: .3rem;
+padding-bottom: 0;
+padding-left: 0;
+background-color: transparent;
+}
+
+.custom-switch {
+  padding: 1rem 0 1rem 2.5rem;
+}
+
+/* filter panel */
+.sort-heading {
+  padding-top: .5rem;
+}
+
+.filter-options{
+margin-top: .3rem;
+padding-top: .3rem;
+padding-bottom: 0;
+padding-left: 0;
+background-color: transparent;
+}
+
+.custom-switch {
+  padding: 1rem 0 1rem 2.5rem;
+
+/* login page */
+.img-fluid {
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+  width: 30%;
+}
+
+.loginTitle {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.loginContainer {
+  text-align: -webkit-center;
+}
+
+.form-inline {
+  text-align: center;
+  display: inherit;
+}
+
+.loginButton {
+  margin-top: 2rem;
+}
+
+/* register page */
+.registerContainer {
+  text-align: -webkit-center;
+}
+
+.registerButton {
+    margin-top: 2rem;
+}
+
+.registerTitle {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+}
+.justify-content-start {
+    margin-top: 0.5rem;
+
 }

@@ -101,59 +101,6 @@ Response
           ... ]}`
 
 
-IGNORE STUFF UNDERNEATH
-## DB (Server Side)
-  There should be three tables for MVP
-
-### Users
-  | Column Name | Data Type |
-  | --- | --- |
-  | id | Integer |
-  | user_name | String |
-  | first_name | String |
-  | last_name | String |
-  | hash | text |
-
-### Meetings
-  | Column Name | Data Type |
-  | --- | --- |
-  | id | Integer |
-  | meeting_name | String |
-  | time | Timestamp |
-  | attendees | integer |
-  | cost | Decimal |
-
-### Attendees (Join Table M2M)
-
-  Many Users attend Many Meetings
-
- | Column Name | Data Type |
- | --- | --- |
- | user_id | Integer |
- | meeting_id | Integer |
-
- ---
-
-## Setup
-
-Run the following commands in your terminal:
-
-```sh
-npm install
-npx knex migrate:latest
-npx knex seed:run
-mv .env.example .env
-```
-
-To run in development:
-```sh
-npm run dev
-```
-
-To run in production:
-```sh
-npm start
-```
 
 
 ## Heroku!!!

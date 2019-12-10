@@ -132,7 +132,9 @@ class Map extends Component {
                         onClick={() => this.openWindow(index)}
                         key={index}
                         position={{ lat: item.lat, lng: item.long }}
-                        icon={this.handleIcons(item.category_id)}
+                        //icon={this.handleIcons(item.category_id)}
+                        icon={'/images/Avocado3.svg'}
+
                       >
                         {this.props.items[index] == this.state.activePin && (
                           <InfoWindow onCloseClick={() => this.closeWindow()} position={{ lat: item.lat, lng: item.long }}>

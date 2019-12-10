@@ -44,8 +44,8 @@ class PopUp extends React.Component {
                   Get access to more options and goodies!
                             </div>
                 <div className="modal-footer">
-                  <Link className="btn btn-primary" to="/login">Login</Link>
-                  <Link className="btn btn-primary" to="/register">Register</Link>
+                  <Link className="btn bg-main-reverse" to="/login">Login</Link>
+                  <Link className="btn bg-main-reverse" to="/register">Register</Link>
                 </div>
               </div>
             </div>
