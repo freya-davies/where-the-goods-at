@@ -151,7 +151,7 @@ export class Filter extends React.Component {
         </div>
 
         <div className='col-sm-12 col-md-12 col-lg-4 mt-3'>
-          <div className='container rounded bg-main mb-3'>
+          <div className='container rounded bg-main mb-3 sort-cont'>
             <h3 className="sort-heading">Sort</h3>
 
             {/* Category dropdown */}
@@ -230,7 +230,7 @@ export class Filter extends React.Component {
             }
           </div>
 
-          <div className='container rounded bg-main mb-3'>
+          <div className='container rounded bg-main mb-3 item-cont'>
             <ItemList items={this.state.items} dispatch={this.props.dispatch} auth={this.props.auth.isAuthenticated} />
           </div>
         </div>
