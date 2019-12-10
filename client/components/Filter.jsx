@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Map from './Map'
 import ItemList from './ItemList'
-import { isProperty } from '@babel/types'
 
 class Filter extends React.Component {
   constructor(props) {
@@ -10,87 +9,180 @@ class Filter extends React.Component {
 
     this.state = {
       items: this.props.items.items,
-      public: true
+      public: true,
+      order: 'default'
+    }
+  }
+
+  componentDidMount() {
+    this.sortItems()
+  }
+
+
+  componentDidUpdate(prevProps){
+    if(this.props.items !== prevProps.items){
+      this.setState({items: this.props.items.items})
     }
   }
 
   handleCategory = e => {
-    this.setState({
-      items: this.props.items.items.filter(
-        item => item.category_id === Number(e.target.value)
-      )
-    })
-  }
-
-  // ------------------------
-  // FREYA - want this to return either first 5 or last 5 entries
-  // ------------------------
-  handleRecent = e => {
-    if (e.target.value == 'new') {
-      const longness = this.props.items.items.length
-
-      this.setState({
-        items: this.props.items.items.map(item => {
-          if (item.id > longness - 5) {
-            console.log(item)
-            return item
-          }
+    if (this.state.public) {
+      if (e.target.value == 0) {
+        this.setState({
+          items: this.props.items.items
         })
-      })
-    } else if (e.target.value == 'old') {
-      const longness = this.props.items.items.length
-
-      this.setState({
-        items: this.props.items.items.map(item => {
-          if (item.id < 5) {
-            console.log(item)
-            return item
-          } else {
-            return
-          }
+      } else {
+        this.setState({
+          items: this.props.items.items.filter(
+            item => item.category_id === Number(e.target.value)
+          )
         })
-      })
-      console.log(this.state.items)
+      }
     } else {
-      return console.log('Something is broken')
+      if (e.target.value == 0) {
+        this.setState({
+          items: this.props.privateItems.privateItems
+        })
+        
+      } else {
+        this.setState({
+          items: this.props.privateItems.privateItems.filter(
+            item => item.category_id === Number(e.target.value)
+          )
+        })
+      }
     }
   }
 
-  handleItemDisplay = e => {
-      this.setState({public: !this.state.public})
+
+  handleSeason = e => {
+    if (this.state.public) {
+      if (e.target.value == 0) {
+        this.setState({
+          items: this.props.items.items
+        })
+      } else {
+        console.log(this.props.items.items)
+        this.setState({
+          items: this.props.items.items.filter(
+            item => item.season_id === Number(e.target.value) || item.season_id === 5
+          )
+        })
+      }
+    } else {
+      if (e.target.value == 0) {
+        this.setState({
+          items: this.props.privateItems.privateItems
+        })
+        
+      } else {
+        this.setState({
+          items: this.props.privateItems.privateItems.filter(
+            item => item.season_id === Number(e.target.value) || item.season_id === 5
+          )
+        })
+      }
+    }
   }
 
-  whichItems = () => {
-    if(this.state.public) return this.state.items
-    else return this.props.privateItems.privateItems
-         
+
+  // set state and then run sortItems function once state has been set
+  handleRecent = e => {
+    this.setState({
+      order: e.target.value
+    },this.sortItems)
+  }
+
+  handleItemDisplay = e => {
+    this.setState({
+      public: !this.state.public
+    }, () => {
+      document.getElementById('category-select').value = 0
+      if (this.state.public) {
+        this.setState({ items: this.props.items.items })
+      } else {
+        this.setState({ items: this.props.privateItems.privateItems })
+      }
+    })
+
+    this.handleToggleHighlight()
+  }
+
+  handleToggleHighlight = () => {
+    if(this.state.public){
+      document.getElementById('public').classList.remove('highlightViewMode')
+      document.getElementById('private').classList.add('highlightViewMode')
+    }else if(!this.state.public){
+      document.getElementById('public').classList.add('highlightViewMode')
+      document.getElementById('private').classList.remove('highlightViewMode')
+    }
+  }
+
+
+  sortItems() {
+    let {items, order} = this.state
+    // is the same as: let items = this.state.items
+
+    if (order == 'default') {
+        items.sort((a, b) => {
+          return a.item_name > b.item_name ? 1 : -1
+      }) 
+    } else if (order == 'new') {
+        items.sort((a, b) => {
+          return a.id > b.id ? -1 : 1
+        })
+    } else if (order == 'old') {
+        items.sort((a, b) => {
+          return a.id < b.id ? -1 : 1
+        })
+    }
+    this.setState({items: items})
   }
 
   render() {
     return (
-      <div className='d-flex px-2'>
-        <div className='col-8'>
-          <Map items={this.whichItems()} />
+      <div className='row px-2'>
+        <div className='col-sm-12 col-md-12 col-lg-8'>
+          <Map items={this.state.items} />
         </div>
 
-        <div >
+        <div className='col-sm-12 col-md-12 col-lg-4'>
           <div className='container rounded bg-main mb-3'>
             <h3 className='display-4'>Sort</h3>
             <div>
               <label htmlFor='category'>
                 Category
-                <select name='category' id='' onChange={this.handleCategory}>
+                <select name='category' id='category-select' onChange={this.handleCategory}>
+                  <option value='0'>All</option>
                   <option value='1'>Fruit</option>
+                  <option value='2'>Vegetables</option>
+                  <option value='3'>Herbs</option>
                   <option value='4'>Flowers</option>
                   <option value='5'>Other</option>
                 </select>
               </label>
             </div>
 
+            {/* Seasons dropdown */}
             <div>
               <label htmlFor='category'>
-                Recently Added - BROKEN BUTTON
+                Season
+                <select name='category' id='category-select' onChange={this.handleSeason}>
+                  <option value='0'>All</option>
+                  <option value='1'>Summer</option>
+                  <option value='2'>Autumn</option>
+                  <option value='3'>Winter</option>
+                  <option value='4'>Spring</option>
+                </select>
+              </label>
+            </div>
+
+            {/* Recently dropdown */}
+            <div>
+              <label htmlFor='category'>
+                Recently Added
                 <select name='category' id='' onChange={this.handleRecent}>
+                  <option value='default'>A-Z</option>
                   <option value='new'>Newest</option>
                   <option value='old'>Oldest </option>
                 </select>
@@ -108,28 +200,16 @@ class Filter extends React.Component {
                 value={this.state.public}
               />
               <label className='custom-control-label' htmlFor='customSwitch1'>
-                Private
+                <div className='d-flex'>
+                  <div id='public' className='px-1 highlightViewMode'>Public</div>
+                  <div id='private' className='px-1'>Private</div>
+                </div>
               </label>
             </div>
-
-            {/* <div>
-                        <label htmlFor="category">Suburb - BROKEN BUTTON
-                    <select name="category" id="" onChange={this.handleRecent}> */}
-            {/* what I want this to do is:
-                        - map through suburb names, 
-                        - only show the name if it isn't already showing
-                        - bring back all items in props that include that name */}
-            {/* {this.props.items.items.map((item, i) => {
-                                  return  <option key={i} value={item.item_name}>{item.item_name}</option>
-                                    })
-                                }
-                            </select>
-                        </label>
-                    </div> */}
           </div>
 
           <div className='rounded bg-main'>
-            <ItemList items={this.whichItems()} />
+            <ItemList items={this.state.items} />
           </div>
         </div>
       </div>

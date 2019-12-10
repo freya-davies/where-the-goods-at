@@ -15,6 +15,15 @@ export default function modals(state = initialState, action) {
             return {
                 currentModal: null
             }
+        case 'UPDATE_ITEM_MODAL':
+            return {
+                currentModal: action.type,
+                item: action.item
+            }
+            case 'ADD_ITEM_BY_ADDRESS_MODAL':
+                return {
+                    currentModal: action.type
+                }
         default:
             return state
     }

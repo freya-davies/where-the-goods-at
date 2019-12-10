@@ -1,6 +1,7 @@
 import { getPublicItems, getPrivateItems, updateItem } from '../apis/items'
 
 export function fetchPublicItems () {
+  
     return (dispatch) => {
         dispatch({
             type: 'FETCH_PUBLIC_ITEMS'

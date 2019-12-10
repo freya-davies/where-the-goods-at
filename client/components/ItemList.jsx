@@ -4,103 +4,52 @@ import { HashRouter as Router, Route, Link } from 'react-router-dom'
 import { findSuburb } from '../apis/itemList'
 
 class ItemList extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {}
-  }
+//   constructor(props) {
+//     super(props)
+//     this.state = {}
+//   }
 
-  componentDidMount() {}
+//   componentDidMount() { }
 
-  componentWillReceiveProps(newProps) {
-    this.setState({
-      items: newProps
-    })
-  }
+//   componentDidUpdate(newProps) {
+//     console.log(newProps)
+//     this.setState({
+//       items: newProps.items
+//     })
+//     return true
+//   }
 
-  handleClick = e => {}
-
-  getSuburbs = item => {
-    // console.log(this.props.items.items)
-    return findSuburb(item.lat, item.long).then(data => {
-      console.log(data)
-      return data
-    })
-    // console.log(findSuburb(item.lat, item.long))
-  }
-  // findSuburb(this.props.items.items.lat, this.props.items.items.long)
+//   handleClick = e => { }
 
   render() {
-    console.log(this)
-    const items = this.props.items
-    // console.log(this.props.items.items)
-
-    // --------------------------
-    // WANT TO ADD IN LOCATION/SUBURB, need to change lat and long into street adderess
-    // --------------------------
-
     return (
-        <div className='scrollable'>
-          <h2>Listed items: </h2>
-               <div className="row">
-                 {items.map((item, i) => {
-                  return (
-                    <div key={i} className="col-sm-4 container bg-dark-main">
-                      <div className="rounded">
-                        <hr></hr>
-                      <img className="rounded" src={item.img_url} alt={item.item_name} height="80" width="80" />
-                      <h3>{item.item_name}</h3>
-                      <p>{item.description}</p>
-                      <Link to={`/update/${item.id}`}>
+      <div className='scrollable'>
+        <h2>Listed items: </h2>
+        <div className="row">
+          <div className="col-centered">
+          {this.props.items.map((item, i) => {
+            return (
+              <div key={i} className="card" style={{ alignItems: 'center'}} >
+                <img className="card-img-top" src={item.image} alt={item.item_name} style={{ 'MaxWidth': 2 + 'rem'}}/>
+                <div className="card-body">
+                  <h5 className="card-title">{item.item_name}</h5>
+                  <h6><em>{item.suburb}</em></h6>
+                  <p className="card-text">{item.description}</p>
+                  <Link to={`/update/${item.id}`}>
                       <button>Update</button>
                       </Link>
-                      {/* <p>{findSuburb(item.lat, item.long)}</p> */}
-                      {/* FREYA - THE BELOW LINE IS WHAT YOU WANT TO UNCOMMENT */}
-                      {/* <p>{this.getSuburbs(item)}</p> */}
-                      <hr></hr>
-                      </div>
-                    </div>
-
-                  )
-                }
-                )}
+                </div>
               </div>
-          
+            )
+          }
+          )}
         </div>
-
-      // <div>
-      //   <div className="container">
-      //     <h2>Listed items: </h2>
-      //       <>
-      //         <div className="row">
-      //           {items.map((item, i) => {
-      //             return (
-      //               <div key={i} className="col-sm-4 container bg-dark-main">
-      //                 <div className="rounded">
-      //                   <hr></hr>
-      //                 <img className="rounded" src={item.img_url} alt={item.item_name} height="80" width="80" />
-      //                 <h3>{item.item_name}</h3>
-      //                 <p>{item.description}</p>
-      //                 {/* <p>{findSuburb(item.lat, item.long)}</p> */}
-      //                 {/* FREYA - THE BELOW LINE IS WHAT YOU WANT TO UNCOMMENT */}
-      //                 {/* <p>{this.getSuburbs(item)}</p> */}
-      //                 <hr></hr>
-      //                 </div>
-      //               </div>
-
-      //             )
-      //           }
-      //           )}
-      //         </div>
-      //       </>
-      //   </div>
-
-      // </div>
+        </div>
+      </div>
     )
   }
 }
 
-const mapStateToProps = () => {
-  return {}
-}
 
-export default connect(mapStateToProps)(ItemList)
+// export default connect()(ItemList)
+export default ItemList

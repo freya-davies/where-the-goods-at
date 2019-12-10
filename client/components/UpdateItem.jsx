@@ -2,6 +2,8 @@ import React from "react"
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { getItem, getCategories, getSeasons, updateItem } from '../apis/items'
+import { fetchPublicItems } from '../actions/items'
+
 
 class UpdateItem extends React.Component {
 
@@ -87,10 +89,11 @@ class UpdateItem extends React.Component {
         console.log(this.state.item)
         e.preventDefault()
         updateItem(this.state.item)
-            .then(
+            .then(() => {
+                this.props.fetchPublicItems()
                 this.setState({
                     redirect: true
-                }))
+                })})
     }
 
     handleChange = (e) => {
@@ -171,4 +174,4 @@ const mapStateToProps = ({ items }) => {
     }
 }
 
-export default connect(mapStateToProps)(UpdateItem)
+export default connect(mapStateToProps, {fetchPublicItems})(UpdateItem)

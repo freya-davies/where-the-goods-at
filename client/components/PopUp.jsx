@@ -1,4 +1,4 @@
-import React,  { Component } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 
@@ -12,7 +12,6 @@ class PopUp extends React.Component {
   }
 
   componentDidMount() {
-    // console.log("did mount?")
     if (!this.props.auth.isAuthenticated) {
       setTimeout(this.popUp, 10000);
     }
@@ -20,9 +19,6 @@ class PopUp extends React.Component {
 
   popUp = () => {
     this.setState({ showPopUp: true })
-    // console.log(document.getElementById('myModal').style)
-    // document.getElementById('myModal').style.display = 'block'
-    // console.log('pop!')
   }
 
   closeModal = () => {
@@ -31,17 +27,11 @@ class PopUp extends React.Component {
     })
   }
 
-
-  handleClick = (e) => {
-    // console.log("e is:", e)
-  }
-
-
   render() {
     return (
       <React.Fragment>
         {this.state.showPopUp &&
-          <div className="modal" style={{ display: 'block' }} id="myModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div className="modal" style={{ display: 'block' }} id="myModal" data-backdrop="static" tabIndex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div className="modal-dialog" role="document">
               <div className="modal-content">
                 <div className="modal-header">

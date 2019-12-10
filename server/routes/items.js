@@ -10,9 +10,7 @@ router.post('/add', (req, res) => {
         .then(userId => {
             req.body.user = userId.id
             db.addItem(req.body)
-                .then(response => {
-                    res.sendStatus(200)
-                })
+                .then(res.sendStatus(200))
         })
 })
 
@@ -52,7 +50,6 @@ router.patch('/update/:id', (req, res) => {
 })
 
 // get public items
-
 router.get('/', (req, res) => {
     db.getPublicItems()
         .then(items => {
@@ -61,7 +58,6 @@ router.get('/', (req, res) => {
 })
 
 // get users private items
-
 router.get('/user/:name', (req, res) => {
     dbUser.getUserByUsername(req.params.name)
         .then(userId => {
@@ -72,11 +68,13 @@ router.get('/user/:name', (req, res) => {
         })
 })
 
+//get all categoies
 router.get('/categories', (req, res) => {
     db.getCategories()
         .then(data => res.json(data))
 })
 
+//get all seasons
 router.get('/seasons', (req, res) => {
     db.getSeasons()
         .then(data => res.json(data))
