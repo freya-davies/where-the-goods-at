@@ -14,7 +14,6 @@ class AddModal extends React.Component {
         user: this.props.auth.auth.user.user_name,
         lat: this.props.location.lat,
         long: this.props.location.lng,
-        img_url: '',
         public: true,
         category: '',
         season: '',

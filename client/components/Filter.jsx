@@ -20,8 +20,9 @@ export class Filter extends React.Component {
   }
 
 
+
   componentDidUpdate(prevProps) {
-    if (this.props.items !== prevProps.items) {
+    if (this.props.items !== prevProps.items && this.state.public) {
       this.setState({ items: this.props.items.items })
 
     }
@@ -71,7 +72,6 @@ export class Filter extends React.Component {
 
         })
       }
-      console.log(this.state.items)
     } else {
       if (e.target.value == 0) {
         this.setState({
@@ -168,7 +168,7 @@ export class Filter extends React.Component {
                     <option value='2' className="dropdown-item">Vegetables</option>
                     <option value='3' className="dropdown-item">Herbs</option>
                     <option value='4' className="dropdown-item">Flowers</option>
-                    <option value='5' className="dropdown-item">Other</option> */}
+                    <option value='5' className="dropdown-item">Other</option>
                   </select>
                 </div>
               </div>
