@@ -223,7 +223,8 @@ class Filter extends React.Component {
           </div>
 
           <div className='container rounded bg-main mb-3'>
-            <ItemList items={this.state.items} dispatch={this.props.dispatch} />
+            <ItemList items={this.state.items} dispatch={this.props.dispatch} auth={this.props.auth.isAuthenticated} />
+
           </div>
         </div>
       </div >
