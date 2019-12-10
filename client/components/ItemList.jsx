@@ -1,15 +1,15 @@
 import React from 'react'
 import { HashRouter as Router, Route, Link } from 'react-router-dom'
-import {deleteItem} from '../apis/items'
+import { deleteItem } from '../apis/items'
 
 
 class ItemList extends React.Component {
-    constructor(props) {
-      super(props)
-      this.state = {
-        item: null
-      }
+  constructor(props) {
+    super(props)
+    this.state = {
+      item: null
     }
+  }
 
   //   componentDidMount() { }
 
@@ -22,18 +22,19 @@ class ItemList extends React.Component {
   //   }
 
   handleDelete = (id) => {
-  
+    alert("Are you sure you would like to delete this item?")
     deleteItem(id)
       .then(() => {
         this.refreshPage()
       })
-    }
+  }
 
   refreshPage = () => {
     window.location.reload()
   }
 
   render() {
+    console.log(this.props)
     return (
       <div className='scrollable'>
         <h2>Listed items: </h2>
@@ -47,11 +48,15 @@ class ItemList extends React.Component {
                     <h5 className="card-title">{item.item_name}</h5>
                     <h6><em>{item.suburb}</em></h6>
                     <p className="card-text">{item.description}</p>
+                  
+                    {this.props.auth &&
+                    <>
                     <Link to={`/update/${item.id}`}>
                       <button>Update</button>
                     </Link>
                     <button onClick={() => this.handleDelete(item.id)}>Delete</button>
-
+                    </>
+                    }
                   </div>
                 </div>
               )
