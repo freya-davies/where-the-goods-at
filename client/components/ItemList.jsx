@@ -43,7 +43,6 @@ class ItemList extends React.Component {
   }
 
   render() {
-    console.log(this.props)
     return (
       <div className='scrollable'>
         <div className='container rounded bg-main mb-3'>

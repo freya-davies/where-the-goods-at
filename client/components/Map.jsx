@@ -102,7 +102,6 @@ class Map extends Component {
   }
 
   handleIcons = category => {
-    console.log(category)
     return '/images/Avocado.svg'
     //need to read from file and do a string.includes on each
   }
