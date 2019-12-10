@@ -129,7 +129,8 @@ export class Map extends Component {
                   mapContainerStyle={{
                     height: "800px",
                     width: "1200px",
-                    borderRadius: ".25rem"
+                    borderRadius: ".25rem",
+                    boxShadow: "rgba(0, 0, 0, 0.5) 0px 3px 4px -1px"
                   }}
                   options={{
                     styles: googleMapStyles
