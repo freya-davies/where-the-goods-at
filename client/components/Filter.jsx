@@ -3,16 +3,16 @@ import { connect } from 'react-redux'
 import Map from './Map'
 import ItemList from './ItemList'
 
-class Filter extends React.Component {
+export class Filter extends React.Component {
   constructor(props) {
     super(props)
 
     this.state = {
       items: this.props.items.items,
-      public: true,
-      order: 'default'
+      public: true
     }
   }
+
 
   componentDidMount() {
     this.sortItems()
@@ -22,6 +22,7 @@ class Filter extends React.Component {
   componentDidUpdate(prevProps) {
     if (this.props.items !== prevProps.items) {
       this.setState({ items: this.props.items.items })
+
     }
   }
 
@@ -43,7 +44,6 @@ class Filter extends React.Component {
         this.setState({
           items: this.props.privateItems.privateItems
         })
-
       } else {
         this.setState({
           items: this.props.privateItems.privateItems.filter(
@@ -53,6 +53,7 @@ class Filter extends React.Component {
       }
     }
   }
+
 
 
   handleSeason = e => {
@@ -66,8 +67,10 @@ class Filter extends React.Component {
           items: this.props.items.items.filter(
             item => item.season_id === Number(e.target.value) || item.season_id === 5
           )
+
         })
-      }
+      })
+      console.log(this.state.items)
     } else {
       if (e.target.value == 0) {
         this.setState({
@@ -92,9 +95,10 @@ class Filter extends React.Component {
     }, this.sortItems)
   }
 
+
   handleItemDisplay = e => {
-    this.setState({
-      public: !this.state.public
+    this.setState({ 
+      public: !this.state.public 
     }, () => {
       document.getElementById('category-select').value = 0
       if (this.state.public) {
@@ -116,7 +120,6 @@ class Filter extends React.Component {
       document.getElementById('private').classList.remove('highlightViewMode')
     }
   }
-
 
   sortItems() {
     let { items, order } = this.state
@@ -230,7 +233,6 @@ class Filter extends React.Component {
 
           <div className='container rounded bg-main mb-3'>
             <ItemList items={this.state.items} dispatch={this.props.dispatch} auth={this.props.auth.isAuthenticated} />
-
           </div>
         </div>
       </div >

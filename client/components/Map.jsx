@@ -10,7 +10,7 @@ import { getCategories, getSeasons } from '../apis/items'
 const googleMapStyles = require('../../public/GoogleMapStyles.json')
 
 
-class Map extends Component {
+export class Map extends Component {
 
   constructor(props) {
 
