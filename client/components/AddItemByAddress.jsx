@@ -283,18 +283,14 @@ class AddItemByAddress extends React.Component {
                                         type='range'
                                         className="custom-range"
                                         min='1'
-                                        max='50'
+                                        max='20'
                                         defaultValue='1'
                                         onChange={this.handleChange} />
                                     {this.state.newItem.quantity}
                                 </div>
 
                                 <div className="form-row">
-                                    <label>
-                                        <p>
-                                            Add Image
-                                        </p>
-                                    </label>
+                                    {/* select an imgage */}
                                     <div className="custom-file">
                                         <input
                                             type="file"
@@ -308,14 +304,15 @@ class AddItemByAddress extends React.Component {
                                     <div className="col-auto my-1">
                                         <button
                                             type='submit'
-                                            className='btn btn-secondary'> Submit
+                                            className='btn bg-main-reverse'> 
+                                            Submit
                                         </button>
                                     </div>
 
                                     <div className="col-auto my-1">
                                         <button
                                             type='button'
-                                            className='btn btn-secondary'
+                                            className='btn bg-main-reverse'
                                             data-dismiss='modal'
                                             onClick={this.props.toggleAddForm}>
                                             Close
