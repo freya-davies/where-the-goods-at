@@ -141,11 +141,11 @@ class Filter extends React.Component {
   render() {
     return (
       <div className='row px-2'>
-        <div className='col-sm-12 col-md-12 col-lg-8'>
+        <div className='col-sm-12 col-md-12 col-lg-8 mt-3'>
           <Map items={this.state.items} />
         </div>
 
-        <div className='col-sm-12 col-md-12 col-lg-4'>
+        <div className='col-sm-12 col-md-12 col-lg-4 mt-3'>
           <div className='container rounded bg-main mb-3'>
             <h3 className="sort-heading">Sort</h3>
             <article className="card-group-item">
@@ -221,7 +221,7 @@ class Filter extends React.Component {
             </div>
           </div>
 
-          <div className='rounded bg-main'>
+          <div className='container rounded bg-main mb-3'>
             <ItemList items={this.state.items} />
           </div>
         </div>
