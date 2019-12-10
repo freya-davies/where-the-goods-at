@@ -148,6 +148,8 @@ class Filter extends React.Component {
         <div className='col-sm-12 col-md-12 col-lg-4'>
           <div className='container rounded bg-main mb-3'>
             <h3 className="sort-heading">Sort</h3>
+
+            {/* Category dropdown */}
             <article class="card-group-item">
               <header class="card-header filter-options">
                 <h6 class="title">Category </h6>
@@ -160,10 +162,9 @@ class Filter extends React.Component {
                     <option value='2' class="dropdown-item">Vegetables</option>
                     <option value='3' class="dropdown-item">Herbs</option>
                     <option value='4' class="dropdown-item">Flowers</option>
-                    <option value='5' class="dropdown-item">Other</option> */}
+                    <option value='5' class="dropdown-item">Other</option>
                   </select>
                 </div>
-
               </div>
             </article>
 
@@ -184,6 +185,7 @@ class Filter extends React.Component {
                 </div>
               </div>
             </article>
+
             {/* Recently dropdown */}
             <article class="card-group-item">
               <header class="card-header filter-options">
@@ -191,26 +193,26 @@ class Filter extends React.Component {
               </header>
               <div class="filter-content">
                 <div class="list-group list-group-flush">
-                <select name='category' id='' onChange={this.handleRecent}>
-                  <option value='default'>A-Z</option>
-                  <option value='new'>Newest</option>
-                  <option value='old'>Oldest </option>
-                </select>
+                  <select name='category' id='' onChange={this.handleRecent}>
+                    <option value='default'>A-Z</option>
+                    <option value='new'>Newest</option>
+                    <option value='old'>Oldest </option>
+                  </select>
                 </div>
-            </div>
+              </div>
             </article>
 
+            {/* View slider */}
             <header class="card-header filter-options">
-                <h6 class="title">View </h6>
-              </header>
+              <h6 class="title">View </h6>
+            </header>
             <div className='custom-control custom-switch'>
               <input
                 type='checkbox'
                 className='custom-control-input'
                 id='customSwitch1'
                 onChange={this.handleItemDisplay}
-                value={this.state.public}
-              />
+                value={this.state.public}/>
               <label className='custom-control-label' htmlFor='customSwitch1'>
                 <div className='d-flex'>
                   <div id='public' className='px-1 highlightViewMode'>Public</div>

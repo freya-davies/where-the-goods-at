@@ -36,6 +36,7 @@ class PopUp extends React.Component {
               <div className="modal-content">
                 <div className="modal-header">
                   <h5 className="modal-title" id="staticBackdropLabel">Become A Forage Extraordinaire!</h5>
+                  
                   <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={this.closeModal}>
                     <span aria-hidden="true">&times;</span>
                   </button>

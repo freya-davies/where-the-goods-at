@@ -58,8 +58,9 @@ class Register extends React.Component {
 
             <div className="row justify-content-start">
               <div className='col-6 reg-text'>
-                <label htmlFor="user_name" >Username:
-          </label>
+                <label htmlFor="user_name" 
+                  >Username:
+              </label>
               </div>
 
               <div className='col-6 reg'>
@@ -69,8 +70,9 @@ class Register extends React.Component {
 
             <div className="row justify-content-start">
               <div className='col-6 reg-text'>
-                <label htmlFor="email" >Email:
-          </label>
+                <label htmlFor="email" 
+                  >Email:
+              </label>
               </div>
 
               <div className='col-6 reg'>
@@ -80,8 +82,9 @@ class Register extends React.Component {
 
             <div className="row justify-content-start">
               <div className='col-6 reg-text'>
-                <label htmlFor="first_name">First Name:
-              </label>
+                <label htmlFor="first_name">
+                  First Name:
+                </label>
               </div>
 
               <div className='col-6 reg'>
@@ -91,8 +94,9 @@ class Register extends React.Component {
 
             <div className="row justify-content-start">
               <div className='col-6 reg-text'>
-                <label htmlFor="lastName">Last Name:
-              </label>
+                <label htmlFor="lastName">
+                  Last Name:
+                </label>
               </div>
 
               <div className='col-6 reg'>
@@ -102,8 +106,9 @@ class Register extends React.Component {
 
             <div className="row justify-content-start">
               <div className='col-6 reg-text'>
-                <label htmlFor="password">Password
-            </label>
+                <label htmlFor="password">
+                  Password
+                </label>
               </div>
 
               <div className='col-6 reg'>
@@ -113,8 +118,9 @@ class Register extends React.Component {
 
             <div className="row justify-content-start">
               <div className='col-6 reg-text'>
-                <label htmlFor="confirm_password">Confirm Password
-              </label>
+                <label htmlFor="confirm_password">
+                  Confirm Password
+                </label>
               </div>
 
               <div className='col-6 reg'>
