@@ -50,6 +50,7 @@ class Register extends React.Component {
     return (
       <div className="registerContainer">
         <div className="col-6 col-md-4">
+          <img className="img-fluid" src="/images/forage-lettuce.png" alt="Forage &amp; Find" />
           <form className="login-register-form" onSubmit={this.submit}>
             <h1 className='registerTitle'>Register</h1>
             {auth.errorMessage && <><h1><span className="badge badge-danger badge-lg">{auth.errorMessage}</span></h1><br></br></>}

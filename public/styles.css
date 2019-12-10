@@ -74,6 +74,11 @@
   color: #195507;
   }
 
+  .bg-main-reverse {
+    background-color: #195507;
+  color: #FFF1DA;
+  }
+
   .bg-dark-main {
     background-color: rgb(223, 215, 203);
   }
@@ -216,4 +221,49 @@ h1.ml8 {
 .info-window {
   min-width: 21rem;
   max-width: 22rem;
+}
+
+/* login page */
+.img-fluid {
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+  width: 30%;
+}
+
+.loginTitle {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.loginContainer {
+  text-align: -webkit-center;
+}
+
+.form-inline {
+  text-align: center;
+  display: inherit;
+}
+
+.loginButton {
+  margin-top: 2rem;
+}
+
+/* register page */
+.registerContainer {
+  text-align: -webkit-center;
+}
+
+.registerButton {
+    margin-top: 2rem;
+}
+
+.registerTitle {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+}
+.justify-content-start {
+    margin-top: 0.5rem;
+
 }
