@@ -218,3 +218,20 @@ h1.ml8 {
   min-width: 21rem;
   max-width: 22rem;
 }
+
+/* filter panel */
+.sort-heading {
+  padding-top: .5rem;
+}
+
+.filter-options{
+margin-top: .3rem;
+padding-top: .3rem;
+padding-bottom: 0;
+padding-left: 0;
+background-color: transparent;
+}
+
+.custom-switch {
+  padding: 1rem 0 1rem 2.5rem;
+}
