@@ -20,6 +20,7 @@ class Map extends Component {
         lat: -41.2743523,
         lng: 174.735582
       },
+      zoom : 12,
       pins: [],
       key: false,
       addMode: false,
@@ -58,6 +59,16 @@ class Map extends Component {
         return location
       })
     })
+
+    if(this.props.currentItem != newProps.currentItem) {
+      this.setState({
+        center: {
+          lat: newProps.currentItem.lat,
+          lng: newProps.currentItem.long
+        },
+        zoom: 18
+      })
+    }
   }
   toggleAddForm = (e) => {
     this.setState({
@@ -122,7 +133,7 @@ class Map extends Component {
                   options={{
                     styles: googleMapStyles
                     }}
-                  zoom={12}
+                  zoom={this.state.zoom}
                   center={this.state.center}
                   mapTypeId='satellite'
                   onClick={this.handleAddPin}>
@@ -134,7 +145,6 @@ class Map extends Component {
                         position={{ lat: item.lat, lng: item.long }}
                         //icon={this.handleIcons(item.category_id)}
                         icon={'/images/Avocado3.svg'}
-
                       >
                         {this.props.items[index] == this.state.activePin && (
                           <InfoWindow onCloseClick={() => this.closeWindow()} position={{ lat: item.lat, lng: item.long }}>
@@ -175,9 +185,10 @@ class Map extends Component {
   }
 }
 
-const mapStateToProps = (auth) => {
+const mapStateToProps = (state) => {
   return {
-    auth
+    auth: state, 
+    currentItem : state.currentItem,
   }
 }
 

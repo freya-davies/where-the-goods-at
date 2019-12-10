@@ -224,7 +224,7 @@ class Filter extends React.Component {
           </div>
 
           <div className='rounded bg-main'>
-            <ItemList items={this.state.items} />
+            <ItemList items={this.state.items} dispatch={this.props.dispatch}/>
           </div>
         </div>
       </div >
