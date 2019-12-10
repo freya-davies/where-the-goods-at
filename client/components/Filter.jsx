@@ -193,18 +193,18 @@ class Filter extends React.Component {
               </header>
               <div className="filter-content">
                 <div className="list-group list-group-flush">
-                <select name='category' id='' onChange={this.handleRecent}>
-                  <option value='default'>A-Z</option>
-                  <option value='new'>Newest</option>
-                  <option value='old'>Oldest </option>
-                </select>
+                  <select name='category' id='' onChange={this.handleRecent}>
+                    <option value='default'>A-Z</option>
+                    <option value='new'>Newest</option>
+                    <option value='old'>Oldest </option>
+                  </select>
                 </div>
               </div>
             </article>
 
             <header className="card-header filter-options view-header">
-                <h6 className="title">View </h6>
-              </header>
+              <h6 className="title">View </h6>
+            </header>
             <div className='custom-control custom-switch'>
               Public
               <input
@@ -212,7 +212,7 @@ class Filter extends React.Component {
                 className='custom-control-input'
                 id='customSwitch1'
                 onChange={this.handleItemDisplay}
-                value={this.state.public}/>
+                value={this.state.public} />
               <label className='custom-control-label' htmlFor='customSwitch1'>
                 <div className='d-flex'>
                   <div id='public' className='px-1 highlightViewMode'>Public</div>
@@ -223,7 +223,7 @@ class Filter extends React.Component {
           </div>
 
           <div className='container rounded bg-main mb-3'>
-            <ItemList items={this.state.items} />
+            <ItemList items={this.state.items} dispatch={this.props.dispatch} />
           </div>
         </div>
       </div >
