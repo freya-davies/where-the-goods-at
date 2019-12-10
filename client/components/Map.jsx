@@ -169,17 +169,6 @@ class Map extends Component {
                 </GoogleMap>
               </LoadScript>
             }
-   
-        {this.props.auth.auth.isAuthenticated &&
-            <div className="addItemContainer">
-              <div className="addPinButton">
-                <button type="button" class="btn btn-light " onClick={this.toggleAddMode}>{this.state.addMode ? "Stop Adding Items" : "Add Item by Pin"}</button>
-              </div>
-              <div className="addPinButton">
-                <button type="button" class="btn btn-light" onClick={this.toggleAddForm}>Add Item by Address</button>
-              </div>
-            </div>
-                }
 
           </div>
         </div>
