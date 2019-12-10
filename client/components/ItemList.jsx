@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { HashRouter as Router, Route, Link } from 'react-router-dom'
 import { findSuburb } from '../apis/itemList'
 
 class ItemList extends React.Component {
@@ -34,6 +35,9 @@ class ItemList extends React.Component {
                   <h5 className="card-title">{item.item_name}</h5>
                   <h6><em>{item.suburb}</em></h6>
                   <p className="card-text">{item.description}</p>
+                  <Link to={`/update/${item.id}`}>
+                      <button>Update</button>
+                      </Link>
                 </div>
               </div>
             )
