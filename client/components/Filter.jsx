@@ -185,12 +185,12 @@ class Filter extends React.Component {
               </div>
             </article>
             {/* Recently dropdown */}
-            <article class="card-group-item">
-              <header class="card-header filter-options">
-                <h6 class="title">Recently Added </h6>
+            <article className="card-group-item">
+              <header className="card-header filter-options">
+                <h6 className="title">Recently Added </h6>
               </header>
-              <div class="filter-content">
-                <div class="list-group list-group-flush">
+              <div className="filter-content">
+                <div className="list-group list-group-flush">
                 <select name='category' id='' onChange={this.handleRecent}>
                   <option value='default'>A-Z</option>
                   <option value='new'>Newest</option>
@@ -200,8 +200,8 @@ class Filter extends React.Component {
             </div>
             </article>
 
-            <header class="card-header filter-options">
-                <h6 class="title">View </h6>
+            <header className="card-header filter-options view-header">
+                <h6 className="title">View </h6>
               </header>
             <div className='custom-control custom-switch'>
               Public

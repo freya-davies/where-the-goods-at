@@ -24,7 +24,8 @@ class ItemList extends React.Component {
   render() {
     return (
       <div className='scrollable'>
-        <h2>Listed items: </h2>
+        <div className='container rounded bg-main mb-3'>
+        <h3 className="list-heading">Listed Items</h3>
         <div className="row">
           <div className="col-centered">
           {this.props.items.map((item, i) => {
@@ -43,6 +44,7 @@ class ItemList extends React.Component {
             )
           }
           )}
+        </div>
         </div>
         </div>
       </div>
