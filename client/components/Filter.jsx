@@ -139,7 +139,7 @@ class Filter extends React.Component {
   }
 
   render() {
-    let isAuthenticated = this.props.auth.auth
+    let isAuthenticated = this.props.auth.isAuthenticated
 
     return (
       <div className='row px-2'>
