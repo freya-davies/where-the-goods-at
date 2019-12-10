@@ -35,7 +35,7 @@ class Register extends React.Component {
     checkDatabase(email)
       .then((emailExists) => {
         if (emailExists) return this.props.dispatch(loginError("Email already exists"))
-        console.log('line 1', result)
+        console.log('line 1', emailExists)
         if (password.length <= 7) return this.props.dispatch(loginError("Password must contain at least 8 characters"))
         // console.log('line 2')
         if (confirm_password != password) return this.props.dispatch(loginError("Passwords don't match"))
