@@ -61,15 +61,20 @@ export class Map extends Component {
     })
 
     if(this.props.currentItem != newProps.currentItem) {
-      this.setState({
-        center: {
-          lat: newProps.currentItem.lat,
-          lng: newProps.currentItem.long
-        },
-        zoom: 18
-      })
+      this.centerFocusOn(newProps.currentItem)
     }
   }
+
+  centerFocusOn = (currentItem) => {
+    this.setState({
+      center: {
+        lat: currentItem.lat,
+        lng: currentItem.long
+      },
+      zoom: 18
+    })
+  }
+
   toggleAddForm = (e) => {
     this.setState({
       addForm: !this.state.addForm
@@ -124,21 +129,15 @@ export class Map extends Component {
                 id="script-loader"
                 libraries={["places"]}
                 googleMapsApiKey={process.env.GOOGLE_MAPS}>
+                  
                 <GoogleMap
-                  id='Traffic-layer-example'
-                  mapContainerStyle={{
-                    height: "800px",
-                    width: "1200px",
-                    borderRadius: ".25rem",
-                    boxShadow: "rgba(0, 0, 0, 0.5) 0px 3px 4px -1px"
-                  }}
-                  options={{
-                    styles: googleMapStyles
-                    }}
+                  id='Traffic-layer-example' mapTypeId='satellite'
+                  mapContainerStyle={{ height: "800px", width: "1200px", borderRadius: ".25rem", boxShadow: "rgba(0, 0, 0, 0.5) 0px 3px 4px -1px" }}
+                  options={{ styles: googleMapStyles }}
                   zoom={this.state.zoom}
                   center={this.state.center}
-                  mapTypeId='satellite'
                   onClick={this.handleAddPin}>
+
                   {this.props.items.map((item, index) => {
                     return (
                       <Marker

@@ -23,7 +23,10 @@ export class Filter extends React.Component {
   componentDidUpdate(prevProps) {
     if (this.props.items !== prevProps.items && this.state.public) {
       this.setState({ items: this.props.items.items })
+    }
 
+    if (this.props.privateItems !== prevProps.privateItems) {
+      this.setState({ items: this.props.privateItems.privateItems, public: false })
     }
   }
 
@@ -53,6 +56,21 @@ export class Filter extends React.Component {
         })
       }
     }
+    /*
+       const items = this.state.public ? this.props.items.items : this.props.privateItems.privateItems
+       
+       if (e.target.value == 0) {
+         this.setState({
+           items: items
+         })
+       } else {
+         this.setState({
+           items: items.filter(
+             item => item.category_id === Number(e.target.value)
+           )
+         })
+       }
+       */
   }
 
 
@@ -97,8 +115,8 @@ export class Filter extends React.Component {
 
 
   handleItemDisplay = e => {
-    this.setState({ 
-      public: !this.state.public 
+    this.setState({
+      public: !this.state.public
     }, () => {
       document.getElementById('category-select').value = 0
       if (this.state.public) {
@@ -108,7 +126,7 @@ export class Filter extends React.Component {
       }
     })
 
-    this.handleToggleHighlight()
+    // this.handleToggleHighlight()
   }
 
   handleToggleHighlight = () => {
@@ -140,6 +158,8 @@ export class Filter extends React.Component {
     }
     this.setState({ items: items })
   }
+
+
 
   render() {
     const isAuthenticated = this.props.auth.isAuthenticated
@@ -213,7 +233,7 @@ export class Filter extends React.Component {
                   <h6 className="title">View </h6>
                 </header>
                 <div className='custom-control custom-switch'>
-              <input
+                  <input
                     type='checkbox'
                     className='custom-control-input'
                     id='customSwitch1'
@@ -221,8 +241,8 @@ export class Filter extends React.Component {
                     value={this.state.public} />
                   <label className='custom-control-label' htmlFor='customSwitch1'>
                     <div className='d-flex'>
-                      <div id='public' className='px-1 highlightViewMode'>Public</div>
-                      <div id='private' className='px-1'>Private</div>
+                      <div id='private' className={this.state.public ? 'px-1' : 'px-1 highlightViewMode'}>Private</div>
+                      <div id='public' className={this.state.public ? 'px-1 highlightViewMode' : 'px-1'}>Public</div>
                     </div>
                   </label>
                 </div>
@@ -237,7 +257,7 @@ export class Filter extends React.Component {
       </div >
     )
   }
-  }
+}
 
 
 const mapStateToProps = ({ auth, items, privateItems }) => {
