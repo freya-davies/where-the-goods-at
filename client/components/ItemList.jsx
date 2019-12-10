@@ -3,6 +3,9 @@ import { connect } from 'react-redux'
 import { findSuburb } from '../apis/itemList'
 
 class ItemList extends React.Component {
+// --------------------
+//  connecting redux make this break for some reason, please leave comments
+// --------------------
 //   constructor(props) {
 //     super(props)
 //     this.state = {}
@@ -22,7 +25,7 @@ class ItemList extends React.Component {
 
   render() {
     return (
-      <div className='scrollable'>
+      <div className='scrollable rounded bg-main'>
         <h2>Listed items: </h2>
         <div className="row">
           <div className="col-centered">
