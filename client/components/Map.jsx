@@ -90,15 +90,11 @@ class Map extends Component {
     })
   }
 
-  // this.setState({
-
-  //     pins: [
-  //         ...this.state.pins,
-  //         { lat: e.latLng.lat(), lng: e.latLng.lng() }
-  //     ],
-  //     center: { lat: e.latLng.lat(), lng: e.latLng.lng()}
-
-  // })
+  handleIcons = category => {
+    console.log(category)
+    return '/images/Avocado.svg'
+    //need to read from file and do a string.includes on each
+  }
 
   render() {
     return (
@@ -136,7 +132,7 @@ class Map extends Component {
                         onClick={() => this.openWindow(index)}
                         key={index}
                         position={{ lat: item.lat, lng: item.long }}
-                        icon={'/images/Avocado.svg'}
+                        icon={this.handleIcons(item.category_id)}
                       >
                         {this.props.items[index] == this.state.activePin && (
                           <InfoWindow onCloseClick={() => this.closeWindow()} position={{ lat: item.lat, lng: item.long }}>
