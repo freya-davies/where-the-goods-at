@@ -42,3 +42,11 @@ export function updateSingleItem(id, item) {
         })
     }
 }
+
+
+export function setCurrentItem(item) {
+       return {
+           type: 'RECEIVE_CURRENT_ITEM',
+           item
+       }
+}

@@ -86,7 +86,7 @@ class UpdateItem extends React.Component {
     }
 
     handleSubmit = (e) => {
-        console.log(this.state.item)
+        (this.state.item)
         e.preventDefault()
         updateItem(this.state.item)
             .then(() => {

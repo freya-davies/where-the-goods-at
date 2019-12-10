@@ -42,7 +42,6 @@ router.get('/item/:id', (req, res) => {
 
 router.patch('/update/:id', (req, res) => {
     let item = req.body
-    console.log(item)
 
     db.updateItem(req.params.id, item).then(items => {
         res.json(items)
@@ -78,6 +77,12 @@ router.get('/categories', (req, res) => {
 router.get('/seasons', (req, res) => {
     db.getSeasons()
         .then(data => res.json(data))
+})
+
+
+router.delete('/delete/:id', (req,res) => {
+    db.deleteItem(req.params.id)
+    .then(res.sendStatus(200))
 })
 
 
