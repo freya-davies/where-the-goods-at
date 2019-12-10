@@ -10,7 +10,7 @@ import { getCategories, getSeasons } from '../apis/items'
 const googleMapStyles = require('../../public/GoogleMapStyles.json')
 
 
-class Map extends Component {
+export class Map extends Component {
 
   constructor(props) {
 
@@ -20,6 +20,7 @@ class Map extends Component {
         lat: -41.2743523,
         lng: 174.735582
       },
+      zoom : 12,
       pins: [],
       key: false,
       addMode: false,
@@ -58,6 +59,16 @@ class Map extends Component {
         return location
       })
     })
+
+    if(this.props.currentItem != newProps.currentItem) {
+      this.setState({
+        center: {
+          lat: newProps.currentItem.lat,
+          lng: newProps.currentItem.long
+        },
+        zoom: 18
+      })
+    }
   }
   toggleAddForm = (e) => {
     this.setState({
@@ -91,7 +102,6 @@ class Map extends Component {
   }
 
   handleIcons = category => {
-    console.log(category)
     return '/images/Avocado.svg'
     //need to read from file and do a string.includes on each
   }
@@ -112,6 +122,7 @@ class Map extends Component {
             {this.state.key && this.props.items &&
               <LoadScript
                 id="script-loader"
+                libraries={["places"]}
                 googleMapsApiKey={process.env.GOOGLE_MAPS}>
                 <GoogleMap
                   id='Traffic-layer-example'
@@ -123,7 +134,7 @@ class Map extends Component {
                   options={{
                     styles: googleMapStyles
                     }}
-                  zoom={12}
+                  zoom={this.state.zoom}
                   center={this.state.center}
                   mapTypeId='satellite'
                   onClick={this.handleAddPin}>
@@ -134,7 +145,7 @@ class Map extends Component {
                         key={index}
                         position={{ lat: item.lat, lng: item.long }}
                         //icon={this.handleIcons(item.category_id)}
-                        icon={'/images/Avocado3.svg'}
+                        icon={`/images/icon${item.category_id}.svg`}
 
                       >
                         {this.props.items[index] == this.state.activePin && (
@@ -143,11 +154,11 @@ class Map extends Component {
                               <h4>{this.props.items[index].item_name}</h4>
                               {/* <input type='text' name={this.props.items[index].item_name} />  */}
                               <h6>Description:</h6><p> <em>"{this.props.items[index].description}"</em></p>
-                              <h6>Category:</h6><p> {this.state.categoryData[this.props.items[index].category_id - 1].category_name}</p> 
+                              <h6>Category:</h6><p> {this.state.categoryData[this.props.items[index].category_id - 1].category_name}</p>
                               <h6>Quantity:</h6><p>{this.props.items[index].quantity}</p>
-                              <h6>Season:</h6><p> {this.state.seasonData[this.props.items[index].season_id - 1].season_name}</p> 
+                              <h6>Season:</h6><p> {this.state.seasonData[this.props.items[index].season_id - 1].season_name}</p>
                               {this.props.items[index].image &&
-                                <img src={this.props.items[index].image} style={{maxWidth: '20rem'}}/>}
+                                <img src={this.props.items[index].image} style={{ maxWidth: '20rem' }} />}
                             </div>
                           </InfoWindow>
                         )}
@@ -155,16 +166,18 @@ class Map extends Component {
                     )
                   })}
 
-{this.props.auth.auth.isAuthenticated &&
-            <div className="addItemContainer">
-              <div className="addPinButton">
-                <button type="button" className="btn btn-light" onClick={this.toggleAddMode}>{this.state.addMode ? "Stop Adding Items" : "Add Item by Pin"}</button>
-              </div>
-              <div className="addPinButton">
-                <button type="button" className="btn btn-light" onClick={this.toggleAddForm}>Add Item by Address</button>
-              </div>
-            </div>
-                }
+
+                  {this.props.auth.auth.isAuthenticated &&
+                              <div className="addItemContainer">
+                                <div className="addPinButton">
+                                  <button type="button" className="btn btn-light" onClick={this.toggleAddMode}>{this.state.addMode ? "Stop Adding Items" : "Add Item by Pin"}</button>
+                                </div>
+                                <div className="addPinButton">
+                                  <button type="button" className="btn btn-light" onClick={this.toggleAddForm}>Add Item by Address</button>
+                                </div>
+                              </div>
+                                  }
+
                 </GoogleMap>
               </LoadScript>
             }
@@ -176,9 +189,10 @@ class Map extends Component {
   }
 }
 
-const mapStateToProps = (auth) => {
+const mapStateToProps = (state) => {
   return {
-    auth
+    auth: state, 
+    currentItem : state.currentItem,
   }
 }
 

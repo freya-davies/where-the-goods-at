@@ -3,16 +3,16 @@ import { connect } from 'react-redux'
 import Map from './Map'
 import ItemList from './ItemList'
 
-class Filter extends React.Component {
+export class Filter extends React.Component {
   constructor(props) {
     super(props)
 
     this.state = {
       items: this.props.items.items,
-      public: true,
-      order: 'default'
+      public: true
     }
   }
+
 
   componentDidMount() {
     this.sortItems()
@@ -22,6 +22,7 @@ class Filter extends React.Component {
   componentDidUpdate(prevProps) {
     if (this.props.items !== prevProps.items) {
       this.setState({ items: this.props.items.items })
+
     }
   }
 
@@ -43,7 +44,6 @@ class Filter extends React.Component {
         this.setState({
           items: this.props.privateItems.privateItems
         })
-
       } else {
         this.setState({
           items: this.props.privateItems.privateItems.filter(
@@ -53,6 +53,7 @@ class Filter extends React.Component {
       }
     }
   }
+
 
 
   handleSeason = e => {
@@ -66,8 +67,10 @@ class Filter extends React.Component {
           items: this.props.items.items.filter(
             item => item.season_id === Number(e.target.value) || item.season_id === 5
           )
+
         })
-      }
+      })
+      console.log(this.state.items)
     } else {
       if (e.target.value == 0) {
         this.setState({
@@ -92,9 +95,10 @@ class Filter extends React.Component {
     }, this.sortItems)
   }
 
+
   handleItemDisplay = e => {
-    this.setState({
-      public: !this.state.public
+    this.setState({ 
+      public: !this.state.public 
     }, () => {
       document.getElementById('category-select').value = 0
       if (this.state.public) {
@@ -117,7 +121,6 @@ class Filter extends React.Component {
     }
   }
 
-
   sortItems() {
     let { items, order } = this.state
     // is the same as: let items = this.state.items
@@ -139,15 +142,19 @@ class Filter extends React.Component {
   }
 
   render() {
+    let isAuthenticated = this.props.auth.isAuthenticated
+
     return (
       <div className='row px-2'>
-        <div className='col-sm-12 col-md-12 col-lg-8'>
+        <div className='col-sm-12 col-md-12 col-lg-8 mt-3'>
           <Map items={this.state.items} />
         </div>
 
-        <div className='col-sm-12 col-md-12 col-lg-4'>
+        <div className='col-sm-12 col-md-12 col-lg-4 mt-3'>
           <div className='container rounded bg-main mb-3'>
             <h3 className="sort-heading">Sort</h3>
+
+            {/* Category dropdown */}
             <article className="card-group-item">
               <header className="card-header filter-options">
                 <h6 className="title">Category </h6>
@@ -163,7 +170,6 @@ class Filter extends React.Component {
                     <option value='5' className="dropdown-item">Other</option> */}
                   </select>
                 </div>
-
               </div>
             </article>
 
@@ -184,6 +190,7 @@ class Filter extends React.Component {
                 </div>
               </div>
             </article>
+
             {/* Recently dropdown */}
             <article className="card-group-item">
               <header className="card-header filter-options">
@@ -191,37 +198,40 @@ class Filter extends React.Component {
               </header>
               <div className="filter-content">
                 <div className="list-group list-group-flush">
-                <select name='category' id='' onChange={this.handleRecent}>
-                  <option value='default'>A-Z</option>
-                  <option value='new'>Newest</option>
-                  <option value='old'>Oldest </option>
-                </select>
+                  <select name='category' id='' onChange={this.handleRecent}>
+                    <option value='default'>A-Z</option>
+                    <option value='new'>Newest</option>
+                    <option value='old'>Oldest </option>
+                  </select>
                 </div>
-            </div>
+              </div>
             </article>
 
-            <header className="card-header filter-options view-header">
-                <h6 className="title">View </h6>
-              </header>
-            <div className='custom-control custom-switch'>
+            {isAuthenticated &&
+              <>
+                <header className="card-header filter-options view-header">
+                  <h6 className="title">View </h6>
+                </header>
+                <div className='custom-control custom-switch'>
               <input
-                type='checkbox'
-                className='custom-control-input'
-                id='customSwitch1'
-                onChange={this.handleItemDisplay}
-                value={this.state.public}
-              />
-              <label className='custom-control-label' htmlFor='customSwitch1'>
-                <div className='d-flex'>
-                  <div id='public' className='px-1 highlightViewMode'>Public</div>
-                  <div id='private' className='px-1'>Private</div>
+                    type='checkbox'
+                    className='custom-control-input'
+                    id='customSwitch1'
+                    onChange={this.handleItemDisplay}
+                    value={this.state.public} />
+                  <label className='custom-control-label' htmlFor='customSwitch1'>
+                    <div className='d-flex'>
+                      <div id='public' className='px-1 highlightViewMode'>Public</div>
+                      <div id='private' className='px-1'>Private</div>
+                    </div>
+                  </label>
                 </div>
-              </label>
-            </div>
+              </>
+            }
           </div>
 
-          <div className='rounded bg-main'>
-            <ItemList items={this.state.items} />
+          <div className='container rounded bg-main mb-3'>
+            <ItemList items={this.state.items} dispatch={this.props.dispatch} auth={this.props.auth.isAuthenticated} />
           </div>
         </div>
       </div >

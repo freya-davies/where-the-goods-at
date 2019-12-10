@@ -86,7 +86,7 @@ class UpdateItem extends React.Component {
     }
 
     handleSubmit = (e) => {
-        console.log(this.state.item)
+        (this.state.item)
         e.preventDefault()
         updateItem(this.state.item)
             .then(() => {
@@ -133,7 +133,7 @@ class UpdateItem extends React.Component {
 
                             <label htmlFor="category">Category: </label>
                             {this.state.categoryData &&
-                                <select required name='category' >
+                                <select required onChange={this.handleChange} name='category' >
                                     <option value={this.state.item.category_id}>{
                                         this.getCategoryName()
                                     }</option>
@@ -147,7 +147,7 @@ class UpdateItem extends React.Component {
                             <br></br>
                             <label htmlFor="season">Season: </label>
                             {this.state.seasonData &&
-                                <select required name='season' >
+                                <select required onChange={this.handleChange} name='season' >
                                     <option value={this.state.item.season_id}>{
                                         this.getSeasonName()
                                     }</option>
