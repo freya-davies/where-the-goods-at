@@ -111,7 +111,7 @@ class Register extends React.Component {
             </div>
             <div className="registerButton">
 
-              <input className="btn btn-primary" value="Register" type="submit" />
+              <input className="btn bg-main" value="Register" type="submit" />
             </div>
           </form>
         </div>
