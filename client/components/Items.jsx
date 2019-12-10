@@ -11,7 +11,6 @@ class AddItemForm extends React.Component {
             user: this.props.auth.auth.user.user_name,
             description: '',
             address: '',
-            img_url: '',
             public: false,
             category: '',
             season: '',
