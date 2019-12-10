@@ -9,7 +9,7 @@ import { showAddItemModal, updateItemModal } from '../actions/modals'
 import { getCategories, getSeasons } from '../apis/items'
 
 
-class Map extends Component {
+export class Map extends Component {
 
   constructor(props) {
 
