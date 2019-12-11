@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Map from './Map'
 import ItemList from './ItemList'
+import { Link } from 'react-router-dom'
 
 export class Filter extends React.Component {
   constructor(props) {
@@ -26,6 +27,7 @@ export class Filter extends React.Component {
 
     }
   }
+
 
   handleCategory = e => {
     if (this.state.public) {
@@ -54,7 +56,6 @@ export class Filter extends React.Component {
       }
     }
   }
-
 
 
   handleSeason = e => {
@@ -88,7 +89,6 @@ export class Filter extends React.Component {
   }
 
 
-  // set state and then run sortItems function once state has been set
   handleRecent = e => {
     this.setState({
       order: e.target.value
@@ -97,8 +97,8 @@ export class Filter extends React.Component {
 
 
   handleItemDisplay = e => {
-    this.setState({ 
-      public: !this.state.public 
+    this.setState({
+      public: !this.state.public
     }, () => {
       document.getElementById('category-select').value = 0
       if (this.state.public) {
@@ -107,9 +107,9 @@ export class Filter extends React.Component {
         this.setState({ items: this.props.privateItems.privateItems })
       }
     })
-
     this.handleToggleHighlight()
   }
+
 
   handleToggleHighlight = () => {
     if (this.state.public) {
@@ -120,6 +120,7 @@ export class Filter extends React.Component {
       document.getElementById('private').classList.remove('highlightViewMode')
     }
   }
+
 
   sortItems() {
     let { items, order } = this.state
@@ -140,6 +141,7 @@ export class Filter extends React.Component {
     }
     this.setState({ items: items })
   }
+
 
   render() {
     const isAuthenticated = this.props.auth.isAuthenticated
@@ -207,13 +209,13 @@ export class Filter extends React.Component {
               </div>
             </article>
 
-            {isAuthenticated &&
+            {/* {isAuthenticated &&
               <>
                 <header className="card-header filter-options view-header">
                   <h6 className="title">View </h6>
                 </header>
                 <div className='custom-control custom-switch'>
-              <input
+                  <input
                     type='checkbox'
                     className='custom-control-input'
                     id='customSwitch1'
@@ -227,6 +229,52 @@ export class Filter extends React.Component {
                   </label>
                 </div>
               </>
+            } */}
+
+
+
+            {isAuthenticated ?
+              <>
+                <header className="card-header filter-options view-header">
+                  <h6 className="title">View </h6>
+                </header>
+                <div className='custom-control custom-switch'>
+                  <input
+                    type='checkbox'
+                    className='custom-control-input'
+                    id='customSwitch1'
+                    onChange={this.handleItemDisplay}
+                    value={this.state.public} />
+                  <label className='custom-control-label' htmlFor='customSwitch1'>
+                    <div className='d-flex'>
+                      <div id='public' className='px-1 highlightViewMode'>Public</div>
+                      <div id='private' className='px-1'>Private</div>
+                    </div>
+                  </label>
+                </div>
+              </>
+              :
+              <>
+                <header className="card-header filter-options view-header">
+                  <h6 className="title">View </h6>
+                </header>
+                <Link to='/login'>
+                  <div className='custom-control custom-switch'>
+                    <input
+                      type='checkbox'
+                      className='custom-control-input'
+                      id='customSwitch1'
+                      onChange={this.handleItemDisplay}
+                      value={this.state.public} />
+                    <label className='custom-control-label' htmlFor='customSwitch1'>
+                      <div className='d-flex'>
+                        <div id='public' className='px-1 highlightViewMode'>Public</div>
+                        <div id='private' className='px-1'>Private</div>
+                      </div>
+                    </label>
+                  </div>
+                </Link>
+              </>
             }
           </div>
 
@@ -237,7 +285,7 @@ export class Filter extends React.Component {
       </div >
     )
   }
-  }
+}
 
 
 const mapStateToProps = ({ auth, items, privateItems }) => {
