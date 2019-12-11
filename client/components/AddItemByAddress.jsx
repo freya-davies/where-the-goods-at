@@ -268,7 +268,9 @@ class AddItemByAddress extends React.Component {
                                             type='text'
                                             name='description'
                                             className="form-control"
+                                            placeholder="e.g. Parsley"
                                             rows='3'
+
                                             onChange={this.handleChange} />
                                     </div>
 
@@ -347,6 +349,33 @@ class AddItemByAddress extends React.Component {
                                                 className='btn btn-secondary'> Submit
                                             </button>
                                         </div>
+
+                                <div className="form-row">
+                                    <label htmlFor="customRange1">
+                                        Quantity
+                                    </label>
+                                    <input
+                                        required
+                                        name='quantity'
+                                        type='range'
+                                        className="custom-range"
+                                        min='1'
+                                        max='20'
+                                        defaultValue='1'
+                                        onChange={this.handleChange} />
+                                    {this.state.newItem.quantity}
+                                </div>
+
+                                <div className="form-row">
+                                    {/* select an imgage */}
+                                    <div className="custom-file">
+                                        <label
+                                        name="image">
+                                        <input
+                                            type="file" 
+                                            accept="image/*"
+                                            onChange={this.handleImageUpload} />
+                                            </label>
 
                                         <div className="col-auto my-1">
                                             <button
