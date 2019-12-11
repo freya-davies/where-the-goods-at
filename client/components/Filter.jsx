@@ -25,8 +25,8 @@ export class Filter extends React.Component {
       this.setState({ items: this.props.items.items })
     }
 
-    if (this.props.privateItems !== prevProps.privateItems) {
-      this.setState({ items: this.props.privateItems.privateItems, public: false })
+    if (this.props.privateItems !== prevProps.privateItems && !this.state.public) {
+      this.setState({ items: this.props.privateItems.privateItems})
     }
   }
 
@@ -241,8 +241,8 @@ export class Filter extends React.Component {
                     value={this.state.public} />
                   <label className='custom-control-label' htmlFor='customSwitch1'>
                     <div className='d-flex'>
-                      <div id='private' className={this.state.public ? 'px-1' : 'px-1 highlightViewMode'}>Private</div>
                       <div id='public' className={this.state.public ? 'px-1 highlightViewMode' : 'px-1'}>Public</div>
+                      <div id='private' className={this.state.public ? 'px-1' : 'px-1 highlightViewMode'}>Private</div>
                     </div>
                   </label>
                 </div>
