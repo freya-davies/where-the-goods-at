@@ -182,7 +182,7 @@ class AddItemByAddress extends React.Component {
                                                 type='text'
                                                 name='item_name'
                                                 className="form-control"
-                                                placeholder="eg; Parsley"
+                                                placeholder="e.g. Parsley"
                                                 onChange={this.handleChange} />
                                         </div>
 
@@ -268,7 +268,7 @@ class AddItemByAddress extends React.Component {
                                             type='text'
                                             name='description'
                                             className="form-control"
-                                            placeholder="e.g. Parsley"
+                                            placeholder="e.g. Behind the fence, down the path."
                                             rows='3'
 
                                             onChange={this.handleChange} />

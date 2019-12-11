@@ -415,7 +415,7 @@ background-color: transparent;
 /* update item page*/
 
 .edit-col {
-  text-align: center;
+  text-align: right;
 }
 
 .updateContainer {
@@ -452,7 +452,7 @@ background-color: transparent;
   margin-bottom: 1.25rem;
 }
 .update-check {
-  text-align-last: right;
+  text-align-last: left;
   max-width: 50%;
 }
 
