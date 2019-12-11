@@ -169,7 +169,7 @@ class AddModal extends React.Component {
                         <div className="form-group col-md-4">
                           <label>
                             Season
-                                        </label>
+                           </label>
                           <select name='season' onChange={this.handleChange} className="form-control">
                             <option value={0}></option>
                             {this.state.seasonData &&
@@ -232,10 +232,11 @@ class AddModal extends React.Component {
                   <div className="col-auto my-1">
                     <button
                       type='button'
-                      className='btn btn-secondary'
+                      className='btn bg-main-reverse'
                       data-dismiss='modal'
                       onClick={this.closeModal}>
-                      Close</button>
+                      Close
+                    </button>
                   </div>
                 </div>
               </div> : null}

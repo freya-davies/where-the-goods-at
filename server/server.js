@@ -24,7 +24,6 @@ server.use('/api/checkEmail', checkEmail)
 
 
 
-
 server.get('/apiKey', (req, res) => {
     res.send(process.env.GOOGLE_MAPS)
 })
