@@ -176,7 +176,8 @@ export class Map extends Component {
                       <div className="addPinButton">
                         <button type="button" className="btn btn-light" onClick={this.toggleAddForm}>Add Item by Address</button>
                       </div>
-                    </div> :
+                    </div> 
+                    :
                     <div className="addItemContainer">
                       <div className="addPinButton">
                         <Link to='/login'>
