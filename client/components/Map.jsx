@@ -157,7 +157,7 @@ export class Map extends Component {
                 <GoogleMap
                   id='Traffic-layer-example' mapTypeId='satellite'
                   mapContainerStyle={{ height: mapSize, width: "1200px", borderRadius: ".25rem", boxShadow: "rgba(0, 0, 0, 0.5) 0px 3px 4px -1px" }}
-                  options={{ styles: googleMapStyles,  draggableCursor: this.state.addMode ? 'url(/images/cursor.png), auto'  : 'pointer'}}
+                  options={{ styles: googleMapStyles,  draggableCursor: this.state.addMode ? 'url(/images/cursor.png) 20 50, auto'  : 'pointer', }}
                   zoom={this.state.zoom}
                   center={this.state.center}
                   onClick={this.handleAddPin}>
