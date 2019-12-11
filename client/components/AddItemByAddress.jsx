@@ -1,6 +1,7 @@
 import React from "react"
 import { connect } from 'react-redux'
 import PlacesAutocomplete, { geocodeByAddress } from 'react-places-autocomplete';
+//import Resizer from 'react-image-file-resizer'
 
 import { addItem, getCategories, getSeasons } from '../apis/items'
 import { fetchPublicItems, fetchPrivateItems } from '../actions/items'
@@ -87,6 +88,9 @@ class AddItemByAddress extends React.Component {
     handleImageUpload(e) {
         const data = new FormData()
         let file = e.target.files[0]
+
+        //let resizeFile = Resizer.imageFileResizer(file, 100, 100, 'PNG', 100, 0, uri => console.log(uri), 'base64')
+
         data.append('file', file)
         let reader = new FileReader();
         reader.readAsDataURL(file);

@@ -24,7 +24,10 @@ export class Filter extends React.Component {
   componentDidUpdate(prevProps) {
     if (this.props.items !== prevProps.items && this.state.public) {
       this.setState({ items: this.props.items.items })
+    }
 
+    if (this.props.privateItems !== prevProps.privateItems && !this.state.public) {
+      this.setState({ items: this.props.privateItems.privateItems})
     }
   }
 
@@ -55,6 +58,21 @@ export class Filter extends React.Component {
         })
       }
     }
+    /*
+       const items = this.state.public ? this.props.items.items : this.props.privateItems.privateItems
+       
+       if (e.target.value == 0) {
+         this.setState({
+           items: items
+         })
+       } else {
+         this.setState({
+           items: items.filter(
+             item => item.category_id === Number(e.target.value)
+           )
+         })
+       }
+       */
   }
 
 
@@ -107,7 +125,10 @@ export class Filter extends React.Component {
         this.setState({ items: this.props.privateItems.privateItems })
       }
     })
-    this.handleToggleHighlight()
+
+
+    // this.handleToggleHighlight()
+    // refactor should get rid of this function
   }
 
 
@@ -223,8 +244,8 @@ export class Filter extends React.Component {
                     value={this.state.public} />
                   <label className='custom-control-label' htmlFor='customSwitch1'>
                     <div className='d-flex'>
-                      <div id='public' className='px-1 highlightViewMode'>Public</div>
-                      <div id='private' className='px-1'>Private</div>
+                      <div id='public' className={this.state.public ? 'px-1 highlightViewMode' : 'px-1'}>Public</div>
+                      <div id='private' className={this.state.public ? 'px-1' : 'px-1 highlightViewMode'}>Private</div>
                     </div>
                   </label>
                 </div>
