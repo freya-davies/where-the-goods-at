@@ -93,7 +93,6 @@ export function updateItem(item) {
 }
 
 export function deleteItem(id) {
-    console.log(id)
     return request
     .delete(`${url}delete/${id}`)
     .then(res => {return res.body})
