@@ -53,9 +53,11 @@ class ItemList extends React.Component {
 
               {this.props.items.map((item, i) => {
                 return (
-                  <div key={i} className="card list-card" style={{ alignItems: 'center' }} >
-                    <div onClick={() => this.props.dispatch(setCurrentItem(item))}>
-                      <img className="card-img-top" src={item.image} alt={item.item_name} style={{ 'MaxWidth': 2 + 'rem' }} />
+                  <div key={i} className="card list-card text-left" style={{ alignItems: 'left' }} >
+                    <div className="ListItemItems text-left" onClick={() => this.props.dispatch(setCurrentItem(item))}>
+                      <div className="itemListImgDiv">
+                        <img className="card-img-top" src={item.image} alt={item.item_name} style={{ 'MaxWidth': 2 + 'rem' }} />
+                      </div>
                       <div className="card-body">
                         <h5 className="card-title">{item.item_name}</h5>
                         <h6><em>{item.suburb}</em></h6>
@@ -65,9 +67,9 @@ class ItemList extends React.Component {
                         {(this.props.auth.isAuthenticated && item.user_id == this.state.data) &&
                           <>
                             <Link to={`/update/${item.id}`}>
-                              <button>Update</button>
+                              <button className="btn bg-main-reverse spacer">Update</button>
                             </Link>
-                            <button onClick={()=> window.confirm("Are you sure you wish to delete this item?") && this.handleDelete(item.id)}>Delete</button>
+                            <button className="btn bg-main-reverse spacer" onClick={() => window.confirm("Are you sure you wish to delete this item?") && this.handleDelete(item.id)}>Delete</button>
                           </>
                         }
                       </div>
