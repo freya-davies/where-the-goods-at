@@ -87,10 +87,15 @@ class AddModal extends React.Component {
 
   closeModal = () => {
     this.props.hideModal()
+  }
+
+  handleModalClose = () => {
     this.setState({
       formShowing: true
     })
+    this.props.hideModal()
   }
+
 
   render() {
     return (
@@ -218,6 +223,15 @@ class AddModal extends React.Component {
                             className='btn btn-secondary'> Submit
                           </button>
                         </div>
+                      <div className="col-auto my-1">
+                        <button
+                          type='button'
+                          className='btn btn-secondary'
+                          data-dismiss='modal'
+                          onClick={this.closeModal}>
+                          Close
+                        </button>
+                      </div>
                       </div>
                     </form>
                   </div>
@@ -234,7 +248,7 @@ class AddModal extends React.Component {
                       type='button'
                       className='btn bg-main-reverse'
                       data-dismiss='modal'
-                      onClick={this.closeModal}>
+                      onClick={this.handleModalClose}>
                       Close
                     </button>
                   </div>

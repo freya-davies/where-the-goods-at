@@ -26,6 +26,7 @@ export class Map extends Component {
       key: false,
       addMode: false,
       addForm: false,
+      addByAddressForm: false,
       showModal: false,
       infoWindowShowing: false,
       activePin: null
@@ -93,6 +94,12 @@ export class Map extends Component {
     })
   }
 
+  toggleAddByAddressForm = (e) => {
+    this.setState({
+      addByAddressForm: !this.state.addByAddressForm
+    })
+  }
+
   toggleAddMode = (e) => {
     this.setState({
       addMode: !this.state.addMode
@@ -127,11 +134,11 @@ export class Map extends Component {
     return (
 
       <div className="mapWrap">
-        {this.state.showPopUp &&
-          <AddModal />
-        }
         {this.state.addForm &&
-          <AddItemByAddress toggleAddForm={this.toggleAddForm} />
+          <AddModal toggleAddForm={this.toggleAddForm} />
+        }
+        {this.state.addByAddressForm &&
+          <AddItemByAddress toggleAddForm={this.toggleAddByAddressForm} />
         }
 
         <div className="container px-lg-5">
