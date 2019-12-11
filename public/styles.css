@@ -97,6 +97,22 @@
     padding-top: .5rem;
   }
 
+  .ListItemItems {
+    display: flex;
+    align-items: center;
+  }
+
+  .itemListImgDiv {
+    height: 9rem;
+    width: 9rem;
+    overflow: hidden;
+  }
+  
+  .itemListImgDiv img {
+    height: 100%;
+    width: auto;
+  }
+
 
 
   .bg-main-reverse {
@@ -114,12 +130,12 @@
 
 
   .card-img-top {
-  margin-top: 1rem;
   width: 60%;
   }
 
   .list-card {
     text-align: center;
+    padding-left: 5%;
   }
 
   .scrollable {
@@ -445,6 +461,11 @@ background-color: transparent;
 .button-form {
   background-color: #F3BD06;
   color: #28395F;
+}
+
+.spacer {
+  margin-left: 5%;
+  margin-right: 5%;
 }
 
 /* Remove default slider styling */
