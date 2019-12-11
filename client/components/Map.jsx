@@ -176,7 +176,12 @@ export class Map extends Component {
                               <h4>{this.props.items[index].item_name}</h4>
                               {/* <input type='text' name={this.props.items[index].item_name} />  */}
                               <h6>Description:</h6><p> <em>"{this.props.items[index].description}"</em></p>
-                              <h6>Address:</h6><p>{this.props.items[index].address}</p>
+                              {this.props.items[index].address ? 
+                              <>
+                              <h6>Address:</h6><p>{this.props.items[index].address}</p> 
+                              </> :
+                              this.props.items[index].suburb ? <><h6>Suburb:</h6><p>{this.props.items[index].suburb }</p></>
+                              : null}
                               <h6>Category:</h6><p> {this.state.categoryData[this.props.items[index].category_id - 1].category_name}</p>
                               <h6>Quantity:</h6><p>{this.props.items[index].quantity}</p>
                               <h6>Season:</h6><p> {this.state.seasonData[this.props.items[index].season_id - 1].season_name}</p>
