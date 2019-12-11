@@ -113,18 +113,18 @@ class AddModal extends React.Component {
             {this.state.formShowing ?
               <>
               <div className='modal-header'>
-                <h5 className='modal-title' id='exampleModalLongTitle'>
+                <h5 className='modal-title' id='exampleModalLongTitle' style={{marginLeft: '8px'}}>
                   Add Item by Dropping Pin
                 </h5>
               </div>
-              <div className='modal-body'>
+              <div className='modal-body pt-0'>
                 <form onSubmit={this.handleSubmit}>
                   <div className="form-row">
-                    
+
                     <div className='modal-body'>
                       <form onSubmit={this.handleSubmit}>
                         <div className="form-row">
-                          <div className="form-group col-md-6">
+                          <div className="form-group col-md-6 pl-0">
                             <label>
                               Item</label>
                             <input
@@ -162,7 +162,7 @@ class AddModal extends React.Component {
                         </div>
 
                         <div className="form-row">
-                          <div className="form-group col-md-4">
+                          <div className="form-group col-md-4 pl-0 select-box">
                             <label>Category</label>
                             <select name='category' onChange={this.handleChange} className="form-control">
                               <option value={0}>Select</option>
@@ -176,7 +176,7 @@ class AddModal extends React.Component {
                                 })}
                             </select>
                           </div>
-                          <div className="form-group col-md-4">
+                          <div className="form-group col-md-4 select-box">
                             <label>
                               Season
                            </label>
@@ -244,7 +244,7 @@ class AddModal extends React.Component {
                       </form>
                                 </div>
                  </div>
-                </form>  
+                </form>
                   </div>
                   </> : this.state.loading ?
                 <div className='modal-body'>
@@ -279,4 +279,3 @@ const mapStateToProps = (auth) => {
         }
 
 export default connect(mapStateToProps, {hideModal, fetchPublicItems})(AddModal)
-                            

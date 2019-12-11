@@ -23,9 +23,9 @@ class AddItemByAddress extends React.Component {
                 image: null,
                 showAddressWarning: false
             },
-            formShowing: true, 
-            loading: false, 
-            itemAdded: false, 
+            formShowing: true,
+            loading: false,
+            itemAdded: false,
         }
 
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -110,32 +110,35 @@ class AddItemByAddress extends React.Component {
     handleSubmit(e) {
         e.preventDefault()
         this.setState({
-            loading: true, 
-            formShowing: false, 
-        })
-        geocodeByAddress(this.state.newItem.address)
-        .then(() => {
-            this.setState({
-                showAddressWarning: false
-            })
-            addItem(this.state.newItem)
-                .then(res => {
-                    if (res == 200) {
-                        if (this.state.newItem.public) this.props.fetchPublicItems()
-                        else {
-                            this.props.fetchPrivateItems(this.props.auth.auth.user.user_name)
-                        }
-                    }
-                    this.setState({
-                        itemAdded: true, 
-                        loading: false
-                    })
-                })
-        })
-        .catch(() => {
-            this.setState({
-                showAddressWarning: true
-            })
+            loading: true,
+            formShowing: false,
+        }, () => {
+          geocodeByAddress(this.state.newItem.address)
+          .then(() => {
+              this.setState({
+                  showAddressWarning: false
+              })
+              addItem(this.state.newItem)
+                  .then(res => {
+                      if (res == 200) {
+                          if (this.state.newItem.public) this.props.fetchPublicItems()
+                          else {
+                              this.props.fetchPrivateItems(this.props.auth.auth.user.user_name)
+                          }
+                      }
+                      this.setState({
+                          itemAdded: true,
+                          loading: false
+                      })
+                  })
+          })
+          .catch(() => {
+              this.setState({
+                  loading: false,
+                  formShowing: true,
+                  showAddressWarning: true
+              })
+          })
         })
     }
 
@@ -166,14 +169,14 @@ class AddItemByAddress extends React.Component {
                     {this.state.formShowing ?
                         <>
                             <div className='modal-header'>
-                                <h5 className='modal-title' id='exampleModalLongTitle'>
+                                <h5 className='modal-title' id='exampleModalLongTitle' style={{marginLeft: '10px'}}>
                                     Add Item by Address
                                 </h5>
                             </div>
                             <div className='modal-body'>
-                                <form onSubmit={this.handleSubmit}>
+                                <form onSubmit={this.handleSubmit} style={{padding: '0 1rem 1rem 1rem'}}>
                                     <div className="form-row">
-                                        <div className="form-group col-md-6">
+                                        <div className="form-group col-md-6 pl-0">
                                             <label>
                                                 Item
                                             </label>
@@ -182,7 +185,7 @@ class AddItemByAddress extends React.Component {
                                                 type='text'
                                                 name='item_name'
                                                 className="form-control"
-                                                placeholder="eg; Parsley"
+                                                placeholder="e.g. Parsley"
                                                 onChange={this.handleChange} />
                                         </div>
 
@@ -255,7 +258,7 @@ class AddItemByAddress extends React.Component {
                                                 )
                                             }}
                                         </PlacesAutocomplete>
-                                        </div>   
+                                        </div>
                                     </div>
                                         {this.state.showAddressWarning && <p style={{color: 'red'}}>Please enter a valid address</p>}
 
@@ -268,14 +271,14 @@ class AddItemByAddress extends React.Component {
                                             type='text'
                                             name='description'
                                             className="form-control"
-                                            placeholder="e.g. Parsley"
+                                            placeholder="e.g. Behind the fence, down the path."
                                             rows='3'
 
                                             onChange={this.handleChange} />
                                     </div>
 
                                     <div className="form-row">
-                                        <div className="form-group col-md-4">
+                                        <div className="form-group col-md-4 pl-0 select-box">
                                             <label>
                                                 Category
                                             </label>
@@ -293,7 +296,7 @@ class AddItemByAddress extends React.Component {
                                             </select>
                                         </div>
 
-                                        <div className="form-group col-md-4">
+                                        <div className="form-group col-md-4 select-box">
                                             <label>
                                                 Season
                                             </label>
@@ -312,10 +315,10 @@ class AddItemByAddress extends React.Component {
                                         </div>
                                     </div>
 
-                                    
 
-                                    
-                                  
+
+
+
 
                                 <div className="form-row">
                                     <label htmlFor="customRange1">
@@ -339,12 +342,12 @@ class AddItemByAddress extends React.Component {
                                         <label
                                         name="image">
                                         <input
-                                            type="file" 
+                                            type="file"
                                             accept="image/*"
                                             onChange={this.handleImageUpload} />
                                             </label>
                                                 </div>
-                                        
+
                                     </div>
                                     <div className='modal-footer'>
                                     <div className="col-auto my-1">
@@ -387,7 +390,7 @@ class AddItemByAddress extends React.Component {
                         </div> : null}
                     </div>
                 </div>
-                </div> 
+                </div>
             </>
         )
     }
