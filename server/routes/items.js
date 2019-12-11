@@ -60,6 +60,13 @@ router.get('/user/:name', (req, res) => {
         })
 })
 
+router.get('/user/user/:name', (req, res) => {
+    dbUser.getUserByUsername(req.params.name)
+    .then(data => {
+        console.log(data)
+        res.json(data.id)})
+})
+
 //get all categoies
 router.get('/categories', (req, res) => {
     db.getCategories()
