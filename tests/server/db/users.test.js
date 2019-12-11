@@ -13,7 +13,7 @@ afterEach(() => testEnv.cleanup(testDb))
 test('createUser inserts a single user', () => {
   let expected = 1
 
-  return users.createUser('new_user', 'New', 'User', 's3cr3t', testDb)
+  return users.createUser('new_user','potat@potat.com', 'New', 'User', 's3cr3t', testDb)
     .then(ids => {
       let actual = ids.length
 

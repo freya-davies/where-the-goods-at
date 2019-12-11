@@ -14,6 +14,14 @@ exports.seed = function (knex) {
           email: "sophiescottmaunder@gmail.com",
           first_name: 'Sophie',
           last_name: 'Scott-Maunder'
+        },
+        {
+          id: 0,
+          user_name: 'admin',
+          hash: hashSync('123', saltRounds),
+          email: "sophiescottmaunder@gmail.com",
+          first_name: 'Admin',
+          last_name: 'Scott-Maunder'
         }
       ])
     })
