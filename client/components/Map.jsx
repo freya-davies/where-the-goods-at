@@ -26,6 +26,7 @@ export class Map extends Component {
       key: false,
       addMode: false,
       addForm: false,
+      addByAddressForm: false,
       showModal: false,
       infoWindowShowing: false,
       activePin: null
@@ -93,6 +94,12 @@ export class Map extends Component {
     })
   }
 
+  toggleAddByAddressForm = (e) => {
+    this.setState({
+      addByAddressForm: !this.state.addByAddressForm
+    })
+  }
+
   toggleAddMode = (e) => {
     this.setState({
       addMode: !this.state.addMode
@@ -131,11 +138,11 @@ export class Map extends Component {
     return (
 
       <div className="mapWrap">
-        {this.state.showPopUp &&
-          <AddModal />
-        }
         {this.state.addForm &&
-          <AddItemByAddress toggleAddForm={this.toggleAddForm} />
+          <AddModal toggleAddForm={this.toggleAddForm} />
+        }
+        {this.state.addByAddressForm &&
+          <AddItemByAddress toggleAddForm={this.toggleAddByAddressForm} />
         }
 
         <div className="container px-lg-5">
@@ -173,6 +180,12 @@ export class Map extends Component {
                               <h4>{this.props.items[index].item_name}</h4>
                               {/* <input type='text' name={this.props.items[index].item_name} />  */}
                               <h6>Description:</h6><p> <em>"{this.props.items[index].description}"</em></p>
+                              {this.props.items[index].address ? 
+                              <>
+                              <h6>Address:</h6><p>{this.props.items[index].address}</p> 
+                              </> :
+                              this.props.items[index].suburb ? <><h6>Suburb:</h6><p>{this.props.items[index].suburb }</p></>
+                              : null}
                               <h6>Category:</h6><p> {this.state.categoryData[this.props.items[index].category_id - 1].category_name}</p>
                               <h6>Quantity:</h6><p>{this.props.items[index].quantity}</p>
                               <h6>Season:</h6><p> {this.state.seasonData[this.props.items[index].season_id - 1].season_name}</p>
@@ -192,7 +205,7 @@ export class Map extends Component {
                                   <button type="button" className="btn btn-light" onClick={this.toggleAddMode} style={{ backgroundColor: this.state.addMode ? "#D25E5D" : "#f8f9fa"}}>{this.state.addMode ? "Stop Adding Items" : "Add Item by Pin"}</button>
                                 </div>
                                 <div className="addPinButton">
-                                  <button type="button" className="btn btn-light" onClick={this.toggleAddForm}>Add Item by Address</button>
+                                  <button type="button" className="btn btn-light" onClick={this.toggleAddByAddressForm}>Add Item by Address</button>
                                 </div>
                               </div>
                     :
