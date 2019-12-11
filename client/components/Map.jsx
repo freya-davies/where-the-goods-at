@@ -61,6 +61,11 @@ export class Map extends Component {
       })
     })
 
+
+      //refactor idea
+        //if(this.props.currentItem != newProps.currentItem) {
+      //this.centerFocusOn(newProps.currentItem)
+
     if (this.props.currentItem != newProps.currentItem) {
       this.setState({
         center: {
@@ -71,6 +76,17 @@ export class Map extends Component {
       })
     }
   }
+
+  //centerFocusOn = (currentItem) => {
+   // this.setState({
+   //   center: {
+   //     lat: currentItem.lat,
+   //     lng: currentItem.long
+  //    },
+  //    zoom: 18
+  //  })
+  //}
+
   toggleAddForm = (e) => {
     this.setState({
       addForm: !this.state.addForm
@@ -109,6 +125,10 @@ export class Map extends Component {
   }
 
   render() {
+    console.log(window.innerWidth)
+
+    let mapSize = '100vh'
+    if(window.innerWidth < 800) mapSize = '50vh'
     return (
 
       <div className="mapWrap">
@@ -126,22 +146,15 @@ export class Map extends Component {
                 id="script-loader"
                 libraries={["places"]}
                 googleMapsApiKey={process.env.GOOGLE_MAPS}>
+                  
                 <GoogleMap
-                  id='Traffic-layer-example'
-                  mapContainerStyle={{
-                    height: "800px",
-                    width: "1200px",
-                    borderRadius: ".25rem",
-                    boxShadow: "rgba(0, 0, 0, 0.5) 0px 3px 4px -1px"
-                  }}
-                  options={{
-                    styles: googleMapStyles,
-                    draggableCursor: this.state.addMode ? 'url(/images/cursor.png), auto'  : 'pointer'
-                  }}
+                  id='Traffic-layer-example' mapTypeId='satellite'
+                  mapContainerStyle={{ height: mapSize, width: "1200px", borderRadius: ".25rem", boxShadow: "rgba(0, 0, 0, 0.5) 0px 3px 4px -1px" }}
+                  options={{ styles: googleMapStyles,  draggableCursor: this.state.addMode ? 'url(/images/cursor.png), auto'  : 'pointer'}}
                   zoom={this.state.zoom}
                   center={this.state.center}
-                  mapTypeId='satellite'
                   onClick={this.handleAddPin}>
+
                   {this.props.items.map((item, index) => {
                     return (
                       <Marker
@@ -174,14 +187,15 @@ export class Map extends Component {
                   })}
 
                   {this.props.auth.auth.isAuthenticated ?
-                    <div className="addItemContainer">
-                      <div className="addPinButton">
-                        <button type="button" className="btn btn-light" onClick={this.toggleAddMode}>{this.state.addMode ? "Stop Adding Items" : "Add Item by Pin"}</button>
-                      </div>
-                      <div className="addPinButton">
-                        <button type="button" className="btn btn-light" onClick={this.toggleAddForm}>Add Item by Address</button>
-                      </div>
-                    </div> 
+                              <div className="addItemContainer">
+                                <div className="addPinButton">
+                                  
+                                  <button type="button" className="btn btn-light" onClick={this.toggleAddMode} style={{ backgroundColor: this.state.addMode ? "#D25E5D" : "#f8f9fa"}}>{this.state.addMode ? "Stop Adding Items" : "Add Item by Pin"}</button>
+                                </div>
+                                <div className="addPinButton">
+                                  <button type="button" className="btn btn-light" onClick={this.toggleAddForm}>Add Item by Address</button>
+                                </div>
+                              </div>
                     :
                     <div className="addItemContainer">
                       <div className="addPinButton">

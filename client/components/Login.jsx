@@ -1,6 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { loginUser, loginError } from '../actions/login'
+import { Link } from 'react-router-dom'
+
 
 class Login extends React.Component {
   constructor(props) {
@@ -27,9 +29,9 @@ class Login extends React.Component {
     const { auth } = this.props
     return (
       <div className="loginContainer">
-        <div className="col-6 col-md-4">
-          <img className="img-fluid" src="/images/forage-lettuce.png" alt="Forage &amp; Find"/>
-          <form onSubmit={this.submit}>
+        <div className="col-6 col-md-4 login-div">
+        <Link to='/' ><img className="img-fluid" src="/images/forage-strawberry.png" alt="Forage &amp; Find" /></Link>
+        <form className="login-register-form" onSubmit={this.submit}>
             <h1 className='loginTitle'>Login</h1>
 
             {auth.errorMessage && (
@@ -47,7 +49,7 @@ class Login extends React.Component {
               <label htmlFor='user_name'>
                 <input
                   required
-                  className='form-control'
+                  className='form-control login-control'
                   placeholder='Username'
                   type='text'
                   name='user_name'
@@ -61,7 +63,7 @@ class Login extends React.Component {
               <label htmlFor='password'>
                 <input
                   required
-                  className='form-control'
+                  className='form-control login-control'
                   placeholder='Password'
                   type='password'
                   name='password'
@@ -71,7 +73,7 @@ class Login extends React.Component {
             </div>
 
               <div className="loginButton">
-                <input className='btn bg-main' value='Login' type='submit' />
+                <input className='btn bg-main-reverse' value='Login' type='submit' />
               </div>
           </form>
         </div>
