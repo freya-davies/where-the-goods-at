@@ -160,11 +160,9 @@ class UpdateItem extends React.Component {
                                 </div>
                                 <div className="form-row update-form-row">
                                     <div className="form-group col-md-6 edit-col">
-                                            <label className="form-check-label" htmlFor="exampleCheck1">Private</label>
+                                            <label className="form-check-label" htmlFor="exampleCheck1">Private:</label>
                                         </div>
-                                    </div>
-                                    <div className="form-group col-md-6 edit-col">
-                                    <div className="form-check update-check">
+                                    <div className="form-check update-check col-md-6">
                                         <input
                                             type="checkbox"
                                             name="public"
@@ -172,7 +170,7 @@ class UpdateItem extends React.Component {
                                             checked={this.state.item.public}
                                             onClick={this.handleClick} />
                                     </div>
-                                </div>
+                                    </div>
                                 <div className="form-row update-form-row">
                                     <div className="form-group col-md-6">
                                         <label htmlFor="category">Category: </label>
@@ -214,7 +212,7 @@ class UpdateItem extends React.Component {
                                 </div>
                                 <button
                                     type='submit'
-                                    className='btn btn-secondary'>Update Item</button>
+                                    className='btn bg-main-reverse'>Update Item</button>
                             </form>
                         </div>
                     </div>
