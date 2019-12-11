@@ -51,8 +51,11 @@
       text-decoration: none;
   }
 
-
-
+label {
+  display: inline-block;
+  margin-bottom: .5rem;
+  margin-top: .5rem;
+}
 
 /* nav bar  */
 .customNavStyles {
@@ -76,16 +79,10 @@
   margin-right: 1.5rem;
 }
 
-
-
-
   /*rating start*/
   .checked {
     color: orange;
   }
-
-
-
 
   /* list Item */
   .item-cont {
@@ -112,6 +109,7 @@
     height: 100%;
     width: auto;
   }
+
 
 
 
@@ -142,9 +140,6 @@
     overflow-y:scroll; 
     height: 74vh;
   }
-
-
-
 
 /* landing page  */
 .full-screen {
@@ -233,14 +228,14 @@ h1.ml8 {
 .ml8 .circle-white {
   width: 30rem;
   height: 30rem;
-  border: 2px dashed white;
+  border: 2px dashed #F3BD06;
   border-radius: 2em;
 }
 
 .ml8 .circle-dark {
   width: 28rem;
   height: 28rem;
-  background-color: #4f7b86;
+  background-color: #D25E5D;
   border-radius: 3em;
   z-index: 1;
 }
@@ -248,7 +243,7 @@ h1.ml8 {
 .ml8 .circle-dark-dashed {
   border-radius: 2.4em;
   background-color: transparent;
-  border: 2px dashed #4f7b86;
+  border: 2px dashed #B0DDD9;
   width: 30rem;
   height: 30rem;
 }
@@ -306,15 +301,28 @@ background-color: transparent;
 }
 
 /* login page */
-.img-fluid {
-  margin-top: 3rem;
+
+
+.login-div {
+  max-width: 50%;
+  background-color: #B0DDD9;
+  border-radius: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 2.5rem;
+  margin-top: 2rem;
   margin-bottom: 2rem;
-  width: 3
+}
+
+.img-fluid {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  width: 25%;
 }
 
 .loginTitle {
   text-align: center;
-  font-size: 2rem;
+  font-family: 'Lakki Reddy', cursive;
+  font-size: 3rem;
   margin-bottom: 1rem;
 }
 
@@ -336,11 +344,29 @@ background-color: transparent;
 .registerContainer {
   text-align: -webkit-center;
 }
+.register-div {
+  max-width: 50%;
+  background-color: #B0DDD9;
+  border-radius: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 2.5rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
 
 .registerTitle {
   text-align: center;
-  font-size: 2rem;
+  font-family: 'Lakki Reddy', cursive;
+  font-size: 3rem;
   margin-bottom: 2rem;
+}
+
+.reg{
+  text-align: left;
+}
+
+.reg-text {
+  text-align: right;
 }
 
 .justify-content-start {
@@ -356,11 +382,9 @@ background-color: transparent;
     margin-top: 0.5rem;
 }
 
-.register-div {
-  max-width: 50%;
-}
 
-/* edit item page*/
+
+/* update item page*/
 
 .edit-col {
   text-align: center;
@@ -392,7 +416,7 @@ background-color: transparent;
 }
 
 .update {
-  margin-bottom: 1.25rem;
+  margin-bottom: .8rem;
   width: 80%;
 }
 
@@ -403,53 +427,6 @@ background-color: transparent;
   text-align-last: right;
   max-width: 50%;
 }
-
-/* edit item page*/
-
-.edit-col {
-  text-align: center;
-}
-
-.updateContainer {
-  text-align: -webkit-center;
-}
-
-.update-div {
-  max-width: 50%;
-  background-color: #B0DDD9;
-  border-radius: 1rem;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-}
-
-.updateTitle {
-  text-align: center;
-  font-size: 2rem;
-  margin-top: 1rem;
-  margin-bottom: 2rem;
-}
-
-.update-form-row {
-  justify-content: center;
-}
-
-.update {
-  margin-bottom: 1.25rem;
-  width: 80%;
-}
-
-.update-image {
-  margin-bottom: 1.25rem;
-}
-.update-check {
-  text-align-last: right;
-  max-width: 25%;
-}
-
-
-
 
 /* Add form */
 .modal-content {
@@ -486,7 +463,6 @@ input[type=range]:focus {
 input[type=range]::-ms-track {
   width: 100%;
   cursor: pointer;
-
   background: transparent; 
   border-color: transparent;
   color: transparent;
