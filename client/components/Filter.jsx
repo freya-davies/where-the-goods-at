@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Map from './Map'
 import ItemList from './ItemList'
+import { Link } from 'react-router-dom'
 
 export class Filter extends React.Component {
   constructor(props) {
@@ -208,7 +209,7 @@ export class Filter extends React.Component {
               </div>
             </article>
 
-            {isAuthenticated &&
+            {/* {isAuthenticated &&
               <>
                 <header className="card-header filter-options view-header">
                   <h6 className="title">View </h6>
@@ -227,6 +228,52 @@ export class Filter extends React.Component {
                     </div>
                   </label>
                 </div>
+              </>
+            } */}
+
+
+
+            {isAuthenticated ?
+              <>
+                <header className="card-header filter-options view-header">
+                  <h6 className="title">View </h6>
+                </header>
+                <div className='custom-control custom-switch'>
+                  <input
+                    type='checkbox'
+                    className='custom-control-input'
+                    id='customSwitch1'
+                    onChange={this.handleItemDisplay}
+                    value={this.state.public} />
+                  <label className='custom-control-label' htmlFor='customSwitch1'>
+                    <div className='d-flex'>
+                      <div id='public' className='px-1 highlightViewMode'>Public</div>
+                      <div id='private' className='px-1'>Private</div>
+                    </div>
+                  </label>
+                </div>
+              </>
+              :
+              <>
+                <header className="card-header filter-options view-header">
+                  <h6 className="title">View </h6>
+                </header>
+                <Link to='/login'>
+                  <div className='custom-control custom-switch'>
+                    <input
+                      type='checkbox'
+                      className='custom-control-input'
+                      id='customSwitch1'
+                      onChange={this.handleItemDisplay}
+                      value={this.state.public} />
+                    <label className='custom-control-label' htmlFor='customSwitch1'>
+                      <div className='d-flex'>
+                        <div id='public' className='px-1 highlightViewMode'>Public</div>
+                        <div id='private' className='px-1'>Private</div>
+                      </div>
+                    </label>
+                  </div>
+                </Link>
               </>
             }
           </div>
