@@ -10,7 +10,8 @@ export class Filter extends React.Component {
 
     this.state = {
       items: this.props.items.items,
-      public: true
+      public: true,
+      order: "default"
     }
   }
 
@@ -130,7 +131,7 @@ export class Filter extends React.Component {
       items.sort((a, b) => {
         return a.item_name > b.item_name ? 1 : -1
       })
-    } else if (order == 'new') {
+    } if (order == 'new') {
       items.sort((a, b) => {
         return a.id > b.id ? -1 : 1
       })
@@ -201,7 +202,7 @@ export class Filter extends React.Component {
               <div className="filter-content">
                 <div className="list-group list-group-flush">
                   <select name='category' id='' onChange={this.handleRecent}>
-                    <option value='default'>A-Z</option>
+                    <option value='default'> </option>
                     <option value='new'>Newest</option>
                     <option value='old'>Oldest </option>
                   </select>

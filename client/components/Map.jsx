@@ -78,6 +78,7 @@ export class Map extends Component {
   }
 
   toggleAddMode = (e) => {
+    
     this.setState({
       addMode: !this.state.addMode
     })
