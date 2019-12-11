@@ -12,8 +12,8 @@ class AddModal extends React.Component {
         item_name: '',
         description: '',
         user: this.props.auth.auth.user.user_name,
-        lat: this.props.location.lat,
-        long: this.props.location.lng,
+        lat: props.location.lat,
+        long: props.location.lng,
         public: true,
         category: '',
         season: '',
@@ -87,10 +87,15 @@ class AddModal extends React.Component {
 
   closeModal = () => {
     this.props.hideModal()
+  }
+
+  handleModalClose = () => {
     this.setState({
       formShowing: true
     })
+    this.props.hideModal()
   }
+
 
   render() {
     return (
@@ -155,7 +160,7 @@ class AddModal extends React.Component {
                         <div className="form-group col-md-4">
                           <label>Category</label>
                           <select name='category' onChange={this.handleChange} className="form-control">
-                            <option value={0}></option>
+                            <option value={0}>Select</option>
                             {this.state.categoryData &&
                               this.state.categoryData.map((category, i) => {
                                 return (
@@ -171,7 +176,7 @@ class AddModal extends React.Component {
                             Season
                            </label>
                           <select name='season' onChange={this.handleChange} className="form-control">
-                            <option value={0}></option>
+                            <option value={0}>Select</option>
                             {this.state.seasonData &&
                               this.state.seasonData.map((season, i) => {
                                 return (
@@ -218,6 +223,15 @@ class AddModal extends React.Component {
                             className='btn btn-secondary'> Submit
                           </button>
                         </div>
+                      <div className="col-auto my-1">
+                        <button
+                          type='button'
+                          className='btn btn-secondary'
+                          data-dismiss='modal'
+                          onClick={this.closeModal}>
+                          Close
+                        </button>
+                      </div>
                       </div>
                     </form>
                   </div>
@@ -234,7 +248,7 @@ class AddModal extends React.Component {
                       type='button'
                       className='btn bg-main-reverse'
                       data-dismiss='modal'
-                      onClick={this.closeModal}>
+                      onClick={this.handleModalClose}>
                       Close
                     </button>
                   </div>

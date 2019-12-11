@@ -278,7 +278,7 @@ class AddItemByAddress extends React.Component {
                                                 Category
                                             </label>
                                             <select name='category' onChange={this.handleChange} className="form-control">
-                                                <option value={0}></option>
+                                                <option value={0}>Select</option>
                                                 {this.state.categoryData &&
                                                     this.state.categoryData.map((category, i) => {
                                                         return (
@@ -296,7 +296,7 @@ class AddItemByAddress extends React.Component {
                                                 Season
                                             </label>
                                             <select name='season' onChange={this.handleChange} className="form-control">
-                                                <option value={0}></option>
+                                                <option value={0}>Select</option>
                                                 {this.state.seasonData &&
                                                     this.state.seasonData.map((season, i) => {
                                                         return (
