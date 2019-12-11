@@ -59,19 +59,12 @@ class ItemList extends React.Component {
                         <p className="card-text">{item.description}</p>
 
 
-                        {this.props.auth ?
+                        {this.props.auth &&
                           <>
                             <Link to={`/update/${item.id}`}>
                               <button>Update</button>
                             </Link>
-                            <button onClick={() => window.confirm("Are you sure you wish to delete this item?") && this.handleDelete(item.id)}>Delete</button>
-                          </>
-                          :
-                          <>
-                            <Link to='/login'>
-                              <button>Update</button>
-                              <button>Delete</button>
-                            </Link>
+                            <button onClick={()=> window.confirm("Are you sure you wish to delete this item?") && this.handleDelete(item.id)}>Delete</button>
                           </>
                         }
                       </div>
