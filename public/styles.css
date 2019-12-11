@@ -289,9 +289,6 @@ background-color: transparent;
   padding: .5rem 0 1rem 2.5rem;
 }
 
-
-
-
 /* login page */
 .img-fluid {
   margin-top: 3rem;
@@ -319,8 +316,6 @@ background-color: transparent;
 }
 
 
-
-
 /* register page */
 .registerContainer {
   text-align: -webkit-center;
@@ -346,7 +341,50 @@ background-color: transparent;
 }
 
 .register-div {
+  max-width: 50%;
+}
 
+/* edit item page*/
+
+.edit-col {
+  text-align: center;
+}
+
+.updateContainer {
+  text-align: -webkit-center;
+}
+
+.update-div {
+  max-width: 50%;
+  background-color: #B0DDD9;
+  border-radius: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.updateTitle {
+  text-align: center;
+  font-size: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+.update-form-row {
+  justify-content: center;
+}
+
+.update {
+  margin-bottom: 1.25rem;
+  width: 80%;
+}
+
+.update-image {
+  margin-bottom: 1.25rem;
+}
+.update-check {
+  text-align-last: right;
   max-width: 50%;
 }
 
