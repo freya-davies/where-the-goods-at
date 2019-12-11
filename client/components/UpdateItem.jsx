@@ -93,7 +93,8 @@ class UpdateItem extends React.Component {
                 this.props.fetchPublicItems()
                 this.setState({
                     redirect: true
-                })})
+                })
+            })
     }
 
     handleChange = (e) => {
@@ -109,59 +110,115 @@ class UpdateItem extends React.Component {
         return (
             <div>
                 {this.state.item != null &&
-                    <div className="updateItemForm">
-                        {this.state.redirect && <Redirect to='/' />}
-                        <form onSubmit={this.handleSubmit}>
-                            <br></br>
-                            <label htmlFor="item_name">Item Name: </label>
-                            <input name="item_name" value={this.state.item.item_name} onChange={this.handleChange} />
-                            <br></br>
-                            <label htmlFor="description">Description: </label>
-                            <textarea name="description" value={this.state.item.description} onChange={this.handleChange} />
-                            <br></br>
-                            <label htmlFor="image">Image</label>
-                            <input
-                                type="file"
-                                name="image"
-                                accept="image/*"
-                                onChange={this.handleImageUpload}
-                            />
-                            <br></br>
-                            <label htmlFor="public">Public: </label>
-                            <input type="checkbox" name="public" checked={this.state.item.public} onClick={this.handleClick} />
-                            <br></br>
+                    <div className="updateContainer">
+                        <div className="col-6 col-md-4 update-div">
+                            {this.state.redirect && <Redirect to='/' />}
+                            <form className="update-form" onSubmit={this.handleSubmit}>
+                                <h1 className='updateTitle'>Update Your Item</h1>
 
-                            <label htmlFor="category">Category: </label>
-                            {this.state.categoryData &&
-                                <select required onChange={this.handleChange} name='category' >
-                                    <option value={this.state.item.category_id}>{
-                                        this.getCategoryName()
-                                    }</option>
-                                    {this.state.categoryData &&
-                                        this.state.categoryData.map((category, i) => {
-                                            return (
-                                                <option key={i} value={category.id}>{category.category_name}</option>
-                                            )
-                                        })}
-                                </select>}
-                            <br></br>
-                            <label htmlFor="season">Season: </label>
-                            {this.state.seasonData &&
-                                <select required onChange={this.handleChange} name='season' >
-                                    <option value={this.state.item.season_id}>{
-                                        this.getSeasonName()
-                                    }</option>
-                                    {this.state.seasonData &&
-                                        this.state.seasonData.map((season, i) => {
-                                            return (
-                                                <option key={i} value={season.id}>{season.season_name}</option>
-                                            )
-                                        })}
-                                </select>}
-                            <br></br>
-                            <button type='submit' value='Submit'>Update Item</button>
-                        </form>
+
+
+                                {/* <div className="form-group col-md-6 edit-col"> */}
+                                <div className="form-row update-form-row">
+                                    <label htmlFor="item">
+                                        Item:
+                                        </label>
+                                </div>
+                                <div className="form-row update-form-row">
+                                    <input
+                                        className="form-control update"
+                                        name="item_name"
+                                        value={this.state.item.item_name}
+                                        onChange={this.handleChange} />
+                                    {/* </div> */}
+                                </div>
+                                    {/* <div className="form-group col-md-6 edit-col"> */}
+                                    <div className="form-row update-form-row">
+
+                                        <label htmlFor="description">Description: </label>
+                                    </div>
+                                    <div className="form-row update-form-row">
+
+                                    <textarea
+                                        className="form-control update"
+                                        name="description"
+                                        value={this.state.item.description}
+                                        onChange={this.handleChange} />
+
+                                    {/* </div> */}
+                                </div>
+                                <div className="form-row update-form-row">
+                                    {/* <div className="form-group col-md-6 edit-col"> */}
+                                    <input
+                                        className="update-image"
+                                        type="file"
+                                        name="image"
+                                        accept="image/*"
+                                        onChange={this.handleImageUpload}
+                                    />
+                                    {/* </div> */}
+                                </div>
+                                <div className="form-row update-form-row">
+                                    <div className="form-group col-md-6 edit-col">
+                                            <label className="form-check-label" htmlFor="exampleCheck1">Private</label>
+                                        </div>
+                                    </div>
+                                    <div className="form-group col-md-6 edit-col">
+                                    <div className="form-check update-check">
+                                        <input
+                                            type="checkbox"
+                                            name="public"
+                                            className="form-check-input"
+                                            checked={this.state.item.public}
+                                            onClick={this.handleClick} />
+                                    </div>
+                                </div>
+                                <div className="form-row update-form-row">
+                                    <div className="form-group col-md-6">
+                                        <label htmlFor="category">Category: </label>
+                                        {this.state.categoryData &&
+                                            <select required
+                                                onChange={this.handleChange}
+                                                name='category'
+                                                className="form-control">
+                                                <option
+                                                    value={this.state.item.category_id}>{
+                                                        this.getCategoryName()
+                                                    }</option>
+                                                {this.state.categoryData &&
+                                                    this.state.categoryData.map((category, i) => {
+                                                        return (
+                                                            <option key={i} value={category.id}>{category.category_name}</option>
+                                                        )
+                                                    })}
+                                            </select>}
+                                    </div>
+                                    <div className="form-group col-md-6">
+                                        <label htmlFor="season">Season: </label>
+                                        {this.state.seasonData &&
+                                            <select required
+                                                onChange={this.handleChange}
+                                                name='season'
+                                                className="form-control">
+                                                <option value={this.state.item.season_id}>{
+                                                    this.getSeasonName()
+                                                }</option>
+                                                {this.state.seasonData &&
+                                                    this.state.seasonData.map((season, i) => {
+                                                        return (
+                                                            <option key={i} value={season.id}>{season.season_name}</option>
+                                                        )
+                                                    })}
+                                            </select>}
+                                    </div>
+                                </div>
+                                <button
+                                    type='submit'
+                                    className='btn btn-secondary'>Update Item</button>
+                            </form>
+                        </div>
                     </div>
+
                 }
             </div>
         )
@@ -174,4 +231,4 @@ const mapStateToProps = ({ items }) => {
     }
 }
 
-export default connect(mapStateToProps, {fetchPublicItems})(UpdateItem)
+export default connect(mapStateToProps, { fetchPublicItems })(UpdateItem)

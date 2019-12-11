@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Map from './Map'
 import ItemList from './ItemList'
+import { Link } from 'react-router-dom'
 
 export class Filter extends React.Component {
   constructor(props) {
@@ -29,6 +30,7 @@ export class Filter extends React.Component {
       this.setState({ items: this.props.privateItems.privateItems})
     }
   }
+
 
   handleCategory = e => {
     if (this.state.public) {
@@ -74,7 +76,6 @@ export class Filter extends React.Component {
   }
 
 
-
   handleSeason = e => {
     if (this.state.public) {
       if (e.target.value == 0) {
@@ -106,7 +107,6 @@ export class Filter extends React.Component {
   }
 
 
-  // set state and then run sortItems function once state has been set
   handleRecent = e => {
     this.setState({
       order: e.target.value
@@ -126,8 +126,11 @@ export class Filter extends React.Component {
       }
     })
 
+
     // this.handleToggleHighlight()
+    // refactor should get rid of this function
   }
+
 
   handleToggleHighlight = () => {
     if (this.state.public) {
@@ -138,6 +141,7 @@ export class Filter extends React.Component {
       document.getElementById('private').classList.remove('highlightViewMode')
     }
   }
+
 
   sortItems() {
     let { items, order } = this.state
@@ -158,7 +162,6 @@ export class Filter extends React.Component {
     }
     this.setState({ items: items })
   }
-
 
 
   render() {
@@ -227,7 +230,7 @@ export class Filter extends React.Component {
               </div>
             </article>
 
-            {isAuthenticated &&
+            {/* {isAuthenticated &&
               <>
                 <header className="card-header filter-options view-header">
                   <h6 className="title">View </h6>
@@ -246,6 +249,52 @@ export class Filter extends React.Component {
                     </div>
                   </label>
                 </div>
+              </>
+            } */}
+
+
+
+            {isAuthenticated ?
+              <>
+                <header className="card-header filter-options view-header">
+                  <h6 className="title">View </h6>
+                </header>
+                <div className='custom-control custom-switch'>
+                  <input
+                    type='checkbox'
+                    className='custom-control-input'
+                    id='customSwitch1'
+                    onChange={this.handleItemDisplay}
+                    value={this.state.public} />
+                  <label className='custom-control-label' htmlFor='customSwitch1'>
+                    <div className='d-flex'>
+                      <div id='public' className='px-1 highlightViewMode'>Public</div>
+                      <div id='private' className='px-1'>Private</div>
+                    </div>
+                  </label>
+                </div>
+              </>
+              :
+              <>
+                <header className="card-header filter-options view-header">
+                  <h6 className="title">View </h6>
+                </header>
+                <Link to='/login'>
+                  <div className='custom-control custom-switch'>
+                    <input
+                      type='checkbox'
+                      className='custom-control-input'
+                      id='customSwitch1'
+                      onChange={this.handleItemDisplay}
+                      value={this.state.public} />
+                    <label className='custom-control-label' htmlFor='customSwitch1'>
+                      <div className='d-flex'>
+                        <div id='public' className='px-1 highlightViewMode'>Public</div>
+                        <div id='private' className='px-1'>Private</div>
+                      </div>
+                    </label>
+                  </div>
+                </Link>
               </>
             }
           </div>
