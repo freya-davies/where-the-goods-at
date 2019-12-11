@@ -24,7 +24,10 @@ export class Filter extends React.Component {
   componentDidUpdate(prevProps) {
     if (this.props.items !== prevProps.items && this.state.public) {
       this.setState({ items: this.props.items.items })
+    }
 
+    if (this.props.privateItems !== prevProps.privateItems && !this.state.public) {
+      this.setState({ items: this.props.privateItems.privateItems})
     }
   }
 
@@ -55,6 +58,21 @@ export class Filter extends React.Component {
         })
       }
     }
+    /*
+       const items = this.state.public ? this.props.items.items : this.props.privateItems.privateItems
+       
+       if (e.target.value == 0) {
+         this.setState({
+           items: items
+         })
+       } else {
+         this.setState({
+           items: items.filter(
+             item => item.category_id === Number(e.target.value)
+           )
+         })
+       }
+       */
   }
 
 
@@ -107,7 +125,10 @@ export class Filter extends React.Component {
         this.setState({ items: this.props.privateItems.privateItems })
       }
     })
-    this.handleToggleHighlight()
+
+
+    // this.handleToggleHighlight()
+    // refactor should get rid of this function
   }
 
 
@@ -255,7 +276,7 @@ export class Filter extends React.Component {
           </div>
 
           <div className='container rounded bg-main mb-3 item-cont'>
-            <ItemList items={this.state.items} dispatch={this.props.dispatch} auth={this.props.auth.isAuthenticated} />
+            <ItemList items={this.state.items} dispatch={this.props.dispatch} auth={this.props.auth} />
           </div>
         </div>
       </div >

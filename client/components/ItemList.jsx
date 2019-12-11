@@ -1,13 +1,14 @@
 import React from 'react'
 import { HashRouter as Router, Route, Link } from 'react-router-dom'
-import { deleteItem } from '../apis/items'
+import { deleteItem, getUserData } from '../apis/items'
 import { setCurrentItem } from '../actions/items'
 
 class ItemList extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      item: null
+      item: null,
+      data: null
     }
   }
 
@@ -19,7 +20,9 @@ class ItemList extends React.Component {
   //     this.state = {}
   //   }
 
-  //   componentDidMount() { }
+    componentDidMount() { 
+      if(this.props.auth.isAuthenticated) getUserData(this.props.auth.user.user_name).then(data => this.setState({data}))
+    }
 
   //   componentDidUpdate(newProps) {
   //     console.log(newProps)
@@ -61,7 +64,7 @@ class ItemList extends React.Component {
                         <p className="card-text">{item.description}</p>
 
 
-                        {this.props.auth &&
+                        {(this.props.auth.isAuthenticated && item.user_id == this.state.data) &&
                           <>
                             <Link to={`/update/${item.id}`}>
                               <button className="btn bg-main-reverse spacer">Update</button>
