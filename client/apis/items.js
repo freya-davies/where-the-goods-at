@@ -1,6 +1,6 @@
 import request from 'superagent'
 import { getKey } from './auth'
-import { findSuburb } from '../apis/itemList'
+import { findAddress, findSuburb } from '../apis/itemList'
 
 const url = '/api/v1/items/'
 
@@ -11,10 +11,18 @@ const endUrl = '&key='
 
 export function addItem(item) {
     if (item.lat && item.long) {
+        return findAddress(item.lat, item.long)
+        .then(address => {
+            item.address = address
+            return findSuburb(item.lat, item.long)
+            .then(suburb => {
+                item.suburb = suburb
                 return request
-                    .post(addItemUrl)
-                    .send(item)
-                    .then(res => res.statusCode)
+                .post(addItemUrl)
+                .send(item)
+                .then(res => res.statusCode)
+            })
+        })
     } else {
         return getCoordinates(item.address)
             .then(res => {
