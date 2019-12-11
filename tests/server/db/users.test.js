@@ -48,6 +48,7 @@ test('getUserByUsername finds existing user', () => {
 
   return users.getUserByUsername('admin', testDb)
     .then(user => {
+      console.log(user)
       let actual = user.first_name
 
       expect(actual).toEqual(expected)
