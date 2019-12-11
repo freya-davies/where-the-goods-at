@@ -56,7 +56,7 @@ class ItemList extends React.Component {
                   <div key={i} className="card list-card text-left" style={{ alignItems: 'left' }} >
                     <div className="ListItemItems text-left" onClick={() => this.props.dispatch(setCurrentItem(item))}>
                       <div className="itemListImgDiv">
-                        <img className="card-img-top" src={item.image} alt={item.item_name} style={{ 'MaxWidth': 2 + 'rem' }} />
+                        <img className="card-img-top" src={item.image == null ? `/images/icon${item.category_id}.svg` : item.image} alt={item.item_name} style={{ 'MaxWidth': 2 + 'rem' }} />
                       </div>
                       <div className="card-body">
                         <h5 className="card-title">{item.item_name}</h5>
