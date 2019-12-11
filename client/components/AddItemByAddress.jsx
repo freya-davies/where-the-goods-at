@@ -40,11 +40,46 @@ class AddItemByAddress extends React.Component {
         })
     }
 
+
+    handleAddressChange = e => {
+        if (e.length > 0) {
+            document.getElementById('suggestion-dropdown').style.display = "block"
+        } else if (e.length == 0) {
+            document.getElementById('suggestion-dropdown').style.display = "none"
+        }
+        this.setState({
+            newItem: {
+                ...this.state.newItem,
+                address: e
+            }
+        })
+    }
+
+    handleAddressSuggestion(suggestion) {
+        this.setState({
+            newItem: {
+                ...this.state.newItem,
+                address: suggestion
+            }
+        })
+        document.getElementById('suggestion-dropdown').style.display = "none"
+    }
+
+
     handleChange(e) {
         this.setState({
             newItem: {
                 ...this.state.newItem,
                 [e.target.name]: e.target.value
+            }
+        })
+    }
+
+    handleCheckbox(e) {
+        this.setState({
+            newItem: {
+                ...this.state.newItem,
+                public: !this.state.newItem.public
             }
         })
     }
@@ -90,35 +125,8 @@ class AddItemByAddress extends React.Component {
         })
     }
 
-    handleCheckbox(e) {
-        this.setState({
-            newItem: {
-                ...this.state.newItem,
-                public: !this.state.newItem.public
-            }
-        })
-    }
-
     closeModal = () => {
         this.props.hideModal()
-    }
-
-    handleAddress = e => {
-        this.setState({
-            newItem: {
-                ...this.state.newItem,
-                address: e
-            }
-        })
-    }
-
-    handleAddressSuggestion(suggestion) {
-        this.setState({
-            newItem: {
-                ...this.state.newItem,
-                address: suggestion
-            }
-        })
     }
 
     render() {
@@ -170,55 +178,63 @@ class AddItemByAddress extends React.Component {
                                 </div>
 
                                 <div className="form-row">
+                                    <div className="form-group">
                                     <PlacesAutocomplete
                                         value={this.state.newItem.address}
                                         name='address'
-                                        onChange={this.handleAddress}
-                                        onSelect={this.handleSelect}
+                                        onChange={this.handleAddressChange}
                                         searchOptions={{
                                             location: new google.maps.LatLng(-41.2743523, 174.735582),
                                             radius: 1000,
                                             types: ['address']
                                         }}
                                     >
-                                        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-                                        <label>
-                                            Address
-                                                <input
-                                                required
-                                                type='text'
-                                                name='address'
-                                                {...getInputProps({
-                                                    placeholder: 'Search Places ...',
-                                                    className: 'form-control location-search-input',
-                                                })}
-                                                />
-                                                <div className="autocomplete-dropdown-container">
-                                                {loading && <div>Loading...</div>}
-                                                {suggestions.map(suggestion => {
-                                                    const className = suggestion.active
-                                                    ? 'suggestion-item--active'
-                                                    : 'suggestion-item';
-                                                    // inline style for demonstration purpose
-                                                    const style = suggestion.active
-                                                    ? { backgroundColor: '#fafafa', cursor: 'pointer' }
-                                                    : { backgroundColor: '#ffffff', cursor: 'pointer' };
-                                                    return (
-                                                    <div
-                                                        {...getSuggestionItemProps(suggestion, {
-                                                        className,
-                                                        style,
+                                        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => {
+                                            return (
+                                                <>
+                                                    <label>Address</label>
+                                                    <input
+                                                        required
+                                                        type='text'
+                                                        name='address'
+                                                        {...getInputProps({
+                                                            placeholder: 'Search Places ...',
+                                                            className: 'form-control location-search-input',
                                                         })}
-                                                        onClick={() => this.handleAddressSuggestion(suggestion.description)}
-                                                    >
-                                                        <span>{suggestion.description}</span>
+                                                    />
+                                                    <div
+                                                        className="autocomplete-dropdown-container"
+                                                        id="suggestion-dropdown"
+                                                        style={{ display: 'none' }}>
+                                                            <div style={{padding: '8px', border: '1px solid #ced4da', display: suggestions.length > 0 ? 'block' : 'none'}}>
+                                                            {loading && <div>Loading...</div>}
+                                                            {suggestions.map(suggestion => {
+                                                                const className = suggestion.active
+                                                                    ? 'suggestion-item--active'
+                                                                    : 'suggestion-item';
+                                                                // inline style for demonstration purpose
+                                                                const style = suggestion.active
+                                                                    ? { backgroundColor: '#fafafa', cursor: 'pointer' }
+                                                                    : { backgroundColor: '#ffffff', cursor: 'pointer' };
+                                                                return (
+                                                                    <div
+                                                                        {...getSuggestionItemProps(suggestion, {
+                                                                            className,
+                                                                            style,
+                                                                        })}
+                                                                        onClick={() => this.handleAddressSuggestion(suggestion.description)}
+                                                                    >
+                                                                        <span>{suggestion.description}</span>
+                                                                    </div>
+                                                                );
+                                                            })}
+                                                            </div>
                                                     </div>
-                                                    );
-                                                })}
-                                                </div>
-                                        </label>
-                                    )}
-                                    </PlacesAutocomplete>   
+                                                </>
+                                            )
+                                        }}
+                                    </PlacesAutocomplete>
+                                    </div>   
                                 </div>
                                     {this.state.showAddressWarning && <p style={{color: 'red'}}>Please enter a valid address</p>}
 
@@ -283,18 +299,14 @@ class AddItemByAddress extends React.Component {
                                         type='range'
                                         className="custom-range"
                                         min='1'
-                                        max='50'
+                                        max='20'
                                         defaultValue='1'
                                         onChange={this.handleChange} />
                                     {this.state.newItem.quantity}
                                 </div>
 
                                 <div className="form-row">
-                                    <label>
-                                        <p>
-                                            Add Image
-                                        </p>
-                                    </label>
+                                    {/* select an imgage */}
                                     <div className="custom-file">
                                         <input
                                             type="file"
@@ -308,14 +320,15 @@ class AddItemByAddress extends React.Component {
                                     <div className="col-auto my-1">
                                         <button
                                             type='submit'
-                                            className='btn btn-secondary'> Submit
+                                            className='btn bg-main-reverse'> 
+                                            Submit
                                         </button>
                                     </div>
 
                                     <div className="col-auto my-1">
                                         <button
                                             type='button'
-                                            className='btn btn-secondary'
+                                            className='btn bg-main-reverse'
                                             data-dismiss='modal'
                                             onClick={this.props.toggleAddForm}>
                                             Close

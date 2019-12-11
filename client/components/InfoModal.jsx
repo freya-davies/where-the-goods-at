@@ -10,7 +10,6 @@ class InfoModal extends React.Component {
                 description: "",
                 lat: this.props.location.lat,
                 long: this.props.location.lng,
-                img_url: "",
                 public: false,
                 category: "",
                 season: "",
