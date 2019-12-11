@@ -307,6 +307,10 @@ background-color: transparent;
   padding: .5rem 0 1rem 2.5rem;
 }
 
+.custom-control-input:checked~.custom-control-label::before {
+  background: #F3BD06;
+  border-color: #F3BD06;
+}
 /* login page */
 
 
