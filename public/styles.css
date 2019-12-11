@@ -100,12 +100,13 @@
   .ListItemItems {
     display: flex;
     align-items: center;
-  }
+  } 
 
   .itemListImgDiv {
     height: 9rem;
     width: 9rem;
     overflow: hidden;
+    /* background-image: url('/images/icon1.svg') */
   }
   
   .itemListImgDiv img {
@@ -113,6 +114,9 @@
     width: auto;
   }
 
+  .card-body {
+    max-width: 24rem;
+  }
 
 
   .bg-main-reverse {
