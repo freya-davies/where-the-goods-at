@@ -20,7 +20,6 @@ export function addItem(item) {
             .then(res => {
                 item.lat = res.body.results[0].geometry.location.lat
                 item.long = res.body.results[0].geometry.location.lng
-                delete item.address
                return findSuburb(item.lat, item.long)
                 .then(suburb => {
                     item.suburb = suburb
