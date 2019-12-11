@@ -312,43 +312,10 @@ class AddItemByAddress extends React.Component {
                                         </div>
                                     </div>
 
-                                    <div className="form-row">
-                                        <label htmlFor="customRange1">
-                                            Quantity
-                                        </label>
-                                        <input
-                                            required
-                                            name='quantity'
-                                            type='range'
-                                            className="custom-range"
-                                            min='1'
-                                            max='50'
-                                            defaultValue='1'
-                                            onChange={this.handleChange} />
-                                        {this.state.newItem.quantity}
-                                    </div>
+                                    
 
-                                    <div className="form-row">
-                                        <label>
-                                            <p>
-                                                Add Image
-                                            </p>
-                                        </label>
-                                        <div className="custom-file">
-                                            <input
-                                                type="file"
-                                                name="image"
-                                                accept="image/*"
-                                                onChange={this.handleImageUpload} />
-                                        </div>
-                                    </div>
-                                    <div className='modal-footer'>
-                                        <div className="col-auto my-1">
-                                            <button
-                                                type='submit'
-                                                className='btn btn-secondary'> Submit
-                                            </button>
-                                        </div>
+                                    
+                                  
 
                                 <div className="form-row">
                                     <label htmlFor="customRange1">
@@ -376,8 +343,11 @@ class AddItemByAddress extends React.Component {
                                             accept="image/*"
                                             onChange={this.handleImageUpload} />
                                             </label>
-
-                                        <div className="col-auto my-1">
+                                                </div>
+                                        
+                                    </div>
+                                    <div className='modal-footer'>
+                                    <div className="col-auto my-1">
                                             <button
                                                 type='button'
                                                 className='btn btn-secondary'
@@ -386,7 +356,13 @@ class AddItemByAddress extends React.Component {
                                                 Close
                                             </button>
                                         </div>
-                                    </div>
+                                        <div className="col-auto my-1">
+                                            <button
+                                                type='submit'
+                                                className='btn btn-secondary'> Submit
+                                            </button>
+                                        </div>
+                                        </div>
                                 </form>
                             </div>
                         </>

@@ -132,10 +132,9 @@ export class Map extends Component {
   }
 
   render() {
-    console.log(window.innerWidth)
-
     let mapSize = '100vh'
     if(window.innerWidth < 800) mapSize = '50vh'
+    
     return (
 
       <div className="mapWrap">
