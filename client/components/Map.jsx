@@ -125,6 +125,10 @@ export class Map extends Component {
   }
 
   render() {
+    console.log(window.innerWidth)
+
+    let mapSize = '100vh'
+    if(window.innerWidth < 800) mapSize = '50vh'
     return (
 
       <div className="mapWrap">
@@ -145,7 +149,7 @@ export class Map extends Component {
                   
                 <GoogleMap
                   id='Traffic-layer-example' mapTypeId='satellite'
-                  mapContainerStyle={{ height: "800px", width: "1200px", borderRadius: ".25rem", boxShadow: "rgba(0, 0, 0, 0.5) 0px 3px 4px -1px" }}
+                  mapContainerStyle={{ height: mapSize, width: "1200px", borderRadius: ".25rem", boxShadow: "rgba(0, 0, 0, 0.5) 0px 3px 4px -1px" }}
                   options={{ styles: googleMapStyles }}
                   zoom={this.state.zoom}
                   center={this.state.center}
@@ -183,14 +187,15 @@ export class Map extends Component {
                   })}
 
                   {this.props.auth.auth.isAuthenticated ?
-                    <div className="addItemContainer">
-                      <div className="addPinButton">
-                        <button type="button" className="btn btn-light" onClick={this.toggleAddMode}>{this.state.addMode ? "Stop Adding Items" : "Add Item by Pin"}</button>
-                      </div>
-                      <div className="addPinButton">
-                        <button type="button" className="btn btn-light" onClick={this.toggleAddForm}>Add Item by Address</button>
-                      </div>
-                    </div> 
+                              <div className="addItemContainer">
+                                <div className="addPinButton">
+                                  
+                                  <button type="button" className="btn btn-light" onClick={this.toggleAddMode} style={{ backgroundColor: this.state.addMode ? "#D25E5D" : "#f8f9fa"}}>{this.state.addMode ? "Stop Adding Items" : "Add Item by Pin"}</button>
+                                </div>
+                                <div className="addPinButton">
+                                  <button type="button" className="btn btn-light" onClick={this.toggleAddForm}>Add Item by Address</button>
+                                </div>
+                              </div>
                     :
                     <div className="addItemContainer">
                       <div className="addPinButton">
