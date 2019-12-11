@@ -1,3 +1,7 @@
+html {
+  width: auto !important;
+}
+
 #map {
     height: 100%;
   }
@@ -35,7 +39,7 @@
   margin-bottom: 10px;
 }
 .mapWrap {
-  
+
   position: relative;
 }
 
@@ -66,16 +70,29 @@ label {
   margin-top: .5rem;
 }
 
+.form-check label {
+  margin-top: 0;
+}
+
 /* nav bar  */
 .customNavStyles {
   background-color: #D25E5D !important;
-  max-height: 5rem;
+  /* max-height: 5rem; */
 }
 
 .is-1 {
   margin-top: 20px;
   font-family: 'Lakki Reddy', cursive;
   color: #FAFAFB;
+  display: block;
+}
+
+@media only screen and (max-width: 570px) {
+
+  .is-1 {
+    display: none;
+  }
+
 }
 
 .nav-link {
@@ -117,19 +134,51 @@ label {
   .ListItemItems {
     display: flex;
     align-items: center;
-  } 
+  }
 
   .itemListImgDiv {
-    height: 9rem;
-    width: 9rem;
-    overflow: hidden;
+    /* height: 9rem;
+    width: 9rem; */
+    /* overflow: hidden; */
     /* background-image: url('/images/icon1.svg') */
   }
-  
+
   .itemListImgDiv img {
-    height: 100%;
-    width: auto;
+    /* height: 100%;
+    width: auto; */
+    height: 144px;
+    width: 144px;
+    object-fit: cover;
   }
+
+  .itemListImgDiv img:hover {
+    cursor: pointer;
+  }
+
+  .list-button {
+    margin-right: 4px !important;
+  }
+
+  @media only screen and (max-width: 1355px) {
+
+    .list-button {
+      margin-bottom: 4px;
+    }
+
+  }
+
+  @media only screen and (max-width: 991px) {
+
+    .list-heading {
+      text-align: center;
+    }
+
+    .list-button {
+      margin-right: 5px !important;
+    }
+
+  }
+
 
   .card-body {
     max-width: 24rem;
@@ -165,7 +214,8 @@ label {
   }
 
   .scrollable {
-    overflow-y:scroll; 
+    /* overflow: auto; */
+    overflow: scroll;
     height: 74vh;
   }
 
@@ -241,6 +291,10 @@ h1.ml8 {
   text-shadow: none;
 }
 
+.sub-title:hover {
+  cursor: pointer;
+}
+
 .ml8 .bang {
   font-size: 1.4em;
   top: auto;
@@ -303,6 +357,11 @@ h1.ml8 {
 
 
 /* filter panel */
+
+.filter-content select:hover {
+  cursor: pointer;
+}
+
 .sort-cont {
   background-color: #B0DDD9;
     color: #28395F;
@@ -335,6 +394,11 @@ background-color: transparent;
   background: #F3BD06;
   border-color: #F3BD06;
 }
+
+.custom-control-label:hover {
+  cursor: pointer;
+}
+
 /* login page */
 
 
@@ -493,11 +557,33 @@ background-color: transparent;
   margin-right: 5%;
 }
 
+.modal-footer {
+  margin-top: 25px;
+  padding-top:20px;
+}
+
+.custom-file {
+  margin-top: 5%;
+}
+
+/* .select-box {
+  padding-left: 0 !important;
+} */
+
+.select-box select:hover {
+  cursor: pointer;
+}
+
+/* checkbox */
+/* input[type="checkbox"] {
+  visibility: hidden;
+} */
+
 /* Remove default slider styling */
 input[type=range] {
-  -webkit-appearance: none; 
+  -webkit-appearance: none;
   width: 100%;
-  background: transparent; 
+  background: transparent;
 }
 
 ::-webkit-file-upload-button {
@@ -511,13 +597,13 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 input[type=range]:focus {
-  outline: none; 
+  outline: none;
 }
 
 input[type=range]::-ms-track {
   width: 100%;
   cursor: pointer;
-  background: transparent; 
+  background: transparent;
   border-color: transparent;
   color: transparent;
 }
@@ -576,17 +662,3 @@ input[type=file]:hover::before {
 input[type=file]:active::before {
   background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
 }
-
-.modal-footer {
-  margin-top: 25px;
-  padding-top:20px;
-}
-
-.custom-file {
-  margin-top: 5%;
-}
-
-/* checkbox */
-/* input[type="checkbox"] {
-  visibility: hidden;
-} */

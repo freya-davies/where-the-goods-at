@@ -30,9 +30,9 @@ export class Filter extends React.Component {
     }
   }
 
-  handleCategory = e => {   
+  handleCategory = e => {
       const items = this.state.public ? this.props.items.items : this.props.privateItems.privateItems
-      
+
       if (e.target.value == 0) {
         this.setState({
           items: items
@@ -109,7 +109,7 @@ export class Filter extends React.Component {
     const isAuthenticated = this.props.auth.isAuthenticated
 
     return (
-      <div className='row px-2'>
+      <div className='row mx-0' style={{width: '100vw !important'}}>
         <div className='col-sm-12 col-md-12 col-lg-8 mt-3 mapDiv' >
           <Map items={this.state.items} />
         </div>
@@ -124,9 +124,9 @@ export class Filter extends React.Component {
             {isAuthenticated ?
               <>
                 <header className="card-header filter-options view-header">
-                  <h6 className="title">View</h6>
+                  <h6 className="title my-0">View</h6>
                 </header>
-                <div className='custom-control custom-switch'>
+                <div className='custom-control custom-switch pt-0'>
                   <input
                     type='checkbox'
                     className='custom-control-input'
@@ -144,10 +144,10 @@ export class Filter extends React.Component {
               :
               <>
                 <header className="card-header filter-options view-header">
-                  <h6 className="title">View </h6>
+                  <h6 className="title my-0">View </h6>
                 </header>
                 <Link to='/login'>
-                  <div className='custom-control custom-switch'>
+                  <div className='custom-control custom-switch pt-0'>
                     <input
                       type='checkbox'
                       className='custom-control-input'
@@ -166,9 +166,7 @@ export class Filter extends React.Component {
             }
           </div>
 
-          <div className='container rounded bg-main mb-3 item-cont'>
-            <ItemList items={this.state.items} dispatch={this.props.dispatch} auth={this.props.auth} />
-          </div>
+          <ItemList items={this.state.items} dispatch={this.props.dispatch} auth={this.props.auth} />
         </div>
       </div >
     )

@@ -101,7 +101,7 @@ export class Map extends Component {
   }
 
   toggleAddMode = (e) => {
-    
+
     this.setState({
       addMode: !this.state.addMode
     })
@@ -134,7 +134,7 @@ export class Map extends Component {
   render() {
     let mapSize = '100vh'
     if(window.innerWidth < 800) mapSize = '50vh'
-    
+
     return (
 
       <div className="mapWrap">
@@ -152,7 +152,7 @@ export class Map extends Component {
                 id="script-loader"
                 libraries={["places"]}
                 googleMapsApiKey={process.env.GOOGLE_MAPS}>
-                  
+
                 <GoogleMap
                   id='Traffic-layer-example' mapTypeId='satellite'
                   mapContainerStyle={{ height: mapSize, width: "1200px", borderRadius: ".25rem", boxShadow: "rgba(0, 0, 0, 0.5) 0px 3px 4px -1px" }}
@@ -168,11 +168,11 @@ export class Map extends Component {
                         key={index}
                         position={{ lat: item.lat, lng: item.long }}
                         //icon={this.handleIcons(item.category_id)}
-                        icon={`/images/icon${item.category_id}.svg`}                      
+                        icon={`/images/icon${item.category_id}.svg`}
                       >
                         {this.props.items[index] == this.state.activePin && (
-                          <InfoWindow 
-                            onCloseClick={() => this.closeWindow()} 
+                          <InfoWindow
+                            onCloseClick={() => this.closeWindow()}
                             position={{ lat: item.lat, lng: item.long }}
                             options={{pixelOffset: new google.maps.Size(0, -40)}}
                             >
@@ -180,9 +180,9 @@ export class Map extends Component {
                               <h4>{this.props.items[index].item_name}</h4>
                               {/* <input type='text' name={this.props.items[index].item_name} />  */}
                               <h6>Description:</h6><p> <em>"{this.props.items[index].description}"</em></p>
-                              {this.props.items[index].address ? 
+                              {this.props.items[index].address ?
                               <>
-                              <h6>Address:</h6><p>{this.props.items[index].address}</p> 
+                              <h6>Address:</h6><p>{this.props.items[index].address}</p>
                               </> :
                               this.props.items[index].suburb ? <><h6>Suburb:</h6><p>{this.props.items[index].suburb }</p></>
                               : null}
@@ -201,7 +201,7 @@ export class Map extends Component {
                   {this.props.auth.auth.isAuthenticated ?
                               <div className="addItemContainer">
                                 <div className="addPinButton">
-                                  
+
                                   <button type="button" className="btn btn-light" onClick={this.toggleAddMode} style={{ backgroundColor: this.state.addMode ? "#D25E5D" : "#f8f9fa"}}>{this.state.addMode ? "Stop Adding Items" : "Add Item by Pin"}</button>
                                 </div>
                                 <div className="addPinButton">
