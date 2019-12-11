@@ -43,7 +43,7 @@ class PopUp extends React.Component {
                 </div>
 
                 <div className="modal-body">
-                  Get access to more options and goodies!
+                  You'll get access to more options and goodies if you sign in or register!
                 </div>
 
                 <div className="modal-footer">

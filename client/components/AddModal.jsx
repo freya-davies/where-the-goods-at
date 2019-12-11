@@ -116,6 +116,33 @@ class AddModal extends React.Component {
                     <h5 className='modal-title' id='exampleModalLongTitle'>
                       Add Item by Dropping Pin
               </h5>
+
+            </div>
+            <div className='modal-body'>
+              <form onSubmit={this.handleSubmit}>
+                <div className="form-row">
+                  <div className="form-group col-md-6">
+                    <label>
+                      Item</label>
+                    <input
+                      required
+                      type='text'
+                      name='item_name'
+                      className="form-control"
+                      placeholder="e.g. Parsley"
+                      onChange={this.handleChange}
+                    />
+                  </div>
+                  <div className="form-check">
+                    <input
+                      type='checkbox'
+                      name='public'
+                      className="form-check-input"
+                      onChange={this.handleCheckbox}
+                    />
+                    <label className="form-check-label" htmlFor="exampleCheck1">Private</label>
+                    <small id="subtext" className="form-text text-muted">Keep your foraging spot a secret!</small>
+
                   </div>
                   <div className='modal-body'>
                     <form onSubmit={this.handleSubmit}>
