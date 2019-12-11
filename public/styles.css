@@ -94,6 +94,25 @@ label {
     padding-top: .5rem;
   }
 
+  .ListItemItems {
+    display: flex;
+    align-items: center;
+  }
+
+  .itemListImgDiv {
+    height: 9rem;
+    width: 9rem;
+    overflow: hidden;
+  }
+  
+  .itemListImgDiv img {
+    height: 100%;
+    width: auto;
+  }
+
+
+
+
   .bg-main-reverse {
     background-color: #F3BD06 ;
     color: #28395F !important;
@@ -109,12 +128,12 @@ label {
 
 
   .card-img-top {
-  margin-top: 1rem;
   width: 60%;
   }
 
   .list-card {
     text-align: center;
+    padding-left: 5%;
   }
 
   .scrollable {
@@ -421,6 +440,11 @@ background-color: transparent;
   color: #28395F;
 }
 
+.spacer {
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
 /* Remove default slider styling */
 input[type=range] {
   -webkit-appearance: none; 
@@ -456,7 +480,6 @@ input[type=range]::-webkit-slider-thumb {
   margin-top: -8px;
   /* box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d; */
 }
-
 /* All the same stuff for Firefox */
 input[type=range]::-moz-range-thumb {
   border: 1px solid #000000;
@@ -467,7 +490,6 @@ input[type=range]::-moz-range-thumb {
   cursor: pointer;
   /* box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d; */
 }
-
 /* All the same stuff for IE */
 input[type=range]::-ms-thumb {
   border: 1px solid #000000;
@@ -509,3 +531,8 @@ input[type=file]:active::before {
 .custom-file {
   margin-top: 5%;
 }
+
+/* checkbox */
+/* input[type="checkbox"] {
+  visibility: hidden;
+} */

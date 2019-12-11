@@ -1,13 +1,14 @@
 import React from 'react'
 import { HashRouter as Router, Route, Link } from 'react-router-dom'
-import { deleteItem } from '../apis/items'
+import { deleteItem, getUserData } from '../apis/items'
 import { setCurrentItem } from '../actions/items'
 
 class ItemList extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      item: null
+      item: null,
+      data: null
     }
   }
 
@@ -19,7 +20,9 @@ class ItemList extends React.Component {
   //     this.state = {}
   //   }
 
-  //   componentDidMount() { }
+    componentDidMount() { 
+      if(this.props.auth.isAuthenticated) getUserData(this.props.auth.user.user_name).then(data => this.setState({data}))
+    }
 
   //   componentDidUpdate(newProps) {
   //     console.log(newProps)
@@ -50,21 +53,23 @@ class ItemList extends React.Component {
 
               {this.props.items.map((item, i) => {
                 return (
-                  <div key={i} className="card list-card" style={{ alignItems: 'center' }} >
-                    <div onClick={() => this.props.dispatch(setCurrentItem(item))}>
-                      <img className="card-img-top" src={item.image} alt={item.item_name} style={{ 'MaxWidth': 2 + 'rem' }} />
+                  <div key={i} className="card list-card text-left" style={{ alignItems: 'left' }} >
+                    <div className="ListItemItems text-left" onClick={() => this.props.dispatch(setCurrentItem(item))}>
+                      <div className="itemListImgDiv">
+                        <img className="card-img-top" src={item.image} alt={item.item_name} style={{ 'MaxWidth': 2 + 'rem' }} />
+                      </div>
                       <div className="card-body">
                         <h5 className="card-title">{item.item_name}</h5>
                         <h6><em>{item.suburb}</em></h6>
                         <p className="card-text">{item.description}</p>
 
 
-                        {this.props.auth &&
+                        {(this.props.auth.isAuthenticated && item.user_id == this.state.data) &&
                           <>
                             <Link to={`/update/${item.id}`}>
-                              <button>Update</button>
+                              <button className="btn bg-main-reverse spacer">Update</button>
                             </Link>
-                            <button onClick={()=> window.confirm("Are you sure you wish to delete this item?") && this.handleDelete(item.id)}>Delete</button>
+                            <button className="btn bg-main-reverse spacer" onClick={() => window.confirm("Are you sure you wish to delete this item?") && this.handleDelete(item.id)}>Delete</button>
                           </>
                         }
                       </div>

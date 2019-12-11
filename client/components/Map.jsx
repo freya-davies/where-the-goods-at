@@ -61,6 +61,11 @@ export class Map extends Component {
       })
     })
 
+
+      //refactor idea
+        //if(this.props.currentItem != newProps.currentItem) {
+      //this.centerFocusOn(newProps.currentItem)
+
     if (this.props.currentItem != newProps.currentItem) {
       this.setState({
         center: {
@@ -71,6 +76,17 @@ export class Map extends Component {
       })
     }
   }
+
+  //centerFocusOn = (currentItem) => {
+   // this.setState({
+   //   center: {
+   //     lat: currentItem.lat,
+   //     lng: currentItem.long
+  //    },
+  //    zoom: 18
+  //  })
+  //}
+
   toggleAddForm = (e) => {
     this.setState({
       addForm: !this.state.addForm
@@ -125,21 +141,15 @@ export class Map extends Component {
                 id="script-loader"
                 libraries={["places"]}
                 googleMapsApiKey={process.env.GOOGLE_MAPS}>
+                  
                 <GoogleMap
-                  id='Traffic-layer-example'
-                  mapContainerStyle={{
-                    height: "800px",
-                    width: "1200px",
-                    borderRadius: ".25rem",
-                    boxShadow: "rgba(0, 0, 0, 0.5) 0px 3px 4px -1px"
-                  }}
-                  options={{
-                    styles: googleMapStyles
-                  }}
+                  id='Traffic-layer-example' mapTypeId='satellite'
+                  mapContainerStyle={{ height: "800px", width: "1200px", borderRadius: ".25rem", boxShadow: "rgba(0, 0, 0, 0.5) 0px 3px 4px -1px" }}
+                  options={{ styles: googleMapStyles }}
                   zoom={this.state.zoom}
                   center={this.state.center}
-                  mapTypeId='satellite'
                   onClick={this.handleAddPin}>
+
                   {this.props.items.map((item, index) => {
                     return (
                       <Marker
@@ -147,11 +157,14 @@ export class Map extends Component {
                         key={index}
                         position={{ lat: item.lat, lng: item.long }}
                         //icon={this.handleIcons(item.category_id)}
-                        icon={`/images/icon${item.category_id}.svg`}
-
+                        icon={`/images/icon${item.category_id}.svg`}                      
                       >
                         {this.props.items[index] == this.state.activePin && (
-                          <InfoWindow onCloseClick={() => this.closeWindow()} position={{ lat: item.lat, lng: item.long }}>
+                          <InfoWindow 
+                            onCloseClick={() => this.closeWindow()} 
+                            position={{ lat: item.lat, lng: item.long }}
+                            options={{pixelOffset: new google.maps.Size(0, -40)}}
+                            >
                             <div className="info-window">
                               <h4>{this.props.items[index].item_name}</h4>
                               {/* <input type='text' name={this.props.items[index].item_name} />  */}
@@ -176,7 +189,8 @@ export class Map extends Component {
                       <div className="addPinButton">
                         <button type="button" className="btn btn-light" onClick={this.toggleAddForm}>Add Item by Address</button>
                       </div>
-                    </div> :
+                    </div> 
+                    :
                     <div className="addItemContainer">
                       <div className="addPinButton">
                         <Link to='/login'>
