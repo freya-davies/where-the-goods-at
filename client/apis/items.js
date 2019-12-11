@@ -61,6 +61,12 @@ export function getPrivateItems(user) {
 
 }
 
+export function getUserData(user){
+    return request
+        .get(url + `user/user/${user}`)
+        .then(res => res.body)
+}
+
 export function getCategories() {
     return request
         .get(url + 'categories')

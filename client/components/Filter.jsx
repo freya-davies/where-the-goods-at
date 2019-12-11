@@ -300,7 +300,7 @@ export class Filter extends React.Component {
           </div>
 
           <div className='container rounded bg-main mb-3 item-cont'>
-            <ItemList items={this.state.items} dispatch={this.props.dispatch} auth={this.props.auth.isAuthenticated} />
+            <ItemList items={this.state.items} dispatch={this.props.dispatch} auth={this.props.auth} />
           </div>
         </div>
       </div >
