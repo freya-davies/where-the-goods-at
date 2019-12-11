@@ -3,7 +3,7 @@ import { HashRouter as Router, Route, Link } from 'react-router-dom'
 import { deleteItem, getUserData } from '../apis/items'
 import { setCurrentItem } from '../actions/items'
 
-class ItemList extends React.Component {
+export class ItemList extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -46,7 +46,7 @@ class ItemList extends React.Component {
   render() {
     return (
       <div className='scrollable'>
-        <div className='container rounded bg-main mb-3'>
+        <div id='listedItems' className='container rounded bg-main mb-3'>
           <h3 className="list-heading">Listed Items</h3>
           <div className="row">
             <div className="col-centered">
