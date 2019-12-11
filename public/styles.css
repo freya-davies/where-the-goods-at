@@ -6,6 +6,10 @@
   font-weight: 900;
 }
 
+.displayHamburgerMenu {
+  z-index: 1;
+}
+
 .addItemContainer {
   position: absolute;
     top: 100px;
@@ -82,6 +86,11 @@ label {
 .nav-username {
   align-self: center;
   font-size: 1.4rem;
+  margin-right: 1.5rem;
+}
+
+.nav-thing {
+  align-self: center;
   margin-right: 1.5rem;
 }
 
@@ -330,7 +339,7 @@ background-color: transparent;
 
 
 .login-div {
-  max-width: 50%;
+  max-width: 65%;
   background-color: #B0DDD9;
   border-radius: 1rem;
   padding-top: 1rem;
@@ -372,7 +381,7 @@ background-color: transparent;
   text-align: -webkit-center;
 }
 .register-div {
-  max-width: 50%;
+  max-width: 75%;
   background-color: #B0DDD9;
   border-radius: 1rem;
   padding-top: 1rem;
@@ -459,6 +468,7 @@ background-color: transparent;
 /* Add form */
 .modal {
   background-color: rgba(255, 255, 255, .6);
+  overflow: scroll !important;
 }
 
 .popup-modal {
