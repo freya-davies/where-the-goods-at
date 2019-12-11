@@ -124,6 +124,10 @@ export class Map extends Component {
   }
 
   render() {
+    console.log(window.innerWidth)
+
+    let mapSize = '100vh'
+    if(window.innerWidth < 800) mapSize = '50vh'
     return (
 
       <div className="mapWrap">
@@ -144,7 +148,7 @@ export class Map extends Component {
                   
                 <GoogleMap
                   id='Traffic-layer-example' mapTypeId='satellite'
-                  mapContainerStyle={{ height: "800px", width: "1200px", borderRadius: ".25rem", boxShadow: "rgba(0, 0, 0, 0.5) 0px 3px 4px -1px" }}
+                  mapContainerStyle={{ height: mapSize, width: "1200px", borderRadius: ".25rem", boxShadow: "rgba(0, 0, 0, 0.5) 0px 3px 4px -1px" }}
                   options={{ styles: googleMapStyles }}
                   zoom={this.state.zoom}
                   center={this.state.center}
