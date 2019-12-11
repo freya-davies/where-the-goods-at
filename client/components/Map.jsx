@@ -146,11 +146,14 @@ export class Map extends Component {
                         key={index}
                         position={{ lat: item.lat, lng: item.long }}
                         //icon={this.handleIcons(item.category_id)}
-                        icon={`/images/icon${item.category_id}.svg`}
-
+                        icon={`/images/icon${item.category_id}.svg`}                      
                       >
                         {this.props.items[index] == this.state.activePin && (
-                          <InfoWindow onCloseClick={() => this.closeWindow()} position={{ lat: item.lat, lng: item.long }}>
+                          <InfoWindow 
+                            onCloseClick={() => this.closeWindow()} 
+                            position={{ lat: item.lat, lng: item.long }}
+                            options={{pixelOffset: new google.maps.Size(0, -40)}}
+                            >
                             <div className="info-window">
                               <h4>{this.props.items[index].item_name}</h4>
                               {/* <input type='text' name={this.props.items[index].item_name} />  */}
