@@ -108,12 +108,13 @@ label {
   .ListItemItems {
     display: flex;
     align-items: center;
-  }
+  } 
 
   .itemListImgDiv {
     height: 9rem;
     width: 9rem;
     overflow: hidden;
+    /* background-image: url('/images/icon1.svg') */
   }
   
   .itemListImgDiv img {
@@ -121,6 +122,9 @@ label {
     width: auto;
   }
 
+  .card-body {
+    max-width: 24rem;
+  }
 
 
 
@@ -318,6 +322,10 @@ background-color: transparent;
   padding: .5rem 0 1rem 2.5rem;
 }
 
+.custom-control-input:checked~.custom-control-label::before {
+  background: #F3BD06;
+  border-color: #F3BD06;
+}
 /* login page */
 
 

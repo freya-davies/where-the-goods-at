@@ -14,7 +14,8 @@ function addItem(item, db = connection) {
             category_id: item.category,
             public: item.public,
             user_id: item.user,
-            image: item.image
+            image: item.image,
+            address: item.address
         })
 }
 
@@ -76,7 +77,7 @@ function updateItem(id, item, db =  connection) {
             category_id: item.category,
             public: item.public,
             user_id: item.user,
-            image: item.image
+            image: item.image,
     })
 }  
 
