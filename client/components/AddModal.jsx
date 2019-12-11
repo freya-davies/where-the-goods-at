@@ -108,7 +108,7 @@ class AddModal extends React.Component {
                       type='text'
                       name='item_name'
                       className="form-control"
-                      placeholder="eg; Parsley"
+                      placeholder="e.g. Parsley"
                       onChange={this.handleChange}
                     />
                   </div>

@@ -165,7 +165,7 @@ class AddItemByAddress extends React.Component {
                                             type='text'
                                             name='item_name'
                                             className="form-control"
-                                            placeholder="eg; Parsley"
+                                            placeholder="e.g. Parsley"
                                             onChange={this.handleChange} />
                                     </div>
 
@@ -312,11 +312,13 @@ class AddItemByAddress extends React.Component {
                                 <div className="form-row">
                                     {/* select an imgage */}
                                     <div className="custom-file">
+                                        <label
+                                        name="image">
                                         <input
-                                            type="file"
-                                            name="image"
+                                            type="file" 
                                             accept="image/*"
                                             onChange={this.handleImageUpload} />
+                                            </label>
                                     </div>
                                 </div>
 

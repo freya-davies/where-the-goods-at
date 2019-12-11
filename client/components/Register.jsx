@@ -48,7 +48,7 @@ class Register extends React.Component {
     return (
       <div className="registerContainer">
         <div className="col-6 col-md-4 register-div">
-          <Link to='/' ><img className="img-fluid" src="/images/forage-lemon.png" alt="Forage &amp; Find" /></Link>
+          <Link to='/' ><img className="img-fluid" src="/images/forage-cabbage.png" alt="Forage &amp; Find" /></Link>
 
           <form className="login-register-form" onSubmit={this.submit}>
             <h1 className='registerTitle'>Register</h1>
@@ -105,7 +105,7 @@ class Register extends React.Component {
             <div className="row justify-content-start">
               <div className='col-6 reg-text'>
                 <label htmlFor="password">
-                  Password
+                  Password:
                 </label>
               </div>
 
@@ -117,7 +117,7 @@ class Register extends React.Component {
             <div className="row justify-content-start">
               <div className='col-6 reg-text'>
                 <label htmlFor="confirm_password">
-                  Confirm Password
+                  Confirm Password:
                 </label>
               </div>
 
