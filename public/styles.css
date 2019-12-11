@@ -148,7 +148,7 @@ label {
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: rgba(176, 221, 217, 0.911);
   color: white;
 }
 
@@ -178,6 +178,7 @@ h1.ml8 {
   color: #fff;
   width: 3em;
   height: 3em;
+  text-shadow: 2px 2px 2px #00000052;
 }
 
 .ml8 .letters-container {
@@ -208,6 +209,8 @@ h1.ml8 {
   line-height: 0.7em;
   right: -0.12em;
   top: -0.2em;
+  color:#28395F;
+  text-shadow: none;
 }
 
 .ml8 .bang {
@@ -228,14 +231,14 @@ h1.ml8 {
 .ml8 .circle-white {
   width: 30rem;
   height: 30rem;
-  border: 2px dashed #F3BD06;
+  border: 2px dashed #D25E5D;
   border-radius: 2em;
 }
 
 .ml8 .circle-dark {
   width: 28rem;
   height: 28rem;
-  background-color: #D25E5D;
+  background-color: #F3BD06;
   border-radius: 3em;
   z-index: 1;
 }
@@ -243,7 +246,7 @@ h1.ml8 {
 .ml8 .circle-dark-dashed {
   border-radius: 2.4em;
   background-color: transparent;
-  border: 2px dashed #B0DDD9;
+  border: 2px dashed #28395F;
   width: 30rem;
   height: 30rem;
 }
@@ -429,6 +432,14 @@ background-color: transparent;
 }
 
 /* Add form */
+.modal {
+  background-color: rgba(255, 255, 255, .6);
+}
+
+.popup-modal {
+  top: 12rem;
+}
+
 .modal-content {
   border-color: #F3BD06;
   border-style: solid;
