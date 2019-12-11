@@ -33,7 +33,7 @@ class PopUp extends React.Component {
         {this.state.showPopUp &&
           <div className="modal" style={{ display: 'block' }} id="myModal" data-backdrop="static" tabIndex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div className="modal-dialog" role="document">
-              <div className="modal-content">
+              <div className="modal-content popup-modal">
                 <div className="modal-header">
                   <h5 className="modal-title" id="staticBackdropLabel">Become A Forage Extraordinaire!</h5>
                   
