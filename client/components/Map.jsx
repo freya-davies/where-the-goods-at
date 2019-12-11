@@ -101,6 +101,7 @@ export class Map extends Component {
   }
 
   toggleAddMode = (e) => {
+    
     this.setState({
       addMode: !this.state.addMode
     })
@@ -156,7 +157,7 @@ export class Map extends Component {
                 <GoogleMap
                   id='Traffic-layer-example' mapTypeId='satellite'
                   mapContainerStyle={{ height: mapSize, width: "1200px", borderRadius: ".25rem", boxShadow: "rgba(0, 0, 0, 0.5) 0px 3px 4px -1px" }}
-                  options={{ styles: googleMapStyles }}
+                  options={{ styles: googleMapStyles,  draggableCursor: this.state.addMode ? 'url(/images/cursor.png), auto'  : 'pointer'}}
                   zoom={this.state.zoom}
                   center={this.state.center}
                   onClick={this.handleAddPin}>

@@ -63,7 +63,6 @@ router.get('/user/:name', (req, res) => {
 router.get('/user/user/:name', (req, res) => {
     dbUser.getUserByUsername(req.params.name)
     .then(data => {
-        console.log(data)
         res.json(data.id)})
 })
 

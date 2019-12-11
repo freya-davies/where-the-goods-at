@@ -11,7 +11,8 @@ export class Filter extends React.Component {
 
     this.state = {
       items: this.props.items.items,
-      public: true
+      public: true,
+      order: "default"
     }
   }
 
@@ -71,15 +72,15 @@ export class Filter extends React.Component {
     this.setState({
       public: !this.state.public
     }, () => {
-      document.getElementById('category-select').value = 0
+      //document.getElementById('category-select').value = 0
       if (this.state.public) {
         this.setState({ items: this.props.items.items })
-        document.getElementById('public').classList.remove('highlightViewMode')
-        document.getElementById('private').classList.add('highlightViewMode')
+        // document.getElementById('public').classList.remove('highlightViewMode')
+        // document.getElementById('private').classList.add('highlightViewMode')
       } else {
         this.setState({ items: this.props.privateItems.privateItems })
-        document.getElementById('public').classList.add('highlightViewMode')
-        document.getElementById('private').classList.remove('highlightViewMode')
+        // document.getElementById('public').classList.add('highlightViewMode')
+        // document.getElementById('private').classList.remove('highlightViewMode')
       }
     })
   }
@@ -91,7 +92,7 @@ export class Filter extends React.Component {
       items.sort((a, b) => {
         return a.item_name > b.item_name ? 1 : -1
       })
-    } else if (order == 'new') {
+    } if (order == 'new') {
       items.sort((a, b) => {
         return a.id > b.id ? -1 : 1
       })
@@ -134,8 +135,8 @@ export class Filter extends React.Component {
                     value={this.state.public} />
                   <label className='custom-control-label' htmlFor='customSwitch1'>
                     <div className='d-flex'>
-                      <div id='public' className='px-1 highlightViewMode'>Public</div>
-                      <div id='private' className='px-1'>Private</div>
+                    <div id='public' className={this.state.public ? 'px-1 highlightViewMode' : 'px-1'}>Public</div>
+                        <div id='private' className={!this.state.public ? 'px-1 highlightViewMode' : 'px-1'}>Private</div>
                     </div>
                   </label>
                 </div>
@@ -152,7 +153,7 @@ export class Filter extends React.Component {
                       className='custom-control-input'
                       id='customSwitch1'
                       onChange={this.handleItemDisplay}
-                      value={this.state.public} />
+                      value={true} />
                     <label className='custom-control-label' htmlFor='customSwitch1'>
                       <div className='d-flex'>
                         <div id='public' className='px-1 highlightViewMode'>Public</div>
