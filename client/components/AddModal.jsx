@@ -66,6 +66,7 @@ class AddModal extends React.Component {
       loading: true,
       formShowing: false,
     })
+    console.log('twice')
     addItem(this.state.newItem)
       .then(() => {
         this.props.fetchPublicItems()
@@ -122,7 +123,6 @@ class AddModal extends React.Component {
                   <div className="form-row">
 
                     <div className='modal-body'>
-                      <form onSubmit={this.handleSubmit}>
                         <div className="form-row">
                           <div className="form-group col-md-6 pl-0">
                             <label>
@@ -241,7 +241,6 @@ class AddModal extends React.Component {
                           </div>
                         </div>
 
-                      </form>
                                 </div>
                  </div>
                 </form>

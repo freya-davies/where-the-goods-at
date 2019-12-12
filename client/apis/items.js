@@ -17,6 +17,7 @@ export function addItem(item) {
             return findSuburb(item.lat, item.long)
             .then(suburb => {
                 item.suburb = suburb
+                console.log('here')
                 return request
                 .post(addItemUrl)
                 .send(item)
