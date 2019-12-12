@@ -160,9 +160,7 @@ class UpdateItem extends React.Component {
                                 </div>
                             <div className="form-row update-form-row px-5 justify-content-center" style={{display: 'flex'}}>
                                 <div className="form-group edit-col justify-content-center">
-                                    <label className="form-check-label" style={{margin: 0}} htmlFor="exampleCheck1">Private:</label>
-                                {/* </div>
-                                <div className="form-check update-check col-md-6"> */}
+                                    <label className="form-check-label sm" style={{margin: 0}} htmlFor="exampleCheck1">Private:</label>
                                     <input
                                         type="checkbox"
                                         name="public"

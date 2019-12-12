@@ -531,6 +531,7 @@ background-color: transparent;
 
 .update-form-row {
   justify-content: center;
+  display: inline !important;
 }
 
 .update {
