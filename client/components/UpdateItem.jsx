@@ -158,19 +158,19 @@ class UpdateItem extends React.Component {
                                     />
                                     {/* </div> */}
                                 </div>
-                                <div className="form-row update-form-row">
-                                    <div className="form-group col-md-6 edit-col">
-                                            <label className="form-check-label" htmlFor="exampleCheck1">Private:</label>
-                                        </div>
-                                    <div className="form-check update-check col-md-6">
-                                        <input
-                                            type="checkbox"
-                                            name="public"
-                                            className="form-check-input"
-                                            checked={this.state.item.public}
-                                            onClick={this.handleClick} />
-                                    </div>
-                                    </div>
+                            <div className="form-row update-form-row px-5 justify-content-center" style={{display: 'flex'}}>
+                                <div className="form-group edit-col justify-content-center">
+                                    <label className="form-check-label" style={{margin: 0}} htmlFor="exampleCheck1">Private:</label>
+                                {/* </div>
+                                <div className="form-check update-check col-md-6"> */}
+                                    <input
+                                        type="checkbox"
+                                        name="public"
+                                        className="form-check-input ml-3"
+                                        checked={this.state.item.public}
+                                        onClick={this.handleClick} />
+                                </div>
+                            </div>
                                 <div className="form-row update-form-row">
                                     <div className="form-group col-md-6">
                                         <label htmlFor="category">Category: </label>

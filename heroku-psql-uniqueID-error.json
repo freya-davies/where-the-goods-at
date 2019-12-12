@@ -1,0 +1,21 @@
+#If you need psql tools
+sudo apt-get install -y postgresql-client
+
+
+heroku psql
+
+SELECT c.relname FROM pg_class c WHERE c.relkind = 'S';
+
+SELECT max(id) FROM "items";
+ALTER SEQUENCE "items_id_seq" RESTART WITH 48;
+
+SELECT max(id) FROM "users";
+ALTER SEQUENCE "users_id_seq" RESTART WITH 2;
+
+
+ categories_id_seq
+ items_id_seq
+ knex_migrations_id_seq
+ knex_migrations_lock_index_seq
+ season_id_seq
+ users_id_seq
