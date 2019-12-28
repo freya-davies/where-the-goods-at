@@ -1,11 +1,25 @@
-# Urban Foraging 
+# Foraged and Found 
+
+This was a 7 day group project that we did for the final project during Dev Accademys bootcamp. A group size of 7. 
+
+I was the product owner for this project which involved team leadership, explaining my idea and plan, keeping on track with the plan and team motivation.
+Below is the information we wrote up as the brief for team members to refer to. We used Agile techniques such as stand-ups, kanban boards and sprints (a day or 2 at a time).
+
+The outcome is an app where people can find other peoples foraging spots and information about them, save their own foraging spots which can be kept private if one so desires. 
+One of the parts of this project I worked on was the filter section (sorting things either by category, oldest, newest or season) which used the full stack - database to components
+
+This is a project which I will be continuing to add features to. I would love to hear any feedback and thoughts you might have to improve this.
+
+-------------------------------------------------------------------
+-------------------------------------------------------------------
+
+
 
 ## Final Project
 
 Find the free food
 
 ## The Tech
-
 
 * React
 * Redux
