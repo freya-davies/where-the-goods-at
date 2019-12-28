@@ -183,3 +183,4 @@ const mapStateToProps = ({ auth, items, privateItems }) => {
 }
 
 export default connect(mapStateToProps)(Filter)
+
