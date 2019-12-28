@@ -66,7 +66,7 @@ class AddModal extends React.Component {
       loading: true,
       formShowing: false,
     })
-    console.log('twice')
+    // console.log('twice')
     addItem(this.state.newItem)
       .then(() => {
         this.props.fetchPublicItems()
