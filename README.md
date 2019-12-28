@@ -106,14 +106,6 @@ As a user:
 | --- | --- |
 | Get | /api/v1/items | 
 
-Response
-`{ locationData: [ { 
-          name: 'test', 
-          description: 'test', 
-          lat: 11.111111, 
-          long: 22.2222222 }, 
-          {...},
-          ... ]}`
 
 
 
